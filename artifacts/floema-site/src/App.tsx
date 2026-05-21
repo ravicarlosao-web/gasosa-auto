@@ -111,7 +111,7 @@ function Home() {
     <div className="min-h-[100dvh] w-full bg-background flex flex-col">
       <header className="w-full flex items-center justify-between px-6 py-6 max-w-[1400px] mx-auto relative z-10">
         <Link href="/" className="flex items-center">
-          <img src={logoSrc} alt="Gasosa Auto Agro" className="h-20 w-auto object-contain" />
+          <img src={logoSrc} alt="Gasosa Auto Agro" className="h-15 w-auto object-contain" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-4">
@@ -126,9 +126,31 @@ function Home() {
 
       <main className="flex-1 flex flex-col items-center justify-center px-4 -mt-20">
         <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-foreground leading-[1.1] mb-2">
-            Espaços pensados para viver<br />
-            e durar uma vida.
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-foreground leading-[1.2]">
+            {[
+              ["Espaços", "pensados", "para", "viver"],
+              ["e", "durar", "uma", "vida."],
+            ].map((line, lineIdx) => (
+              <div key={lineIdx} className="overflow-hidden block">
+                <div className="flex items-baseline justify-center gap-[0.28em] flex-wrap">
+                  {line.map((word, wordIdx) => (
+                    <motion.span
+                      key={wordIdx}
+                      className="inline-block"
+                      initial={{ y: "110%", opacity: 0, rotateZ: 3 }}
+                      animate={{ y: "0%", opacity: 1, rotateZ: 0 }}
+                      transition={{
+                        delay: 0.15 + lineIdx * 0.18 + wordIdx * 0.07,
+                        duration: 0.75,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </h1>
         </div>
       </main>
