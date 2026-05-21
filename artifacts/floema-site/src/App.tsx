@@ -159,10 +159,10 @@ function Home() {
           alt=""
           className="absolute right-0 top-0 h-full w-[60%] object-cover object-left pointer-events-none select-none"
         />
-        <div className="relative z-10 w-[38%]">
-          <div className="overflow-hidden mb-4">
+        <div className="relative z-10 w-[42%]">
+          <div className="overflow-hidden mb-6">
             <motion.h1
-              className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground leading-[1.2] text-left"
+              className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground leading-[1.15] text-left"
               initial={{ y: "100%", opacity: 0 }}
               animate={{ y: "0%", opacity: 1 }}
               transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -172,7 +172,7 @@ function Home() {
           </div>
           <div className="overflow-hidden">
             <motion.p
-              className="text-sm md:text-base text-foreground/70 leading-relaxed text-left"
+              className="text-base md:text-lg text-foreground/70 leading-relaxed text-left"
               initial={{ y: "100%", opacity: 0 }}
               animate={{ y: "0%", opacity: 1 }}
               transition={{ delay: 0.35, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
