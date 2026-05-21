@@ -244,7 +244,7 @@ function Home() {
           </motion.h1>
         </div>
 
-        {/* Man image — z-20, in FRONT of the title */}
+        {/* Man image — z-20, in FRONT of the title, shifted down */}
         <div className="absolute inset-0 flex items-end justify-center z-20 pointer-events-none select-none">
           <motion.img
             src={heroManSrc}
@@ -255,6 +255,7 @@ function Home() {
               objectFit: "contain",
               objectPosition: "bottom center",
               display: "block",
+              transform: "translateY(18%)",
             }}
             initial={{ opacity: 0, scale: 0.96, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
