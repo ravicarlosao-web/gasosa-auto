@@ -30,7 +30,7 @@ const MILESTONES = [
     year: "2016",
     label: "Fundação",
     subtitle: "O início em Luanda",
-    image: "/hero.png",
+    image: "/historia-2016.png",
     description:
       "Fundação da Gasosa Auto Agro em Luanda, com capital próprio e foco no fornecimento de peças, acessórios e lubrificantes para o sector automóvel e agrícola angolano.",
   },
@@ -38,7 +38,7 @@ const MILESTONES = [
     year: "2019",
     label: "Marca própria",
     subtitle: "Nasce a Pangulino",
-    image: "/contact-card.png",
+    image: "/historia-2019.png",
     description:
       "Criação da marca própria Pangulino, inspirada no pangolim — símbolo de resistência e protecção. Uma linha de ferramentas e equipamentos agrícolas de alta durabilidade, desenvolvida para o mercado angolano.",
   },
@@ -46,7 +46,7 @@ const MILESTONES = [
     year: "2020",
     label: "Expansão nacional",
     subtitle: "De Luanda ao interior do país",
-    image: "/hero.png",
+    image: "/historia-2020.png",
     description:
       "Consolidação da presença nacional com a abertura de instalações no Lubango e no Huambo — mais de 10.000 m² de infraestrutura no Lubango, com lojas, armazéns e oficinas ao serviço das províncias do sul e centro do país.",
   },
