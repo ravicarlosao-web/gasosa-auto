@@ -2,7 +2,7 @@ import { Switch, Route, Router as WouterRouter, Link } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { ChevronDown, Check, Menu, X } from "lucide-react";
+import { ChevronDown, Check, Menu, X, Mail } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import heroManSrc from "/hero-man.png";
 import { motion, AnimatePresence } from "framer-motion";
@@ -281,35 +281,44 @@ function Home() {
             Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
           </motion.p>
 
-          {/* Video card */}
+          {/* Contact card */}
           <motion.div
             className="relative overflow-hidden rounded-2xl flex-shrink-0"
             style={{
-              width: "clamp(110px, 16vw, 190px)",
-              height: "clamp(72px, 10vw, 120px)",
-              background: "linear-gradient(160deg, #0e1e38 0%, #1c3461 60%, #24426e 100%)",
-              boxShadow: "0 6px 28px rgba(0,0,0,0.28)",
+              width: "clamp(140px, 18vw, 220px)",
+              height: "clamp(100px, 13vw, 160px)",
+              boxShadow: "0 6px 28px rgba(0,0,0,0.22)",
             }}
             initial={{ opacity: 0, scale: 0.88 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="absolute inset-0" style={{
-              background: "radial-gradient(ellipse at 60% 40%, rgba(60,90,140,0.45) 0%, rgba(10,20,40,0.85) 100%)"
-            }} />
-            <div className="absolute inset-0 flex items-center justify-center">
+            {/* Background image */}
+            <img
+              src="/contact-card.png"
+              alt="Contacte-nos"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            {/* CONTACTE-NOS pill — same style as NavPill */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
               <div
-                className="flex items-center justify-center rounded-full"
+                className="flex items-center gap-1.5 rounded-full px-3 py-1.5"
                 style={{
-                  width: "clamp(28px, 3.5vw, 38px)",
-                  height: "clamp(28px, 3.5vw, 38px)",
-                  background: "rgba(255,255,255,0.18)",
-                  border: "1.5px solid rgba(255,255,255,0.35)",
+                  background: "#ffffff",
+                  boxShadow: "0 2px 12px rgba(0,0,0,0.18)",
                 }}
               >
-                <svg viewBox="0 0 10 12" fill="white" style={{ width: "9px", height: "11px", marginLeft: "2px" }}>
-                  <path d="M0 0L10 6L0 12V0Z" />
-                </svg>
+                <Mail className="w-3 h-3 flex-shrink-0" style={{ color: "#003591" }} />
+                <span
+                  style={{
+                    fontSize: "10px",
+                    fontWeight: 700,
+                    letterSpacing: "0.1em",
+                    color: "#111111",
+                  }}
+                >
+                  CONTACTE-NOS
+                </span>
               </div>
             </div>
           </motion.div>
