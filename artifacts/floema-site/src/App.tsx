@@ -22,19 +22,19 @@ function Home() {
           </button>
         </div>
         
-        <nav className="hidden md:flex items-center gap-2">
+        <nav className="hidden md:flex items-center gap-1.5">
           {["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"].map((item) => (
             <Link 
               key={item} 
               href={`/${item.toLowerCase()}`}
-              className="text-[11px] font-semibold tracking-wider px-3 py-1.5 rounded-full border border-foreground/10 hover:bg-foreground/5 transition-colors text-foreground"
+              className="text-[11px] font-semibold tracking-widest px-4 py-[7px] rounded-full border border-neutral-300 bg-white/90 hover:bg-white transition-colors text-foreground"
             >
               {item}
             </Link>
           ))}
-          <div className="ml-2 flex items-center text-[11px] font-semibold cursor-pointer">
-            PT <ChevronDown className="w-3 h-3 ml-0.5 opacity-70" />
-          </div>
+          <button className="flex items-center text-[11px] font-semibold tracking-widest px-4 py-[7px] rounded-full border border-neutral-300 bg-white/90 hover:bg-white transition-colors text-foreground cursor-pointer gap-0.5">
+            PT <ChevronDown className="w-3 h-3 ml-0.5" />
+          </button>
         </nav>
       </header>
 
