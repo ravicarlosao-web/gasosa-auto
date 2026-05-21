@@ -23,8 +23,9 @@ function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
   return (
     <MotionLink
       href={`/${item.toLowerCase()}`}
-      className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full bg-white text-foreground whitespace-nowrap inline-flex items-center justify-center relative"
+      className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full bg-white whitespace-nowrap inline-flex items-center justify-center relative"
       style={{
+        color: "#003591",
         paddingLeft: "1.25rem",
         paddingRight: "1.25rem",
         marginLeft: overlap ? "-4px" : "0",
@@ -87,12 +88,13 @@ function LangDropdown() {
                 transition={{ delay: i * 0.04, type: "spring", stiffness: 400, damping: 22 }}
                 onClick={() => { setSelected(lang.code); setOpen(false); }}
                 className={`w-full flex items-center justify-between px-4 py-2.5 text-[11px] font-semibold tracking-widest transition-colors cursor-pointer
-                  ${selected === lang.code ? "bg-neutral-100 text-foreground" : "text-foreground hover:bg-neutral-50"}`}
+                  ${selected === lang.code ? "bg-neutral-100 hover:bg-neutral-100" : "hover:bg-neutral-50"}`}
+                style={{ color: "#003591" }}
                 data-testid={`button-lang-${lang.code}`}
               >
                 {lang.label}
                 {selected === lang.code && (
-                  <Check className="w-3 h-3 ml-3 text-foreground" />
+                  <Check className="w-3 h-3 ml-3" style={{ color: "#003591" }} />
                 )}
               </motion.button>
             ))}
