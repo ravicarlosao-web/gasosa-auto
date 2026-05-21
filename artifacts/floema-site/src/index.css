@@ -79,9 +79,9 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  --background: 220 100% 28%; /* #003591 */
+  --background: 0 0% 100%; /* white */
 
-  --foreground: 0 0% 100%; /* white */
+  --foreground: 220 14% 10%; /* near-black */
 
   --border: 20 5.9% 90%;
 
