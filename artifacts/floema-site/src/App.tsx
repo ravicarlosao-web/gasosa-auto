@@ -396,6 +396,34 @@ function Home() {
   return (
     <div className="w-full flex flex-col">
 
+      {/* ── Header (fixed, floats over everything) ───────────────────── */}
+      <header className="fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between px-5 sm:px-8 py-5 max-w-[1400px] mx-auto">
+        <Link href="/" className="flex items-center">
+          <img src={logoSrc} alt="Gasosa Auto Agro" className="h-10 sm:h-12 w-auto object-contain" />
+        </Link>
+
+        {/* Desktop nav */}
+        <nav className="hidden lg:flex items-center gap-4">
+          <div className="flex items-center">
+            {NAV_ITEMS.map((item, i) => (
+              <NavPill key={item} item={item} overlap={i > 0} />
+            ))}
+          </div>
+          <LangDropdown />
+        </nav>
+
+        {/* Mobile hamburger */}
+        <button
+          className="lg:hidden p-2 text-foreground"
+          onClick={() => setMobileMenuOpen(true)}
+          aria-label="Abrir menu"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
+      </header>
+
+      <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+
       {/* ── Hero wrapper — sticky, blurs + recedes as section slides over it ── */}
       <div
         className="sticky top-0 z-0 min-h-[100dvh] w-full bg-background flex flex-col overflow-hidden"
@@ -407,34 +435,6 @@ function Home() {
           borderRadius: scrollProgress > 0 ? `${scrollProgress * 20}px` : "0px",
         }}
       >
-        {/* ── Header ───────────────────────────────────────────────────── */}
-        <header className="w-full flex items-center justify-between px-5 sm:px-8 py-5 max-w-[1400px] mx-auto relative z-20 w-full">
-          <Link href="/" className="flex items-center">
-            <img src={logoSrc} alt="Gasosa Auto Agro" className="h-10 sm:h-12 w-auto object-contain" />
-          </Link>
-
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center">
-              {NAV_ITEMS.map((item, i) => (
-                <NavPill key={item} item={item} overlap={i > 0} />
-              ))}
-            </div>
-            <LangDropdown />
-          </nav>
-
-          {/* Mobile hamburger */}
-          <button
-            className="lg:hidden p-2 text-foreground"
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label="Abrir menu"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-        </header>
-
-        <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
-
         <main className="relative flex-1 w-full overflow-hidden">
 
           {/* Title — z-10, behind man */}
