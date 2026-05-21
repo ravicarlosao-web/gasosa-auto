@@ -159,10 +159,10 @@ function Home() {
           alt=""
           className="absolute right-0 top-0 h-full w-[60%] object-cover object-left pointer-events-none select-none"
         />
-        <div className="relative z-10 w-[42%]">
+        <div className="relative z-10 w-[50%]">
           <div className="overflow-hidden mb-6">
             <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground leading-[1.15] text-left"
+              className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-foreground leading-[1.15] text-left"
               initial={{ y: "100%", opacity: 0 }}
               animate={{ y: "0%", opacity: 1 }}
               transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
