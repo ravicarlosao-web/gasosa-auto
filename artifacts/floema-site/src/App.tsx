@@ -2,7 +2,7 @@ import { Switch, Route, Router as WouterRouter, Link } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { ChevronDown, Check, Menu, X, Mail } from "lucide-react";
+import { ChevronDown, Check, Menu, X, Mail, ArrowDown } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import heroManSrc from "/hero-man.png";
 import { motion, AnimatePresence } from "framer-motion";
@@ -287,6 +287,28 @@ function Home() {
           >
             Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
           </motion.p>
+
+          {/* Divider + welcome */}
+          <motion.div
+            className="flex flex-col gap-2"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.7, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <hr style={{ border: "none", borderTop: "1px solid rgba(0,0,0,0.18)", width: "clamp(120px, 18vw, 200px)" }} />
+            <div className="flex items-center gap-2">
+              <span style={{
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 500,
+                fontSize: "clamp(11px, 1vw, 14px)",
+                color: "#111111",
+                letterSpacing: "0.04em",
+              }}>
+                welcome
+              </span>
+              <ArrowDown style={{ width: "clamp(12px, 1vw, 15px)", height: "clamp(12px, 1vw, 15px)", color: "#111111", strokeWidth: 2 }} />
+            </div>
+          </motion.div>
 
           {/* Contact card — only on sm+ */}
           <motion.div
