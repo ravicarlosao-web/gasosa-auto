@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChevronDown, Check } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
+import heroSrc from "/hero.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import NotFound from "@/pages/not-found";
@@ -152,15 +153,20 @@ function Home() {
         </nav>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center px-4 -mt-20">
-        <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-foreground leading-[1.2]">
+      <main className="flex-1 relative overflow-hidden flex flex-col justify-center px-8 md:px-16 -mt-20">
+        <img
+          src={heroSrc}
+          alt=""
+          className="absolute right-0 top-0 h-full w-[60%] object-cover object-left pointer-events-none select-none"
+        />
+        <div className="relative z-10 max-w-lg">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-foreground leading-[1.2] text-left">
             {[
               ["Espaços", "pensados", "para", "viver"],
               ["e", "durar", "uma", "vida."],
             ].map((line, lineIdx) => (
               <div key={lineIdx} className="overflow-hidden block">
-                <div className="flex items-baseline justify-center gap-[0.28em] flex-wrap">
+                <div className="flex items-baseline justify-start gap-[0.28em] flex-wrap">
                   {line.map((word, wordIdx) => (
                     <motion.span
                       key={wordIdx}
