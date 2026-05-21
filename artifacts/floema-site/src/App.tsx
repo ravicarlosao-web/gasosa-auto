@@ -12,7 +12,7 @@ const queryClient = new QueryClient();
 
 const MotionLink = motion.create(Link);
 
-const NAV_ITEMS = ["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"];
+const NAV_ITEMS = ["QUEM SOMOS", "SECTORES", "INFRAESTRUTURAS","PARCEIROS", "CONTACTOS"];
 
 const LANGUAGES = [
   { code: "EN", label: "EN" },
@@ -21,10 +21,20 @@ const LANGUAGES = [
 ];
 
 function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
+  const [mouse, setMouse] = useState<{ x: number; y: number } | null>(null);
+  const pillRef = useRef<HTMLAnchorElement>(null);
+
+  function handleMouseMove(e: React.MouseEvent<HTMLAnchorElement>) {
+    const rect = pillRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  }
+
   return (
     <MotionLink
+      ref={pillRef}
       href={`/${item.toLowerCase()}`}
-      className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full bg-white whitespace-nowrap inline-flex items-center justify-center relative"
+      className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full bg-white whitespace-nowrap inline-flex items-center justify-center relative overflow-hidden"
       style={{
         color: "#003591",
         paddingLeft: "1.25rem",
@@ -33,8 +43,25 @@ function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
       }}
       whileHover={{ paddingLeft: "1.75rem", paddingRight: "1.75rem", zIndex: 10 }}
       transition={{ type: "spring", stiffness: 350, damping: 18 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setMouse(null)}
     >
-      {item}
+      <AnimatePresence>
+        {mouse && (
+          <motion.span
+            key="glow"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className="pointer-events-none absolute inset-0 rounded-full"
+            style={{
+              background: `radial-gradient(circle 55px at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.18) 0%, transparent 80%)`,
+            }}
+          />
+        )}
+      </AnimatePresence>
+      <span className="relative z-10">{item}</span>
     </MotionLink>
   );
 }
@@ -111,7 +138,7 @@ function Home() {
     <div className="min-h-[100dvh] w-full bg-background flex flex-col">
       <header className="w-full flex items-center justify-between px-6 py-6 max-w-[1400px] mx-auto relative z-10">
         <Link href="/" className="flex items-center">
-          <img src={logoSrc} alt="Gasosa Auto Agro" className="h-15 w-auto object-contain" />
+          <img src={logoSrc} alt="Gasosa Auto Agro" className="h-25 w-auto object-contain" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-4">
