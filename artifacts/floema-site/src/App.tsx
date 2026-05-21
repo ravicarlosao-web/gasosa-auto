@@ -255,10 +255,9 @@ function Home() {
               objectFit: "contain",
               objectPosition: "bottom center",
               display: "block",
-              transform: "translateY(30%)",
             }}
-            initial={{ opacity: 0, scale: 0.96, y: 24 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.96, y: 80 }}
+            animate={{ opacity: 1, scale: 1, y: "28%" }}
             transition={{ delay: 0.18, duration: 1, ease: [0.22, 1, 0.36, 1] }}
           />
         </div>
