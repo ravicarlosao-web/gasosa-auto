@@ -27,22 +27,28 @@ const LANGUAGES = [
 
 const MILESTONES = [
   {
-    year: "2005",
+    year: "2016",
+    label: "Fundação",
+    subtitle: "O início em Luanda",
     image: "/hero.png",
     description:
-      "Fundação da Gasosa Auto Agro em Luanda, com foco na importação e distribuição de equipamentos agrícolas e veículos de alta performance.",
+      "Fundação da Gasosa Auto Agro em Luanda, com capital próprio e foco no fornecimento de peças, acessórios e lubrificantes para o sector automóvel e agrícola angolano.",
   },
   {
-    year: "2015",
+    year: "2019",
+    label: "Marca própria",
+    subtitle: "Nasce a Pangulino",
     image: "/contact-card.png",
     description:
-      "Expansão para o sector de infraestruturas, tornando-nos parceiros estratégicos em projetos de desenvolvimento nacional.",
+      "Criação da marca própria Pangulino, inspirada no pangolim — símbolo de resistência e protecção. Uma linha de ferramentas e equipamentos agrícolas de alta durabilidade, desenvolvida para o mercado angolano.",
   },
   {
     year: "2020",
+    label: "Expansão nacional",
+    subtitle: "De Luanda ao interior do país",
     image: "/hero.png",
     description:
-      "Consolidação de parcerias com as principais marcas internacionais dos sectores automóvel e agrícola.",
+      "Consolidação da presença nacional com a abertura de instalações no Lubango e no Huambo — mais de 10.000 m² de infraestrutura no Lubango, com lojas, armazéns e oficinas ao serviço das províncias do sul e centro do país.",
   },
 ];
 
@@ -237,21 +243,32 @@ function MilestoneCard({
         className="px-0 md:px-8 pt-10 pb-10"
         style={{ paddingLeft: index === 0 ? 0 : undefined }}
       >
-        <motion.span
+        <motion.div
           initial={{ opacity: 0, x: -14 }}
           animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -14 }}
           transition={{ duration: 0.6, delay: base, ease }}
-          style={{
+          style={{ marginBottom: "16px" }}
+        >
+          <span style={{
             fontSize: "11px",
             fontWeight: 700,
             letterSpacing: "0.18em",
-            color: "rgba(255,255,255,0.55)",
+            color: "rgba(255,255,255,0.45)",
             display: "block",
-            marginBottom: "20px",
-          }}
-        >
-          {milestone.year}
-        </motion.span>
+            marginBottom: "4px",
+          }}>
+            {milestone.year} — {milestone.label}
+          </span>
+          <span style={{
+            fontSize: "clamp(0.95rem, 0.7rem + 1vw, 1.15rem)",
+            fontWeight: 700,
+            color: "#ffffff",
+            display: "block",
+            lineHeight: 1.2,
+          }}>
+            {milestone.subtitle}
+          </span>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 28, scale: 0.97 }}
@@ -311,25 +328,35 @@ function CurrentYearHighlight() {
             fontSize: "clamp(5rem, 4rem + 10vw, 14rem)",
           }}
         >
-          2024
+          2025
         </motion.span>
       </div>
 
-      <motion.p
+      <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
         transition={{ duration: 0.85, delay: 0.2, ease }}
-        className="sm:max-w-[340px] pb-2"
-        style={{
+        className="sm:max-w-[360px] pb-2"
+      >
+        <span style={{
+          fontSize: "11px",
+          fontWeight: 700,
+          letterSpacing: "0.18em",
+          color: "rgba(255,255,255,0.45)",
+          display: "block",
+          marginBottom: "8px",
+        }}>
+          HOJE — 2025
+        </span>
+        <p style={{
           color: "rgba(255,255,255,0.85)",
           fontSize: "clamp(0.85rem, 0.6rem + 0.8vw, 1.05rem)",
           lineHeight: 1.65,
           fontWeight: 500,
-        }}
-      >
-        Consolidados como referência nacional no sector automóvel e agrícola, com projetos de
-        impacto em todo o território angolano — e uma visão clara para o futuro.
-      </motion.p>
+        }}>
+          Consolidados como referência nacional no sector automóvel, agrícola e industrial, com representação exclusiva da marca Nergytech em Angola, parceria com mais de 30 clientes e empresas de referência — e uma visão clara para o futuro.
+        </p>
+      </motion.div>
     </div>
   );
 }
