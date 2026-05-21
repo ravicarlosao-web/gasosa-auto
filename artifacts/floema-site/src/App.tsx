@@ -281,9 +281,9 @@ function Home() {
               fontWeight: 500,
               maxWidth: "clamp(160px, 22vw, 240px)",
             }}
-            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+            initial={{ opacity: 0, y: 60, filter: "blur(6px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 1.1, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 1.4, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           >
             Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
           </motion.p>
@@ -296,11 +296,11 @@ function Home() {
               height: "clamp(90px, 12vw, 150px)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.24)",
             }}
-            initial={{ opacity: 0, scale: 0.82, y: 24, filter: "blur(8px)" }}
+            initial={{ opacity: 0, scale: 0.92, y: 60, filter: "blur(6px)" }}
             animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
             transition={{
-              delay: 1.3,
-              duration: 0.85,
+              delay: 1.6,
+              duration: 0.9,
               ease: [0.16, 1, 0.3, 1],
             }}
           >
