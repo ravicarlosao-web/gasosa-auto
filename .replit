@@ -33,7 +33,7 @@ args = "PORT=5173 BASE_PATH=/ pnpm --filter @workspace/floema-site run dev"
 waitForPort = 5173
 
 [agent]
-stack = "PNPM_WORKSPACE"
+stack = "BEST_EFFORT_FALLBACK"
 expertMode = true
 
 [postMerge]
@@ -55,3 +55,7 @@ externalPort = 80
 [[ports]]
 localPort = 20513
 externalPort = 3000
+
+[userenv]
+
+[userenv.shared]
