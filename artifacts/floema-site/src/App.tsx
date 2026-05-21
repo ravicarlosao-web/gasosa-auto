@@ -72,15 +72,19 @@ function LangDropdown() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -6, scale: 0.97 }}
+            initial={{ opacity: 0, y: -8, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -6, scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className="absolute right-0 top-full mt-2 bg-white rounded-2xl shadow-md overflow-hidden min-w-[72px] z-50"
+            exit={{ opacity: 0, y: -8, scale: 0.95, transition: { duration: 0.15 } }}
+            transition={{ type: "spring", stiffness: 500, damping: 28 }}
+            className="absolute left-1/2 -translate-x-1/2 top-full mt-3 bg-white rounded-2xl shadow-lg overflow-hidden min-w-[72px] z-50"
+            style={{ transformOrigin: "top center" }}
           >
-            {LANGUAGES.map((lang) => (
-              <button
+            {LANGUAGES.map((lang, i) => (
+              <motion.button
                 key={lang.code}
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.04, type: "spring", stiffness: 400, damping: 22 }}
                 onClick={() => { setSelected(lang.code); setOpen(false); }}
                 className={`w-full flex items-center justify-between px-4 py-2.5 text-[11px] font-semibold tracking-widest transition-colors cursor-pointer
                   ${selected === lang.code ? "bg-neutral-100 text-foreground" : "text-foreground hover:bg-neutral-50"}`}
@@ -88,9 +92,9 @@ function LangDropdown() {
               >
                 {lang.label}
                 {selected === lang.code && (
-                  <Check className="w-3 h-3 ml-2 text-foreground" />
+                  <Check className="w-3 h-3 ml-3 text-foreground" />
                 )}
-              </button>
+              </motion.button>
             ))}
           </motion.div>
         )}
