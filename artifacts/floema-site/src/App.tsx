@@ -363,8 +363,8 @@ function Home() {
   return (
     <div className="w-full flex flex-col">
 
-      {/* ── Hero wrapper (original, untouched) ───────────────────────── */}
-      <div className="min-h-[100dvh] w-full bg-background flex flex-col overflow-hidden">
+      {/* ── Hero wrapper — sticky so the section below slides over it ── */}
+      <div className="sticky top-0 z-0 min-h-[100dvh] w-full bg-background flex flex-col overflow-hidden">
         {/* ── Header ───────────────────────────────────────────────────── */}
         <header className="w-full flex items-center justify-between px-5 sm:px-8 py-5 max-w-[1400px] mx-auto relative z-20 w-full">
           <Link href="/" className="flex items-center">
@@ -521,8 +521,10 @@ function Home() {
         </main>
       </div>
 
-      {/* ── História Section (new, below hero) ───────────────────────── */}
-      <HistoriaSection />
+      {/* ── História Section — slides over the sticky hero on scroll ─── */}
+      <div className="relative z-10">
+        <HistoriaSection />
+      </div>
 
     </div>
   );
