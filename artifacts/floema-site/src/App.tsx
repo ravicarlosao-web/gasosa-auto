@@ -231,7 +231,8 @@ function Home() {
             style={{
               color: "#003591",
               fontSize: "clamp(2.2rem, 6.8vw, 5rem)",
-              fontWeight: 900,
+              fontFamily: "'Poppins', sans-serif",
+              fontWeight: 700,
               lineHeight: 1.1,
               letterSpacing: "0.02em",
             }}
