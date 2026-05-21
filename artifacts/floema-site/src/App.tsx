@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChevronDown, Check } from "lucide-react";
-import logoSrc from "/logo.png";
+import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import NotFound from "@/pages/not-found";
@@ -139,7 +139,7 @@ function Home() {
     <div className="min-h-[100dvh] w-full bg-background flex flex-col">
       <header className="w-full flex items-center justify-between px-6 py-6 max-w-[1400px] mx-auto relative z-10">
         <Link href="/" className="flex items-center">
-          <img src={logoSrc} alt="Gasosa Auto Agro" className="h-25 w-auto object-contain" />
+          <img src={logoSrc} alt="Gasosa Auto Agro" className="h-11 w-auto object-contain" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-4">
