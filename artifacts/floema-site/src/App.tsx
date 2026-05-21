@@ -344,7 +344,7 @@ function HistoriaSection() {
       className="w-full relative"
       style={{ background: "#003591", fontFamily: "'Poppins', sans-serif" }}
     >
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-10 py-20 sm:py-28">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-10 pt-10 pb-16 sm:pt-14 sm:pb-24">
         <div ref={headingRef} className="overflow-hidden mb-16 sm:mb-20">
           <motion.h2
             initial={{ y: 50, opacity: 0 }}
@@ -355,7 +355,7 @@ function HistoriaSection() {
               fontWeight: 700,
               lineHeight: 1.1,
               letterSpacing: "0.01em",
-              fontSize: "clamp(1.6rem, 1rem + 3.2vw, 4rem)",
+              fontSize: "clamp(1.25rem, 0.8rem + 2.8vw, 4rem)",
               maxWidth: "700px",
             }}
           >
