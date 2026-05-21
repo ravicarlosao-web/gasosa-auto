@@ -226,11 +226,11 @@ function Home() {
       <main className="relative flex-1 w-full overflow-hidden">
 
         {/* Title — z-10, sits BEHIND the man */}
-        <div className="absolute inset-x-0 top-0 z-10 w-full text-center px-4 sm:px-12 pt-8 sm:pt-12">
+        <div className="absolute inset-x-0 top-0 z-10 w-full text-center px-4 sm:px-12 pt-4 sm:pt-6">
           <motion.h1
             style={{
               color: "#003591",
-              fontSize: "clamp(2.4rem, 7.5vw, 5.5rem)",
+              fontSize: "clamp(1.9rem, 5.8vw, 4.2rem)",
               fontWeight: 900,
               lineHeight: 1.1,
               letterSpacing: "-0.025em",
@@ -257,7 +257,7 @@ function Home() {
               display: "block",
             }}
             initial={{ opacity: 0, scale: 0.96, y: 80 }}
-            animate={{ opacity: 1, scale: 1, y: "28%" }}
+            animate={{ opacity: 1, scale: 1, y: "18%" }}
             transition={{ delay: 0.18, duration: 1, ease: [0.22, 1, 0.36, 1] }}
           />
         </div>
