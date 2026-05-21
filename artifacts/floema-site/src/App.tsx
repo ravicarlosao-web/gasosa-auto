@@ -236,9 +236,9 @@ function Home() {
               letterSpacing: "0.02em",
               fontSize: "clamp(1.55rem, 1rem + 3.8vw, 5rem)",
             }}
-            initial={{ opacity: 0, y: 40, filter: "blur(6px)" }}
+            initial={{ opacity: 0, y: 60, filter: "blur(12px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 0.1, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 0.2, duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
           >
             Referência angolana no<br />
             sector automóvel e agrícola.
@@ -257,11 +257,11 @@ function Home() {
               objectPosition: "bottom center",
               display: "block",
             }}
-            initial={{ opacity: 0, scale: 0.93, y: "35%", filter: "blur(4px)" }}
+            initial={{ opacity: 0, scale: 0.9, y: "42%", filter: "blur(10px)" }}
             animate={{ opacity: 1, scale: 1, y: "18%", filter: "blur(0px)" }}
             transition={{
-              delay: 0.3,
-              duration: 1.4,
+              delay: 0.55,
+              duration: 2.2,
               ease: [0.16, 1, 0.3, 1],
             }}
           />
@@ -281,9 +281,9 @@ function Home() {
               fontWeight: 500,
               maxWidth: "clamp(160px, 22vw, 240px)",
             }}
-            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 0.65, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 1.2, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
           >
             Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
           </motion.p>
@@ -296,11 +296,11 @@ function Home() {
               height: "clamp(90px, 12vw, 150px)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.24)",
             }}
-            initial={{ opacity: 0, scale: 0.85, y: 16, filter: "blur(4px)" }}
+            initial={{ opacity: 0, scale: 0.82, y: 24, filter: "blur(8px)" }}
             animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
             transition={{
-              delay: 0.8,
-              duration: 1,
+              delay: 1.5,
+              duration: 1.4,
               ease: [0.16, 1, 0.3, 1],
             }}
           >
