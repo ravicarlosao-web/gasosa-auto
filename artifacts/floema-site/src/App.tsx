@@ -12,13 +12,17 @@ const MotionLink = motion.create(Link);
 
 const NAV_ITEMS = ["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"];
 
-function NavPill({ item }: { item: string }) {
+function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
   return (
     <MotionLink
       href={`/${item.toLowerCase()}`}
-      className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full bg-white text-foreground whitespace-nowrap inline-flex items-center justify-center"
-      style={{ paddingLeft: "1.25rem", paddingRight: "1.25rem" }}
-      whileHover={{ paddingLeft: "1.75rem", paddingRight: "1.75rem" }}
+      className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full bg-white text-foreground whitespace-nowrap inline-flex items-center justify-center relative"
+      style={{
+        paddingLeft: "1.25rem",
+        paddingRight: "1.25rem",
+        marginLeft: overlap ? "-6px" : "0",
+      }}
+      whileHover={{ paddingLeft: "1.75rem", paddingRight: "1.75rem", zIndex: 10 }}
       transition={{ type: "spring", stiffness: 350, damping: 18 }}
     >
       {item}
@@ -41,9 +45,9 @@ function Home() {
         </div>
 
         <nav className="hidden md:flex items-center gap-4">
-          <div className="flex items-center gap-0">
-            {NAV_ITEMS.map((item) => (
-              <NavPill key={item} item={item} />
+          <div className="flex items-center gap--3">
+            {NAV_ITEMS.map((item, i) => (
+              <NavPill key={item} item={item} overlap={i > 0} />
             ))}
           </div>
           <button className="flex items-center text-[11px] font-semibold tracking-widest text-foreground cursor-pointer">
