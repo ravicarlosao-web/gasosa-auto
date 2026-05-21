@@ -159,33 +159,27 @@ function Home() {
           alt=""
           className="absolute right-0 top-0 h-full w-[60%] object-cover object-left pointer-events-none select-none"
         />
-        <div className="relative z-10 max-w-lg">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-foreground leading-[1.2] text-left">
-            {[
-              ["Espaços", "pensados", "para", "viver"],
-              ["e", "durar", "uma", "vida."],
-            ].map((line, lineIdx) => (
-              <div key={lineIdx} className="overflow-hidden block">
-                <div className="flex items-baseline justify-start gap-[0.28em] flex-wrap">
-                  {line.map((word, wordIdx) => (
-                    <motion.span
-                      key={wordIdx}
-                      className="inline-block"
-                      initial={{ y: "110%", opacity: 0, rotateZ: 3 }}
-                      animate={{ y: "0%", opacity: 1, rotateZ: 0 }}
-                      transition={{
-                        delay: 0.15 + lineIdx * 0.18 + wordIdx * 0.07,
-                        duration: 0.75,
-                        ease: [0.22, 1, 0.36, 1],
-                      }}
-                    >
-                      {word}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </h1>
+        <div className="relative z-10 w-[38%]">
+          <div className="overflow-hidden mb-4">
+            <motion.h1
+              className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-foreground leading-[1.2] text-left"
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: "0%", opacity: 1 }}
+              transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Referência angolana no sector automóvel e agrícola.
+            </motion.h1>
+          </div>
+          <div className="overflow-hidden">
+            <motion.p
+              className="text-sm md:text-base text-foreground/70 leading-relaxed text-left"
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: "0%", opacity: 1 }}
+              transition={{ delay: 0.35, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
+            </motion.p>
+          </div>
         </div>
       </main>
     </div>
