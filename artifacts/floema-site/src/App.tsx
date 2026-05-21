@@ -22,24 +22,18 @@ function Home() {
           </button>
         </div>
         
-        <nav className="hidden md:flex items-center gap-4">
-          {/* Connected pill group */}
-          <div className="flex items-center">
-            {["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"].map((item, i) => (
-              <Link
-                key={item}
-                href={`/${item.toLowerCase()}`}
-                className={`text-[11px] font-semibold tracking-widest px-4 py-[7px] border border-neutral-300 bg-white/90 hover:bg-white transition-colors text-foreground relative z-0 hover:z-10
-                  ${i === 0 ? "rounded-l-full" : "-ml-px"}
-                  ${i === 3 ? "rounded-r-full" : ""}
-                `}
-              >
-                {item}
-              </Link>
-            ))}
-          </div>
+        <nav className="hidden md:flex items-center gap-2">
+          {["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"].map((item) => (
+            <Link
+              key={item}
+              href={`/${item.toLowerCase()}`}
+              className="text-[11px] font-semibold tracking-widest px-4 py-[7px] rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 transition-colors text-foreground"
+            >
+              {item}
+            </Link>
+          ))}
           {/* PT standalone — no border */}
-          <button className="flex items-center text-[11px] font-semibold tracking-widest text-foreground cursor-pointer">
+          <button className="flex items-center text-[11px] font-semibold tracking-widest text-foreground cursor-pointer ml-1">
             PT <ChevronDown className="w-3 h-3 ml-0.5" />
           </button>
         </nav>
