@@ -36,8 +36,8 @@ function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
       href={`/${item.toLowerCase()}`}
       className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full whitespace-nowrap inline-flex items-center justify-center relative overflow-hidden"
       style={{
-        background: "#003591",
-        color: "#ffffff",
+        background: "#ffffff",
+        color: "#111111",
         paddingLeft: "1.25rem",
         paddingRight: "1.25rem",
         marginLeft: overlap ? "-4px" : "0",
@@ -57,7 +57,7 @@ function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
             transition={{ duration: 0.15 }}
             className="pointer-events-none absolute inset-0 rounded-full"
             style={{
-              background: `radial-gradient(circle 55px at ${mouse.x}px ${mouse.y}px, rgba(255,255,255,0.2) 0%, transparent 80%)`,
+              background: `radial-gradient(circle 55px at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.18) 0%, transparent 80%)`,
             }}
           />
         )}
