@@ -43,7 +43,7 @@ function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
         marginLeft: overlap ? "-4px" : "0",
       }}
       whileHover={{ paddingLeft: "1.75rem", paddingRight: "1.75rem", zIndex: 10 }}
-      transition={{ type: "spring", stiffness: 350, damping: 18 }}
+      transition={{ type: "spring", stiffness: 110, damping: 22, mass: 1.4 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setMouse(null)}
     >
@@ -54,7 +54,7 @@ function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
             className="pointer-events-none absolute inset-0 rounded-full"
             style={{
               background: `radial-gradient(circle 55px at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.18) 0%, transparent 80%)`,
@@ -139,7 +139,7 @@ function Home() {
     <div className="min-h-[100dvh] w-full bg-background flex flex-col">
       <header className="w-full flex items-center justify-between px-6 py-6 max-w-[1400px] mx-auto relative z-10">
         <Link href="/" className="flex items-center">
-          <img src={logoSrc} alt="Gasosa Auto Agro" className="h-11 w-auto object-contain" />
+          <img src={logoSrc} alt="Gasosa Auto Agro" className="h-15 w-auto object-contain" />
         </Link>
 
         <nav className="hidden md:flex items-center gap-4">
