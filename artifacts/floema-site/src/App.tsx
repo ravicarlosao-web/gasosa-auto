@@ -22,27 +22,21 @@ function Home() {
           </button>
         </div>
 
-        <nav className="hidden md:flex items-center gap-[-8px]">
-          {["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"].map((item, index) => (
-            <Link
-              key={item}
-              href={`/${item.toLowerCase()}`}
-              className={[
-                "text-[11px] font-semibold tracking-widest px-5 py-[7px]",
-                "border border-neutral-400 bg-[#f5f0eb]",
-                "hover:bg-neutral-200 transition-colors text-foreground whitespace-nowrap",
-                "rounded-full relative",
-                index !== 0 ? "-ml-2" : "",
-              ].join(" ")}
-              style={{ 
-                zIndex: index === 0 ? 4 : index === 1 ? 3 : index === 2 ? 2 : 1,
-                boxShadow: index !== 0 ? "-4px 0 0 2px #f5f0eb" : "none"
-              }}
-            >
-              {item}
-            </Link>
-          ))}
-          <button className="flex items-center text-[11px] font-semibold tracking-widest text-foreground cursor-pointer ml-3">
+        <nav className="hidden md:flex items-center gap-4">
+          {/* Single pill — one border, internal dividers */}
+          <div className="flex items-center rounded-full border border-neutral-400 bg-white overflow-hidden">
+            {["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"].map((item, i) => (
+              <Link
+                key={item}
+                href={`/${item.toLowerCase()}`}
+                className={`text-[11px] font-semibold tracking-widest px-5 py-[7px] hover:bg-neutral-100 transition-colors text-foreground whitespace-nowrap${i < 3 ? " border-r border-neutral-400" : ""}`}
+              >
+                {item}
+              </Link>
+            ))}
+          </div>
+          {/* PT standalone */}
+          <button className="flex items-center text-[11px] font-semibold tracking-widest text-foreground cursor-pointer">
             PT <ChevronDown className="w-3 h-3 ml-0.5" />
           </button>
         </nav>
