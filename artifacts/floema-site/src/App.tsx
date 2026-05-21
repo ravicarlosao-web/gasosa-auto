@@ -375,9 +375,7 @@ function Home() {
 
   useEffect(() => {
     function onScroll() {
-      const start = window.innerHeight * 0.55;
-      const end = window.innerHeight * 1.5;
-      const progress = Math.min(1, Math.max(0, (window.scrollY - start) / (end - start)));
+      const progress = Math.min(1, Math.max(0, window.scrollY / window.innerHeight));
       setScrollProgress(progress);
     }
     window.addEventListener("scroll", onScroll, { passive: true });
