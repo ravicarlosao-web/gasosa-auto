@@ -4,7 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChevronDown, Check, Menu, X } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
-import heroSrc from "/hero.png";
+import heroManSrc from "/hero-man.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import NotFound from "@/pages/not-found";
@@ -223,93 +223,102 @@ function Home() {
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
       {/* ── Hero ─────────────────────────────────────────── */}
-
-      {/* ── Mobile / Tablet (< lg) ── stacked layout */}
-      <main className="flex flex-col lg:hidden" style={{ height: "calc(100dvh - 72px)" }}>
-        {/* Image block — 55% of the available height */}
-        <div className="relative w-full overflow-hidden" style={{ flex: "0 0 55%" }}>
-          <img
-            src={heroSrc}
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: "50% 8%" }}
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(to bottom, transparent 55%, var(--background) 100%)" }}
-          />
+      <main className="relative flex-1 w-full overflow-hidden flex flex-col">
+        {/* Title — centered, full width */}
+        <div className="relative z-10 w-full text-center px-5 sm:px-10 pt-6 sm:pt-10">
+          <motion.h1
+            style={{
+              color: "#003591",
+              fontSize: "clamp(1.75rem, 5vw, 4rem)",
+              fontWeight: 700,
+              lineHeight: 1.18,
+              letterSpacing: "-0.01em",
+            }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Referência angolana no<br />
+            sector automóvel e agrícola.
+          </motion.h1>
         </div>
 
-        {/* Text block — fills the remaining 45% */}
-        <div className="flex flex-col justify-center px-5 sm:px-10" style={{ flex: "1 1 0" }}>
-          <div className="overflow-hidden mb-3 sm:mb-5">
-            <motion.h1
-              className="font-semibold tracking-tight text-foreground text-left"
-              style={{ fontSize: "clamp(1.9rem, 6vw, 3rem)", lineHeight: 1.15 }}
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: "0%", opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            >
-              Referência angolana no sector{" "}
-              <span style={{ color: "#003591" }}>automóvel</span> e{" "}
-              <span style={{ color: "#003591" }}>agrícola.</span>
-            </motion.h1>
-          </div>
-          <div className="overflow-hidden">
+        {/* Man image — centered, bottom-anchored, fills remaining space */}
+        <div className="relative flex-1 flex items-end justify-center overflow-hidden">
+          <motion.img
+            src={heroManSrc}
+            alt="Técnico Gasosa Auto Agro"
+            className="relative z-10 select-none pointer-events-none"
+            style={{
+              height: "clamp(320px, 72vh, 680px)",
+              width: "auto",
+              objectFit: "contain",
+              objectPosition: "bottom center",
+              display: "block",
+            }}
+            initial={{ opacity: 0, scale: 0.97, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          />
+
+          {/* Bottom bar: subtitle left, video card right */}
+          <div className="absolute bottom-4 sm:bottom-8 left-5 sm:left-10 right-5 sm:right-10 z-20 flex items-end justify-between gap-4">
+            {/* Subtitle */}
             <motion.p
-              className="text-foreground/70 leading-relaxed text-left"
-              style={{ fontSize: "clamp(0.9rem, 3.5vw, 1.1rem)" }}
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: "0%", opacity: 1 }}
-              transition={{ delay: 0.35, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                fontSize: "clamp(0.75rem, 1.4vw, 0.9rem)",
+                color: "hsl(var(--foreground))",
+                opacity: 0.75,
+                lineHeight: 1.55,
+                maxWidth: "240px",
+              }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 0.75, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
+              Qualidade e confiança para<br />
+              quem impulsiona Angola — nos<br />
+              campos, nas estradas e nas indústrias.
             </motion.p>
-          </div>
-        </div>
-      </main>
 
-      {/* ── Desktop (≥ lg) ── side-by-side layout */}
-      <main className="flex-1 relative hidden lg:flex lg:flex-row lg:items-center">
-        {/* Text */}
-        <div className="relative z-10 flex flex-col justify-center px-16 py-0 w-[52%]">
-          <div className="overflow-hidden mb-6">
-            <motion.h1
-              className="font-semibold tracking-tight text-foreground text-left"
-              style={{ fontSize: "clamp(2rem, 4vw, 4.5rem)", lineHeight: 1.15 }}
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: "0%", opacity: 1 }}
-              transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            {/* Video card */}
+            <motion.div
+              className="relative overflow-hidden rounded-2xl flex-shrink-0 flex items-center justify-center"
+              style={{
+                width: "clamp(100px, 14vw, 160px)",
+                height: "clamp(65px, 9vw, 104px)",
+                background: "linear-gradient(135deg, #1a2a4a 0%, #2d4a7a 100%)",
+                boxShadow: "0 4px 20px rgba(0,0,0,0.18)",
+              }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.55, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
             >
-              Referência angolana no sector{" "}
-              <span style={{ color: "#003591" }}>automóvel</span> e{" "}
-              <span style={{ color: "#003591" }}>agrícola.</span>
-            </motion.h1>
+              {/* Simulated video frame lines */}
+              <div className="absolute inset-0 opacity-20" style={{
+                backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 12px)"
+              }} />
+              {/* Play button */}
+              <div
+                className="relative z-10 flex items-center justify-center rounded-full"
+                style={{
+                  width: "clamp(28px, 4vw, 36px)",
+                  height: "clamp(28px, 4vw, 36px)",
+                  background: "rgba(255,255,255,0.15)",
+                  backdropFilter: "blur(4px)",
+                  border: "1.5px solid rgba(255,255,255,0.3)",
+                }}
+              >
+                <svg
+                  viewBox="0 0 10 12"
+                  fill="white"
+                  style={{ width: "10px", height: "12px", marginLeft: "2px" }}
+                >
+                  <path d="M0 0L10 6L0 12V0Z" />
+                </svg>
+              </div>
+            </motion.div>
           </div>
-          <div className="overflow-hidden">
-            <motion.p
-              className="text-foreground/70 leading-relaxed text-left max-w-[520px]"
-              style={{ fontSize: "clamp(0.9rem, 1.2vw, 1.05rem)" }}
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: "0%", opacity: 1 }}
-              transition={{ delay: 0.35, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            >
-              Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
-            </motion.p>
-          </div>
-        </div>
-
-        {/* Image */}
-        <div className="absolute right-0 top-0 h-full w-[55%] pointer-events-none select-none">
-          <img
-            src={heroSrc}
-            alt=""
-            className="w-full h-full object-cover object-left"
-          />
-          <div
-            className="absolute inset-y-0 left-0 w-1/3"
-            style={{ background: "linear-gradient(to right, var(--background) 0%, transparent 100%)" }}
-          />
         </div>
       </main>
     </div>
