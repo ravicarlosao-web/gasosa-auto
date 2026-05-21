@@ -2,7 +2,7 @@ import { Switch, Route, Router as WouterRouter, Link } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { ChevronDown, Check, Menu, X, Mail, ArrowDown } from "lucide-react";
+import { ChevronDown, Check, Menu, X, Mail } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import heroManSrc from "/hero-man.png";
 import { motion, AnimatePresence } from "framer-motion";
@@ -306,7 +306,7 @@ function Home() {
               }}>
                 welcome
               </span>
-              <ArrowDown style={{ width: "clamp(12px, 1vw, 15px)", height: "clamp(12px, 1vw, 15px)", color: "#111111", strokeWidth: 2 }} />
+              <ChevronDown style={{ width: "clamp(12px, 1vw, 15px)", height: "clamp(12px, 1vw, 15px)", color: "#111111", strokeWidth: 2 }} />
             </div>
           </motion.div>
 
