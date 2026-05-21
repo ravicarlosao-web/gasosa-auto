@@ -283,7 +283,7 @@ function Home() {
             }}
             initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 1.2, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: 1.1, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
           >
             Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
           </motion.p>
@@ -299,8 +299,8 @@ function Home() {
             initial={{ opacity: 0, scale: 0.82, y: 24, filter: "blur(8px)" }}
             animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
             transition={{
-              delay: 1.5,
-              duration: 1.4,
+              delay: 1.3,
+              duration: 0.85,
               ease: [0.16, 1, 0.3, 1],
             }}
           >
