@@ -223,10 +223,10 @@ function Home() {
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <main className="relative flex-1 w-full overflow-hidden flex flex-col">
+      <main className="relative flex-1 w-full overflow-hidden">
 
-        {/* Title — very large, bold, centered */}
-        <div className="relative z-10 w-full text-center px-4 sm:px-12 pt-8 sm:pt-12">
+        {/* Title — z-10, sits BEHIND the man */}
+        <div className="absolute inset-x-0 top-0 z-10 w-full text-center px-4 sm:px-12 pt-8 sm:pt-12">
           <motion.h1
             style={{
               color: "#003591",
@@ -244,14 +244,13 @@ function Home() {
           </motion.h1>
         </div>
 
-        {/* Man image + bottom overlay — fills remaining space */}
-        <div className="relative flex-1 flex items-end justify-center overflow-hidden">
+        {/* Man image — z-20, in FRONT of the title */}
+        <div className="absolute inset-0 flex items-end justify-center z-20 pointer-events-none select-none">
           <motion.img
             src={heroManSrc}
             alt="Técnico Gasosa Auto Agro"
-            className="relative z-10 select-none pointer-events-none"
             style={{
-              height: "clamp(400px, 80vh, 760px)",
+              height: "clamp(420px, 82vh, 780px)",
               width: "auto",
               objectFit: "contain",
               objectPosition: "bottom center",
@@ -261,69 +260,59 @@ function Home() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ delay: 0.18, duration: 1, ease: [0.22, 1, 0.36, 1] }}
           />
+        </div>
 
-          {/* Bottom bar: subtitle left, video card right */}
-          <div className="absolute bottom-5 sm:bottom-10 left-5 sm:left-12 right-5 sm:right-12 z-20 flex items-end justify-between gap-4">
+        {/* Bottom bar: subtitle left, video card right — z-30, above everything */}
+        <div className="absolute bottom-5 sm:bottom-10 left-5 sm:left-12 right-5 sm:right-12 z-30 flex items-end justify-between gap-4">
 
-            {/* Subtitle */}
-            <motion.p
-              style={{
-                fontSize: "clamp(0.8rem, 1.3vw, 0.95rem)",
-                color: "#003591",
-                lineHeight: 1.6,
-                maxWidth: "210px",
-                fontWeight: 400,
-              }}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-            >
-              Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
-            </motion.p>
+          {/* Subtitle */}
+          <motion.p
+            style={{
+              fontSize: "clamp(0.8rem, 1.3vw, 0.95rem)",
+              color: "#003591",
+              lineHeight: 1.6,
+              maxWidth: "210px",
+              fontWeight: 500,
+            }}
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
+          </motion.p>
 
-            {/* Video card */}
-            <motion.div
-              className="relative overflow-hidden rounded-2xl flex-shrink-0"
-              style={{
-                width: "clamp(110px, 16vw, 190px)",
-                height: "clamp(72px, 10vw, 120px)",
-                background: "linear-gradient(160deg, #0e1e38 0%, #1c3461 60%, #24426e 100%)",
-                boxShadow: "0 6px 28px rgba(0,0,0,0.28)",
-              }}
-              initial={{ opacity: 0, scale: 0.88 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {/* Dark cinematic overlay suggesting a video frame */}
-              <div className="absolute inset-0" style={{
-                background: "radial-gradient(ellipse at 60% 40%, rgba(60,90,140,0.45) 0%, rgba(10,20,40,0.85) 100%)"
-              }} />
-              {/* Subtle scan-lines */}
-              <div className="absolute inset-0 opacity-10" style={{
-                backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.12) 0px, rgba(255,255,255,0.12) 1px, transparent 1px, transparent 10px)"
-              }} />
-              {/* A hint of a person silhouette */}
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full opacity-20"
-                style={{ width: "40%", height: "55%", background: "rgba(180,210,255,0.5)", filter: "blur(8px)" }}
-              />
-              {/* Play button */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div
-                  className="flex items-center justify-center rounded-full"
-                  style={{
-                    width: "clamp(28px, 3.5vw, 38px)",
-                    height: "clamp(28px, 3.5vw, 38px)",
-                    background: "rgba(255,255,255,0.18)",
-                    border: "1.5px solid rgba(255,255,255,0.35)",
-                  }}
-                >
-                  <svg viewBox="0 0 10 12" fill="white" style={{ width: "9px", height: "11px", marginLeft: "2px" }}>
-                    <path d="M0 0L10 6L0 12V0Z" />
-                  </svg>
-                </div>
+          {/* Video card */}
+          <motion.div
+            className="relative overflow-hidden rounded-2xl flex-shrink-0"
+            style={{
+              width: "clamp(110px, 16vw, 190px)",
+              height: "clamp(72px, 10vw, 120px)",
+              background: "linear-gradient(160deg, #0e1e38 0%, #1c3461 60%, #24426e 100%)",
+              boxShadow: "0 6px 28px rgba(0,0,0,0.28)",
+            }}
+            initial={{ opacity: 0, scale: 0.88 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="absolute inset-0" style={{
+              background: "radial-gradient(ellipse at 60% 40%, rgba(60,90,140,0.45) 0%, rgba(10,20,40,0.85) 100%)"
+            }} />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div
+                className="flex items-center justify-center rounded-full"
+                style={{
+                  width: "clamp(28px, 3.5vw, 38px)",
+                  height: "clamp(28px, 3.5vw, 38px)",
+                  background: "rgba(255,255,255,0.18)",
+                  border: "1.5px solid rgba(255,255,255,0.35)",
+                }}
+              >
+                <svg viewBox="0 0 10 12" fill="white" style={{ width: "9px", height: "11px", marginLeft: "2px" }}>
+                  <path d="M0 0L10 6L0 12V0Z" />
+                </svg>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </main>
     </div>
