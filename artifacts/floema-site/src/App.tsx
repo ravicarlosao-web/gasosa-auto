@@ -224,17 +224,18 @@ function Home() {
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <main className="relative flex-1 w-full overflow-hidden flex flex-col">
-        {/* Title — centered, full width */}
-        <div className="relative z-10 w-full text-center px-5 sm:px-10 pt-6 sm:pt-10">
+
+        {/* Title — very large, bold, centered */}
+        <div className="relative z-10 w-full text-center px-4 sm:px-12 pt-8 sm:pt-12">
           <motion.h1
             style={{
               color: "#003591",
-              fontSize: "clamp(1.75rem, 5vw, 4rem)",
-              fontWeight: 700,
-              lineHeight: 1.18,
-              letterSpacing: "-0.01em",
+              fontSize: "clamp(2.4rem, 7.5vw, 5.5rem)",
+              fontWeight: 900,
+              lineHeight: 1.1,
+              letterSpacing: "-0.025em",
             }}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.05, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
           >
@@ -243,79 +244,83 @@ function Home() {
           </motion.h1>
         </div>
 
-        {/* Man image — centered, bottom-anchored, fills remaining space */}
+        {/* Man image + bottom overlay — fills remaining space */}
         <div className="relative flex-1 flex items-end justify-center overflow-hidden">
           <motion.img
             src={heroManSrc}
             alt="Técnico Gasosa Auto Agro"
             className="relative z-10 select-none pointer-events-none"
             style={{
-              height: "clamp(320px, 72vh, 680px)",
+              height: "clamp(400px, 80vh, 760px)",
               width: "auto",
               objectFit: "contain",
               objectPosition: "bottom center",
               display: "block",
             }}
-            initial={{ opacity: 0, scale: 0.97, y: 20 }}
+            initial={{ opacity: 0, scale: 0.96, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.18, duration: 1, ease: [0.22, 1, 0.36, 1] }}
           />
 
           {/* Bottom bar: subtitle left, video card right */}
-          <div className="absolute bottom-4 sm:bottom-8 left-5 sm:left-10 right-5 sm:right-10 z-20 flex items-end justify-between gap-4">
+          <div className="absolute bottom-5 sm:bottom-10 left-5 sm:left-12 right-5 sm:right-12 z-20 flex items-end justify-between gap-4">
+
             {/* Subtitle */}
             <motion.p
               style={{
-                fontSize: "clamp(0.75rem, 1.4vw, 0.9rem)",
-                color: "hsl(var(--foreground))",
-                opacity: 0.75,
-                lineHeight: 1.55,
-                maxWidth: "240px",
+                fontSize: "clamp(0.8rem, 1.3vw, 0.95rem)",
+                color: "#003591",
+                lineHeight: 1.6,
+                maxWidth: "210px",
+                fontWeight: 400,
               }}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 0.75, y: 0 }}
-              transition={{ delay: 0.45, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
             >
-              Qualidade e confiança para<br />
-              quem impulsiona Angola — nos<br />
-              campos, nas estradas e nas indústrias.
+              Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
             </motion.p>
 
             {/* Video card */}
             <motion.div
-              className="relative overflow-hidden rounded-2xl flex-shrink-0 flex items-center justify-center"
+              className="relative overflow-hidden rounded-2xl flex-shrink-0"
               style={{
-                width: "clamp(100px, 14vw, 160px)",
-                height: "clamp(65px, 9vw, 104px)",
-                background: "linear-gradient(135deg, #1a2a4a 0%, #2d4a7a 100%)",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.18)",
+                width: "clamp(110px, 16vw, 190px)",
+                height: "clamp(72px, 10vw, 120px)",
+                background: "linear-gradient(160deg, #0e1e38 0%, #1c3461 60%, #24426e 100%)",
+                boxShadow: "0 6px 28px rgba(0,0,0,0.28)",
               }}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.88 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.55, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Simulated video frame lines */}
-              <div className="absolute inset-0 opacity-20" style={{
-                backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 12px)"
+              {/* Dark cinematic overlay suggesting a video frame */}
+              <div className="absolute inset-0" style={{
+                background: "radial-gradient(ellipse at 60% 40%, rgba(60,90,140,0.45) 0%, rgba(10,20,40,0.85) 100%)"
               }} />
+              {/* Subtle scan-lines */}
+              <div className="absolute inset-0 opacity-10" style={{
+                backgroundImage: "repeating-linear-gradient(0deg, rgba(255,255,255,0.12) 0px, rgba(255,255,255,0.12) 1px, transparent 1px, transparent 10px)"
+              }} />
+              {/* A hint of a person silhouette */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full opacity-20"
+                style={{ width: "40%", height: "55%", background: "rgba(180,210,255,0.5)", filter: "blur(8px)" }}
+              />
               {/* Play button */}
-              <div
-                className="relative z-10 flex items-center justify-center rounded-full"
-                style={{
-                  width: "clamp(28px, 4vw, 36px)",
-                  height: "clamp(28px, 4vw, 36px)",
-                  background: "rgba(255,255,255,0.15)",
-                  backdropFilter: "blur(4px)",
-                  border: "1.5px solid rgba(255,255,255,0.3)",
-                }}
-              >
-                <svg
-                  viewBox="0 0 10 12"
-                  fill="white"
-                  style={{ width: "10px", height: "12px", marginLeft: "2px" }}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div
+                  className="flex items-center justify-center rounded-full"
+                  style={{
+                    width: "clamp(28px, 3.5vw, 38px)",
+                    height: "clamp(28px, 3.5vw, 38px)",
+                    background: "rgba(255,255,255,0.18)",
+                    border: "1.5px solid rgba(255,255,255,0.35)",
+                  }}
                 >
-                  <path d="M0 0L10 6L0 12V0Z" />
-                </svg>
+                  <svg viewBox="0 0 10 12" fill="white" style={{ width: "9px", height: "11px", marginLeft: "2px" }}>
+                    <path d="M0 0L10 6L0 12V0Z" />
+                  </svg>
+                </div>
               </div>
             </motion.div>
           </div>
