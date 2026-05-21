@@ -3,14 +3,32 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Search, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
 
+const MotionLink = motion.create(Link);
+
+const NAV_ITEMS = ["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"];
+
+function NavPill({ item }: { item: string }) {
+  return (
+    <MotionLink
+      href={`/${item.toLowerCase()}`}
+      className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full border border-neutral-300 bg-white text-foreground whitespace-nowrap inline-flex items-center justify-center"
+      style={{ paddingLeft: "1.25rem", paddingRight: "1.25rem" }}
+      whileHover={{ paddingLeft: "1.75rem", paddingRight: "1.75rem" }}
+      transition={{ type: "spring", stiffness: 350, damping: 18 }}
+    >
+      {item}
+    </MotionLink>
+  );
+}
+
 function Home() {
   return (
     <div className="min-h-[100dvh] w-full bg-background flex flex-col">
-      {/* Header */}
       <header className="w-full flex items-center justify-between px-6 py-6 max-w-[1400px] mx-auto relative z-10">
         <div className="flex items-center gap-1">
           <Link href="/" className="flex items-start">
@@ -23,26 +41,17 @@ function Home() {
         </div>
 
         <nav className="hidden md:flex items-center gap-4">
-          {/* Single pill — one border, internal dividers */}
-          <div className="flex items-center rounded-full border border-neutral-400 bg-white overflow-hidden">
-            {["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"].map((item, i) => (
-              <Link
-                key={item}
-                href={`/${item.toLowerCase()}`}
-                className={`text-[11px] font-semibold tracking-widest px-5 py-[7px] hover:bg-neutral-100 transition-colors text-foreground whitespace-nowrap${i < 3 ? " border-r border-neutral-400" : ""}`}
-              >
-                {item}
-              </Link>
+          <div className="flex items-center gap-[2px]">
+            {NAV_ITEMS.map((item) => (
+              <NavPill key={item} item={item} />
             ))}
           </div>
-          {/* PT standalone */}
           <button className="flex items-center text-[11px] font-semibold tracking-widest text-foreground cursor-pointer">
             PT <ChevronDown className="w-3 h-3 ml-0.5" />
           </button>
         </nav>
       </header>
 
-      {/* Hero Section */}
       <main className="flex-1 flex flex-col items-center justify-center px-4 -mt-20">
         <div className="text-center max-w-4xl mx-auto">
           <h1
