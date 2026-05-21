@@ -6,7 +6,7 @@ import { ChevronDown, Check, Menu, X, Mail } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import heroManSrc from "/hero-man.png";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -42,16 +42,7 @@ const MILESTONES = [
   },
 ];
 
-// ─── NavPill ─────────────────────────────────────────────────────────────────
-function NavPill({
-  item,
-  overlap,
-  isDark,
-}: {
-  item: string;
-  overlap?: boolean;
-  isDark?: boolean;
-}) {
+function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
   const [mouse, setMouse] = useState<{ x: number; y: number } | null>(null);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
@@ -64,12 +55,11 @@ function NavPill({
       href={`/${item.toLowerCase()}`}
       className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full whitespace-nowrap inline-flex items-center justify-center relative overflow-hidden"
       style={{
-        background: isDark ? "rgba(255,255,255,0.18)" : "#ffffff",
-        color: isDark ? "#ffffff" : "#111111",
+        background: "#ffffff",
+        color: "#111111",
         paddingLeft: "1.25rem",
         paddingRight: "1.25rem",
         marginLeft: overlap ? "-4px" : "0",
-        transition: "background 0.4s, color 0.4s",
       }}
       whileHover={{ paddingLeft: "1.75rem", paddingRight: "1.75rem", zIndex: 10 }}
       transition={{ type: "spring", stiffness: 110, damping: 22, mass: 1.4 }}
@@ -86,7 +76,7 @@ function NavPill({
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="pointer-events-none absolute inset-0 rounded-full"
             style={{
-              background: `radial-gradient(circle 55px at ${mouse.x}px ${mouse.y}px, rgba(255,255,255,0.22) 0%, transparent 80%)`,
+              background: `radial-gradient(circle 55px at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.18) 0%, transparent 80%)`,
             }}
           />
         )}
@@ -96,28 +86,16 @@ function NavPill({
   );
 }
 
-// ─── LangDropdown ─────────────────────────────────────────────────────────────
-function LangDropdown({ isDark }: { isDark?: boolean }) {
+function LangDropdown() {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("PT");
   const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, []);
 
   return (
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-0.5 text-[11px] font-semibold tracking-widest cursor-pointer select-none"
-        style={{ color: isDark ? "#ffffff" : "inherit", transition: "color 0.4s" }}
+        className="flex items-center gap-0.5 text-[11px] font-semibold tracking-widest text-foreground cursor-pointer select-none"
         data-testid="button-lang-selector"
       >
         {selected}
@@ -146,10 +124,7 @@ function LangDropdown({ isDark }: { isDark?: boolean }) {
                 initial={{ opacity: 0, y: -4 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.04, type: "spring", stiffness: 400, damping: 22 }}
-                onClick={() => {
-                  setSelected(lang.code);
-                  setOpen(false);
-                }}
+                onClick={() => { setSelected(lang.code); setOpen(false); }}
                 className={`w-full flex items-center justify-between px-4 py-2.5 text-[11px] font-semibold tracking-widest transition-colors cursor-pointer
                   ${selected === lang.code ? "bg-neutral-100 hover:bg-neutral-100" : "hover:bg-neutral-50"}`}
                 style={{ color: "#003591" }}
@@ -168,7 +143,6 @@ function LangDropdown({ isDark }: { isDark?: boolean }) {
   );
 }
 
-// ─── MobileMenu ───────────────────────────────────────────────────────────────
 function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
   return (
     <AnimatePresence>
@@ -223,53 +197,6 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
   );
 }
 
-// ─── HistoriaSection ──────────────────────────────────────────────────────────
-function HistoriaSection({ sectionRef }: { sectionRef: React.RefObject<HTMLElement | null> }) {
-  const headingRef = useRef(null);
-  const headingInView = useInView(headingRef, { once: true, margin: "-80px 0px 0px 0px" });
-
-  return (
-    <section
-      ref={sectionRef}
-      className="w-full relative"
-      style={{ background: "#003591", fontFamily: "'Poppins', sans-serif" }}
-    >
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-10 py-20 sm:py-28">
-
-        {/* Section heading */}
-        <div ref={headingRef} className="overflow-hidden mb-16 sm:mb-20">
-          <motion.h2
-            initial={{ y: -80, opacity: 0 }}
-            animate={headingInView ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              color: "#ffffff",
-              fontWeight: 700,
-              lineHeight: 1.1,
-              letterSpacing: "0.01em",
-              fontSize: "clamp(1.6rem, 1rem + 3.2vw, 4rem)",
-              maxWidth: "700px",
-            }}
-          >
-            Uma trajetória marcada pela dedicação, excelência e crescimento.
-          </motion.h2>
-        </div>
-
-        {/* Milestones grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-white/20">
-          {MILESTONES.map((milestone, i) => (
-            <MilestoneCard key={milestone.year} milestone={milestone} index={i} />
-          ))}
-        </div>
-
-        {/* Current year highlight */}
-        <CurrentYearHighlight />
-
-      </div>
-    </section>
-  );
-}
-
 // ─── MilestoneCard ────────────────────────────────────────────────────────────
 function MilestoneCard({
   milestone,
@@ -292,15 +219,10 @@ function MilestoneCard({
       <motion.div
         initial={{ y: -60, opacity: 0 }}
         animate={inView ? { y: 0, opacity: 1 } : { y: -60, opacity: 0 }}
-        transition={{
-          duration: 0.9,
-          delay: index * 0.12,
-          ease: [0.16, 1, 0.3, 1],
-        }}
+        transition={{ duration: 0.9, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
         className="px-0 md:px-8 pt-10 pb-10"
         style={{ paddingLeft: index === 0 ? 0 : undefined }}
       >
-        {/* Year tag */}
         <span
           style={{
             fontSize: "11px",
@@ -314,11 +236,7 @@ function MilestoneCard({
           {milestone.year}
         </span>
 
-        {/* Image */}
-        <div
-          className="w-full rounded-xl overflow-hidden mb-6"
-          style={{ aspectRatio: "4/3" }}
-        >
+        <div className="w-full rounded-xl overflow-hidden mb-6" style={{ aspectRatio: "4/3" }}>
           <img
             src={milestone.image}
             alt={`Gasosa Auto Agro — ${milestone.year}`}
@@ -327,7 +245,6 @@ function MilestoneCard({
           />
         </div>
 
-        {/* Description */}
         <p
           style={{
             color: "rgba(255,255,255,0.78)",
@@ -393,230 +310,224 @@ function CurrentYearHighlight() {
   );
 }
 
+// ─── HistoriaSection ──────────────────────────────────────────────────────────
+function HistoriaSection() {
+  const headingRef = useRef(null);
+  const headingInView = useInView(headingRef, { once: true, margin: "-80px 0px 0px 0px" });
+
+  return (
+    <section
+      className="w-full relative"
+      style={{ background: "#003591", fontFamily: "'Poppins', sans-serif" }}
+    >
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-10 py-20 sm:py-28">
+
+        {/* Section heading */}
+        <div ref={headingRef} className="overflow-hidden mb-16 sm:mb-20">
+          <motion.h2
+            initial={{ y: -80, opacity: 0 }}
+            animate={headingInView ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
+            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              color: "#ffffff",
+              fontWeight: 700,
+              lineHeight: 1.1,
+              letterSpacing: "0.01em",
+              fontSize: "clamp(1.6rem, 1rem + 3.2vw, 4rem)",
+              maxWidth: "700px",
+            }}
+          >
+            Uma trajetória marcada pela dedicação, excelência e crescimento.
+          </motion.h2>
+        </div>
+
+        {/* Milestones grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-white/20">
+          {MILESTONES.map((milestone, i) => (
+            <MilestoneCard key={milestone.year} milestone={milestone} index={i} />
+          ))}
+        </div>
+
+        {/* Current year highlight */}
+        <CurrentYearHighlight />
+
+      </div>
+    </section>
+  );
+}
+
 // ─── Home ─────────────────────────────────────────────────────────────────────
 function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [headerDark, setHeaderDark] = useState(false);
-  const blueSectionRef = useRef<HTMLElement | null>(null);
-
-  // Detect when the blue section scrolls under the header
-  useEffect(() => {
-    const section = blueSectionRef.current;
-    if (!section) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setHeaderDark(entry.isIntersecting);
-      },
-      {
-        root: null,
-        rootMargin: "-72px 0px 0px 0px",
-        threshold: 0,
-      }
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
 
   return (
-    <div className="w-full flex flex-col" style={{ background: "#F5EFE9" }}>
+    <div className="w-full flex flex-col">
 
-      {/* ── Header (fixed) ───────────────────────────────────────────── */}
-      <motion.header
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 sm:px-8 py-5 max-w-[1400px] mx-auto w-full pointer-events-none"
-        style={{ left: 0, right: 0, margin: "0 auto" }}
-        animate={{ opacity: 1 }}
-        initial={{ opacity: 0 }}
-        transition={{ delay: 0.1, duration: 0.6 }}
-      >
-        {/* Transparent backdrop blur when over blue section */}
-        <AnimatePresence>
-          {headerDark && (
-            <motion.div
-              key="header-bg"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: "linear-gradient(to bottom, rgba(0,53,145,0.72) 0%, rgba(0,53,145,0) 100%)",
-                backdropFilter: "blur(0px)",
-              }}
-            />
-          )}
-        </AnimatePresence>
-
-        <div className="relative z-10 flex items-center justify-between w-full pointer-events-auto">
+      {/* ── Hero wrapper (original, untouched) ───────────────────────── */}
+      <div className="min-h-[100dvh] w-full bg-background flex flex-col overflow-hidden">
+        {/* ── Header ───────────────────────────────────────────────────── */}
+        <header className="w-full flex items-center justify-between px-5 sm:px-8 py-5 max-w-[1400px] mx-auto relative z-20 w-full">
           <Link href="/" className="flex items-center">
-            <img
-              src={logoSrc}
-              alt="Gasosa Auto Agro"
-              className="h-10 sm:h-12 w-auto object-contain"
-            />
+            <img src={logoSrc} alt="Gasosa Auto Agro" className="h-10 sm:h-12 w-auto object-contain" />
           </Link>
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-4">
             <div className="flex items-center">
               {NAV_ITEMS.map((item, i) => (
-                <NavPill key={item} item={item} overlap={i > 0} isDark={headerDark} />
+                <NavPill key={item} item={item} overlap={i > 0} />
               ))}
             </div>
-            <LangDropdown isDark={headerDark} />
+            <LangDropdown />
           </nav>
 
           {/* Mobile hamburger */}
           <button
-            className="lg:hidden p-2"
-            style={{ color: headerDark ? "#ffffff" : "inherit", transition: "color 0.4s" }}
+            className="lg:hidden p-2 text-foreground"
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Abrir menu"
           >
             <Menu className="w-6 h-6" />
           </button>
-        </div>
-      </motion.header>
+        </header>
 
-      <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+        <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
-      {/* ── Hero ─────────────────────────────────────────────────────── */}
-      <main
-        className="relative w-full overflow-hidden"
-        style={{ minHeight: "100dvh", background: "#F5EFE9" }}
-      >
-        {/* Title — z-10, behind man */}
-        <div className="absolute inset-x-0 top-0 z-10 w-full text-center px-4 sm:px-10 pt-24 sm:pt-28">
-          <motion.h1
-            style={{
-              color: "#003591",
-              fontFamily: "'Poppins', sans-serif",
-              fontWeight: 700,
-              lineHeight: 1.1,
-              letterSpacing: "0.02em",
-              fontSize: "clamp(1.55rem, 1rem + 3.8vw, 5rem)",
-            }}
-            initial={{ opacity: 0, y: 60, filter: "blur(12px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 0.2, duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Referência angolana no<br />
-            sector automóvel e agrícola.
-          </motion.h1>
-        </div>
+        {/* ── Hero ─────────────────────────────────────────────────────── */}
+        <main className="relative flex-1 w-full overflow-hidden">
 
-        {/* Man image — z-20, in front of title */}
-        <div className="absolute inset-0 flex items-end justify-center z-20 pointer-events-none select-none">
-          <motion.img
-            src={heroManSrc}
-            alt="Técnico Gasosa Auto Agro"
-            style={{
-              height: "clamp(340px, 80vh, 780px)",
-              width: "auto",
-              objectFit: "contain",
-              objectPosition: "bottom center",
-              display: "block",
-            }}
-            initial={{ opacity: 0, scale: 0.9, y: "42%", filter: "blur(10px)" }}
-            animate={{ opacity: 1, scale: 1, y: "18%", filter: "blur(0px)" }}
-            transition={{ delay: 0.55, duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
-          />
-        </div>
-
-        {/* Bottom bar — z-30 */}
-        <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-10 right-4 sm:right-10 z-30 flex items-end justify-between gap-3">
-          <motion.p
-            style={{
-              fontSize: "clamp(0.72rem, 0.5rem + 0.9vw, 0.95rem)",
-              color: "#003591",
-              lineHeight: 1.65,
-              fontWeight: 500,
-              maxWidth: "clamp(160px, 22vw, 240px)",
-            }}
-            initial={{ opacity: 0, y: 60, filter: "blur(6px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 1.4, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
-          </motion.p>
-
-          <motion.div
-            className="relative overflow-hidden rounded-2xl flex-shrink-0 hidden sm:block"
-            style={{
-              width: "clamp(170px, 22vw, 260px)",
-              height: "clamp(110px, 13vw, 160px)",
-              boxShadow: "0 8px 32px rgba(0,0,0,0.24)",
-            }}
-            initial={{ opacity: 0, scale: 0.92, y: 60, filter: "blur(6px)" }}
-            animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ delay: 1.6, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <img
-              src="/contact-card.png"
-              alt="Contacte-nos"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <p
-              className="absolute top-3 left-3 right-3"
+          {/* Title — z-10, behind man */}
+          <div className="absolute inset-x-0 top-0 z-10 w-full text-center px-4 sm:px-10 pt-4 sm:pt-6">
+            <motion.h1
               style={{
-                color: "#ffffff",
+                color: "#003591",
                 fontFamily: "'Poppins', sans-serif",
-                fontWeight: 500,
-                fontSize: "clamp(10px, 1.1vw, 13px)",
-                lineHeight: 1.35,
-                textShadow: "0 1px 4px rgba(0,0,0,0.4)",
+                fontWeight: 700,
+                lineHeight: 1.1,
+                letterSpacing: "0.02em",
+                fontSize: "clamp(1.55rem, 1rem + 3.8vw, 5rem)",
               }}
+              initial={{ opacity: 0, y: 60, filter: "blur(12px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ delay: 0.2, duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              Uma empresa construída<br />para durar.
-            </p>
+              Referência angolana no<br />
+              sector automóvel e agrícola.
+            </motion.h1>
+          </div>
 
-            <div className="absolute bottom-3 left-3 flex items-center whitespace-nowrap">
-              <div
-                className="flex items-center justify-center rounded-full"
+          {/* Man image — z-20, in FRONT of title */}
+          <div className="absolute inset-0 flex items-end justify-center z-20 pointer-events-none select-none">
+            <motion.img
+              src={heroManSrc}
+              alt="Técnico Gasosa Auto Agro"
+              style={{
+                height: "clamp(340px, 80vh, 780px)",
+                width: "auto",
+                objectFit: "contain",
+                objectPosition: "bottom center",
+                display: "block",
+              }}
+              initial={{ opacity: 0, scale: 0.9, y: "42%", filter: "blur(10px)" }}
+              animate={{ opacity: 1, scale: 1, y: "18%", filter: "blur(0px)" }}
+              transition={{ delay: 0.55, duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
+            />
+          </div>
+
+          {/* Bottom bar — z-30 */}
+          <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-10 right-4 sm:right-10 z-30 flex items-end justify-between gap-3">
+
+            {/* Subtitle */}
+            <motion.p
+              style={{
+                fontSize: "clamp(0.72rem, 0.5rem + 0.9vw, 0.95rem)",
+                color: "#003591",
+                lineHeight: 1.65,
+                fontWeight: 500,
+                maxWidth: "clamp(160px, 22vw, 240px)",
+              }}
+              initial={{ opacity: 0, y: 60, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ delay: 1.4, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
+            </motion.p>
+
+            {/* Contact card — only on sm+ */}
+            <motion.div
+              className="relative overflow-hidden rounded-2xl flex-shrink-0 hidden sm:block"
+              style={{
+                width: "clamp(170px, 22vw, 260px)",
+                height: "clamp(110px, 13vw, 160px)",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.24)",
+              }}
+              initial={{ opacity: 0, scale: 0.92, y: 60, filter: "blur(6px)" }}
+              animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ delay: 1.6, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <img
+                src="/contact-card.png"
+                alt="Contacte-nos"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <p
+                className="absolute top-3 left-3 right-3"
                 style={{
-                  background: "#ffffff",
-                  width: "30px",
-                  height: "30px",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-                  position: "relative",
-                  zIndex: 2,
+                  color: "#ffffff",
+                  fontFamily: "'Poppins', sans-serif",
+                  fontWeight: 500,
+                  fontSize: "clamp(10px, 1.1vw, 13px)",
+                  lineHeight: 1.35,
+                  textShadow: "0 1px 4px rgba(0,0,0,0.4)",
                 }}
               >
-                <Mail className="w-3.5 h-3.5" style={{ color: "#111111" }} />
-              </div>
-              <div
-                className="flex items-center justify-center rounded-full"
-                style={{
-                  background: "#ffffff",
-                  paddingLeft: "14px",
-                  paddingRight: "14px",
-                  height: "30px",
-                  marginLeft: "-4px",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                <span
-                  style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.1em", color: "#111111" }}
+                Uma empresa construída<br />para durar.
+              </p>
+
+              <div className="absolute bottom-3 left-3 flex items-center whitespace-nowrap">
+                <div
+                  className="flex items-center justify-center rounded-full"
+                  style={{
+                    background: "#ffffff",
+                    width: "30px",
+                    height: "30px",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                    position: "relative",
+                    zIndex: 2,
+                  }}
                 >
-                  CONTACTE-NOS
-                </span>
+                  <Mail className="w-3.5 h-3.5" style={{ color: "#111111" }} />
+                </div>
+                <div
+                  className="flex items-center justify-center rounded-full"
+                  style={{
+                    background: "#ffffff",
+                    paddingLeft: "14px",
+                    paddingRight: "14px",
+                    height: "30px",
+                    marginLeft: "-4px",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                >
+                  <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.1em", color: "#111111" }}>
+                    CONTACTE-NOS
+                  </span>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
-      </main>
+            </motion.div>
+          </div>
+        </main>
+      </div>
 
-      {/* ── Historia Section ──────────────────────────────────────────── */}
-      <HistoriaSection sectionRef={blueSectionRef} />
+      {/* ── História Section (new, below hero) ───────────────────────── */}
+      <HistoriaSection />
 
     </div>
   );
 }
 
-// ─── Router & App ─────────────────────────────────────────────────────────────
 function Router() {
   return (
     <Switch>
