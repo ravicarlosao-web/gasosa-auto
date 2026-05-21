@@ -8,6 +8,8 @@ import heroManSrc from "/hero-man.png";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import NotFound from "@/pages/not-found";
+import { LangProvider, useLang } from "./i18n";
+import type { Lang } from "./translations";
 
 const queryClient = new QueryClient();
 
@@ -17,39 +19,16 @@ const MotionLink = motion.create(Link) as React.ComponentType<
     Record<string, unknown>
 >;
 
-const NAV_ITEMS = ["QUEM SOMOS", "SECTORES", "INFRAESTRUTURAS", "PARCEIROS", "CONTACTOS"];
-
-const LANGUAGES = [
-  { code: "EN", label: "EN" },
+const LANGUAGES: { code: Lang; label: string }[] = [
   { code: "PT", label: "PT" },
+  { code: "EN", label: "EN" },
   { code: "ES", label: "ES" },
 ];
 
-const MILESTONES = [
-  {
-    year: "2016",
-    label: "Fundação",
-    subtitle: "O início em Luanda",
-    image: "/historia-2016.png",
-    description:
-      "Fundação da Gasosa Auto Agro em Luanda, com capital próprio e foco no fornecimento de peças, acessórios e lubrificantes para o sector automóvel e agrícola angolano.",
-  },
-  {
-    year: "2019",
-    label: "Marca própria",
-    subtitle: "Nasce a Pangulino",
-    image: "/historia-2019.png",
-    description:
-      "Criação da marca própria Pangulino, inspirada no pangolim — símbolo de resistência e protecção. Uma linha de ferramentas e equipamentos agrícolas de alta durabilidade, desenvolvida para o mercado angolano.",
-  },
-  {
-    year: "2020",
-    label: "Expansão nacional",
-    subtitle: "De Luanda ao interior do país",
-    image: "/historia-2020.png",
-    description:
-      "Consolidação da presença nacional com a abertura de instalações no Lubango e no Huambo — mais de 10.000 m² de infraestrutura no Lubango, com lojas, armazéns e oficinas ao serviço das províncias do sul e centro do país.",
-  },
+const MILESTONE_STATIC = [
+  { year: "2016", image: "/historia-2016.png" },
+  { year: "2019", image: "/historia-2019.png" },
+  { year: "2020", image: "/historia-2020.png" },
 ];
 
 // ─── NavPill ──────────────────────────────────────────────────────────────────
@@ -63,7 +42,7 @@ function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
 
   return (
     <MotionLink
-      href={`/${item.toLowerCase()}`}
+      href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
       className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full whitespace-nowrap inline-flex items-center justify-center relative overflow-hidden"
       style={{
         background: "#ffffff",
@@ -99,8 +78,8 @@ function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
 
 // ─── LangDropdown ─────────────────────────────────────────────────────────────
 function LangDropdown() {
+  const { lang, setLang } = useLang();
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState("PT");
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -118,7 +97,7 @@ function LangDropdown() {
         className="flex items-center gap-0.5 text-[11px] font-semibold tracking-widest cursor-pointer select-none"
         data-testid="button-lang-selector"
       >
-        {selected}
+        {lang}
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -138,20 +117,20 @@ function LangDropdown() {
             className="absolute left-1/2 -translate-x-1/2 top-full mt-3 bg-white rounded-2xl shadow-lg overflow-hidden min-w-[72px] z-50"
             style={{ transformOrigin: "top center" }}
           >
-            {LANGUAGES.map((lang, i) => (
+            {LANGUAGES.map((l, i) => (
               <motion.button
-                key={lang.code}
+                key={l.code}
                 initial={{ opacity: 0, y: -4 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.04, type: "spring", stiffness: 400, damping: 22 }}
-                onClick={() => { setSelected(lang.code); setOpen(false); }}
+                onClick={() => { setLang(l.code); setOpen(false); }}
                 className={`w-full flex items-center justify-between px-4 py-2.5 text-[11px] font-semibold tracking-widest transition-colors cursor-pointer
-                  ${selected === lang.code ? "bg-neutral-100" : "hover:bg-neutral-50"}`}
+                  ${lang === l.code ? "bg-neutral-100" : "hover:bg-neutral-50"}`}
                 style={{ color: "#003591" }}
-                data-testid={`button-lang-${lang.code}`}
+                data-testid={`button-lang-${l.code}`}
               >
-                {lang.label}
-                {selected === lang.code && (
+                {l.label}
+                {lang === l.code && (
                   <Check className="w-3 h-3 ml-3" style={{ color: "#003591" }} />
                 )}
               </motion.button>
@@ -165,6 +144,8 @@ function LangDropdown() {
 
 // ─── MobileMenu ───────────────────────────────────────────────────────────────
 function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const { t, lang, setLang } = useLang();
+
   return (
     <AnimatePresence>
       {open && (
@@ -184,7 +165,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
             </button>
           </div>
           <nav className="flex flex-col gap-2">
-            {NAV_ITEMS.map((item, i) => (
+            {t.nav.map((item, i) => (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, x: -16 }}
@@ -192,7 +173,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                 transition={{ delay: i * 0.06, type: "spring", stiffness: 400, damping: 28 }}
               >
                 <Link
-                  href={`/${item.toLowerCase()}`}
+                  href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
                   onClick={onClose}
                   className="text-xl font-semibold tracking-wide text-foreground py-3 border-b border-foreground/10 flex items-center justify-between"
                 >
@@ -202,13 +183,17 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
               </motion.div>
             ))}
           </nav>
-          <div className="mt-8 flex gap-4">
-            {LANGUAGES.map((lang) => (
+          <div className="mt-8 flex gap-2">
+            {LANGUAGES.map((l) => (
               <button
-                key={lang.code}
-                className="text-[11px] font-semibold tracking-widest px-4 py-2 rounded-full bg-white text-foreground"
+                key={l.code}
+                onClick={() => setLang(l.code)}
+                className={`text-[11px] font-semibold tracking-widest px-4 py-2 rounded-full transition-colors ${
+                  lang === l.code ? "text-white" : "bg-white text-foreground"
+                }`}
+                style={lang === l.code ? { background: "#003591" } : {}}
               >
-                {lang.label}
+                {l.label}
               </button>
             ))}
           </div>
@@ -220,10 +205,18 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
 
 // ─── MilestoneCard ────────────────────────────────────────────────────────────
 function MilestoneCard({
-  milestone,
+  year,
+  image,
+  label,
+  subtitle,
+  description,
   index,
 }: {
-  milestone: (typeof MILESTONES)[number];
+  year: string;
+  image: string;
+  label: string;
+  subtitle: string;
+  description: string;
   index: number;
 }) {
   const ref = useRef(null);
@@ -236,7 +229,7 @@ function MilestoneCard({
       ref={ref}
       className="overflow-hidden"
       style={{
-        borderRight: index < MILESTONES.length - 1 ? "1px solid rgba(255,255,255,0.15)" : "none",
+        borderRight: index < MILESTONE_STATIC.length - 1 ? "1px solid rgba(255,255,255,0.15)" : "none",
       }}
     >
       <div
@@ -257,7 +250,7 @@ function MilestoneCard({
             display: "block",
             marginBottom: "4px",
           }}>
-            {milestone.year} — {milestone.label}
+            {year} — {label}
           </span>
           <span style={{
             fontSize: "clamp(0.95rem, 0.7rem + 1vw, 1.15rem)",
@@ -266,7 +259,7 @@ function MilestoneCard({
             display: "block",
             lineHeight: 1.2,
           }}>
-            {milestone.subtitle}
+            {subtitle}
           </span>
         </motion.div>
 
@@ -278,8 +271,8 @@ function MilestoneCard({
           style={{ height: "220px" }}
         >
           <img
-            src={milestone.image}
-            alt={`Gasosa Auto Agro — ${milestone.year}`}
+            src={image}
+            alt={`Gasosa Auto Agro — ${year}`}
             className="w-full h-full object-cover"
             style={{ filter: "brightness(0.82) saturate(0.9)" }}
           />
@@ -296,7 +289,7 @@ function MilestoneCard({
             fontWeight: 400,
           }}
         >
-          {milestone.description}
+          {description}
         </motion.p>
       </div>
     </div>
@@ -305,6 +298,7 @@ function MilestoneCard({
 
 // ─── CurrentYearHighlight ─────────────────────────────────────────────────────
 function CurrentYearHighlight() {
+  const { t } = useLang();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-40px 0px 0px 0px" });
   const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -346,7 +340,7 @@ function CurrentYearHighlight() {
           display: "block",
           marginBottom: "8px",
         }}>
-          HOJE — 2025
+          {t.historia.currentLabel}
         </span>
         <p style={{
           color: "rgba(255,255,255,0.85)",
@@ -354,7 +348,7 @@ function CurrentYearHighlight() {
           lineHeight: 1.65,
           fontWeight: 500,
         }}>
-          Consolidados como referência nacional no sector automóvel, agrícola e industrial, com representação exclusiva da marca Nergytech em Angola, parceria com mais de 30 clientes e empresas de referência — e uma visão clara para o futuro.
+          {t.historia.currentText}
         </p>
       </motion.div>
     </div>
@@ -363,6 +357,7 @@ function CurrentYearHighlight() {
 
 // ─── HistoriaSection ──────────────────────────────────────────────────────────
 function HistoriaSection() {
+  const { t } = useLang();
   const headingRef = useRef(null);
   const headingInView = useInView(headingRef, { once: true, margin: "-80px 0px 0px 0px" });
 
@@ -386,14 +381,25 @@ function HistoriaSection() {
               maxWidth: "700px",
             }}
           >
-            Uma trajetória marcada pela dedicação, excelência e crescimento.
+            {t.historia.heading}
           </motion.h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-white/20">
-          {MILESTONES.map((milestone, i) => (
-            <MilestoneCard key={milestone.year} milestone={milestone} index={i} />
-          ))}
+          {MILESTONE_STATIC.map((m, i) => {
+            const tr = t.historia.milestones[i];
+            return (
+              <MilestoneCard
+                key={m.year}
+                year={m.year}
+                image={m.image}
+                label={tr.label}
+                subtitle={tr.subtitle}
+                description={tr.description}
+                index={i}
+              />
+            );
+          })}
         </div>
 
         <CurrentYearHighlight />
@@ -404,6 +410,7 @@ function HistoriaSection() {
 
 // ─── Home ─────────────────────────────────────────────────────────────────────
 function Home() {
+  const { t } = useLang();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -429,21 +436,19 @@ function Home() {
           <img src={logoSrc} alt="Gasosa Auto Agro" className="h-10 sm:h-12 w-auto object-contain" />
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden lg:flex items-center gap-4">
           <div className="flex items-center">
-            {NAV_ITEMS.map((item, i) => (
+            {t.nav.map((item, i) => (
               <NavPill key={item} item={item} overlap={i > 0} />
             ))}
           </div>
           <LangDropdown />
         </nav>
 
-        {/* Mobile hamburger */}
         <button
           className="lg:hidden p-2 text-foreground"
           onClick={() => setMobileMenuOpen(true)}
-          aria-label="Abrir menu"
+          aria-label={t.mobile.openMenu}
         >
           <Menu className="w-6 h-6" />
         </button>
@@ -451,7 +456,7 @@ function Home() {
 
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
-      {/* ── Hero wrapper — sticky, blurs + recedes as section slides over it ── */}
+      {/* ── Hero wrapper ─────────────────────────────────────────────── */}
       <div
         className="sticky top-0 z-0 min-h-[100dvh] w-full bg-background flex flex-col overflow-hidden"
         style={{
@@ -464,7 +469,7 @@ function Home() {
       >
         <main className="relative flex-1 w-full overflow-hidden">
 
-          {/* Title — z-10, behind man */}
+          {/* Title */}
           <div className="absolute inset-x-0 top-0 z-10 w-full text-center px-4 sm:px-10 pt-20 sm:pt-24">
             <motion.h1
               style={{
@@ -479,16 +484,16 @@ function Home() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ delay: 0.2, duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              Referência angolana no<br />
-              sector automóvel e agrícola.
+              {t.hero.title1}<br />
+              {t.hero.title2}
             </motion.h1>
           </div>
 
-          {/* Man image — z-20, in FRONT of title */}
+          {/* Man image */}
           <div className="absolute inset-0 flex items-end justify-center z-20 pointer-events-none select-none">
             <motion.img
               src={heroManSrc}
-              alt="Técnico Gasosa Auto Agro"
+              alt={t.hero.technicianAlt}
               style={{
                 height: "clamp(340px, 80vh, 780px)",
                 width: "auto",
@@ -502,7 +507,7 @@ function Home() {
             />
           </div>
 
-          {/* Bottom bar — z-30 */}
+          {/* Bottom bar */}
           <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-10 right-4 sm:right-10 z-30 flex items-end justify-between gap-3">
             <motion.p
               style={{
@@ -516,8 +521,7 @@ function Home() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ delay: 1.4, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas
-              indústrias.
+              {t.hero.subtitle}
             </motion.p>
 
             <motion.div
@@ -533,7 +537,7 @@ function Home() {
             >
               <img
                 src="/contact-card.png"
-                alt="Contacte-nos"
+                alt={t.hero.contactAlt}
                 className="absolute inset-0 w-full h-full object-cover"
               />
               <p
@@ -547,7 +551,7 @@ function Home() {
                   textShadow: "0 1px 4px rgba(0,0,0,0.4)",
                 }}
               >
-                Uma empresa construída<br />para durar.
+                {t.hero.cardText1}<br />{t.hero.cardText2}
               </p>
               <div className="absolute bottom-3 left-3 flex items-center whitespace-nowrap">
                 <div
@@ -584,7 +588,7 @@ function Home() {
                       color: "#111111",
                     }}
                   >
-                    CONTACTE-NOS
+                    {t.hero.contactBtn}
                   </span>
                 </div>
               </div>
@@ -593,7 +597,7 @@ function Home() {
         </main>
       </div>
 
-      {/* ── História Section — slides over sticky hero ────────────────── */}
+      {/* ── História Section ─────────────────────────────────────────── */}
       <div
         className="relative z-10"
         style={{
@@ -623,10 +627,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
+        <LangProvider>
+          <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+            <Router />
+          </WouterRouter>
+          <Toaster />
+        </LangProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
