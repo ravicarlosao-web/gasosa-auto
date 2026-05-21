@@ -293,7 +293,7 @@ function Home() {
             className="relative overflow-hidden rounded-2xl flex-shrink-0 hidden sm:block"
             style={{
               width: "clamp(170px, 22vw, 260px)",
-              height: "clamp(90px, 11vw, 140px)",
+              height: "clamp(110px, 13vw, 160px)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.24)",
             }}
             initial={{ opacity: 0, scale: 0.92, y: 60, filter: "blur(6px)" }}
@@ -309,8 +309,23 @@ function Home() {
               alt="Contacte-nos"
               className="absolute inset-0 w-full h-full object-cover"
             />
-            {/* Pills — same overlapping style as header nav */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center whitespace-nowrap">
+            {/* Text overlay — top left */}
+            <p
+              className="absolute top-3 left-3 right-3"
+              style={{
+                color: "#ffffff",
+                fontFamily: "'Poppins', sans-serif",
+                fontWeight: 700,
+                fontSize: "clamp(10px, 1.1vw, 13px)",
+                lineHeight: 1.35,
+                textShadow: "0 1px 4px rgba(0,0,0,0.4)",
+              }}
+            >
+              Uma empresa construída<br />para durar.
+            </p>
+
+            {/* Pills — left-aligned, same overlapping style as header nav */}
+            <div className="absolute bottom-3 left-3 flex items-center whitespace-nowrap">
               {/* Icon pill */}
               <div
                 className="flex items-center justify-center rounded-full"
