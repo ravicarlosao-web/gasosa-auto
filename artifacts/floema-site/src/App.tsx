@@ -167,7 +167,7 @@ function Home() {
               animate={{ y: "0%", opacity: 1 }}
               transition={{ delay: 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              Referência angolana no sector automóvel e agrícola.
+              Referência angolana no sector <span style={{ color: "#003591" }}>automóvel</span> e <span style={{ color: "#003591" }}>agrícola.</span>
             </motion.h1>
           </div>
           <div className="overflow-hidden">
