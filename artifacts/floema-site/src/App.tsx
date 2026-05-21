@@ -233,7 +233,7 @@ function Home() {
               fontSize: "clamp(2.2rem, 6.8vw, 5rem)",
               fontWeight: 900,
               lineHeight: 1.1,
-              letterSpacing: "-0.025em",
+              letterSpacing: "0.02em",
             }}
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
