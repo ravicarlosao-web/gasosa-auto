@@ -438,7 +438,7 @@ function Home() {
         <main className="relative flex-1 w-full overflow-hidden">
 
           {/* Title — z-10, behind man */}
-          <div className="absolute inset-x-0 top-0 z-10 w-full text-center px-4 sm:px-10 pt-4 sm:pt-6">
+          <div className="absolute inset-x-0 top-0 z-10 w-full text-center px-4 sm:px-10 pt-20 sm:pt-24">
             <motion.h1
               style={{
                 color: "#003591",
