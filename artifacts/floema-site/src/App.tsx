@@ -315,7 +315,7 @@ function Home() {
               style={{
                 color: "#ffffff",
                 fontFamily: "'Poppins', sans-serif",
-                fontWeight: 700,
+                fontWeight: 500,
                 fontSize: "clamp(10px, 1.1vw, 13px)",
                 lineHeight: 1.35,
                 textShadow: "0 1px 4px rgba(0,0,0,0.4)",
