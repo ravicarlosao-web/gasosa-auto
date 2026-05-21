@@ -47,15 +47,7 @@ const MILESTONES = [
 ];
 
 // ─── NavPill ──────────────────────────────────────────────────────────────────
-function NavPill({
-  item,
-  overlap,
-  isDark,
-}: {
-  item: string;
-  overlap?: boolean;
-  isDark?: boolean;
-}) {
+function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
   const [mouse, setMouse] = useState<{ x: number; y: number } | null>(null);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
@@ -68,12 +60,11 @@ function NavPill({
       href={`/${item.toLowerCase()}`}
       className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full whitespace-nowrap inline-flex items-center justify-center relative overflow-hidden"
       style={{
-        background: isDark ? "rgba(255,255,255,0.13)" : "#ffffff",
-        color: isDark ? "#ffffff" : "#111111",
+        background: "#ffffff",
+        color: "#111111",
         paddingLeft: "1.25rem",
         paddingRight: "1.25rem",
         marginLeft: overlap ? "-4px" : "0",
-        transition: "background 0.5s ease, color 0.5s ease",
       }}
       whileHover={{ paddingLeft: "1.75rem", paddingRight: "1.75rem", zIndex: 10 }}
       transition={{ type: "spring", stiffness: 110, damping: 22, mass: 1.4 }}
@@ -90,7 +81,7 @@ function NavPill({
             transition={{ duration: 0.35, ease: "easeOut" }}
             className="pointer-events-none absolute inset-0 rounded-full"
             style={{
-              background: `radial-gradient(circle 55px at ${mouse.x}px ${mouse.y}px, rgba(255,255,255,0.22) 0%, transparent 80%)`,
+              background: `radial-gradient(circle 55px at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.18) 0%, transparent 80%)`,
             }}
           />
         )}
@@ -101,7 +92,7 @@ function NavPill({
 }
 
 // ─── LangDropdown ─────────────────────────────────────────────────────────────
-function LangDropdown({ isDark }: { isDark?: boolean }) {
+function LangDropdown() {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState("PT");
   const ref = useRef<HTMLDivElement>(null);
@@ -119,10 +110,6 @@ function LangDropdown({ isDark }: { isDark?: boolean }) {
       <button
         onClick={() => setOpen((v) => !v)}
         className="flex items-center gap-0.5 text-[11px] font-semibold tracking-widest cursor-pointer select-none"
-        style={{
-          color: isDark ? "#ffffff" : "inherit",
-          transition: "color 0.5s ease",
-        }}
         data-testid="button-lang-selector"
       >
         {selected}
@@ -392,10 +379,7 @@ function HistoriaSection() {
 function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [isDark, setIsDark] = useState(false);
-  const blueSectionRef = useRef<HTMLDivElement>(null);
 
-  // Hero blur/scale tied to scroll
   useEffect(() => {
     function onScroll() {
       const progress = Math.min(1, Math.max(0, window.scrollY / window.innerHeight));
@@ -405,18 +389,6 @@ function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Detect when blue section passes under the navbar
-  useEffect(() => {
-    const el = blueSectionRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsDark(entry.isIntersecting),
-      { rootMargin: "-72px 0px 0px 0px", threshold: 0 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
   const heroBlur = scrollProgress * 3;
   const heroScale = 1 - scrollProgress * 0.028;
   const heroBrightness = 1 - scrollProgress * 0.09;
@@ -424,61 +396,7 @@ function Home() {
   return (
     <div className="w-full flex flex-col">
 
-      {/* ── Floating navbar (fixed, outside hero) ────────────────────── */}
-      <motion.div
-        className="fixed top-4 left-4 right-4 z-50"
-        style={{ maxWidth: "1380px", margin: "0 auto", left: "1rem", right: "1rem" }}
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <motion.div
-          className="flex items-center justify-between px-4 sm:px-5 py-3 rounded-2xl"
-          animate={{
-            background: isDark
-              ? "rgba(0, 40, 118, 0.88)"
-              : "rgba(255, 255, 255, 0.88)",
-            boxShadow: isDark
-              ? "0 4px 40px rgba(0,0,0,0.32)"
-              : "0 4px 24px rgba(0,0,0,0.10)",
-          }}
-          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          style={{ backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)" }}
-        >
-          <Link href="/" className="flex items-center">
-            <img
-              src={logoSrc}
-              alt="Gasosa Auto Agro"
-              className="h-9 sm:h-11 w-auto object-contain"
-            />
-          </Link>
-
-          {/* Desktop nav */}
-          <nav className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center">
-              {NAV_ITEMS.map((item, i) => (
-                <NavPill key={item} item={item} overlap={i > 0} isDark={isDark} />
-              ))}
-            </div>
-            <LangDropdown isDark={isDark} />
-          </nav>
-
-          {/* Mobile hamburger */}
-          <motion.button
-            className="lg:hidden p-2"
-            animate={{ color: isDark ? "#ffffff" : "#111111" }}
-            transition={{ duration: 0.5 }}
-            onClick={() => setMobileMenuOpen(true)}
-            aria-label="Abrir menu"
-          >
-            <Menu className="w-6 h-6" />
-          </motion.button>
-        </motion.div>
-      </motion.div>
-
-      <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
-
-      {/* ── Hero (sticky, no header inside) ──────────────────────────── */}
+      {/* ── Hero wrapper — sticky, blurs + recedes as section slides over it ── */}
       <div
         className="sticky top-0 z-0 min-h-[100dvh] w-full bg-background flex flex-col overflow-hidden"
         style={{
@@ -489,6 +407,34 @@ function Home() {
           borderRadius: scrollProgress > 0 ? `${scrollProgress * 20}px` : "0px",
         }}
       >
+        {/* ── Header ───────────────────────────────────────────────────── */}
+        <header className="w-full flex items-center justify-between px-5 sm:px-8 py-5 max-w-[1400px] mx-auto relative z-20 w-full">
+          <Link href="/" className="flex items-center">
+            <img src={logoSrc} alt="Gasosa Auto Agro" className="h-10 sm:h-12 w-auto object-contain" />
+          </Link>
+
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-4">
+            <div className="flex items-center">
+              {NAV_ITEMS.map((item, i) => (
+                <NavPill key={item} item={item} overlap={i > 0} />
+              ))}
+            </div>
+            <LangDropdown />
+          </nav>
+
+          {/* Mobile hamburger */}
+          <button
+            className="lg:hidden p-2 text-foreground"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Abrir menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+        </header>
+
+        <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+
         <main className="relative flex-1 w-full overflow-hidden">
 
           {/* Title — z-10, behind man */}
@@ -622,7 +568,6 @@ function Home() {
 
       {/* ── História Section — slides over sticky hero ────────────────── */}
       <div
-        ref={blueSectionRef}
         className="relative z-10"
         style={{
           borderRadius: "28px 28px 0 0",
