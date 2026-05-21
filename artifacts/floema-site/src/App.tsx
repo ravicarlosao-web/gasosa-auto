@@ -292,8 +292,8 @@ function Home() {
           <motion.div
             className="relative overflow-hidden rounded-2xl flex-shrink-0 hidden sm:block"
             style={{
-              width: "clamp(130px, 17vw, 210px)",
-              height: "clamp(90px, 12vw, 150px)",
+              width: "clamp(170px, 22vw, 260px)",
+              height: "clamp(90px, 11vw, 140px)",
               boxShadow: "0 8px 32px rgba(0,0,0,0.24)",
             }}
             initial={{ opacity: 0, scale: 0.92, y: 60, filter: "blur(6px)" }}
