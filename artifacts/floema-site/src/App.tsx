@@ -6,7 +6,7 @@ import { ChevronDown, Check, Menu, X, Mail } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import heroManSrc from "/hero-man.png";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -359,12 +359,35 @@ function HistoriaSection() {
 // ─── Home ─────────────────────────────────────────────────────────────────────
 function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    function onScroll() {
+      const progress = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.65)));
+      setScrollProgress(progress);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const heroBlur = scrollProgress * 9;
+  const heroScale = 1 - scrollProgress * 0.055;
+  const heroBrightness = 1 - scrollProgress * 0.18;
 
   return (
     <div className="w-full flex flex-col">
 
-      {/* ── Hero wrapper — sticky so the section below slides over it ── */}
-      <div className="sticky top-0 z-0 min-h-[100dvh] w-full bg-background flex flex-col overflow-hidden">
+      {/* ── Hero wrapper — sticky, blurs + recedes as section slides over it ── */}
+      <div
+        className="sticky top-0 z-0 min-h-[100dvh] w-full bg-background flex flex-col overflow-hidden"
+        style={{
+          filter: `blur(${heroBlur}px) brightness(${heroBrightness})`,
+          transform: `scale(${heroScale})`,
+          transformOrigin: "center center",
+          willChange: "transform, filter",
+          borderRadius: scrollProgress > 0 ? `${scrollProgress * 20}px` : "0px",
+        }}
+      >
         {/* ── Header ───────────────────────────────────────────────────── */}
         <header className="w-full flex items-center justify-between px-5 sm:px-8 py-5 max-w-[1400px] mx-auto relative z-20 w-full">
           <Link href="/" className="flex items-center">
@@ -522,7 +545,14 @@ function Home() {
       </div>
 
       {/* ── História Section — slides over the sticky hero on scroll ─── */}
-      <div className="relative z-10">
+      <div
+        className="relative z-10"
+        style={{
+          borderRadius: "28px 28px 0 0",
+          overflow: "hidden",
+          boxShadow: "0 -12px 60px rgba(0,0,0,0.28)",
+        }}
+      >
         <HistoriaSection />
       </div>
 
