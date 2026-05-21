@@ -22,17 +22,19 @@ function Home() {
           </button>
         </div>
         
-        <nav className="hidden md:flex items-center gap-1.5">
-          {["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"].map((item) => (
+        <nav className="hidden md:flex items-center">
+          {["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"].map((item, i) => (
             <Link 
               key={item} 
               href={`/${item.toLowerCase()}`}
-              className="text-[11px] font-semibold tracking-widest px-4 py-[7px] rounded-full border border-neutral-300 bg-white/90 hover:bg-white transition-colors text-foreground"
+              className={`text-[11px] font-semibold tracking-widest px-4 py-[7px] border border-neutral-300 bg-white/90 hover:bg-white transition-colors text-foreground relative z-0 hover:z-10
+                ${i === 0 ? "rounded-l-full" : "-ml-px"}
+              `}
             >
               {item}
             </Link>
           ))}
-          <button className="flex items-center text-[11px] font-semibold tracking-widest px-4 py-[7px] rounded-full border border-neutral-300 bg-white/90 hover:bg-white transition-colors text-foreground cursor-pointer gap-0.5">
+          <button className="flex items-center text-[11px] font-semibold tracking-widest px-4 py-[7px] rounded-r-full border border-neutral-300 bg-white/90 hover:bg-white transition-colors text-foreground cursor-pointer -ml-px relative z-0 hover:z-10">
             PT <ChevronDown className="w-3 h-3 ml-0.5" />
           </button>
         </nav>
