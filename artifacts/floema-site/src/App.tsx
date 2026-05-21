@@ -21,19 +21,28 @@ function Home() {
             <Search className="w-4 h-4" strokeWidth={2} />
           </button>
         </div>
-        
-        <nav className="hidden md:flex items-center gap-2">
-          {["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"].map((item) => (
+
+        <nav className="hidden md:flex items-center gap-[-8px]">
+          {["PRODUTOS", "SOBRE", "SUSTENTABILIDADE", "JORNAL"].map((item, index) => (
             <Link
               key={item}
               href={`/${item.toLowerCase()}`}
-              className="text-[11px] font-semibold tracking-widest px-4 py-[7px] rounded-full border border-neutral-300 bg-white hover:bg-neutral-50 transition-colors text-foreground"
+              className={[
+                "text-[11px] font-semibold tracking-widest px-5 py-[7px]",
+                "border border-neutral-400 bg-[#f5f0eb]",
+                "hover:bg-neutral-200 transition-colors text-foreground whitespace-nowrap",
+                "rounded-full relative",
+                index !== 0 ? "-ml-2" : "",
+              ].join(" ")}
+              style={{ 
+                zIndex: index === 0 ? 4 : index === 1 ? 3 : index === 2 ? 2 : 1,
+                boxShadow: index !== 0 ? "-4px 0 0 2px #f5f0eb" : "none"
+              }}
             >
               {item}
             </Link>
           ))}
-          {/* PT standalone — no border */}
-          <button className="flex items-center text-[11px] font-semibold tracking-widest text-foreground cursor-pointer ml-1">
+          <button className="flex items-center text-[11px] font-semibold tracking-widest text-foreground cursor-pointer ml-3">
             PT <ChevronDown className="w-3 h-3 ml-0.5" />
           </button>
         </nav>
@@ -42,7 +51,10 @@ function Home() {
       {/* Hero Section */}
       <main className="flex-1 flex flex-col items-center justify-center px-4 -mt-20">
         <div className="text-center max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1] mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+          <h1
+            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1] mb-2"
+            style={{ fontFamily: 'Playfair Display, serif' }}
+          >
             Espaços pensados para viver<br />
             e durar uma vida.
           </h1>
@@ -75,4 +87,3 @@ function App() {
 }
 
 export default App;
-
