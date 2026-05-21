@@ -275,7 +275,7 @@ function MilestoneCard({
           animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 28, scale: 0.97 }}
           transition={{ duration: 0.85, delay: base + 0.1, ease }}
           className="w-full rounded-xl overflow-hidden mb-6"
-          style={{ aspectRatio: "4/3" }}
+          style={{ height: "220px" }}
         >
           <img
             src={milestone.image}
