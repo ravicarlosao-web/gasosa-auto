@@ -206,7 +206,10 @@ function MilestoneCard({
   index: number;
 }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px 0px 0px 0px" });
+  const inView = useInView(ref, { once: true, margin: "-40px 0px 0px 0px" });
+
+  const base = index * 0.1;
+  const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
   return (
     <div
@@ -216,14 +219,15 @@ function MilestoneCard({
         borderRight: index < MILESTONES.length - 1 ? "1px solid rgba(255,255,255,0.15)" : "none",
       }}
     >
-      <motion.div
-        initial={{ y: -60, opacity: 0 }}
-        animate={inView ? { y: 0, opacity: 1 } : { y: -60, opacity: 0 }}
-        transition={{ duration: 0.9, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+      <div
         className="px-0 md:px-8 pt-10 pb-10"
         style={{ paddingLeft: index === 0 ? 0 : undefined }}
       >
-        <span
+        {/* Year label */}
+        <motion.span
+          initial={{ opacity: 0, x: -14 }}
+          animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -14 }}
+          transition={{ duration: 0.6, delay: base, ease }}
           style={{
             fontSize: "11px",
             fontWeight: 700,
@@ -234,18 +238,29 @@ function MilestoneCard({
           }}
         >
           {milestone.year}
-        </span>
+        </motion.span>
 
-        <div className="w-full rounded-xl overflow-hidden mb-6" style={{ aspectRatio: "4/3" }}>
+        {/* Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 28, scale: 0.97 }}
+          animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 28, scale: 0.97 }}
+          transition={{ duration: 0.85, delay: base + 0.1, ease }}
+          className="w-full rounded-xl overflow-hidden mb-6"
+          style={{ aspectRatio: "4/3" }}
+        >
           <img
             src={milestone.image}
             alt={`Gasosa Auto Agro — ${milestone.year}`}
             className="w-full h-full object-cover"
             style={{ filter: "brightness(0.82) saturate(0.9)" }}
           />
-        </div>
+        </motion.div>
 
-        <p
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0, y: 18 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+          transition={{ duration: 0.75, delay: base + 0.22, ease }}
           style={{
             color: "rgba(255,255,255,0.78)",
             fontSize: "clamp(0.78rem, 0.6rem + 0.6vw, 0.92rem)",
@@ -254,8 +269,8 @@ function MilestoneCard({
           }}
         >
           {milestone.description}
-        </p>
-      </motion.div>
+        </motion.p>
+      </div>
     </div>
   );
 }
@@ -263,19 +278,19 @@ function MilestoneCard({
 // ─── CurrentYearHighlight ─────────────────────────────────────────────────────
 function CurrentYearHighlight() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px 0px 0px 0px" });
+  const inView = useInView(ref, { once: true, margin: "-40px 0px 0px 0px" });
+  const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
   return (
     <div
       ref={ref}
-      className="overflow-hidden mt-0 pt-10 border-t border-white/20 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8"
+      className="mt-0 pt-10 border-t border-white/20 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8"
     >
-      <motion.div
-        initial={{ y: -70, opacity: 0 }}
-        animate={inView ? { y: 0, opacity: 1 } : { y: -70, opacity: 0 }}
-        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <span
+      <div className="overflow-hidden">
+        <motion.span
+          initial={{ y: 80, opacity: 0 }}
+          animate={inView ? { y: 0, opacity: 1 } : { y: 80, opacity: 0 }}
+          transition={{ duration: 1.0, ease }}
           style={{
             display: "block",
             fontWeight: 800,
@@ -286,26 +301,23 @@ function CurrentYearHighlight() {
           }}
         >
           2024
-        </span>
-      </motion.div>
+        </motion.span>
+      </div>
 
-      <motion.div
-        initial={{ y: -50, opacity: 0 }}
-        animate={inView ? { y: 0, opacity: 1 } : { y: -50, opacity: 0 }}
-        transition={{ duration: 1.0, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+      <motion.p
+        initial={{ opacity: 0, y: 24 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+        transition={{ duration: 0.85, delay: 0.2, ease }}
         className="sm:max-w-[340px] pb-2"
+        style={{
+          color: "rgba(255,255,255,0.85)",
+          fontSize: "clamp(0.85rem, 0.6rem + 0.8vw, 1.05rem)",
+          lineHeight: 1.65,
+          fontWeight: 500,
+        }}
       >
-        <p
-          style={{
-            color: "rgba(255,255,255,0.85)",
-            fontSize: "clamp(0.85rem, 0.6rem + 0.8vw, 1.05rem)",
-            lineHeight: 1.65,
-            fontWeight: 500,
-          }}
-        >
-          Consolidados como referência nacional no sector automóvel e agrícola, com projetos de impacto em todo o território angolano — e uma visão clara para o futuro.
-        </p>
-      </motion.div>
+        Consolidados como referência nacional no sector automóvel e agrícola, com projetos de impacto em todo o território angolano — e uma visão clara para o futuro.
+      </motion.p>
     </div>
   );
 }
@@ -325,9 +337,9 @@ function HistoriaSection() {
         {/* Section heading */}
         <div ref={headingRef} className="overflow-hidden mb-16 sm:mb-20">
           <motion.h2
-            initial={{ y: -80, opacity: 0 }}
-            animate={headingInView ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ y: 50, opacity: 0 }}
+            animate={headingInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+            transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
             style={{
               color: "#ffffff",
               fontWeight: 700,
@@ -363,16 +375,18 @@ function Home() {
 
   useEffect(() => {
     function onScroll() {
-      const progress = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.65)));
+      const start = window.innerHeight * 0.55;
+      const end = window.innerHeight * 1.5;
+      const progress = Math.min(1, Math.max(0, (window.scrollY - start) / (end - start)));
       setScrollProgress(progress);
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const heroBlur = scrollProgress * 9;
-  const heroScale = 1 - scrollProgress * 0.055;
-  const heroBrightness = 1 - scrollProgress * 0.18;
+  const heroBlur = scrollProgress * 3;
+  const heroScale = 1 - scrollProgress * 0.028;
+  const heroBrightness = 1 - scrollProgress * 0.09;
 
   return (
     <div className="w-full flex flex-col">
