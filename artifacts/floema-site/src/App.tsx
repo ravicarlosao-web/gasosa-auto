@@ -16,7 +16,7 @@ function NavPill({ item }: { item: string }) {
   return (
     <MotionLink
       href={`/${item.toLowerCase()}`}
-      className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full border border-neutral-300 bg-white text-foreground whitespace-nowrap inline-flex items-center justify-center"
+      className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full bg-white text-foreground whitespace-nowrap inline-flex items-center justify-center"
       style={{ paddingLeft: "1.25rem", paddingRight: "1.25rem" }}
       whileHover={{ paddingLeft: "1.75rem", paddingRight: "1.75rem" }}
       transition={{ type: "spring", stiffness: 350, damping: 18 }}
@@ -41,7 +41,7 @@ function Home() {
         </div>
 
         <nav className="hidden md:flex items-center gap-4">
-          <div className="flex items-center gap-[2px]">
+          <div className="flex items-center gap-0">
             {NAV_ITEMS.map((item) => (
               <NavPill key={item} item={item} />
             ))}
