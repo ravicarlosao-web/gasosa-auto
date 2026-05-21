@@ -225,7 +225,7 @@ function Home() {
       {/* ── Hero ─────────────────────────────────────────── */}
       <main className="relative flex-1 w-full overflow-hidden">
 
-        {/* Title — z-10, behind man. Font scales linearly with viewport. */}
+        {/* Title — z-10, behind man */}
         <div className="absolute inset-x-0 top-0 z-10 w-full text-center px-4 sm:px-10 pt-4 sm:pt-6">
           <motion.h1
             style={{
@@ -234,69 +234,75 @@ function Home() {
               fontWeight: 700,
               lineHeight: 1.1,
               letterSpacing: "0.02em",
-              /* Scales from 1.55rem (mobile 320px) → 5rem (desktop 1400px+) */
               fontSize: "clamp(1.55rem, 1rem + 3.8vw, 5rem)",
             }}
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 40, filter: "blur(6px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ delay: 0.1, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           >
             Referência angolana no<br />
             sector automóvel e agrícola.
           </motion.h1>
         </div>
 
-        {/* Man image — z-20, in FRONT of title, shifted down consistently */}
+        {/* Man image — z-20, in FRONT of title */}
         <div className="absolute inset-0 flex items-end justify-center z-20 pointer-events-none select-none">
           <motion.img
             src={heroManSrc}
             alt="Técnico Gasosa Auto Agro"
             style={{
-              /* Height anchored to viewport height so it stays proportional */
               height: "clamp(340px, 80vh, 780px)",
               width: "auto",
               objectFit: "contain",
               objectPosition: "bottom center",
               display: "block",
             }}
-            initial={{ opacity: 0, scale: 0.96, y: 80 }}
-            animate={{ opacity: 1, scale: 1, y: "18%" }}
-            transition={{ delay: 0.18, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, scale: 0.93, y: "35%", filter: "blur(4px)" }}
+            animate={{ opacity: 1, scale: 1, y: "18%", filter: "blur(0px)" }}
+            transition={{
+              delay: 0.3,
+              duration: 1.4,
+              ease: [0.16, 1, 0.3, 1],
+            }}
           />
         </div>
 
-        {/* Bottom bar — z-30, above everything */}
+        {/* Bottom bar — z-30 */}
+        {/* Desktop (sm+): subtitle left, card right, side by side */}
+        {/* Mobile (<sm): subtitle bottom-left only, card hidden */}
         <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-10 right-4 sm:right-10 z-30 flex items-end justify-between gap-3">
 
-          {/* Subtitle */}
+          {/* Subtitle — wider on mobile since card is hidden */}
           <motion.p
             style={{
-              /* Scales cleanly with viewport width */
               fontSize: "clamp(0.72rem, 0.5rem + 0.9vw, 0.95rem)",
               color: "#003591",
-              lineHeight: 1.6,
-              maxWidth: "clamp(140px, 20vw, 230px)",
+              lineHeight: 1.65,
               fontWeight: 500,
+              maxWidth: "clamp(160px, 22vw, 240px)",
             }}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ delay: 0.65, duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
           </motion.p>
 
-          {/* Contact card — hidden on very small screens */}
+          {/* Contact card — only on sm+ */}
           <motion.div
-            className="relative overflow-hidden rounded-2xl flex-shrink-0 hidden xs:block"
+            className="relative overflow-hidden rounded-2xl flex-shrink-0 hidden sm:block"
             style={{
               width: "clamp(130px, 17vw, 210px)",
               height: "clamp(90px, 12vw, 150px)",
-              boxShadow: "0 6px 28px rgba(0,0,0,0.22)",
-              display: "block",
+              boxShadow: "0 8px 32px rgba(0,0,0,0.24)",
             }}
-            initial={{ opacity: 0, scale: 0.88 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, scale: 0.85, y: 16, filter: "blur(4px)" }}
+            animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+            transition={{
+              delay: 0.8,
+              duration: 1,
+              ease: [0.16, 1, 0.3, 1],
+            }}
           >
             <img
               src="/contact-card.png"
