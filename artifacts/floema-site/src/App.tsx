@@ -309,16 +309,37 @@ function Home() {
               alt="Contacte-nos"
               className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap">
+            {/* Pills — same overlapping style as header nav */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center whitespace-nowrap">
+              {/* Icon pill */}
               <div
-                className="flex items-center gap-1.5 rounded-full px-2.5 py-1.5"
+                className="flex items-center justify-center rounded-full"
                 style={{
                   background: "#ffffff",
-                  boxShadow: "0 2px 12px rgba(0,0,0,0.18)",
+                  width: "30px",
+                  height: "30px",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                  position: "relative",
+                  zIndex: 2,
                 }}
               >
-                <Mail className="w-3 h-3 flex-shrink-0" style={{ color: "#003591" }} />
-                <span style={{ fontSize: "clamp(8px, 0.8vw, 10px)", fontWeight: 700, letterSpacing: "0.1em", color: "#111111" }}>
+                <Mail className="w-3.5 h-3.5" style={{ color: "#111111" }} />
+              </div>
+              {/* Text pill — overlaps icon pill by 4px, same as header */}
+              <div
+                className="flex items-center justify-center rounded-full"
+                style={{
+                  background: "#ffffff",
+                  paddingLeft: "14px",
+                  paddingRight: "14px",
+                  height: "30px",
+                  marginLeft: "-4px",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                  position: "relative",
+                  zIndex: 1,
+                }}
+              >
+                <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.1em", color: "#111111" }}>
                   CONTACTE-NOS
                 </span>
               </div>
