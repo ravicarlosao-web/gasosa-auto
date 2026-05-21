@@ -20,7 +20,7 @@ function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
       style={{
         paddingLeft: "1.25rem",
         paddingRight: "1.25rem",
-        marginLeft: overlap ? "-6px" : "0",
+        marginLeft: overlap ? "-4px" : "0",
       }}
       whileHover={{ paddingLeft: "1.75rem", paddingRight: "1.75rem", zIndex: 10 }}
       transition={{ type: "spring", stiffness: 350, damping: 18 }}
@@ -36,7 +36,7 @@ function Home() {
       <header className="w-full flex items-center justify-between px-6 py-6 max-w-[1400px] mx-auto relative z-10">
         <div className="flex items-center gap-1">
           <Link href="/" className="flex items-start">
-            <span className="text-xl font-medium tracking-tight text-foreground" style={{ fontFamily: 'Playfair Display, serif' }}>Floema</span>
+            <span className="text-xl font-medium tracking-tight text-foreground">Floema</span>
             <span className="text-[10px] leading-none ml-[2px] mt-[4px] font-sans">®</span>
           </Link>
           <button className="p-2 ml-1 text-foreground/80 hover:text-foreground transition-colors cursor-pointer" aria-label="Search">
@@ -60,7 +60,6 @@ function Home() {
         <div className="text-center max-w-4xl mx-auto">
           <h1
             className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1] mb-2"
-            style={{ fontFamily: 'Playfair Display, serif' }}
           >
             Espaços pensados para viver<br />
             e durar uma vida.
