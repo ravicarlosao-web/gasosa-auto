@@ -2,7 +2,8 @@ import { Switch, Route, Router as WouterRouter, Link } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Search, ChevronDown, Check } from "lucide-react";
+import { ChevronDown, Check } from "lucide-react";
+import logoSrc from "/logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import NotFound from "@/pages/not-found";
@@ -109,15 +110,9 @@ function Home() {
   return (
     <div className="min-h-[100dvh] w-full bg-background flex flex-col">
       <header className="w-full flex items-center justify-between px-6 py-6 max-w-[1400px] mx-auto relative z-10">
-        <div className="flex items-center gap-1">
-          <Link href="/" className="flex items-start">
-            <span className="text-xl font-medium tracking-tight text-foreground">Floema</span>
-            <span className="text-[10px] leading-none ml-[2px] mt-[4px] font-sans">®</span>
-          </Link>
-          <button className="p-2 ml-1 text-foreground/80 hover:text-foreground transition-colors cursor-pointer" aria-label="Search">
-            <Search className="w-4 h-4" strokeWidth={2} />
-          </button>
-        </div>
+        <Link href="/" className="flex items-center">
+          <img src={logoSrc} alt="Gasosa Auto Agro" className="h-20 w-auto object-contain" />
+        </Link>
 
         <nav className="hidden md:flex items-center gap-4">
           <div className="flex items-center">
