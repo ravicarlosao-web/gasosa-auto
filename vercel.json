@@ -1,0 +1,12 @@
+{
+  "buildCommand": "pnpm --filter @workspace/floema-site run build",
+  "outputDirectory": "artifacts/floema-site/dist/public",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "framework": null,
+  "env": {
+    "BASE_PATH": "/"
+  },
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
