@@ -225,16 +225,17 @@ function Home() {
       {/* ── Hero ─────────────────────────────────────────── */}
       <main className="relative flex-1 w-full overflow-hidden">
 
-        {/* Title — z-10, sits BEHIND the man */}
-        <div className="absolute inset-x-0 top-0 z-10 w-full text-center px-4 sm:px-12 pt-4 sm:pt-6">
+        {/* Title — z-10, behind man. Font scales linearly with viewport. */}
+        <div className="absolute inset-x-0 top-0 z-10 w-full text-center px-4 sm:px-10 pt-4 sm:pt-6">
           <motion.h1
             style={{
               color: "#003591",
-              fontSize: "clamp(2.2rem, 6.8vw, 5rem)",
               fontFamily: "'Poppins', sans-serif",
               fontWeight: 700,
               lineHeight: 1.1,
               letterSpacing: "0.02em",
+              /* Scales from 1.55rem (mobile 320px) → 5rem (desktop 1400px+) */
+              fontSize: "clamp(1.55rem, 1rem + 3.8vw, 5rem)",
             }}
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -245,13 +246,14 @@ function Home() {
           </motion.h1>
         </div>
 
-        {/* Man image — z-20, in FRONT of the title, shifted down */}
+        {/* Man image — z-20, in FRONT of title, shifted down consistently */}
         <div className="absolute inset-0 flex items-end justify-center z-20 pointer-events-none select-none">
           <motion.img
             src={heroManSrc}
             alt="Técnico Gasosa Auto Agro"
             style={{
-              height: "clamp(420px, 82vh, 780px)",
+              /* Height anchored to viewport height so it stays proportional */
+              height: "clamp(340px, 80vh, 780px)",
               width: "auto",
               objectFit: "contain",
               objectPosition: "bottom center",
@@ -263,16 +265,17 @@ function Home() {
           />
         </div>
 
-        {/* Bottom bar: subtitle left, video card right — z-30, above everything */}
-        <div className="absolute bottom-5 sm:bottom-10 left-5 sm:left-12 right-5 sm:right-12 z-30 flex items-end justify-between gap-4">
+        {/* Bottom bar — z-30, above everything */}
+        <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-10 right-4 sm:right-10 z-30 flex items-end justify-between gap-3">
 
           {/* Subtitle */}
           <motion.p
             style={{
-              fontSize: "clamp(0.8rem, 1.3vw, 0.95rem)",
+              /* Scales cleanly with viewport width */
+              fontSize: "clamp(0.72rem, 0.5rem + 0.9vw, 0.95rem)",
               color: "#003591",
               lineHeight: 1.6,
-              maxWidth: "210px",
+              maxWidth: "clamp(140px, 20vw, 230px)",
               fontWeight: 500,
             }}
             initial={{ opacity: 0, y: 14 }}
@@ -282,42 +285,34 @@ function Home() {
             Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.
           </motion.p>
 
-          {/* Contact card */}
+          {/* Contact card — hidden on very small screens */}
           <motion.div
-            className="relative overflow-hidden rounded-2xl flex-shrink-0"
+            className="relative overflow-hidden rounded-2xl flex-shrink-0 hidden xs:block"
             style={{
-              width: "clamp(140px, 18vw, 220px)",
-              height: "clamp(100px, 13vw, 160px)",
+              width: "clamp(130px, 17vw, 210px)",
+              height: "clamp(90px, 12vw, 150px)",
               boxShadow: "0 6px 28px rgba(0,0,0,0.22)",
+              display: "block",
             }}
             initial={{ opacity: 0, scale: 0.88 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Background image */}
             <img
               src="/contact-card.png"
               alt="Contacte-nos"
               className="absolute inset-0 w-full h-full object-cover"
             />
-            {/* CONTACTE-NOS pill — same style as NavPill */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
+            <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap">
               <div
-                className="flex items-center gap-1.5 rounded-full px-3 py-1.5"
+                className="flex items-center gap-1.5 rounded-full px-2.5 py-1.5"
                 style={{
                   background: "#ffffff",
                   boxShadow: "0 2px 12px rgba(0,0,0,0.18)",
                 }}
               >
                 <Mail className="w-3 h-3 flex-shrink-0" style={{ color: "#003591" }} />
-                <span
-                  style={{
-                    fontSize: "10px",
-                    fontWeight: 700,
-                    letterSpacing: "0.1em",
-                    color: "#111111",
-                  }}
-                >
+                <span style={{ fontSize: "clamp(8px, 0.8vw, 10px)", fontWeight: 700, letterSpacing: "0.1em", color: "#111111" }}>
                   CONTACTE-NOS
                 </span>
               </div>
