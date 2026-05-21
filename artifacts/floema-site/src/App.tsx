@@ -5,7 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChevronDown, Check, Menu, X, Mail } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import heroManSrc from "/hero-man.png";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import NotFound from "@/pages/not-found";
 import { LangProvider, useLang } from "./i18n";
@@ -211,6 +211,7 @@ function MilestoneCard({
   subtitle,
   description,
   index,
+  sectionProgress,
 }: {
   year: string;
   image: string;
@@ -218,15 +219,26 @@ function MilestoneCard({
   subtitle: string;
   description: string;
   index: number;
+  sectionProgress: ReturnType<typeof useSpring>;
 }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-40px 0px 0px 0px" });
-  const base = index * 0.1;
-  const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
+  const imgRef = useRef(null);
+  const { scrollYProgress: imgScroll } = useScroll({
+    target: imgRef,
+    offset: ["start end", "end start"],
+  });
+  const imgSmoothScroll = useSpring(imgScroll, { stiffness: 60, damping: 20, restDelta: 0.001 });
+  const imageY = useTransform(imgSmoothScroll, [0, 1], ["-12%", "12%"]);
+
+  const base = 0.06 + index * 0.09;
+  const labelOpacity = useTransform(sectionProgress, [base, base + 0.14], [0, 1]);
+  const labelX = useTransform(sectionProgress, [base, base + 0.14], [-18, 0]);
+  const cardOpacity = useTransform(sectionProgress, [base + 0.03, base + 0.18], [0, 1]);
+  const cardY = useTransform(sectionProgress, [base + 0.03, base + 0.18], [40, 0]);
+  const descOpacity = useTransform(sectionProgress, [base + 0.08, base + 0.22], [0, 1]);
+  const descY = useTransform(sectionProgress, [base + 0.08, base + 0.22], [20, 0]);
 
   return (
     <div
-      ref={ref}
       className="overflow-hidden"
       style={{
         borderRight: index < MILESTONE_STATIC.length - 1 ? "1px solid rgba(255,255,255,0.15)" : "none",
@@ -236,12 +248,7 @@ function MilestoneCard({
         className="px-0 md:px-8 pt-10 pb-10"
         style={{ paddingLeft: index === 0 ? 0 : undefined }}
       >
-        <motion.div
-          initial={{ opacity: 0, x: -14 }}
-          animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -14 }}
-          transition={{ duration: 0.6, delay: base, ease }}
-          style={{ marginBottom: "16px" }}
-        >
+        <motion.div style={{ opacity: labelOpacity, x: labelX, marginBottom: "16px" }}>
           <span style={{
             fontSize: "11px",
             fontWeight: 700,
@@ -264,25 +271,24 @@ function MilestoneCard({
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 28, scale: 0.97 }}
-          animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 28, scale: 0.97 }}
-          transition={{ duration: 0.85, delay: base + 0.1, ease }}
+          style={{ opacity: cardOpacity, y: cardY }}
           className="w-full rounded-xl overflow-hidden mb-6"
-          style={{ height: "220px" }}
+          ref={imgRef}
         >
-          <img
-            src={image}
-            alt={`Gasosa Auto Agro — ${year}`}
-            className="w-full h-full object-cover"
-            style={{ filter: "brightness(0.82) saturate(0.9)" }}
-          />
+          <motion.div style={{ y: imageY, height: "220px", position: "relative" }}>
+            <img
+              src={image}
+              alt={`Gasosa Auto Agro — ${year}`}
+              className="w-full h-full object-cover"
+              style={{ filter: "brightness(0.82) saturate(0.9)", display: "block" }}
+            />
+          </motion.div>
         </motion.div>
 
         <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-          transition={{ duration: 0.75, delay: base + 0.22, ease }}
           style={{
+            opacity: descOpacity,
+            y: descY,
             color: "rgba(255,255,255,0.78)",
             fontSize: "clamp(0.78rem, 0.6rem + 0.6vw, 0.92rem)",
             lineHeight: 1.7,
@@ -297,23 +303,25 @@ function MilestoneCard({
 }
 
 // ─── CurrentYearHighlight ─────────────────────────────────────────────────────
-function CurrentYearHighlight() {
+function CurrentYearHighlight({
+  sectionProgress,
+}: {
+  sectionProgress: ReturnType<typeof useSpring>;
+}) {
   const { t } = useLang();
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-40px 0px 0px 0px" });
-  const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+  const yearX = useTransform(sectionProgress, [0.38, 0.62], [-60, 0]);
+  const yearOpacity = useTransform(sectionProgress, [0.38, 0.58], [0, 1]);
+  const textY = useTransform(sectionProgress, [0.44, 0.66], [28, 0]);
+  const textOpacity = useTransform(sectionProgress, [0.44, 0.62], [0, 1]);
 
   return (
-    <div
-      ref={ref}
-      className="mt-0 pt-10 border-t border-white/20 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8"
-    >
+    <div className="mt-0 pt-10 border-t border-white/20 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8">
       <div className="overflow-hidden">
         <motion.span
-          initial={{ y: 80, opacity: 0 }}
-          animate={inView ? { y: 0, opacity: 1 } : { y: 80, opacity: 0 }}
-          transition={{ duration: 1.0, ease }}
           style={{
+            x: yearX,
+            opacity: yearOpacity,
             display: "block",
             fontWeight: 800,
             lineHeight: 0.85,
@@ -327,9 +335,7 @@ function CurrentYearHighlight() {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-        transition={{ duration: 0.85, delay: 0.2, ease }}
+        style={{ opacity: textOpacity, y: textY }}
         className="sm:max-w-[360px] pb-2"
       >
         <span style={{
@@ -358,21 +364,33 @@ function CurrentYearHighlight() {
 // ─── HistoriaSection ──────────────────────────────────────────────────────────
 function HistoriaSection() {
   const { t } = useLang();
-  const headingRef = useRef(null);
-  const headingInView = useInView(headingRef, { once: true, margin: "-80px 0px 0px 0px" });
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const sectionProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 28,
+    restDelta: 0.001,
+  });
+
+  const headingY = useTransform(sectionProgress, [0, 0.14], [55, 0]);
+  const headingOpacity = useTransform(sectionProgress, [0, 0.11], [0, 1]);
 
   return (
     <section
-      className="w-full relative"
-      style={{ background: "#003591", fontFamily: "'Poppins', sans-serif" }}
+      ref={sectionRef}
+      className="w-full"
+      style={{ background: "#003591", fontFamily: "'Poppins', sans-serif", position: "relative" }}
     >
       <div className="max-w-[1400px] mx-auto px-5 sm:px-10 pt-10 pb-16 sm:pt-14 sm:pb-24">
-        <div ref={headingRef} className="overflow-hidden mb-16 sm:mb-20">
+        <div className="overflow-hidden mb-16 sm:mb-20">
           <motion.h2
-            initial={{ y: 50, opacity: 0 }}
-            animate={headingInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
-            transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
             style={{
+              y: headingY,
+              opacity: headingOpacity,
               color: "#ffffff",
               fontWeight: 700,
               lineHeight: 1.1,
@@ -397,12 +415,13 @@ function HistoriaSection() {
                 subtitle={tr.subtitle}
                 description={tr.description}
                 index={i}
+                sectionProgress={sectionProgress}
               />
             );
           })}
         </div>
 
-        <CurrentYearHighlight />
+        <CurrentYearHighlight sectionProgress={sectionProgress} />
       </div>
     </section>
   );
