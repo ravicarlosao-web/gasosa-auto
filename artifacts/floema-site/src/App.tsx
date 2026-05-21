@@ -255,7 +255,7 @@ function Home() {
               objectFit: "contain",
               objectPosition: "bottom center",
               display: "block",
-              transform: "translateY(18%)",
+              transform: "translateY(30%)",
             }}
             initial={{ opacity: 0, scale: 0.96, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
