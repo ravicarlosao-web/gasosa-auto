@@ -230,7 +230,7 @@ function Home() {
           <motion.h1
             style={{
               color: "#003591",
-              fontSize: "clamp(1.9rem, 5.8vw, 4.2rem)",
+              fontSize: "clamp(2.2rem, 6.8vw, 5rem)",
               fontWeight: 900,
               lineHeight: 1.1,
               letterSpacing: "-0.025em",
