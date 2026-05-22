@@ -651,26 +651,22 @@ function SectoresSection() {
               flexShrink: 0,
             }}
           >
-            <AnimatePresence mode="sync" custom={dir}>
+            {SECTORES_DATA.map((s, i) => (
               <motion.div
-                key={`thumb-${activeIndex}`}
-                custom={dir}
-                variants={thumbVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ type: "spring", stiffness: 460, damping: 38, mass: 0.7 }}
-                style={{ position: "absolute", inset: 0, willChange: "transform", transform: "translateZ(0)" }}
+                key={s.key}
+                animate={{ y: `${(i - activeIndex) * 100}%` }}
+                transition={{ type: "spring", stiffness: 500, damping: 42, mass: 0.6 }}
+                style={{ position: "absolute", inset: 0, willChange: "transform" }}
               >
                 <img
-                  src={active.thumbnail}
-                  alt={active.name}
+                  src={s.thumbnail}
+                  alt={s.name}
                   loading="eager"
                   decoding="sync"
                   style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                 />
               </motion.div>
-            </AnimatePresence>
+            ))}
           </div>
         </div>
 
@@ -751,20 +747,16 @@ function SectoresSection() {
         >
           {/* Inner frame — takes all available space inside padding */}
           <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-            <AnimatePresence mode="sync" custom={dir}>
+            {SECTORES_DATA.map((s, i) => (
               <motion.div
-                key={activeIndex}
-                custom={dir}
-                variants={imageVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{ type: "spring", stiffness: 460, damping: 38, mass: 0.7 }}
-                style={{ position: "absolute", inset: 0, willChange: "transform", transform: "translateZ(0)" }}
+                key={s.key}
+                animate={{ y: `${(i - activeIndex) * 100}%` }}
+                transition={{ type: "spring", stiffness: 500, damping: 42, mass: 0.6 }}
+                style={{ position: "absolute", inset: 0, willChange: "transform" }}
               >
                 <img
-                  src={active.image}
-                  alt={active.name}
+                  src={s.image}
+                  alt={s.name}
                   loading="eager"
                   decoding="sync"
                   style={{
@@ -776,7 +768,7 @@ function SectoresSection() {
                   }}
                 />
               </motion.div>
-            </AnimatePresence>
+            ))}
           </div>
         </div>
       </div>
