@@ -1,0 +1,14 @@
+Estou anexando duas imagens nesta mensagem:
+Imagem 1 (estado atual): A secção actual do site Gasosa Auto Agro, que apresenta uma organização visual fraca — o layout está desequilibrado, com o texto e a imagem mal distribuídos, tipografia inconsistente e falta de hierarquia visual clara.
+Imagem 2 (referência): O site Floema, que serve como inspiração de design — layout dividido em duas colunas bem definidas, tipografia grande e expressiva à esquerda com palavras animadas em sequência vertical, coluna central com subtítulo descritivo e texto explicativo, e coluna direita com uma imagem de destaque ocupando boa parte da altura.
+
+O que quero que faças:
+Analisa as duas imagens anexadas e reorganiza a secção hero/apresentação do meu site (ignorando o header com a navbar e a logo, que não devem ser alterados) para que fique visualmente semelhante à estrutura da Imagem 2, mantendo o conteúdo e identidade do meu site (Gasosa Auto Agro).
+Especificamente:
+
+Layout em 3 colunas — coluna esquerda com o título animado em sequência (Automóvel → Agrícola → Industrial), coluna central com o subtítulo "Fornecimento industrial de confiança" e o parágrafo descritivo, coluna direita com a imagem da loja em destaque, ocupando toda a altura da secção.
+Tipografia expressiva — o título à esquerda deve ser grande, bold, com as palavras a aparecerem em sequência (uma de cada vez), tal como na referência onde aparecem "Desenhamos / Construímos / → Implementamos".
+Espaçamento e respiro — aumentar o padding interno da secção, dar mais espaço entre os elementos, evitar o aspecto comprimido actual.
+Linha separadora — adicionar uma linha fina horizontal subtil entre o título e o tagline pequeno abaixo ("Stock permanente, atendimento especializado ↓"), como na referência.
+Imagem da loja — reposicionar a imagem para a coluna direita, maior, com object-fit: cover, sem bordas arredondadas exageradas, semelhante ao bloco de imagem da referência.
+Fundo — manter o fundo claro (bege/off-white) já existente no site, não alterar as cores da marca.

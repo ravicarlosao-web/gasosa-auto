@@ -40,8 +40,7 @@ const SECTORES_DATA = [
       "Fornecemos peças, acessórios e lubrificantes de alta performance para veículos ligeiros, pesados e industriais. Com marcas de referência internacional como Nergytech, Petronas, Castrol e Galp, garantimos qualidade e durabilidade em cada produto — para frotas empresariais e particulares.",
     tagline: "Alta performance para cada veículo",
     thumbnail: "/historia-2020.png",
-    bg: "linear-gradient(145deg, #001534 0%, #002d6e 55%, #003591 100%)",
-    pattern: "#0047c0",
+    image: "/historia-2020.png",
   },
   {
     key: "agricola",
@@ -51,8 +50,7 @@ const SECTORES_DATA = [
       "Apoiamos o desenvolvimento do sector rural angolano com máquinas, ferramentas e equipamentos agrícolas de alta durabilidade. Através da nossa marca própria Pangulino, oferecemos produtos desenvolvidos para as condições do campo angolano — robustos, fiáveis e acessíveis.",
     tagline: "Soluções para o campo angolano",
     thumbnail: "/historia-2016.png",
-    bg: "linear-gradient(145deg, #0b2414 0%, #1a5230 55%, #1f6b3a 100%)",
-    pattern: "#267a42",
+    image: "/historia-2016.png",
   },
   {
     key: "industrial",
@@ -62,8 +60,7 @@ const SECTORES_DATA = [
       "Servimos indústrias, unidades fabris e empresas de logística com lubrificantes, materiais de manutenção e ferramentas diversas. A nossa equipa experiente garante o produto certo para cada aplicação — com stock permanente e atendimento especializado nas três províncias onde operamos.",
     tagline: "Stock permanente, atendimento especializado",
     thumbnail: "/historia-2019.png",
-    bg: "linear-gradient(145deg, #0d0d18 0%, #1a1a30 55%, #22223e 100%)",
-    pattern: "#2d2d50",
+    image: "/historia-2019.png",
   },
 ] as const;
 
@@ -525,11 +522,12 @@ function SectoresSection() {
                     overflow: "hidden",
                   }}
                 >
-                  {/* Reserved arrow slot — always takes space, only visible when active */}
+                  {/* Reserved arrow slot — fixed narrow width so name text fits panel */}
                   <span
                     style={{
                       display: "inline-block",
-                      width: "clamp(1.6rem, 1.4rem + 1.2vw, 2.8rem)",
+                      width: "0.75em",
+                      fontSize: "clamp(1.4rem, 3vw, 2.8rem)",
                       flexShrink: 0,
                     }}
                   >
@@ -538,7 +536,6 @@ function SectoresSection() {
                       transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
                       style={{
                         display: "inline-block",
-                        fontSize: "clamp(2rem, 1.6rem + 2.4vw, 4.4rem)",
                         fontWeight: 700,
                         color: "#111111",
                         lineHeight: 1.06,
@@ -556,8 +553,8 @@ function SectoresSection() {
                     }}
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     style={{
-                      fontSize: "clamp(2rem, 1.6rem + 2.4vw, 4.4rem)",
-                      letterSpacing: "-0.035em",
+                      fontSize: "clamp(1.4rem, 3vw, 2.8rem)",
+                      letterSpacing: "-0.03em",
                       lineHeight: 1.06,
                     }}
                   >
@@ -681,72 +678,37 @@ function SectoresSection() {
           </AnimatePresence>
         </div>
 
-        {/* ── Right panel: visual ───────────────────────────── */}
-        <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+        {/* ── Right panel: full-bleed photo ────────────────── */}
+        <div style={{ flex: 1, position: "relative", overflow: "hidden", minWidth: 0 }}>
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0, transition: { duration: 0.3 } }}
-              transition={{ duration: 0.55, ease: "easeInOut" }}
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: active.bg,
-                display: "flex",
-                alignItems: "flex-end",
-                justifyContent: "flex-start",
-                padding: "clamp(24px, 4vw, 64px)",
-                overflow: "hidden",
-              }}
+              exit={{ opacity: 0, transition: { duration: 0.35 } }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+              style={{ position: "absolute", inset: 0 }}
             >
-              {/* Large ghost name behind */}
-              <span
+              <img
+                src={active.image}
+                alt={active.name}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  display: "block",
+                }}
+              />
+              {/* Subtle dark overlay at bottom for readability */}
+              <div
                 style={{
                   position: "absolute",
-                  bottom: "-0.08em",
-                  right: "-0.04em",
-                  fontSize: "clamp(7rem, 14vw, 22rem)",
-                  fontWeight: 800,
-                  letterSpacing: "-0.05em",
-                  lineHeight: 0.85,
-                  color: "rgba(255,255,255,0.06)",
-                  userSelect: "none",
+                  inset: 0,
+                  background: "linear-gradient(to top, rgba(0,0,0,0.28) 0%, transparent 45%)",
                   pointerEvents: "none",
-                  whiteSpace: "nowrap",
                 }}
-              >
-                {active.name}
-              </span>
-              {/* Sector index overlay */}
-              <div style={{ position: "relative", zIndex: 2 }}>
-                <span
-                  style={{
-                    display: "block",
-                    fontSize: "10px",
-                    fontWeight: 700,
-                    letterSpacing: "0.22em",
-                    color: "rgba(255,255,255,0.45)",
-                    marginBottom: "10px",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Sector {String(activeIndex + 1).padStart(2, "0")}
-                </span>
-                <span
-                  style={{
-                    display: "block",
-                    fontSize: "clamp(1.4rem, 2vw, 2.2rem)",
-                    fontWeight: 700,
-                    color: "rgba(255,255,255,0.92)",
-                    letterSpacing: "-0.02em",
-                    lineHeight: 1.1,
-                  }}
-                >
-                  {active.name}
-                </span>
-              </div>
+              />
             </motion.div>
           </AnimatePresence>
         </div>
