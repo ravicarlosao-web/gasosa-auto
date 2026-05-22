@@ -38,6 +38,8 @@ const SECTORES_DATA = [
     subtitle: "Soluções completas para o sector automóvel",
     description:
       "Fornecemos peças, acessórios e lubrificantes de alta performance para veículos ligeiros, pesados e industriais. Com marcas de referência internacional como Nergytech, Petronas, Castrol e Galp, garantimos qualidade e durabilidade em cada produto — para frotas empresariais e particulares.",
+    tagline: "Alta performance para cada veículo",
+    thumbnail: "/historia-2020.png",
     bg: "linear-gradient(145deg, #001534 0%, #002d6e 55%, #003591 100%)",
     pattern: "#0047c0",
   },
@@ -47,6 +49,8 @@ const SECTORES_DATA = [
     subtitle: "Equipamentos que trabalham tanto quanto o agricultor",
     description:
       "Apoiamos o desenvolvimento do sector rural angolano com máquinas, ferramentas e equipamentos agrícolas de alta durabilidade. Através da nossa marca própria Pangulino, oferecemos produtos desenvolvidos para as condições do campo angolano — robustos, fiáveis e acessíveis.",
+    tagline: "Soluções para o campo angolano",
+    thumbnail: "/historia-2016.png",
     bg: "linear-gradient(145deg, #0b2414 0%, #1a5230 55%, #1f6b3a 100%)",
     pattern: "#267a42",
   },
@@ -56,6 +60,8 @@ const SECTORES_DATA = [
     subtitle: "Fornecimento industrial de confiança",
     description:
       "Servimos indústrias, unidades fabris e empresas de logística com lubrificantes, materiais de manutenção e ferramentas diversas. A nossa equipa experiente garante o produto certo para cada aplicação — com stock permanente e atendimento especializado nas três províncias onde operamos.",
+    tagline: "Stock permanente, atendimento especializado",
+    thumbnail: "/historia-2019.png",
     bg: "linear-gradient(145deg, #0d0d18 0%, #1a1a30 55%, #22223e 100%)",
     pattern: "#2d2d50",
   },
@@ -492,94 +498,130 @@ function SectoresSection() {
         {/* ── Left panel: stacked sector names ─────────────── */}
         <div
           style={{
-            width: "clamp(200px, 26%, 360px)",
+            width: "clamp(220px, 28%, 380px)",
             flexShrink: 0,
-            padding: "clamp(28px, 5vw, 80px) clamp(20px, 3.5vw, 56px)",
+            paddingTop: "clamp(48px, 10vh, 120px)",
+            paddingBottom: "clamp(32px, 6vh, 72px)",
+            paddingLeft: "clamp(24px, 4vw, 60px)",
+            paddingRight: "clamp(20px, 3vw, 48px)",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             borderRight: "1px solid rgba(0,0,0,0.07)",
             background: "#F5EFE9",
           }}
         >
-          {/* Sector names */}
-          <div style={{ marginBottom: "clamp(20px, 4vh, 48px)" }}>
-            {SECTORES_DATA.map((s, i) => (
-              <div
-                key={s.key}
-                style={{
-                  display: "flex",
-                  alignItems: "baseline",
-                  lineHeight: 1.05,
-                  marginBottom: "0.06em",
-                }}
-              >
-                <motion.span
-                  animate={{
-                    opacity: i === activeIndex ? 1 : 0,
-                    x: i === activeIndex ? 0 : -10,
-                  }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          {/* ── Sector names ── */}
+          <div style={{ marginBottom: "clamp(24px, 4.5vh, 52px)" }}>
+            {SECTORES_DATA.map((s, i) => {
+              const isActive = i === activeIndex;
+              return (
+                <div
+                  key={s.key}
                   style={{
-                    display: "inline-block",
-                    marginRight: "0.18em",
-                    color: "#003591",
-                    fontSize: "clamp(2rem, 1.6rem + 2.2vw, 4.2rem)",
-                    fontWeight: 700,
-                    userSelect: "none",
+                    display: "flex",
+                    alignItems: "baseline",
+                    lineHeight: 1.08,
+                    marginBottom: "0.02em",
+                    overflow: "hidden",
                   }}
                 >
-                  →
-                </motion.span>
-                <motion.span
-                  animate={{
-                    color: i === activeIndex ? "#003591" : "rgba(0,0,0,0.15)",
-                    fontWeight: i === activeIndex ? 700 : 300,
-                  }}
-                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  style={{
-                    fontSize: "clamp(2rem, 1.6rem + 2.2vw, 4.2rem)",
-                    letterSpacing: "-0.025em",
-                    display: "block",
-                  }}
-                >
-                  {s.name}
-                </motion.span>
-              </div>
-            ))}
+                  {/* Reserved arrow slot — always takes space, only visible when active */}
+                  <span
+                    style={{
+                      display: "inline-block",
+                      width: "clamp(1.4rem, 1.2rem + 1vw, 2.4rem)",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <motion.span
+                      animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -6 }}
+                      transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+                      style={{
+                        display: "inline-block",
+                        fontSize: "clamp(1.7rem, 1.4rem + 1.8vw, 3.6rem)",
+                        fontWeight: 700,
+                        color: "#111111",
+                        lineHeight: 1.08,
+                      }}
+                    >
+                      →
+                    </motion.span>
+                  </span>
+
+                  {/* Sector name */}
+                  <motion.span
+                    animate={{
+                      color: isActive ? "#111111" : "rgba(0,0,0,0.28)",
+                      fontWeight: isActive ? 700 : 400,
+                    }}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    style={{
+                      fontSize: "clamp(1.7rem, 1.4rem + 1.8vw, 3.6rem)",
+                      letterSpacing: "-0.03em",
+                      lineHeight: 1.08,
+                    }}
+                  >
+                    {s.name}
+                  </motion.span>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Progress bar */}
-          <div style={{ borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: "18px" }}>
-            <motion.span
-              key={activeIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+          {/* ── Separator ── */}
+          <div
+            style={{
+              width: "clamp(48px, 30%, 100px)",
+              height: 1,
+              background: "rgba(0,0,0,0.18)",
+              marginBottom: "clamp(14px, 2.5vh, 28px)",
+            }}
+          />
+
+          {/* ── Tagline ── */}
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={`tag-${activeIndex}`}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6, transition: { duration: 0.18 } }}
+              transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
               style={{
-                display: "block",
-                fontSize: "10px",
-                fontWeight: 700,
-                letterSpacing: "0.2em",
-                color: "rgba(0,0,0,0.3)",
-                marginBottom: "10px",
+                fontSize: "clamp(0.72rem, 0.6rem + 0.4vw, 0.88rem)",
+                fontWeight: 500,
+                color: "rgba(0,0,0,0.55)",
+                lineHeight: 1.45,
+                marginBottom: "clamp(14px, 2.5vh, 28px)",
               }}
             >
-              {String(activeIndex + 1).padStart(2, "0")} — {String(SECTORES_DATA.length).padStart(2, "0")}
-            </motion.span>
-            <div style={{ display: "flex", gap: "5px" }}>
-              {SECTORES_DATA.map((_, i) => (
-                <motion.div
-                  key={i}
-                  animate={{
-                    width: i === activeIndex ? 32 : 8,
-                    background: i === activeIndex ? "#003591" : "rgba(0,0,0,0.13)",
-                  }}
-                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                  style={{ height: 3, borderRadius: 2, flexShrink: 0 }}
-                />
-              ))}
-            </div>
-          </div>
+              {active.tagline} ↓
+            </motion.p>
+          </AnimatePresence>
+
+          {/* ── Thumbnail ── */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`thumb-${activeIndex}`}
+              initial={{ opacity: 0, scale: 0.97 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.2 } }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                width: "clamp(100px, 55%, 170px)",
+                aspectRatio: "4 / 3",
+                borderRadius: "6px",
+                overflow: "hidden",
+                flexShrink: 0,
+              }}
+            >
+              <img
+                src={active.thumbnail}
+                alt={active.name}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* ── Middle panel: subtitle + description ─────────── */}
