@@ -498,16 +498,15 @@ function SectoresSection() {
         {/* ── Left panel: stacked sector names ─────────────── */}
         <div
           style={{
-            width: "clamp(220px, 28%, 380px)",
+            width: "clamp(200px, 22%, 320px)",
             flexShrink: 0,
-            paddingTop: "clamp(48px, 10vh, 120px)",
+            paddingTop: "clamp(36px, 6vh, 80px)",
             paddingBottom: "clamp(32px, 6vh, 72px)",
-            paddingLeft: "clamp(24px, 4vw, 60px)",
-            paddingRight: "clamp(20px, 3vw, 48px)",
+            paddingLeft: "clamp(28px, 4.5vw, 64px)",
+            paddingRight: "clamp(16px, 2.5vw, 36px)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
-            borderRight: "1px solid rgba(0,0,0,0.07)",
             background: "#F5EFE9",
           }}
         >
@@ -530,7 +529,7 @@ function SectoresSection() {
                   <span
                     style={{
                       display: "inline-block",
-                      width: "clamp(1.4rem, 1.2rem + 1vw, 2.4rem)",
+                      width: "clamp(1.6rem, 1.4rem + 1.2vw, 2.8rem)",
                       flexShrink: 0,
                     }}
                   >
@@ -539,10 +538,10 @@ function SectoresSection() {
                       transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
                       style={{
                         display: "inline-block",
-                        fontSize: "clamp(1.7rem, 1.4rem + 1.8vw, 3.6rem)",
+                        fontSize: "clamp(2rem, 1.6rem + 2.4vw, 4.4rem)",
                         fontWeight: 700,
                         color: "#111111",
-                        lineHeight: 1.08,
+                        lineHeight: 1.06,
                       }}
                     >
                       →
@@ -552,14 +551,14 @@ function SectoresSection() {
                   {/* Sector name */}
                   <motion.span
                     animate={{
-                      color: isActive ? "#111111" : "rgba(0,0,0,0.28)",
+                      color: isActive ? "#111111" : "rgba(0,0,0,0.3)",
                       fontWeight: isActive ? 700 : 400,
                     }}
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     style={{
-                      fontSize: "clamp(1.7rem, 1.4rem + 1.8vw, 3.6rem)",
-                      letterSpacing: "-0.03em",
-                      lineHeight: 1.08,
+                      fontSize: "clamp(2rem, 1.6rem + 2.4vw, 4.4rem)",
+                      letterSpacing: "-0.035em",
+                      lineHeight: 1.06,
                     }}
                   >
                     {s.name}
@@ -627,47 +626,58 @@ function SectoresSection() {
         {/* ── Middle panel: subtitle + description ─────────── */}
         <div
           style={{
-            width: "clamp(180px, 24%, 340px)",
+            width: "clamp(180px, 20%, 300px)",
             flexShrink: 0,
-            padding: "clamp(28px, 5vw, 80px) clamp(20px, 3.5vw, 56px)",
+            paddingTop: "clamp(36px, 6vh, 80px)",
+            paddingBottom: "clamp(36px, 6vh, 80px)",
+            paddingLeft: "clamp(24px, 3.5vw, 52px)",
+            paddingRight: "clamp(20px, 3vw, 44px)",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
-            borderRight: "1px solid rgba(0,0,0,0.07)",
+            justifyContent: "flex-start",
             background: "#F5EFE9",
           }}
         >
           <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              initial={{ opacity: 0, y: 28 }}
+            <motion.h3
+              key={`sub-${activeIndex}`}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20, transition: { duration: 0.22 } }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, y: -12, transition: { duration: 0.2 } }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                fontSize: "clamp(1.05rem, 0.85rem + 1vw, 1.65rem)",
+                fontWeight: 700,
+                lineHeight: 1.22,
+                letterSpacing: "-0.01em",
+                color: "#111111",
+                margin: 0,
+              }}
             >
-              <h3
-                style={{
-                  fontSize: "clamp(1.2rem, 0.9rem + 1.6vw, 2.2rem)",
-                  fontWeight: 700,
-                  lineHeight: 1.2,
-                  letterSpacing: "-0.01em",
-                  color: "#003591",
-                  marginBottom: "clamp(14px, 2.8vh, 30px)",
-                }}
-              >
-                {active.subtitle}
-              </h3>
-              <p
-                style={{
-                  fontSize: "clamp(0.78rem, 0.62rem + 0.55vw, 0.96rem)",
-                  lineHeight: 1.78,
-                  color: "rgba(0,0,0,0.6)",
-                  fontWeight: 400,
-                }}
-              >
-                {active.description}
-              </p>
-            </motion.div>
+              {active.subtitle}
+            </motion.h3>
+          </AnimatePresence>
+
+          {/* spacer pushes description to lower portion */}
+          <div style={{ flex: 1 }} />
+
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={`desc-${activeIndex}`}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12, transition: { duration: 0.2 } }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.06 }}
+              style={{
+                fontSize: "clamp(0.75rem, 0.6rem + 0.5vw, 0.93rem)",
+                lineHeight: 1.82,
+                color: "rgba(0,0,0,0.58)",
+                fontWeight: 400,
+                margin: 0,
+              }}
+            >
+              {active.description}
+            </motion.p>
           </AnimatePresence>
         </div>
 
