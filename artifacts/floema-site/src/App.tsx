@@ -685,39 +685,41 @@ function SectoresSection() {
           </AnimatePresence>
         </div>
 
-        {/* ── Right panel: full-bleed photo ────────────────── */}
-        <div style={{ flex: 1, position: "relative", overflow: "hidden", minWidth: 0 }}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, transition: { duration: 0.35 } }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              style={{ position: "absolute", inset: 0 }}
-            >
-              <img
-                src={active.image}
-                alt={active.name}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  display: "block",
-                }}
-              />
-              {/* Subtle dark overlay at bottom for readability */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "linear-gradient(to top, rgba(0,0,0,0.28) 0%, transparent 45%)",
-                  pointerEvents: "none",
-                }}
-              />
-            </motion.div>
-          </AnimatePresence>
+        {/* ── Right panel: contained photo with padding ────── */}
+        <div
+          style={{
+            flex: "0 0 clamp(280px, 44%, 680px)",
+            background: "#F5EFE9",
+            padding: "clamp(40px, 8vh, 88px) clamp(24px, 3vw, 56px) clamp(40px, 8vh, 88px) 0",
+            display: "flex",
+            minWidth: 0,
+          }}
+        >
+          {/* Inner frame — takes all available space inside padding */}
+          <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, transition: { duration: 0.35 } }}
+                transition={{ duration: 0.6, ease: "easeInOut" }}
+                style={{ position: "absolute", inset: 0 }}
+              >
+                <img
+                  src={active.image}
+                  alt={active.name}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                    display: "block",
+                  }}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </div>
