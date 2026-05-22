@@ -675,7 +675,7 @@ function SectoresSection() {
               style={{
                 fontSize: "clamp(0.75rem, 0.6rem + 0.5vw, 0.93rem)",
                 lineHeight: 1.82,
-                color: "rgba(0,0,0,0.58)",
+                color: "#111111",
                 fontWeight: 400,
                 margin: 0,
               }}
