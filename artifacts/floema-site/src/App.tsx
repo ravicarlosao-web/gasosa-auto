@@ -498,7 +498,7 @@ function SectoresSection() {
         {/* ── Left panel: stacked sector names ─────────────── */}
         <div
           style={{
-            width: "clamp(200px, 22%, 320px)",
+            width: "clamp(210px, 26%, 360px)",
             flexShrink: 0,
             paddingTop: "clamp(36px, 6vh, 80px)",
             paddingBottom: "clamp(32px, 6vh, 72px)",
@@ -626,7 +626,7 @@ function SectoresSection() {
         {/* ── Middle panel: subtitle + description ─────────── */}
         <div
           style={{
-            width: "clamp(180px, 20%, 300px)",
+            width: "clamp(190px, 22%, 320px)",
             flexShrink: 0,
             paddingTop: "clamp(36px, 6vh, 80px)",
             paddingBottom: "clamp(36px, 6vh, 80px)",
