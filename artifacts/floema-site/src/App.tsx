@@ -495,12 +495,12 @@ function SectoresSection() {
         {/* ── Left panel: stacked sector names ─────────────── */}
         <div
           style={{
-            width: "clamp(210px, 26%, 360px)",
+            width: "clamp(220px, 28%, 420px)",
             flexShrink: 0,
             paddingTop: "clamp(88px, 12vh, 130px)",
-            paddingBottom: "clamp(32px, 6vh, 72px)",
+            paddingBottom: "clamp(36px, 6vh, 80px)",
             paddingLeft: "clamp(28px, 4.5vw, 64px)",
-            paddingRight: "clamp(16px, 2.5vw, 36px)",
+            paddingRight: "clamp(20px, 3vw, 44px)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
@@ -527,7 +527,7 @@ function SectoresSection() {
                     style={{
                       display: "inline-block",
                       width: "1.1em",
-                      fontSize: "clamp(1.6rem, 3.4vw, 3.2rem)",
+                      fontSize: "clamp(1.4rem, 2.8vw, 2.8rem)",
                       flexShrink: 0,
                       lineHeight: 1.06,
                     }}
@@ -559,7 +559,7 @@ function SectoresSection() {
                     animate={{ color: isActive ? "#111111" : "rgba(0,0,0,0.3)" }}
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     style={{
-                      fontSize: "clamp(1.6rem, 3.4vw, 3.2rem)",
+                      fontSize: "clamp(1.4rem, 2.8vw, 2.8rem)",
                       fontWeight: 400,
                       letterSpacing: "-0.03em",
                       lineHeight: 1.06,
@@ -688,9 +688,12 @@ function SectoresSection() {
         {/* ── Right panel: contained photo with padding ────── */}
         <div
           style={{
-            flex: "0 0 clamp(280px, 44%, 680px)",
+            flex: 1,
             background: "#F5EFE9",
-            padding: "clamp(40px, 8vh, 88px) clamp(24px, 3vw, 56px) clamp(40px, 8vh, 88px) 0",
+            paddingTop: "clamp(88px, 12vh, 130px)",
+            paddingBottom: "clamp(36px, 6vh, 80px)",
+            paddingLeft: 0,
+            paddingRight: "clamp(28px, 4.5vw, 64px)",
             display: "flex",
             minWidth: 0,
           }}
