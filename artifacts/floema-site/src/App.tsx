@@ -654,7 +654,7 @@ function SectoresSection() {
                 fontWeight: 400,
                 lineHeight: 1.28,
                 letterSpacing: "-0.01em",
-                color: "rgba(0,0,0,0.58)",
+                color: "#111111",
                 margin: 0,
               }}
             >
