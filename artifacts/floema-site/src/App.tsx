@@ -463,21 +463,9 @@ function HistoriaSection() {
 // ─── SectoresSection ──────────────────────────────────────────────────────────
 
 const textVariants = {
-  enter: (d: number) => ({ opacity: 0, y: d * 14 }),
+  enter: (d: number) => ({ opacity: 0, y: d * 8 }),
   center: { opacity: 1, y: 0 },
-  exit: (d: number) => ({ opacity: 0, y: d * -10, transition: { duration: 0.38, ease: [0.4, 0, 0.2, 1] } }),
-};
-
-const imageVariants = {
-  enter: (d: number) => ({ y: `${d * 100}%` }),
-  center: { y: "0%" },
-  exit: { opacity: 0, transition: { duration: 0.06, delay: 0.22 } },
-};
-
-const thumbVariants = {
-  enter: (d: number) => ({ y: `${d * 100}%` }),
-  center: { y: "0%" },
-  exit: { opacity: 0, transition: { duration: 0.06, delay: 0.2 } },
+  exit: (d: number) => ({ opacity: 0, y: d * -6, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }),
 };
 
 function SectoresSection() {
@@ -516,7 +504,7 @@ function SectoresSection() {
   }, []);
 
   return (
-    <div ref={containerRef} style={{ height: "300vh", position: "relative" }}>
+    <div ref={containerRef} style={{ height: "200vh", position: "relative" }}>
       <div
         style={{
           position: "sticky",
@@ -620,7 +608,7 @@ function SectoresSection() {
           />
 
           {/* ── Tagline ── */}
-          <AnimatePresence mode="wait" custom={dir}>
+          <AnimatePresence mode="sync" custom={dir}>
             <motion.p
               key={`tag-${activeIndex}`}
               custom={dir}
@@ -628,7 +616,7 @@ function SectoresSection() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+              transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1], delay: 0.06 }}
               style={{
                 fontSize: "clamp(0.72rem, 0.6rem + 0.4vw, 0.88rem)",
                 fontWeight: 400,
@@ -655,7 +643,7 @@ function SectoresSection() {
               <motion.div
                 key={s.key}
                 animate={{ y: `${(i - activeIndex) * 100}%` }}
-                transition={{ type: "spring", stiffness: 500, damping: 42, mass: 0.6 }}
+                transition={{ type: "spring", stiffness: 340, damping: 34, mass: 0.7 }}
                 style={{ position: "absolute", inset: 0, willChange: "transform" }}
               >
                 <img
@@ -685,7 +673,7 @@ function SectoresSection() {
             background: "#F5EFE9",
           }}
         >
-          <AnimatePresence mode="wait" custom={dir}>
+          <AnimatePresence mode="sync" custom={dir}>
             <motion.h3
               key={`sub-${activeIndex}`}
               custom={dir}
@@ -693,7 +681,7 @@ function SectoresSection() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
               style={{
                 fontSize: "clamp(1.05rem, 0.85rem + 1vw, 1.5rem)",
                 fontWeight: 400,
@@ -710,7 +698,7 @@ function SectoresSection() {
           {/* spacer pushes description to lower portion */}
           <div style={{ flex: 1 }} />
 
-          <AnimatePresence mode="wait" custom={dir}>
+          <AnimatePresence mode="sync" custom={dir}>
             <motion.p
               key={`desc-${activeIndex}`}
               custom={dir}
@@ -718,7 +706,7 @@ function SectoresSection() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+              transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
               style={{
                 fontSize: "clamp(0.75rem, 0.6rem + 0.5vw, 0.93rem)",
                 lineHeight: 1.82,
@@ -751,7 +739,7 @@ function SectoresSection() {
               <motion.div
                 key={s.key}
                 animate={{ y: `${(i - activeIndex) * 100}%` }}
-                transition={{ type: "spring", stiffness: 500, damping: 42, mass: 0.6 }}
+                transition={{ type: "spring", stiffness: 340, damping: 34, mass: 0.7 }}
                 style={{ position: "absolute", inset: 0, willChange: "transform" }}
               >
                 <img
