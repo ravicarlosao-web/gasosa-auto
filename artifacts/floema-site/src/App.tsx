@@ -650,11 +650,11 @@ function SectoresSection() {
               exit={{ opacity: 0, y: -12, transition: { duration: 0.2 } }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               style={{
-                fontSize: "clamp(1.05rem, 0.85rem + 1vw, 1.65rem)",
-                fontWeight: 700,
-                lineHeight: 1.22,
+                fontSize: "clamp(1.05rem, 0.85rem + 1vw, 1.5rem)",
+                fontWeight: 400,
+                lineHeight: 1.28,
                 letterSpacing: "-0.01em",
-                color: "#111111",
+                color: "rgba(0,0,0,0.58)",
                 margin: 0,
               }}
             >
