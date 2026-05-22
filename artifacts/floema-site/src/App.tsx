@@ -572,6 +572,9 @@ function SectoresSection() {
             })}
           </div>
 
+          {/* spacer — pushes separator + tagline + thumbnail to bottom */}
+          <div style={{ flex: 1 }} />
+
           {/* ── Separator ── */}
           <div
             style={{
