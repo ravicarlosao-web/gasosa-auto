@@ -497,7 +497,7 @@ function SectoresSection() {
           style={{
             width: "clamp(210px, 26%, 360px)",
             flexShrink: 0,
-            paddingTop: "clamp(36px, 6vh, 80px)",
+            paddingTop: "clamp(88px, 12vh, 130px)",
             paddingBottom: "clamp(32px, 6vh, 72px)",
             paddingLeft: "clamp(28px, 4.5vw, 64px)",
             paddingRight: "clamp(16px, 2.5vw, 36px)",
@@ -508,7 +508,7 @@ function SectoresSection() {
           }}
         >
           {/* ── Sector names ── */}
-          <div style={{ marginBottom: "clamp(24px, 4.5vh, 52px)" }}>
+          <div style={{ marginBottom: "clamp(28px, 5vh, 56px)" }}>
             {SECTORES_DATA.map((s, i) => {
               const isActive = i === activeIndex;
               return (
@@ -522,38 +522,45 @@ function SectoresSection() {
                     overflow: "hidden",
                   }}
                 >
-                  {/* Reserved arrow slot — fixed narrow width so name text fits panel */}
+                  {/* Arrow icon slot — shows on active item only */}
                   <span
                     style={{
                       display: "inline-block",
-                      width: "0.75em",
-                      fontSize: "clamp(1.4rem, 3vw, 2.8rem)",
+                      width: "1.1em",
+                      fontSize: "clamp(1.6rem, 3.4vw, 3.2rem)",
                       flexShrink: 0,
+                      lineHeight: 1.06,
                     }}
                   >
                     <motion.span
-                      animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -6 }}
+                      animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -8 }}
                       transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-                      style={{
-                        display: "inline-block",
-                        fontWeight: 700,
-                        color: "#111111",
-                        lineHeight: 1.06,
-                      }}
+                      style={{ display: "inline-flex", alignItems: "center", color: "#111111" }}
                     >
-                      →
+                      <svg
+                        width="0.72em"
+                        height="0.72em"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        style={{ display: "block" }}
+                      >
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="13 6 19 12 13 18" />
+                      </svg>
                     </motion.span>
                   </span>
 
-                  {/* Sector name */}
+                  {/* Sector name — colour only changes, no weight change */}
                   <motion.span
-                    animate={{
-                      color: isActive ? "#111111" : "rgba(0,0,0,0.3)",
-                      fontWeight: isActive ? 700 : 400,
-                    }}
+                    animate={{ color: isActive ? "#111111" : "rgba(0,0,0,0.3)" }}
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     style={{
-                      fontSize: "clamp(1.4rem, 3vw, 2.8rem)",
+                      fontSize: "clamp(1.6rem, 3.4vw, 3.2rem)",
+                      fontWeight: 400,
                       letterSpacing: "-0.03em",
                       lineHeight: 1.06,
                     }}
@@ -585,7 +592,7 @@ function SectoresSection() {
               transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
               style={{
                 fontSize: "clamp(0.72rem, 0.6rem + 0.4vw, 0.88rem)",
-                fontWeight: 500,
+                fontWeight: 400,
                 color: "rgba(0,0,0,0.55)",
                 lineHeight: 1.45,
                 marginBottom: "clamp(14px, 2.5vh, 28px)",
@@ -604,9 +611,9 @@ function SectoresSection() {
               exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.2 } }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               style={{
-                width: "clamp(100px, 55%, 170px)",
+                width: "clamp(130px, 74%, 230px)",
                 aspectRatio: "4 / 3",
-                borderRadius: "6px",
+                borderRadius: "0",
                 overflow: "hidden",
                 flexShrink: 0,
               }}
@@ -625,7 +632,7 @@ function SectoresSection() {
           style={{
             width: "clamp(190px, 22%, 320px)",
             flexShrink: 0,
-            paddingTop: "clamp(36px, 6vh, 80px)",
+            paddingTop: "clamp(88px, 12vh, 130px)",
             paddingBottom: "clamp(36px, 6vh, 80px)",
             paddingLeft: "clamp(24px, 3.5vw, 52px)",
             paddingRight: "clamp(20px, 3vw, 44px)",
