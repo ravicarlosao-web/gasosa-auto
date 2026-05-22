@@ -31,6 +31,36 @@ const MILESTONE_STATIC = [
   { year: "2020", image: "/historia-2020.png" },
 ];
 
+const SECTORES_DATA = [
+  {
+    key: "automovel",
+    name: "Automóvel",
+    subtitle: "Soluções completas para o sector automóvel",
+    description:
+      "Fornecemos peças, acessórios e lubrificantes de alta performance para veículos ligeiros, pesados e industriais. Com marcas de referência internacional como Nergytech, Petronas, Castrol e Galp, garantimos qualidade e durabilidade em cada produto — para frotas empresariais e particulares.",
+    bg: "linear-gradient(145deg, #001534 0%, #002d6e 55%, #003591 100%)",
+    pattern: "#0047c0",
+  },
+  {
+    key: "agricola",
+    name: "Agrícola",
+    subtitle: "Equipamentos que trabalham tanto quanto o agricultor",
+    description:
+      "Apoiamos o desenvolvimento do sector rural angolano com máquinas, ferramentas e equipamentos agrícolas de alta durabilidade. Através da nossa marca própria Pangulino, oferecemos produtos desenvolvidos para as condições do campo angolano — robustos, fiáveis e acessíveis.",
+    bg: "linear-gradient(145deg, #0b2414 0%, #1a5230 55%, #1f6b3a 100%)",
+    pattern: "#267a42",
+  },
+  {
+    key: "industrial",
+    name: "Industrial",
+    subtitle: "Fornecimento industrial de confiança",
+    description:
+      "Servimos indústrias, unidades fabris e empresas de logística com lubrificantes, materiais de manutenção e ferramentas diversas. A nossa equipa experiente garante o produto certo para cada aplicação — com stock permanente e atendimento especializado nas três províncias onde operamos.",
+    bg: "linear-gradient(145deg, #0d0d18 0%, #1a1a30 55%, #22223e 100%)",
+    pattern: "#2d2d50",
+  },
+] as const;
+
 // ─── NavPill ──────────────────────────────────────────────────────────────────
 function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
   const [mouse, setMouse] = useState<{ x: number; y: number } | null>(null);
@@ -427,6 +457,252 @@ function HistoriaSection() {
   );
 }
 
+// ─── SectoresSection ──────────────────────────────────────────────────────────
+function SectoresSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  useEffect(() => {
+    return scrollYProgress.on("change", (v) => {
+      if (v < 1 / 3) setActiveIndex(0);
+      else if (v < 2 / 3) setActiveIndex(1);
+      else setActiveIndex(2);
+    });
+  }, [scrollYProgress]);
+
+  const active = SECTORES_DATA[activeIndex];
+
+  return (
+    <div ref={containerRef} style={{ height: "300vh", position: "relative" }}>
+      <div
+        style={{
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          overflow: "hidden",
+          display: "flex",
+          fontFamily: "'Poppins', sans-serif",
+        }}
+      >
+        {/* ── Left panel: stacked sector names ─────────────── */}
+        <div
+          style={{
+            width: "clamp(200px, 26%, 360px)",
+            flexShrink: 0,
+            padding: "clamp(28px, 5vw, 80px) clamp(20px, 3.5vw, 56px)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            borderRight: "1px solid rgba(0,0,0,0.07)",
+            background: "#F5EFE9",
+          }}
+        >
+          {/* Sector names */}
+          <div style={{ marginBottom: "clamp(20px, 4vh, 48px)" }}>
+            {SECTORES_DATA.map((s, i) => (
+              <div
+                key={s.key}
+                style={{
+                  display: "flex",
+                  alignItems: "baseline",
+                  lineHeight: 1.05,
+                  marginBottom: "0.06em",
+                }}
+              >
+                <motion.span
+                  animate={{
+                    opacity: i === activeIndex ? 1 : 0,
+                    x: i === activeIndex ? 0 : -10,
+                  }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    display: "inline-block",
+                    marginRight: "0.18em",
+                    color: "#003591",
+                    fontSize: "clamp(2rem, 1.6rem + 2.2vw, 4.2rem)",
+                    fontWeight: 700,
+                    userSelect: "none",
+                  }}
+                >
+                  →
+                </motion.span>
+                <motion.span
+                  animate={{
+                    color: i === activeIndex ? "#003591" : "rgba(0,0,0,0.15)",
+                    fontWeight: i === activeIndex ? 700 : 300,
+                  }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  style={{
+                    fontSize: "clamp(2rem, 1.6rem + 2.2vw, 4.2rem)",
+                    letterSpacing: "-0.025em",
+                    display: "block",
+                  }}
+                >
+                  {s.name}
+                </motion.span>
+              </div>
+            ))}
+          </div>
+
+          {/* Progress bar */}
+          <div style={{ borderTop: "1px solid rgba(0,0,0,0.1)", paddingTop: "18px" }}>
+            <motion.span
+              key={activeIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              style={{
+                display: "block",
+                fontSize: "10px",
+                fontWeight: 700,
+                letterSpacing: "0.2em",
+                color: "rgba(0,0,0,0.3)",
+                marginBottom: "10px",
+              }}
+            >
+              {String(activeIndex + 1).padStart(2, "0")} — {String(SECTORES_DATA.length).padStart(2, "0")}
+            </motion.span>
+            <div style={{ display: "flex", gap: "5px" }}>
+              {SECTORES_DATA.map((_, i) => (
+                <motion.div
+                  key={i}
+                  animate={{
+                    width: i === activeIndex ? 32 : 8,
+                    background: i === activeIndex ? "#003591" : "rgba(0,0,0,0.13)",
+                  }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ height: 3, borderRadius: 2, flexShrink: 0 }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Middle panel: subtitle + description ─────────── */}
+        <div
+          style={{
+            width: "clamp(180px, 24%, 340px)",
+            flexShrink: 0,
+            padding: "clamp(28px, 5vw, 80px) clamp(20px, 3.5vw, 56px)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            borderRight: "1px solid rgba(0,0,0,0.07)",
+            background: "#F5EFE9",
+          }}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20, transition: { duration: 0.22 } }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <h3
+                style={{
+                  fontSize: "clamp(1.2rem, 0.9rem + 1.6vw, 2.2rem)",
+                  fontWeight: 700,
+                  lineHeight: 1.2,
+                  letterSpacing: "-0.01em",
+                  color: "#003591",
+                  marginBottom: "clamp(14px, 2.8vh, 30px)",
+                }}
+              >
+                {active.subtitle}
+              </h3>
+              <p
+                style={{
+                  fontSize: "clamp(0.78rem, 0.62rem + 0.55vw, 0.96rem)",
+                  lineHeight: 1.78,
+                  color: "rgba(0,0,0,0.6)",
+                  fontWeight: 400,
+                }}
+              >
+                {active.description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* ── Right panel: visual ───────────────────────────── */}
+        <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.3 } }}
+              transition={{ duration: 0.55, ease: "easeInOut" }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: active.bg,
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "flex-start",
+                padding: "clamp(24px, 4vw, 64px)",
+                overflow: "hidden",
+              }}
+            >
+              {/* Large ghost name behind */}
+              <span
+                style={{
+                  position: "absolute",
+                  bottom: "-0.08em",
+                  right: "-0.04em",
+                  fontSize: "clamp(7rem, 14vw, 22rem)",
+                  fontWeight: 800,
+                  letterSpacing: "-0.05em",
+                  lineHeight: 0.85,
+                  color: "rgba(255,255,255,0.06)",
+                  userSelect: "none",
+                  pointerEvents: "none",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {active.name}
+              </span>
+              {/* Sector index overlay */}
+              <div style={{ position: "relative", zIndex: 2 }}>
+                <span
+                  style={{
+                    display: "block",
+                    fontSize: "10px",
+                    fontWeight: 700,
+                    letterSpacing: "0.22em",
+                    color: "rgba(255,255,255,0.45)",
+                    marginBottom: "10px",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Sector {String(activeIndex + 1).padStart(2, "0")}
+                </span>
+                <span
+                  style={{
+                    display: "block",
+                    fontSize: "clamp(1.4rem, 2vw, 2.2rem)",
+                    fontWeight: 700,
+                    color: "rgba(255,255,255,0.92)",
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.1,
+                  }}
+                >
+                  {active.name}
+                </span>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Home ─────────────────────────────────────────────────────────────────────
 function Home() {
   const { t } = useLang();
@@ -626,6 +902,11 @@ function Home() {
         }}
       >
         <HistoriaSection />
+      </div>
+
+      {/* ── Sectores Section ─────────────────────────────────────────── */}
+      <div className="relative z-10">
+        <SectoresSection />
       </div>
 
     </div>
