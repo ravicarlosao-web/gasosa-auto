@@ -612,7 +612,7 @@ function SectoresSection() {
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               style={{
                 width: "clamp(130px, 74%, 230px)",
-                aspectRatio: "4 / 3",
+                aspectRatio: "3 / 4",
                 borderRadius: "0",
                 overflow: "hidden",
                 flexShrink: 0,
