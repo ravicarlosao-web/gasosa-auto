@@ -469,15 +469,15 @@ const textVariants = {
 };
 
 const imageVariants = {
-  enter: { opacity: 0, scale: 1.04 },
-  center: { opacity: 1, scale: 1 },
-  exit: { opacity: 0, scale: 0.98, transition: { duration: 0.55, ease: [0.4, 0, 0.2, 1] } },
+  enter: (d: number) => ({ y: `${d * 100}%` }),
+  center: { y: "0%" },
+  exit: { opacity: 0, transition: { duration: 0.12, delay: 0.72 } },
 };
 
 const thumbVariants = {
-  enter: (d: number) => ({ opacity: 0, y: d * 10, scale: 0.97 }),
-  center: { opacity: 1, y: 0, scale: 1 },
-  exit: (d: number) => ({ opacity: 0, y: d * -8, scale: 0.97, transition: { duration: 0.38, ease: [0.4, 0, 0.2, 1] } }),
+  enter: (d: number) => ({ y: `${d * 100}%` }),
+  center: { y: "0%" },
+  exit: { opacity: 0, transition: { duration: 0.12, delay: 0.6 } },
 };
 
 function SectoresSection() {
@@ -632,30 +632,34 @@ function SectoresSection() {
           </AnimatePresence>
 
           {/* ── Thumbnail ── */}
-          <AnimatePresence mode="wait" custom={dir}>
-            <motion.div
-              key={`thumb-${activeIndex}`}
-              custom={dir}
-              variants={thumbVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.78, ease: [0.22, 1, 0.36, 1], delay: 0.14 }}
-              style={{
-                width: "clamp(130px, 74%, 230px)",
-                aspectRatio: "3 / 4",
-                borderRadius: "0",
-                overflow: "hidden",
-                flexShrink: 0,
-              }}
-            >
-              <img
-                src={active.thumbnail}
-                alt={active.name}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-              />
-            </motion.div>
-          </AnimatePresence>
+          <div
+            style={{
+              width: "clamp(130px, 74%, 230px)",
+              aspectRatio: "3 / 4",
+              overflow: "hidden",
+              position: "relative",
+              flexShrink: 0,
+            }}
+          >
+            <AnimatePresence mode="sync" custom={dir}>
+              <motion.div
+                key={`thumb-${activeIndex}`}
+                custom={dir}
+                variants={thumbVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.78, ease: [0.22, 1, 0.36, 1] }}
+                style={{ position: "absolute", inset: 0 }}
+              >
+                <img
+                  src={active.thumbnail}
+                  alt={active.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* ── Middle panel: subtitle + description ─────────── */}
@@ -735,9 +739,10 @@ function SectoresSection() {
         >
           {/* Inner frame — takes all available space inside padding */}
           <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="sync" custom={dir}>
               <motion.div
                 key={activeIndex}
+                custom={dir}
                 variants={imageVariants}
                 initial="enter"
                 animate="center"
