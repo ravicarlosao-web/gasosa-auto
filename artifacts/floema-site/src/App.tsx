@@ -463,9 +463,9 @@ function HistoriaSection() {
 // ─── SectoresSection ──────────────────────────────────────────────────────────
 
 const textVariants = {
-  enter: (d: number) => ({ opacity: 0, y: d > 0 ? 42 : -42 }),
-  center: { opacity: 1, y: 0, transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.18 } },
-  exit: (d: number) => ({ opacity: 0, y: d > 0 ? 42 : -42, transition: { duration: 0.55, ease: [0.4, 0, 0.6, 1] } }),
+  enter: (d: number) => ({ opacity: 0, y: d > 0 ? 36 : -36 }),
+  center: { opacity: 1, y: 0, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } },
+  exit: (d: number) => ({ opacity: 0, y: d > 0 ? 36 : -36, transition: { duration: 0.38, ease: [0.4, 0, 0.6, 1] } }),
 };
 
 function SectoresSection() {
@@ -609,7 +609,7 @@ function SectoresSection() {
 
           {/* ── Tagline ── */}
           <div style={{ overflow: "hidden", marginBottom: "clamp(14px, 2.5vh, 28px)" }}>
-            <AnimatePresence mode="popLayout" custom={dir}>
+            <AnimatePresence mode="wait" custom={dir}>
               <motion.p
                 key={`tag-${activeIndex}`}
                 custom={dir}
@@ -675,7 +675,7 @@ function SectoresSection() {
           }}
         >
           <div style={{ overflow: "hidden" }}>
-            <AnimatePresence mode="popLayout" custom={dir}>
+            <AnimatePresence mode="wait" custom={dir}>
               <motion.h3
                 key={`sub-${activeIndex}`}
                 custom={dir}
@@ -701,7 +701,7 @@ function SectoresSection() {
           <div style={{ flex: 1 }} />
 
           <div style={{ overflow: "hidden" }}>
-            <AnimatePresence mode="popLayout" custom={dir}>
+            <AnimatePresence mode="wait" custom={dir}>
               <motion.p
                 key={`desc-${activeIndex}`}
                 custom={dir}
