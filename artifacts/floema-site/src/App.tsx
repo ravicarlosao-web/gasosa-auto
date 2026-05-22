@@ -463,9 +463,9 @@ function HistoriaSection() {
 // ─── SectoresSection ──────────────────────────────────────────────────────────
 
 const textVariants = {
-  enter: (d: number) => ({ opacity: 0, y: d > 0 ? 28 : -28 }),
-  center: { opacity: 1, y: 0, transition: { duration: 1.05, ease: [0.16, 1, 0.3, 1] } },
-  exit: (d: number) => ({ opacity: 0, y: d > 0 ? -22 : 22, transition: { duration: 0.52, ease: [0.4, 0, 0.6, 1] } }),
+  enter: (d: number) => ({ opacity: 0, y: d > 0 ? 42 : -42 }),
+  center: { opacity: 1, y: 0, transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.18 } },
+  exit: (d: number) => ({ opacity: 0, y: d > 0 ? 42 : -42, transition: { duration: 0.55, ease: [0.4, 0, 0.6, 1] } }),
 };
 
 function SectoresSection() {
