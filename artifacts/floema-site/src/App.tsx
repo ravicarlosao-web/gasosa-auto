@@ -517,9 +517,8 @@ function SectoresSection() {
                   style={{
                     display: "flex",
                     alignItems: "baseline",
-                    lineHeight: 1.08,
-                    marginBottom: "0.02em",
-                    overflow: "hidden",
+                    lineHeight: 1.25,
+                    marginBottom: "0.04em",
                   }}
                 >
                   {/* Arrow icon slot — shows on active item only */}
