@@ -463,21 +463,21 @@ function HistoriaSection() {
 // ─── SectoresSection ──────────────────────────────────────────────────────────
 
 const textVariants = {
-  enter: (d: number) => ({ opacity: 0, y: d * 22 }),
+  enter: (d: number) => ({ opacity: 0, y: d * 14 }),
   center: { opacity: 1, y: 0 },
-  exit: (d: number) => ({ opacity: 0, y: d * -16, transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] } }),
+  exit: (d: number) => ({ opacity: 0, y: d * -10, transition: { duration: 0.38, ease: [0.4, 0, 0.2, 1] } }),
 };
 
 const imageVariants = {
-  enter: { opacity: 0, scale: 1.05 },
+  enter: { opacity: 0, scale: 1.04 },
   center: { opacity: 1, scale: 1 },
-  exit: { opacity: 0, scale: 0.97, transition: { duration: 0.35, ease: "easeInOut" } },
+  exit: { opacity: 0, scale: 0.98, transition: { duration: 0.55, ease: [0.4, 0, 0.2, 1] } },
 };
 
 const thumbVariants = {
-  enter: (d: number) => ({ opacity: 0, y: d * 14, scale: 0.96 }),
+  enter: (d: number) => ({ opacity: 0, y: d * 10, scale: 0.97 }),
   center: { opacity: 1, y: 0, scale: 1 },
-  exit: (d: number) => ({ opacity: 0, y: d * -12, scale: 0.96, transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] } }),
+  exit: (d: number) => ({ opacity: 0, y: d * -8, scale: 0.97, transition: { duration: 0.38, ease: [0.4, 0, 0.2, 1] } }),
 };
 
 function SectoresSection() {
@@ -618,7 +618,7 @@ function SectoresSection() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.44, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
               style={{
                 fontSize: "clamp(0.72rem, 0.6rem + 0.4vw, 0.88rem)",
                 fontWeight: 400,
@@ -640,7 +640,7 @@ function SectoresSection() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+              transition={{ duration: 0.78, ease: [0.22, 1, 0.36, 1], delay: 0.14 }}
               style={{
                 width: "clamp(130px, 74%, 230px)",
                 aspectRatio: "3 / 4",
@@ -681,7 +681,7 @@ function SectoresSection() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
               style={{
                 fontSize: "clamp(1.05rem, 0.85rem + 1vw, 1.5rem)",
                 fontWeight: 400,
@@ -706,7 +706,7 @@ function SectoresSection() {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.09 }}
+              transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
               style={{
                 fontSize: "clamp(0.75rem, 0.6rem + 0.5vw, 0.93rem)",
                 lineHeight: 1.82,
@@ -742,7 +742,7 @@ function SectoresSection() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
                 style={{ position: "absolute", inset: 0 }}
               >
                 <img
