@@ -471,13 +471,13 @@ const textVariants = {
 const imageVariants = {
   enter: (d: number) => ({ y: `${d * 100}%` }),
   center: { y: "0%" },
-  exit: { opacity: 0, transition: { duration: 0.1, delay: 0.48 } },
+  exit: { opacity: 0, transition: { duration: 0.08, delay: 0.34 } },
 };
 
 const thumbVariants = {
   enter: (d: number) => ({ y: `${d * 100}%` }),
   center: { y: "0%" },
-  exit: { opacity: 0, transition: { duration: 0.1, delay: 0.4 } },
+  exit: { opacity: 0, transition: { duration: 0.08, delay: 0.3 } },
 };
 
 function SectoresSection() {
@@ -649,7 +649,7 @@ function SectoresSection() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
                 style={{ position: "absolute", inset: 0 }}
               >
                 <img
@@ -747,7 +747,7 @@ function SectoresSection() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
                 style={{ position: "absolute", inset: 0 }}
               >
                 <img
