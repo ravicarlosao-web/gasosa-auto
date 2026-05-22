@@ -693,7 +693,7 @@ function SectoresSection() {
             paddingTop: "clamp(88px, 12vh, 130px)",
             paddingBottom: "clamp(36px, 6vh, 80px)",
             paddingLeft: 0,
-            paddingRight: "clamp(28px, 4.5vw, 64px)",
+            paddingRight: 0,
             display: "flex",
             minWidth: 0,
           }}
