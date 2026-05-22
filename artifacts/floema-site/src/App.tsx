@@ -471,13 +471,13 @@ const textVariants = {
 const imageVariants = {
   enter: (d: number) => ({ y: `${d * 100}%` }),
   center: { y: "0%" },
-  exit: { opacity: 0, transition: { duration: 0.06, delay: 0.22 } },
+  exit: { opacity: 0, transition: { duration: 0.06, delay: 0.28 } },
 };
 
 const thumbVariants = {
   enter: (d: number) => ({ y: `${d * 100}%` }),
   center: { y: "0%" },
-  exit: { opacity: 0, transition: { duration: 0.06, delay: 0.2 } },
+  exit: { opacity: 0, transition: { duration: 0.06, delay: 0.24 } },
 };
 
 function SectoresSection() {
@@ -504,6 +504,16 @@ function SectoresSection() {
 
   const active = SECTORES_DATA[activeIndex];
   const dir = directionRef.current;
+
+  /* preload all images so they're decoded before the animation fires */
+  useEffect(() => {
+    SECTORES_DATA.forEach((s) => {
+      [s.image, s.thumbnail].forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    });
+  }, []);
 
   return (
     <div ref={containerRef} style={{ height: "300vh", position: "relative" }}>
@@ -649,12 +659,14 @@ function SectoresSection() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
-                style={{ position: "absolute", inset: 0 }}
+                transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                style={{ position: "absolute", inset: 0, willChange: "transform", transform: "translateZ(0)" }}
               >
                 <img
                   src={active.thumbnail}
                   alt={active.name}
+                  loading="eager"
+                  decoding="sync"
                   style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                 />
               </motion.div>
@@ -747,12 +759,14 @@ function SectoresSection() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                style={{ position: "absolute", inset: 0 }}
+                transition={{ duration: 0.36, ease: [0.16, 1, 0.3, 1] }}
+                style={{ position: "absolute", inset: 0, willChange: "transform", transform: "translateZ(0)" }}
               >
                 <img
                   src={active.image}
                   alt={active.name}
+                  loading="eager"
+                  decoding="sync"
                   style={{
                     width: "100%",
                     height: "100%",
