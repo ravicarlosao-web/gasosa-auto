@@ -463,9 +463,9 @@ function HistoriaSection() {
 // ─── SectoresSection ──────────────────────────────────────────────────────────
 
 const textVariants = {
-  enter: (d: number) => ({ opacity: 0, y: d * 8 }),
-  center: { opacity: 1, y: 0 },
-  exit: (d: number) => ({ opacity: 0, y: d * -6, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }),
+  enter: (d: number) => ({ opacity: 0, y: d > 0 ? 22 : -22 }),
+  center: { opacity: 1, y: 0, transition: { duration: 0.46, ease: [0.22, 1, 0.36, 1] } },
+  exit: (d: number) => ({ opacity: 0, y: d > 0 ? -18 : 18, transition: { duration: 0.24, ease: [0.4, 0, 1, 1] } }),
 };
 
 function SectoresSection() {
@@ -608,26 +608,27 @@ function SectoresSection() {
           />
 
           {/* ── Tagline ── */}
-          <AnimatePresence mode="sync" custom={dir}>
-            <motion.p
-              key={`tag-${activeIndex}`}
-              custom={dir}
-              variants={textVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1], delay: 0.06 }}
-              style={{
-                fontSize: "clamp(0.72rem, 0.6rem + 0.4vw, 0.88rem)",
-                fontWeight: 400,
-                color: "rgba(0,0,0,0.55)",
-                lineHeight: 1.45,
-                marginBottom: "clamp(14px, 2.5vh, 28px)",
-              }}
-            >
-              {active.tagline} ↓
-            </motion.p>
-          </AnimatePresence>
+          <div style={{ overflow: "hidden", marginBottom: "clamp(14px, 2.5vh, 28px)" }}>
+            <AnimatePresence mode="popLayout" custom={dir}>
+              <motion.p
+                key={`tag-${activeIndex}`}
+                custom={dir}
+                variants={textVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                style={{
+                  fontSize: "clamp(0.72rem, 0.6rem + 0.4vw, 0.88rem)",
+                  fontWeight: 400,
+                  color: "rgba(0,0,0,0.55)",
+                  lineHeight: 1.45,
+                  margin: 0,
+                }}
+              >
+                {active.tagline} ↓
+              </motion.p>
+            </AnimatePresence>
+          </div>
 
           {/* ── Thumbnail ── */}
           <div
@@ -673,51 +674,53 @@ function SectoresSection() {
             background: "#F5EFE9",
           }}
         >
-          <AnimatePresence mode="sync" custom={dir}>
-            <motion.h3
-              key={`sub-${activeIndex}`}
-              custom={dir}
-              variants={textVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-              style={{
-                fontSize: "clamp(1.05rem, 0.85rem + 1vw, 1.5rem)",
-                fontWeight: 400,
-                lineHeight: 1.28,
-                letterSpacing: "-0.01em",
-                color: "#111111",
-                margin: 0,
-              }}
-            >
-              {active.subtitle}
-            </motion.h3>
-          </AnimatePresence>
+          <div style={{ overflow: "hidden" }}>
+            <AnimatePresence mode="popLayout" custom={dir}>
+              <motion.h3
+                key={`sub-${activeIndex}`}
+                custom={dir}
+                variants={textVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                style={{
+                  fontSize: "clamp(1.05rem, 0.85rem + 1vw, 1.5rem)",
+                  fontWeight: 400,
+                  lineHeight: 1.28,
+                  letterSpacing: "-0.01em",
+                  color: "#111111",
+                  margin: 0,
+                }}
+              >
+                {active.subtitle}
+              </motion.h3>
+            </AnimatePresence>
+          </div>
 
           {/* spacer pushes description to lower portion */}
           <div style={{ flex: 1 }} />
 
-          <AnimatePresence mode="sync" custom={dir}>
-            <motion.p
-              key={`desc-${activeIndex}`}
-              custom={dir}
-              variants={textVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-              style={{
-                fontSize: "clamp(0.75rem, 0.6rem + 0.5vw, 0.93rem)",
-                lineHeight: 1.82,
-                color: "#111111",
-                fontWeight: 400,
-                margin: 0,
-              }}
-            >
-              {active.description}
-            </motion.p>
-          </AnimatePresence>
+          <div style={{ overflow: "hidden" }}>
+            <AnimatePresence mode="popLayout" custom={dir}>
+              <motion.p
+                key={`desc-${activeIndex}`}
+                custom={dir}
+                variants={textVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                style={{
+                  fontSize: "clamp(0.75rem, 0.6rem + 0.5vw, 0.93rem)",
+                  lineHeight: 1.82,
+                  color: "#111111",
+                  fontWeight: 400,
+                  margin: 0,
+                }}
+              >
+                {active.description}
+              </motion.p>
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* ── Right panel: contained photo with padding ────── */}
