@@ -461,9 +461,30 @@ function HistoriaSection() {
 }
 
 // ─── SectoresSection ──────────────────────────────────────────────────────────
+
+const textVariants = {
+  enter: (d: number) => ({ opacity: 0, y: d * 22 }),
+  center: { opacity: 1, y: 0 },
+  exit: (d: number) => ({ opacity: 0, y: d * -16, transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] } }),
+};
+
+const imageVariants = {
+  enter: { opacity: 0, scale: 1.05 },
+  center: { opacity: 1, scale: 1 },
+  exit: { opacity: 0, scale: 0.97, transition: { duration: 0.35, ease: "easeInOut" } },
+};
+
+const thumbVariants = {
+  enter: (d: number) => ({ opacity: 0, y: d * 14, scale: 0.96 }),
+  center: { opacity: 1, y: 0, scale: 1 },
+  exit: (d: number) => ({ opacity: 0, y: d * -12, scale: 0.96, transition: { duration: 0.22, ease: [0.22, 1, 0.36, 1] } }),
+};
+
 function SectoresSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const directionRef = useRef<number>(1);
+  const activeIndexRef = useRef<number>(0);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -472,13 +493,17 @@ function SectoresSection() {
 
   useEffect(() => {
     return scrollYProgress.on("change", (v) => {
-      if (v < 1 / 3) setActiveIndex(0);
-      else if (v < 2 / 3) setActiveIndex(1);
-      else setActiveIndex(2);
+      const next = v < 1 / 3 ? 0 : v < 2 / 3 ? 1 : 2;
+      if (next !== activeIndexRef.current) {
+        directionRef.current = next > activeIndexRef.current ? 1 : -1;
+        activeIndexRef.current = next;
+        setActiveIndex(next);
+      }
     });
   }, [scrollYProgress]);
 
   const active = SECTORES_DATA[activeIndex];
+  const dir = directionRef.current;
 
   return (
     <div ref={containerRef} style={{ height: "300vh", position: "relative" }}>
@@ -585,13 +610,15 @@ function SectoresSection() {
           />
 
           {/* ── Tagline ── */}
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" custom={dir}>
             <motion.p
               key={`tag-${activeIndex}`}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6, transition: { duration: 0.18 } }}
-              transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+              custom={dir}
+              variants={textVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.44, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
               style={{
                 fontSize: "clamp(0.72rem, 0.6rem + 0.4vw, 0.88rem)",
                 fontWeight: 400,
@@ -605,13 +632,15 @@ function SectoresSection() {
           </AnimatePresence>
 
           {/* ── Thumbnail ── */}
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" custom={dir}>
             <motion.div
               key={`thumb-${activeIndex}`}
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.2 } }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              custom={dir}
+              variants={thumbVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
               style={{
                 width: "clamp(130px, 74%, 230px)",
                 aspectRatio: "3 / 4",
@@ -644,12 +673,14 @@ function SectoresSection() {
             background: "#F5EFE9",
           }}
         >
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" custom={dir}>
             <motion.h3
               key={`sub-${activeIndex}`}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12, transition: { duration: 0.2 } }}
+              custom={dir}
+              variants={textVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               style={{
                 fontSize: "clamp(1.05rem, 0.85rem + 1vw, 1.5rem)",
@@ -667,13 +698,15 @@ function SectoresSection() {
           {/* spacer pushes description to lower portion */}
           <div style={{ flex: 1 }} />
 
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" custom={dir}>
             <motion.p
               key={`desc-${activeIndex}`}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12, transition: { duration: 0.2 } }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.06 }}
+              custom={dir}
+              variants={textVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.09 }}
               style={{
                 fontSize: "clamp(0.75rem, 0.6rem + 0.5vw, 0.93rem)",
                 lineHeight: 1.82,
@@ -705,10 +738,11 @@ function SectoresSection() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0, transition: { duration: 0.35 } }}
-                transition={{ duration: 0.6, ease: "easeInOut" }}
+                variants={imageVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
                 style={{ position: "absolute", inset: 0 }}
               >
                 <img
