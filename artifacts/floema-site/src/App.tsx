@@ -893,10 +893,35 @@ function MarqueeRow({
   );
 }
 
+const FADE_UP = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.82, ease: [0.16, 1, 0.3, 1], delay },
+  }),
+};
+
+const REVEAL_ROW = {
+  hidden: { opacity: 0, y: 56, scale: 0.97 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1], delay },
+  }),
+};
+
 function ParceirosSection() {
   const { t } = useLang();
+  const viewport = { once: false, amount: 0.18 } as const;
+
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: false, amount: 0.06 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       style={{
         background: "#F5EFE9",
         fontFamily: "'Poppins', sans-serif",
@@ -915,50 +940,86 @@ function ParceirosSection() {
           marginBottom: "clamp(44px, 6vw, 80px)",
         }}
       >
-        <span
-          style={{
-            display: "inline-block",
-            fontSize: "0.72rem",
-            fontWeight: 600,
-            letterSpacing: "0.16em",
-            color: "#003591",
-            marginBottom: "18px",
-          }}
-        >
-          {t.parceiros.tag}
-        </span>
-        <h2
-          style={{
-            fontSize: "clamp(2rem, 1.4rem + 2.8vw, 4rem)",
-            fontWeight: 700,
-            color: "#111111",
-            lineHeight: 1.08,
-            letterSpacing: "-0.035em",
-            margin: "0 0 18px",
-          }}
-        >
-          {t.parceiros.heading}
-        </h2>
-        <p
-          style={{
-            fontSize: "clamp(0.93rem, 0.8rem + 0.5vw, 1.15rem)",
-            color: "rgba(0,0,0,0.55)",
-            lineHeight: 1.65,
-            maxWidth: "560px",
-            margin: 0,
-          }}
-        >
-          {t.parceiros.subheading}
-        </p>
+        <div style={{ overflow: "hidden" }}>
+          <motion.span
+            variants={FADE_UP}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            custom={0}
+            style={{
+              display: "inline-block",
+              fontSize: "0.72rem",
+              fontWeight: 600,
+              letterSpacing: "0.16em",
+              color: "#003591",
+              marginBottom: "18px",
+            }}
+          >
+            {t.parceiros.tag}
+          </motion.span>
+        </div>
+
+        <div style={{ overflow: "hidden" }}>
+          <motion.h2
+            variants={FADE_UP}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            custom={0.1}
+            style={{
+              fontSize: "clamp(2rem, 1.4rem + 2.8vw, 4rem)",
+              fontWeight: 700,
+              color: "#111111",
+              lineHeight: 1.08,
+              letterSpacing: "-0.035em",
+              margin: "0 0 18px",
+            }}
+          >
+            {t.parceiros.heading}
+          </motion.h2>
+        </div>
+
+        <div style={{ overflow: "hidden" }}>
+          <motion.p
+            variants={FADE_UP}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            custom={0.22}
+            style={{
+              fontSize: "clamp(0.93rem, 0.8rem + 0.5vw, 1.15rem)",
+              color: "rgba(0,0,0,0.55)",
+              lineHeight: 1.65,
+              maxWidth: "560px",
+              margin: 0,
+            }}
+          >
+            {t.parceiros.subheading}
+          </motion.p>
+        </div>
       </div>
 
       {/* ── Marquee rows ── */}
       <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-        <MarqueeRow items={PARCEIROS_ROW1} direction="rtl" speed="34s" />
-        <MarqueeRow items={PARCEIROS_ROW2} direction="ltr" speed="28s" />
-        <MarqueeRow items={PARCEIROS_ROW3} direction="rtl" speed="40s" />
+        {[
+          { items: PARCEIROS_ROW1, dir: "rtl" as const, speed: "58s", delay: 0.0 },
+          { items: PARCEIROS_ROW2, dir: "ltr" as const, speed: "48s", delay: 0.1 },
+          { items: PARCEIROS_ROW3, dir: "rtl" as const, speed: "68s", delay: 0.2 },
+        ].map(({ items, dir, speed, delay }, idx) => (
+          <motion.div
+            key={idx}
+            variants={REVEAL_ROW}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.1 }}
+            custom={delay}
+          >
+            <MarqueeRow items={items} direction={dir} speed={speed} />
+          </motion.div>
+        ))}
       </div>
-    </section>
+    </motion.section>
   );
 }
 
