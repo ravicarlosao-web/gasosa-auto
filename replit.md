@@ -1,6 +1,6 @@
-# [Project name]
+# Gasosa Auto Agro — Site Institucional
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Site de apresentação institucional da Gasosa Auto Agro, empresa angolana de referência nos sectores automóvel, agrícola e industrial. Língua oficial: **Português (PT)**.
 
 ## Run & Operate
 
