@@ -894,21 +894,30 @@ function MarqueeRow({
 }
 
 const FADE_UP = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 36, filter: "blur(10px)" },
   visible: (delay: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.82, ease: [0.16, 1, 0.3, 1], delay },
+    filter: "blur(0px)",
+    transition: {
+      y:      { type: "spring", stiffness: 52, damping: 18, restDelta: 0.001, delay },
+      opacity:{ duration: 1.0, ease: [0.0, 0, 0.18, 1], delay },
+      filter: { duration: 0.9, ease: [0.0, 0, 0.18, 1], delay: delay + 0.04 },
+    },
   }),
 };
 
 const REVEAL_ROW = {
-  hidden: { opacity: 0, y: 56, scale: 0.97 },
+  hidden: { opacity: 0, y: 52, filter: "blur(8px)" },
   visible: (delay: number) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1], delay },
+    filter: "blur(0px)",
+    transition: {
+      y:      { type: "spring", stiffness: 44, damping: 16, restDelta: 0.001, delay },
+      opacity:{ duration: 1.1, ease: [0.0, 0, 0.18, 1], delay },
+      filter: { duration: 1.0, ease: [0.0, 0, 0.18, 1], delay: delay + 0.06 },
+    },
   }),
 };
 
