@@ -1057,13 +1057,13 @@ function Home() {
       <div
         className="fixed top-0 left-0 right-0 z-50"
         style={{
-          paddingBottom: "36px",
-          backdropFilter: `blur(${headerGlass * 7}px)`,
-          WebkitBackdropFilter: `blur(${headerGlass * 7}px)`,
-          background: `linear-gradient(to bottom, rgba(245,239,233,${headerGlass * 0.46}) 40%, transparent 100%)`,
-          maskImage: "linear-gradient(to bottom, black 45%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 45%, transparent 100%)",
-          transition: "backdrop-filter 0.55s ease, -webkit-backdrop-filter 0.55s ease, background 0.55s ease",
+          paddingBottom: "48px",
+          backdropFilter: `blur(${headerGlass * 5}px)`,
+          WebkitBackdropFilter: `blur(${headerGlass * 5}px)`,
+          background: `linear-gradient(to bottom, rgba(245,239,233,${headerGlass * 0.28}) 15%, transparent 80%)`,
+          maskImage: "linear-gradient(to bottom, black 20%, transparent 78%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 20%, transparent 78%)",
+          transition: "backdrop-filter 0.6s ease, -webkit-backdrop-filter 0.6s ease, background 0.6s ease",
         }}
       >
         <header className="w-full max-w-[1400px] mx-auto flex items-center justify-between px-5 sm:px-8 py-5">
