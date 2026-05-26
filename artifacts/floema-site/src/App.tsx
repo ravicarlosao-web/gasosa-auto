@@ -926,11 +926,7 @@ function ParceirosSection() {
   const viewport = { once: false, amount: 0.18 } as const;
 
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: false, amount: 0.06 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+    <section
       style={{
         background: "#F5EFE9",
         fontFamily: "'Poppins', sans-serif",
@@ -1028,7 +1024,7 @@ function ParceirosSection() {
           </motion.div>
         ))}
       </div>
-    </motion.section>
+    </section>
   );
 }
 
