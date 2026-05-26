@@ -1057,13 +1057,10 @@ function Home() {
       <div
         className="fixed top-0 left-0 right-0 z-50"
         style={{
-          backdropFilter: `blur(${headerGlass * 16}px) saturate(${1 + headerGlass * 0.18})`,
-          WebkitBackdropFilter: `blur(${headerGlass * 16}px) saturate(${1 + headerGlass * 0.18})`,
-          background: `rgba(245, 239, 233, ${headerGlass * 0.72})`,
-          boxShadow: headerGlass > 0.01
-            ? `0 1px 0 rgba(0,0,0,${headerGlass * 0.055})`
-            : "none",
-          transition: "backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease, background 0.4s ease, box-shadow 0.4s ease",
+          backdropFilter: `blur(${headerGlass * 8}px)`,
+          WebkitBackdropFilter: `blur(${headerGlass * 8}px)`,
+          background: `rgba(245, 239, 233, ${headerGlass * 0.42})`,
+          transition: "backdrop-filter 0.55s ease, -webkit-backdrop-filter 0.55s ease, background 0.55s ease",
         }}
       >
         <header className="w-full max-w-[1400px] mx-auto flex items-center justify-between px-5 sm:px-8 py-5">
