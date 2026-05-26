@@ -469,6 +469,7 @@ const textVariants = {
 };
 
 function SectoresSection() {
+  const { t } = useLang();
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const directionRef = useRef<number>(1);
@@ -490,7 +491,15 @@ function SectoresSection() {
     });
   }, [scrollYProgress]);
 
-  const active = SECTORES_DATA[activeIndex];
+  const sectorsT = SECTORES_DATA.map((s, i) => ({
+    ...s,
+    name: t.sectores.items[i].name,
+    subtitle: t.sectores.items[i].title,
+    tagline: t.sectores.items[i].tagline,
+    description: t.sectores.items[i].description,
+  }));
+
+  const active = sectorsT[activeIndex];
   const dir = directionRef.current;
 
   /* preload all images so they're decoded before the animation fires */
@@ -532,7 +541,7 @@ function SectoresSection() {
         >
           {/* ── Sector names ── */}
           <div style={{ marginBottom: "clamp(28px, 5vh, 56px)" }}>
-            {SECTORES_DATA.map((s, i) => {
+            {sectorsT.map((s, i) => {
               const isActive = i === activeIndex;
               return (
                 <div
@@ -640,7 +649,7 @@ function SectoresSection() {
               flexShrink: 0,
             }}
           >
-            {SECTORES_DATA.map((s, i) => (
+            {sectorsT.map((s, i) => (
               <motion.div
                 key={s.key}
                 animate={{ y: `${(i - activeIndex) * 100}%` }}
@@ -738,7 +747,7 @@ function SectoresSection() {
         >
           {/* Inner frame — takes all available space inside padding */}
           <div style={{ flex: 1, position: "relative", overflow: "hidden" }}>
-            {SECTORES_DATA.map((s, i) => (
+            {sectorsT.map((s, i) => (
               <motion.div
                 key={s.key}
                 animate={{ y: `${(i - activeIndex) * 100}%` }}

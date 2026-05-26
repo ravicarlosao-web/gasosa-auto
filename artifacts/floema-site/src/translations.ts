@@ -39,6 +39,42 @@ export const translations = {
       currentText:
         "Consolidados como referência nacional no sector automóvel, agrícola e industrial, com representação exclusiva da marca Nergytech em Angola, parceria com mais de 30 clientes e empresas de referência — e uma visão clara para o futuro.",
     },
+    sectores: {
+      tag: "O QUE FAZEMOS",
+      heading: "Três sectores. Uma só missão.",
+      subheading:
+        "Da peça ao campo, da oficina à indústria — a Gasosa Auto Agro está presente em cada etapa do desenvolvimento angolano.",
+      cta: "Saber mais",
+      items: [
+        {
+          num: "01",
+          tag: "AUTOMÓVEL",
+          name: "Automóvel",
+          title: "Soluções completas para o sector automóvel",
+          tagline: "Alta performance para cada veículo",
+          description:
+            "Fornecemos peças, acessórios e lubrificantes de alta performance para veículos ligeiros, pesados e industriais. Com marcas de referência internacional como Nergytech, Petronas, Castrol e Galp, garantimos qualidade e durabilidade em cada produto — para frotas empresariais e particulares.",
+        },
+        {
+          num: "02",
+          tag: "AGRÍCOLA",
+          name: "Agrícola",
+          title: "Equipamentos que trabalham tanto quanto o agricultor",
+          tagline: "Soluções para o campo angolano",
+          description:
+            "Apoiamos o desenvolvimento do sector rural angolano com máquinas, ferramentas e equipamentos agrícolas de alta durabilidade. Através da nossa marca própria Pangulino, oferecemos produtos desenvolvidos para as condições do campo angolano — robustos, fiáveis e acessíveis.",
+        },
+        {
+          num: "03",
+          tag: "INDUSTRIAL",
+          name: "Industrial",
+          title: "Fornecimento industrial de confiança",
+          tagline: "Stock permanente, atendimento especializado",
+          description:
+            "Servimos indústrias, unidades fabris e empresas de logística com lubrificantes, materiais de manutenção e ferramentas diversas. A nossa equipa experiente garante o produto certo para cada aplicação — com stock permanente e atendimento especializado nas três províncias onde operamos.",
+        },
+      ],
+    },
     mobile: {
       openMenu: "Abrir menu",
     },
@@ -83,6 +119,42 @@ export const translations = {
       currentText:
         "Established as a national reference in the automotive, agricultural and industrial sector, with exclusive representation of the Nergytech brand in Angola, partnerships with more than 30 leading clients and companies — and a clear vision for the future.",
     },
+    sectores: {
+      tag: "WHAT WE DO",
+      heading: "Three sectors. One mission.",
+      subheading:
+        "From parts to the field, from the workshop to industry — Gasosa Auto Agro is present at every stage of Angola's development.",
+      cta: "Learn more",
+      items: [
+        {
+          num: "01",
+          tag: "AUTOMOTIVE",
+          name: "Automotive",
+          title: "Complete solutions for the automotive sector",
+          tagline: "High performance for every vehicle",
+          description:
+            "We supply high-performance parts, accessories and lubricants for light, heavy and industrial vehicles. With leading international brands such as Nergytech, Petronas, Castrol and Galp, we guarantee quality and durability in every product — for corporate fleets and private customers.",
+        },
+        {
+          num: "02",
+          tag: "AGRICULTURAL",
+          name: "Agricultural",
+          title: "Equipment that works as hard as the farmer",
+          tagline: "Solutions for the Angolan countryside",
+          description:
+            "We support the development of Angola's rural sector with high-durability agricultural machinery, tools and equipment. Through our own brand Pangulino, we offer products developed for Angolan field conditions — robust, reliable and accessible.",
+        },
+        {
+          num: "03",
+          tag: "INDUSTRIAL",
+          name: "Industrial",
+          title: "Reliable industrial supply",
+          tagline: "Permanent stock, specialised service",
+          description:
+            "We serve industries, manufacturing units and logistics companies with lubricants, maintenance materials and a wide range of tools. Our experienced team ensures the right product for every application — with permanent stock and specialised support across the three provinces where we operate.",
+        },
+      ],
+    },
     mobile: {
       openMenu: "Open menu",
     },
@@ -126,6 +198,42 @@ export const translations = {
       currentLabel: "HOY — 2025",
       currentText:
         "Consolidados como referencia nacional en el sector automovilístico, agrícola e industrial, con representación exclusiva de la marca Nergytech en Angola, asociación con más de 30 clientes y empresas de referencia — y una visión clara para el futuro.",
+    },
+    sectores: {
+      tag: "LO QUE HACEMOS",
+      heading: "Tres sectores. Una sola misión.",
+      subheading:
+        "De la pieza al campo, del taller a la industria — Gasosa Auto Agro está presente en cada etapa del desarrollo angoleño.",
+      cta: "Saber más",
+      items: [
+        {
+          num: "01",
+          tag: "AUTOMOVILÍSTICO",
+          name: "Automovilístico",
+          title: "Soluciones completas para el sector automovilístico",
+          tagline: "Alta performance para cada vehículo",
+          description:
+            "Suministramos piezas, accesorios y lubricantes de alto rendimiento para vehículos ligeros, pesados e industriales. Con marcas de referencia internacional como Nergytech, Petronas, Castrol y Galp, garantizamos calidad y durabilidad en cada producto — para flotas empresariales y particulares.",
+        },
+        {
+          num: "02",
+          tag: "AGRÍCOLA",
+          name: "Agrícola",
+          title: "Equipos que trabajan tanto como el agricultor",
+          tagline: "Soluciones para el campo angoleño",
+          description:
+            "Apoyamos el desarrollo del sector rural angoleño con maquinaria, herramientas y equipos agrícolas de alta durabilidad. A través de nuestra marca propia Pangulino, ofrecemos productos desarrollados para las condiciones del campo angoleño — robustos, fiables y accesibles.",
+        },
+        {
+          num: "03",
+          tag: "INDUSTRIAL",
+          name: "Industrial",
+          title: "Suministro industrial de confianza",
+          tagline: "Stock permanente, atención especializada",
+          description:
+            "Servimos a industrias, plantas de fabricación y empresas de logística con lubricantes, materiales de mantenimiento y herramientas diversas. Nuestro experimentado equipo garantiza el producto adecuado para cada aplicación — con stock permanente y atención especializada en las tres provincias donde operamos.",
+        },
+      ],
     },
     mobile: {
       openMenu: "Abrir menú",
