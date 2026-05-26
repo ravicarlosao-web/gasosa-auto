@@ -1057,9 +1057,12 @@ function Home() {
       <div
         className="fixed top-0 left-0 right-0 z-50"
         style={{
-          backdropFilter: `blur(${headerGlass * 8}px)`,
-          WebkitBackdropFilter: `blur(${headerGlass * 8}px)`,
-          background: `rgba(245, 239, 233, ${headerGlass * 0.42})`,
+          paddingBottom: "36px",
+          backdropFilter: `blur(${headerGlass * 7}px)`,
+          WebkitBackdropFilter: `blur(${headerGlass * 7}px)`,
+          background: `linear-gradient(to bottom, rgba(245,239,233,${headerGlass * 0.46}) 40%, transparent 100%)`,
+          maskImage: "linear-gradient(to bottom, black 45%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 45%, transparent 100%)",
           transition: "backdrop-filter 0.55s ease, -webkit-backdrop-filter 0.55s ease, background 0.55s ease",
         }}
       >
