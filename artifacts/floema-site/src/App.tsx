@@ -1033,11 +1033,14 @@ function Home() {
   const { t } = useLang();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [headerGlass, setHeaderGlass] = useState(0);
 
   useEffect(() => {
     function onScroll() {
-      const progress = Math.min(1, Math.max(0, window.scrollY / window.innerHeight));
+      const sy = window.scrollY;
+      const progress = Math.min(1, Math.max(0, sy / window.innerHeight));
       setScrollProgress(progress);
+      setHeaderGlass(Math.min(1, sy / 90));
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -1051,28 +1054,41 @@ function Home() {
     <div className="w-full flex flex-col">
 
       {/* ── Header (fixed, floats over everything) ───────────────────── */}
-      <header className="fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between px-5 sm:px-8 py-5 max-w-[1400px] mx-auto">
-        <Link href="/" className="flex items-center">
-          <img src={logoSrc} alt="Gasosa Auto Agro" className="h-10 sm:h-12 w-auto object-contain" />
-        </Link>
+      <div
+        className="fixed top-0 left-0 right-0 z-50"
+        style={{
+          backdropFilter: `blur(${headerGlass * 16}px) saturate(${1 + headerGlass * 0.18})`,
+          WebkitBackdropFilter: `blur(${headerGlass * 16}px) saturate(${1 + headerGlass * 0.18})`,
+          background: `rgba(245, 239, 233, ${headerGlass * 0.72})`,
+          boxShadow: headerGlass > 0.01
+            ? `0 1px 0 rgba(0,0,0,${headerGlass * 0.055})`
+            : "none",
+          transition: "backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease, background 0.4s ease, box-shadow 0.4s ease",
+        }}
+      >
+        <header className="w-full max-w-[1400px] mx-auto flex items-center justify-between px-5 sm:px-8 py-5">
+          <Link href="/" className="flex items-center">
+            <img src={logoSrc} alt="Gasosa Auto Agro" className="h-10 sm:h-12 w-auto object-contain" />
+          </Link>
 
-        <nav className="hidden lg:flex items-center gap-4">
-          <div className="flex items-center">
-            {t.nav.map((item, i) => (
-              <NavPill key={item} item={item} overlap={i > 0} />
-            ))}
-          </div>
-          <LangDropdown />
-        </nav>
+          <nav className="hidden lg:flex items-center gap-4">
+            <div className="flex items-center">
+              {t.nav.map((item, i) => (
+                <NavPill key={item} item={item} overlap={i > 0} />
+              ))}
+            </div>
+            <LangDropdown />
+          </nav>
 
-        <button
-          className="lg:hidden p-2 text-foreground"
-          onClick={() => setMobileMenuOpen(true)}
-          aria-label={t.mobile.openMenu}
-        >
-          <Menu className="w-6 h-6" />
-        </button>
-      </header>
+          <button
+            className="lg:hidden p-2 text-foreground"
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label={t.mobile.openMenu}
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+        </header>
+      </div>
 
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
