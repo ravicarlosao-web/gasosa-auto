@@ -776,6 +776,192 @@ function SectoresSection() {
   );
 }
 
+// ─── ParceirosSection ─────────────────────────────────────────────────────────
+
+const PARCEIROS_ROW1 = [
+  { name: "Parceiro A", color: "#E8391D", initial: "A" },
+  { name: "Parceiro B", color: "#111111", initial: "B" },
+  { name: "Parceiro C", color: "#003591", initial: "C" },
+  { name: "Parceiro D", color: "#E67E22", initial: "D" },
+  { name: "Parceiro E", color: "#27AE60", initial: "E" },
+  { name: "Parceiro F", color: "#8E44AD", initial: "F" },
+  { name: "Parceiro G", color: "#C0392B", initial: "G" },
+  { name: "Parceiro H", color: "#2980B9", initial: "H" },
+  { name: "Parceiro I", color: "#16A085", initial: "I" },
+];
+
+const PARCEIROS_ROW2 = [
+  { name: "Cliente A",  color: "#F39C12", initial: "A" },
+  { name: "Cliente B",  color: "#1ABC9C", initial: "B" },
+  { name: "Cliente C",  color: "#E74C3C", initial: "C" },
+  { name: "Cliente D",  color: "#2C3E50", initial: "D" },
+  { name: "Cliente E",  color: "#3498DB", initial: "E" },
+  { name: "Cliente F",  color: "#9B59B6", initial: "F" },
+  { name: "Cliente G",  color: "#E67E22", initial: "G" },
+  { name: "Cliente H",  color: "#27AE60", initial: "H" },
+  { name: "Cliente I",  color: "#003591", initial: "I" },
+];
+
+const PARCEIROS_ROW3 = [
+  { name: "Empresa A",  color: "#2ECC71", initial: "A" },
+  { name: "Empresa B",  color: "#E74C3C", initial: "B" },
+  { name: "Empresa C",  color: "#F1C40F", initial: "C" },
+  { name: "Empresa D",  color: "#003591", initial: "D" },
+  { name: "Empresa E",  color: "#1ABC9C", initial: "E" },
+  { name: "Empresa F",  color: "#E8391D", initial: "F" },
+  { name: "Empresa G",  color: "#8E44AD", initial: "G" },
+  { name: "Empresa H",  color: "#2980B9", initial: "H" },
+  { name: "Empresa I",  color: "#111111", initial: "I" },
+];
+
+function LogoChip({ item }: { item: { name: string; color: string; initial: string } }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "10px",
+        padding: "10px 22px 10px 10px",
+        background: "#ffffff",
+        borderRadius: "14px",
+        flexShrink: 0,
+        boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+        border: "1px solid rgba(0,0,0,0.06)",
+      }}
+    >
+      <div
+        style={{
+          width: "38px",
+          height: "38px",
+          borderRadius: "9px",
+          background: item.color,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "#ffffff",
+          fontWeight: 700,
+          fontSize: "15px",
+          flexShrink: 0,
+          fontFamily: "'Poppins', sans-serif",
+        }}
+      >
+        {item.initial}
+      </div>
+      <span
+        style={{
+          fontWeight: 500,
+          fontSize: "15px",
+          color: "#111111",
+          whiteSpace: "nowrap",
+          fontFamily: "'Poppins', sans-serif",
+          letterSpacing: "-0.01em",
+        }}
+      >
+        {item.name}
+      </span>
+    </div>
+  );
+}
+
+function MarqueeRow({
+  items,
+  direction,
+  speed = "32s",
+}: {
+  items: typeof PARCEIROS_ROW1;
+  direction: "rtl" | "ltr";
+  speed?: string;
+}) {
+  const cls = direction === "rtl" ? "marquee-rtl" : "marquee-ltr";
+  const doubled = [...items, ...items];
+  return (
+    <div style={{ overflow: "hidden", width: "100%" }}>
+      <div
+        className={cls}
+        style={{
+          display: "flex",
+          gap: "14px",
+          width: "max-content",
+          animationDuration: speed,
+        }}
+      >
+        {doubled.map((item, i) => (
+          <LogoChip key={i} item={item} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ParceirosSection() {
+  const { t } = useLang();
+  return (
+    <section
+      style={{
+        background: "#F5EFE9",
+        fontFamily: "'Poppins', sans-serif",
+        paddingTop: "clamp(64px, 9vw, 120px)",
+        paddingBottom: "clamp(72px, 10vw, 140px)",
+        overflow: "hidden",
+      }}
+    >
+      {/* ── Heading ── */}
+      <div
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          paddingLeft: "clamp(20px, 5vw, 64px)",
+          paddingRight: "clamp(20px, 5vw, 64px)",
+          marginBottom: "clamp(44px, 6vw, 80px)",
+        }}
+      >
+        <span
+          style={{
+            display: "inline-block",
+            fontSize: "0.72rem",
+            fontWeight: 600,
+            letterSpacing: "0.16em",
+            color: "#003591",
+            marginBottom: "18px",
+          }}
+        >
+          {t.parceiros.tag}
+        </span>
+        <h2
+          style={{
+            fontSize: "clamp(2rem, 1.4rem + 2.8vw, 4rem)",
+            fontWeight: 700,
+            color: "#111111",
+            lineHeight: 1.08,
+            letterSpacing: "-0.035em",
+            margin: "0 0 18px",
+          }}
+        >
+          {t.parceiros.heading}
+        </h2>
+        <p
+          style={{
+            fontSize: "clamp(0.93rem, 0.8rem + 0.5vw, 1.15rem)",
+            color: "rgba(0,0,0,0.55)",
+            lineHeight: 1.65,
+            maxWidth: "560px",
+            margin: 0,
+          }}
+        >
+          {t.parceiros.subheading}
+        </p>
+      </div>
+
+      {/* ── Marquee rows ── */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+        <MarqueeRow items={PARCEIROS_ROW1} direction="rtl" speed="34s" />
+        <MarqueeRow items={PARCEIROS_ROW2} direction="ltr" speed="28s" />
+        <MarqueeRow items={PARCEIROS_ROW3} direction="rtl" speed="40s" />
+      </div>
+    </section>
+  );
+}
+
 // ─── Home ─────────────────────────────────────────────────────────────────────
 function Home() {
   const { t } = useLang();
@@ -980,6 +1166,11 @@ function Home() {
       {/* ── Sectores Section ─────────────────────────────────────────── */}
       <div className="relative z-10">
         <SectoresSection />
+      </div>
+
+      {/* ── Parceiros & Clientes Section ──────────────────────────────── */}
+      <div className="relative z-10">
+        <ParceirosSection />
       </div>
 
     </div>

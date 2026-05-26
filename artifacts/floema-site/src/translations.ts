@@ -75,6 +75,11 @@ export const translations = {
         },
       ],
     },
+    parceiros: {
+      tag: "PARCEIROS & CLIENTES",
+      heading: "Empresas que confiam em nós.",
+      subheading: "Uma rede crescente de parceiros e clientes que escolheram a Gasosa Auto Agro como fornecedor de referência em Angola.",
+    },
     mobile: {
       openMenu: "Abrir menu",
     },
@@ -155,6 +160,11 @@ export const translations = {
         },
       ],
     },
+    parceiros: {
+      tag: "PARTNERS & CLIENTS",
+      heading: "Companies that trust us.",
+      subheading: "A growing network of partners and clients who have chosen Gasosa Auto Agro as their reference supplier in Angola.",
+    },
     mobile: {
       openMenu: "Open menu",
     },
@@ -234,6 +244,11 @@ export const translations = {
             "Servimos a industrias, plantas de fabricación y empresas de logística con lubricantes, materiales de mantenimiento y herramientas diversas. Nuestro experimentado equipo garantiza el producto adecuado para cada aplicación — con stock permanente y atención especializada en las tres provincias donde operamos.",
         },
       ],
+    },
+    parceiros: {
+      tag: "SOCIOS & CLIENTES",
+      heading: "Empresas que confían en nosotros.",
+      subheading: "Una red creciente de socios y clientes que han elegido a Gasosa Auto Agro como proveedor de referencia en Angola.",
     },
     mobile: {
       openMenu: "Abrir menú",
