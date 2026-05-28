@@ -5,7 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChevronDown, Check, Menu, X, Mail } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext, createContext } from "react";
 import NotFound from "@/pages/not-found";
 import { LangProvider, useLang } from "./i18n";
 import type { Lang } from "./translations";
@@ -63,15 +63,19 @@ const SECTORES_DATA = [
   },
 ] as const;
 
+// ─── NavTheme context ─────────────────────────────────────────────────────────
+const NavThemeCtx = createContext(false);
+
 // ─── NavPill ──────────────────────────────────────────────────────────────────
 function NavPill({ item }: { item: string; overlap?: boolean }) {
+  const light = useContext(NavThemeCtx);
   return (
     <MotionLink
       href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
       className="text-[11px] font-semibold tracking-widest px-4 py-2 whitespace-nowrap inline-flex items-center justify-center relative"
-      style={{ color: "#111111" }}
-      whileHover={{ color: "#003591" }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
+      animate={{ color: light ? "#ffffff" : "#111111" }}
+      whileHover={{ color: light ? "rgba(255,255,255,0.7)" : "#003591" }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
     >
       {item}
     </MotionLink>
@@ -83,6 +87,7 @@ function LangDropdown() {
   const { lang, setLang } = useLang();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const light = useContext(NavThemeCtx);
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -94,9 +99,11 @@ function LangDropdown() {
 
   return (
     <div ref={ref} className="relative">
-      <button
+      <motion.button
         onClick={() => setOpen((v) => !v)}
         className="flex items-center gap-0.5 text-[11px] font-semibold tracking-widest cursor-pointer select-none"
+        animate={{ color: light ? "#ffffff" : "#111111" }}
+        transition={{ duration: 0.35, ease: "easeOut" }}
         data-testid="button-lang-selector"
       >
         {lang}
@@ -107,7 +114,7 @@ function LangDropdown() {
         >
           <ChevronDown className="w-3 h-3" />
         </motion.span>
-      </button>
+      </motion.button>
 
       <AnimatePresence>
         {open && (
@@ -384,6 +391,7 @@ function HistoriaSection() {
   return (
     <section
       ref={sectionRef}
+      data-nav-light
       className="w-full"
       style={{ background: "#003591", fontFamily: "'Poppins', sans-serif", position: "relative" }}
     >
@@ -1002,6 +1010,7 @@ function Home() {
   const { t } = useLang();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [navLight, setNavLight] = useState(false);
 
   useEffect(() => {
     function onScroll() {
@@ -1012,6 +1021,22 @@ function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* detect when a dark section overlaps the header (~80px strip at top) */
+  useEffect(() => {
+    const sections = document.querySelectorAll("[data-nav-light]");
+    if (!sections.length) return;
+    const bottomMargin = -(window.innerHeight - 90);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const anyActive = entries.some((e) => e.isIntersecting);
+        setNavLight(anyActive);
+      },
+      { rootMargin: `0px 0px ${bottomMargin}px 0px`, threshold: 0 }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
   const heroBlur = scrollProgress * 3;
   const heroScale = 1 - scrollProgress * 0.028;
   const heroBrightness = 1 - scrollProgress * 0.09;
@@ -1020,9 +1045,16 @@ function Home() {
     <div className="w-full flex flex-col">
 
       {/* ── Header (fixed, floats over everything) ───────────────────── */}
-      <header className="fixed top-0 left-0 right-0 z-50 w-full max-w-[1400px] mx-auto flex items-center justify-between px-5 sm:px-8 py-5">
+      <NavThemeCtx.Provider value={navLight}>
+        <header className="fixed top-0 left-0 right-0 z-50 w-full max-w-[1400px] mx-auto flex items-center justify-between px-5 sm:px-8 py-5">
           <Link href="/" className="flex items-center">
-            <img src={logoSrc} alt="Gasosa Auto Agro" className="h-10 sm:h-12 w-auto object-contain" />
+            <motion.img
+              src={logoSrc}
+              alt="Gasosa Auto Agro"
+              className="h-10 sm:h-12 w-auto object-contain"
+              animate={{ filter: navLight ? "brightness(0) invert(1)" : "brightness(1) invert(0)" }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-4">
@@ -1034,14 +1066,17 @@ function Home() {
             <LangDropdown />
           </nav>
 
-          <button
-            className="lg:hidden p-2 text-foreground"
+          <motion.button
+            className="lg:hidden p-2"
+            animate={{ color: navLight ? "#ffffff" : "#111111" }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
             onClick={() => setMobileMenuOpen(true)}
             aria-label={t.mobile.openMenu}
           >
             <Menu className="w-6 h-6" />
-          </button>
-      </header>
+          </motion.button>
+        </header>
+      </NavThemeCtx.Provider>
 
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
