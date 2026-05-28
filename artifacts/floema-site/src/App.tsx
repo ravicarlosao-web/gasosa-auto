@@ -1026,10 +1026,7 @@ function Home() {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-4">
-            <div
-              className="flex items-center gap-1 px-3 py-1.5 rounded-full"
-              style={{ border: "1px solid rgba(0,0,0,0.12)" }}
-            >
+            <div className="flex items-center gap-1">
               {t.nav.map((item) => (
                 <NavPill key={item} item={item} />
               ))}
