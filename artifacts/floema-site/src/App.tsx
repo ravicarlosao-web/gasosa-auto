@@ -64,46 +64,16 @@ const SECTORES_DATA = [
 ] as const;
 
 // ─── NavPill ──────────────────────────────────────────────────────────────────
-function NavPill({ item, overlap }: { item: string; overlap?: boolean }) {
-  const [mouse, setMouse] = useState<{ x: number; y: number } | null>(null);
-
-  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  }
-
+function NavPill({ item }: { item: string; overlap?: boolean }) {
   return (
     <MotionLink
       href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
-      className="text-[11px] font-semibold tracking-widest py-[7px] rounded-full whitespace-nowrap inline-flex items-center justify-center relative overflow-hidden"
-      style={{
-        background: "#ffffff",
-        color: "#111111",
-        paddingLeft: "1.25rem",
-        paddingRight: "1.25rem",
-        marginLeft: overlap ? "-4px" : "0",
-      }}
-      whileHover={{ paddingLeft: "1.75rem", paddingRight: "1.75rem", zIndex: 10 }}
-      transition={{ type: "spring", stiffness: 110, damping: 22, mass: 1.4 }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => setMouse(null)}
+      className="text-[11px] font-semibold tracking-widest px-4 py-2 whitespace-nowrap inline-flex items-center justify-center relative"
+      style={{ color: "#111111" }}
+      whileHover={{ color: "#003591" }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
     >
-      <AnimatePresence>
-        {mouse && (
-          <motion.span
-            key="glow"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: "easeOut" }}
-            className="pointer-events-none absolute inset-0 rounded-full"
-            style={{
-              background: `radial-gradient(circle 55px at ${mouse.x}px ${mouse.y}px, rgba(59,130,246,0.18) 0%, transparent 80%)`,
-            }}
-          />
-        )}
-      </AnimatePresence>
-      <span className="relative z-10">{item}</span>
+      {item}
     </MotionLink>
   );
 }
@@ -1056,9 +1026,12 @@ function Home() {
           </Link>
 
           <nav className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center">
-              {t.nav.map((item, i) => (
-                <NavPill key={item} item={item} overlap={i > 0} />
+            <div
+              className="flex items-center gap-1 px-3 py-1.5 rounded-full"
+              style={{ border: "1px solid rgba(0,0,0,0.12)" }}
+            >
+              {t.nav.map((item) => (
+                <NavPill key={item} item={item} />
               ))}
             </div>
             <LangDropdown />
@@ -1089,7 +1062,7 @@ function Home() {
         <main className="relative flex-1 w-full overflow-hidden">
 
           {/* Title */}
-          <div className="absolute inset-0 z-10 w-full flex items-center justify-center text-center px-4 sm:px-10 pb-[22vh]">
+          <div className="absolute inset-0 z-10 w-full flex items-center justify-center text-center px-4 sm:px-10 pb-[30vh]">
             <motion.h1
               style={{
                 color: "#003591",
