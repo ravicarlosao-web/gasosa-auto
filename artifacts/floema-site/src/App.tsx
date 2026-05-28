@@ -72,7 +72,7 @@ function NavPill({ item }: { item: string; overlap?: boolean }) {
   return (
     <MotionLink
       href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
-      className="text-[11px] font-semibold tracking-widest px-4 py-2 whitespace-nowrap inline-flex items-center justify-center relative"
+      className="text-[13px] font-semibold tracking-widest px-4 py-2 whitespace-nowrap inline-flex items-center justify-center relative"
       animate={{ color: light ? "#ffffff" : "#111111" }}
       whileHover={{ color: light ? "rgba(255,255,255,0.7)" : "#003591" }}
       transition={{ duration: 0.35, ease: "easeOut" }}
