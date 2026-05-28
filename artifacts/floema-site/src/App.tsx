@@ -4,7 +4,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChevronDown, Check, Menu, X, Mail } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
-import heroManSrc from "/hero-man.png";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
 import NotFound from "@/pages/not-found";
@@ -1090,7 +1089,7 @@ function Home() {
         <main className="relative flex-1 w-full overflow-hidden">
 
           {/* Title */}
-          <div className="absolute inset-x-0 top-0 z-10 w-full text-center px-4 sm:px-10 pt-20 sm:pt-24">
+          <div className="absolute inset-0 z-10 w-full flex items-center justify-center text-center px-4 sm:px-10">
             <motion.h1
               style={{
                 color: "#003591",
@@ -1109,23 +1108,6 @@ function Home() {
             </motion.h1>
           </div>
 
-          {/* Man image */}
-          <div className="absolute inset-0 flex items-end justify-center z-20 pointer-events-none select-none">
-            <motion.img
-              src={heroManSrc}
-              alt={t.hero.technicianAlt}
-              style={{
-                height: "clamp(340px, 80vh, 780px)",
-                width: "auto",
-                objectFit: "contain",
-                objectPosition: "bottom center",
-                display: "block",
-              }}
-              initial={{ opacity: 0, scale: 0.9, y: "42%", filter: "blur(10px)" }}
-              animate={{ opacity: 1, scale: 1, y: "18%", filter: "blur(0px)" }}
-              transition={{ delay: 0.55, duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
-            />
-          </div>
 
           {/* Bottom bar */}
           <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-10 right-4 sm:right-10 z-30 flex items-end justify-between gap-3">
