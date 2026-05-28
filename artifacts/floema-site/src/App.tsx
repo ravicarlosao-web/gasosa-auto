@@ -1089,7 +1089,7 @@ function Home() {
         <main className="relative flex-1 w-full overflow-hidden">
 
           {/* Title */}
-          <div className="absolute inset-0 z-10 w-full flex items-center justify-center text-center px-4 sm:px-10">
+          <div className="absolute inset-0 z-10 w-full flex items-center justify-center text-center px-4 sm:px-10 pb-[22vh]">
             <motion.h1
               style={{
                 color: "#003591",
