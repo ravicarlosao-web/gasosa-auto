@@ -1021,20 +1021,21 @@ function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* detect when a dark section overlaps the header (~80px strip at top) */
+  /* detect when a dark section overlaps the header (top 80px of viewport) */
   useEffect(() => {
-    const sections = document.querySelectorAll("[data-nav-light]");
-    if (!sections.length) return;
-    const bottomMargin = -(window.innerHeight - 90);
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const anyActive = entries.some((e) => e.isIntersecting);
-        setNavLight(anyActive);
-      },
-      { rootMargin: `0px 0px ${bottomMargin}px 0px`, threshold: 0 }
-    );
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
+    const HEADER_H = 80;
+    function checkNavTheme() {
+      const sections = document.querySelectorAll<HTMLElement>("[data-nav-light]");
+      let active = false;
+      sections.forEach((s) => {
+        const r = s.getBoundingClientRect();
+        if (r.top <= HEADER_H && r.bottom > 0) active = true;
+      });
+      setNavLight(active);
+    }
+    checkNavTheme();
+    window.addEventListener("scroll", checkNavTheme, { passive: true });
+    return () => window.removeEventListener("scroll", checkNavTheme);
   }, []);
 
   const heroBlur = scrollProgress * 3;
