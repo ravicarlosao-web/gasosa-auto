@@ -1047,19 +1047,26 @@ function Home() {
 
       {/* ── Header (fixed, floats over everything) ───────────────────── */}
       <NavThemeCtx.Provider value={navLight}>
-        <header className="fixed top-0 left-0 right-0 z-50 w-full max-w-[1400px] mx-auto flex items-center justify-between px-5 sm:px-8 py-5">
+        <header
+          className="fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between"
+          style={{
+            maxWidth: "1400px",
+            margin: "0 auto",
+            padding: "clamp(12px, 2vh, 22px) clamp(16px, 4vw, 64px)",
+          }}
+        >
           <Link href="/" className="flex items-center">
             <motion.img
               src={logoSrc}
               alt="Gasosa Auto Agro"
-              className="h-10 sm:h-12 w-auto object-contain"
+              style={{ height: "clamp(32px, 4.5vw, 48px)", width: "auto", objectFit: "contain" }}
               animate={{ filter: navLight ? "brightness(0) invert(1)" : "brightness(1) invert(0)" }}
               transition={{ duration: 0.35, ease: "easeOut" }}
             />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-4">
-            <div className="flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-3">
+            <div className="flex items-center gap-0.5">
               {t.nav.map((item) => (
                 <NavPill key={item} item={item} />
               ))}
@@ -1068,13 +1075,14 @@ function Home() {
           </nav>
 
           <motion.button
-            className="lg:hidden p-2"
+            className="lg:hidden"
+            style={{ padding: "clamp(6px, 1.2vw, 10px)" }}
             animate={{ color: navLight ? "#ffffff" : "#111111" }}
             transition={{ duration: 0.35, ease: "easeOut" }}
             onClick={() => setMobileMenuOpen(true)}
             aria-label={t.mobile.openMenu}
           >
-            <Menu className="w-6 h-6" />
+            <Menu style={{ width: "clamp(20px, 3vw, 26px)", height: "clamp(20px, 3vw, 26px)" }} />
           </motion.button>
         </header>
       </NavThemeCtx.Provider>
@@ -1094,18 +1102,24 @@ function Home() {
       >
         <main className="relative flex-1 w-full overflow-hidden">
 
-          {/* Title */}
-          <div className="absolute inset-0 z-10 w-full flex items-center justify-center text-center px-4 sm:px-10 pb-[30vh]">
+          {/* Title — vertically centred, shifts up via bottom padding */}
+          <div
+            className="absolute inset-0 z-10 flex items-center justify-center text-center"
+            style={{
+              padding: `0 clamp(16px, 6vw, 80px)`,
+              paddingBottom: "clamp(12vh, 20vh, 26vh)",
+            }}
+          >
             <motion.h1
               style={{
                 color: "#003591",
                 fontFamily: "'Poppins', sans-serif",
                 fontWeight: 700,
-                lineHeight: 1.1,
-                letterSpacing: "0.02em",
-                fontSize: "clamp(1.55rem, 1rem + 3.8vw, 5rem)",
+                lineHeight: 1.08,
+                letterSpacing: "0.01em",
+                fontSize: "clamp(2rem, 4vw + 1rem, 5.5rem)",
               }}
-              initial={{ opacity: 0, y: 60, filter: "blur(12px)" }}
+              initial={{ opacity: 0, y: 50, filter: "blur(12px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ delay: 0.2, duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
             >
@@ -1114,18 +1128,25 @@ function Home() {
             </motion.h1>
           </div>
 
-
           {/* Bottom bar */}
-          <div className="absolute bottom-4 sm:bottom-8 left-4 sm:left-10 right-4 sm:right-10 z-30 flex items-end justify-between gap-3">
+          <div
+            className="absolute z-30 flex items-end justify-between"
+            style={{
+              bottom: "clamp(16px, 4vh, 48px)",
+              left: "clamp(16px, 4vw, 64px)",
+              right: "clamp(16px, 4vw, 64px)",
+              gap: "clamp(10px, 2vw, 24px)",
+            }}
+          >
             <motion.p
               style={{
-                fontSize: "clamp(0.72rem, 0.5rem + 0.9vw, 0.95rem)",
+                fontSize: "clamp(0.72rem, 0.5vw + 0.6rem, 0.95rem)",
                 color: "#003591",
                 lineHeight: 1.65,
                 fontWeight: 500,
-                maxWidth: "clamp(160px, 22vw, 240px)",
+                maxWidth: "clamp(200px, 40vw, 300px)",
               }}
-              initial={{ opacity: 0, y: 60, filter: "blur(6px)" }}
+              initial={{ opacity: 0, y: 40, filter: "blur(6px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ delay: 1.4, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             >
@@ -1135,11 +1156,11 @@ function Home() {
             <motion.div
               className="relative overflow-hidden rounded-2xl flex-shrink-0 hidden sm:block"
               style={{
-                width: "clamp(170px, 22vw, 260px)",
-                height: "clamp(110px, 13vw, 160px)",
+                width: "clamp(150px, 20vw, 260px)",
+                height: "clamp(96px, 12vw, 160px)",
                 boxShadow: "0 8px 32px rgba(0,0,0,0.24)",
               }}
-              initial={{ opacity: 0, scale: 0.92, y: 60, filter: "blur(6px)" }}
+              initial={{ opacity: 0, scale: 0.92, y: 40, filter: "blur(6px)" }}
               animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
               transition={{ delay: 1.6, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             >
@@ -1154,7 +1175,7 @@ function Home() {
                   color: "#ffffff",
                   fontFamily: "'Poppins', sans-serif",
                   fontWeight: 500,
-                  fontSize: "clamp(10px, 1.1vw, 13px)",
+                  fontSize: "clamp(9px, 0.9vw + 0.1rem, 13px)",
                   lineHeight: 1.35,
                   textShadow: "0 1px 4px rgba(0,0,0,0.4)",
                 }}
@@ -1163,25 +1184,25 @@ function Home() {
               </p>
               <div className="absolute bottom-3 left-3 flex items-center whitespace-nowrap">
                 <div
-                  className="flex items-center justify-center rounded-full"
+                  className="flex items-center justify-center rounded-full flex-shrink-0"
                   style={{
                     background: "#ffffff",
-                    width: "30px",
-                    height: "30px",
+                    width: "clamp(24px, 2vw, 30px)",
+                    height: "clamp(24px, 2vw, 30px)",
                     boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
                     position: "relative",
                     zIndex: 2,
                   }}
                 >
-                  <Mail className="w-3.5 h-3.5" style={{ color: "#111111" }} />
+                  <Mail style={{ width: "clamp(10px, 1vw, 14px)", height: "clamp(10px, 1vw, 14px)", color: "#111111" }} />
                 </div>
                 <div
                   className="flex items-center justify-center rounded-full"
                   style={{
                     background: "#ffffff",
-                    paddingLeft: "14px",
-                    paddingRight: "14px",
-                    height: "30px",
+                    paddingLeft: "clamp(10px, 1.2vw, 14px)",
+                    paddingRight: "clamp(10px, 1.2vw, 14px)",
+                    height: "clamp(24px, 2vw, 30px)",
                     marginLeft: "-4px",
                     boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
                     position: "relative",
@@ -1190,7 +1211,7 @@ function Home() {
                 >
                   <span
                     style={{
-                      fontSize: "10px",
+                      fontSize: "clamp(8px, 0.7vw, 10px)",
                       fontWeight: 700,
                       letterSpacing: "0.1em",
                       color: "#111111",
