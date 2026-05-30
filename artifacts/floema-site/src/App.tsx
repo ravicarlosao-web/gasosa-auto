@@ -799,42 +799,6 @@ function MarcasRepresentadasSection() {
         Marcas Representadas
       </motion.h2>
 
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, scale: 0.8 },
-          visible: {
-            opacity: 1, scale: 1,
-            transition: { duration: 0.7, ease: [0, 0, 0.18, 1], delay: 0.2 },
-          },
-        }}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewport}
-        style={{ marginBottom: "22px" }}
-      >
-        <div
-          style={{
-            width: "40px",
-            height: "40px",
-            borderRadius: "50%",
-            border: "2px solid rgba(0,0,0,0.22)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "0 auto",
-          }}
-        >
-          <div
-            style={{
-              width: "8px",
-              height: "8px",
-              borderRadius: "50%",
-              background: "#111111",
-            }}
-          />
-        </div>
-      </motion.div>
-
       <motion.p
         variants={{
           hidden: { opacity: 0, y: 20 },
