@@ -762,32 +762,15 @@ function MarcasRepresentadasSection() {
     offset: ["start start", "end end"],
   });
 
-  const smooth = useSpring(scrollYProgress, { stiffness: 38, damping: 18, restDelta: 0.001 });
+  // Very slow, heavy spring — feels like real physical weight
+  const smooth = useSpring(scrollYProgress, { stiffness: 28, damping: 16, restDelta: 0.001 });
 
-  // Images start completely below viewport, rise slowly
-  const imgLeftY  = useTransform(smooth, [0, 1], ["130%", "-20%"]);
-  const imgRightY = useTransform(smooth, [0, 1], ["145%", "-10%"]);
+  // Images emerge from far below — slow and deliberate
+  const imgLeftY  = useTransform(smooth, [0, 1], ["140%", "-15%"]);
+  const imgRightY = useTransform(smooth, [0, 1], ["160%", "-8%"]);
 
-  // Phase 1 text: "Marcas Representadas" — visible at start, fades out mid-scroll
-  const introOpacity = useTransform(smooth, [0, 0.28, 0.42], [1, 1, 0]);
-  const introY       = useTransform(smooth, [0.28, 0.42], [0, -28]);
-
-  // Phase 2 text: Nergytech brand — fades in mid-scroll
-  const brandOpacity = useTransform(smooth, [0.38, 0.58], [0, 1]);
-  const brandY       = useTransform(smooth, [0.38, 0.58], [28, 0]);
-
-  const CENTRE: React.CSSProperties = {
-    position: "absolute",
-    inset: 0,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    textAlign: "center",
-    padding: "0 clamp(16px, 4vw, 60px)",
-    fontFamily: "'Poppins', sans-serif",
-    pointerEvents: "none",
-  };
+  // Text drifts upward very subtly — never disappears, just a gentle lift
+  const textY = useTransform(smooth, [0, 1], [0, -28]);
 
   return (
     <div
@@ -802,6 +785,7 @@ function MarcasRepresentadasSection() {
           overflow: "hidden",
           display: "grid",
           gridTemplateColumns: "1fr 1fr 1fr",
+          fontFamily: "'Poppins', sans-serif",
         }}
       >
         {/* ── Left image ── */}
@@ -821,90 +805,43 @@ function MarcasRepresentadasSection() {
           />
         </div>
 
-        {/* ── Centre: overlapping text phases ── */}
-        <div style={{ position: "relative" }}>
-          {/* Phase 1 — intro */}
-          <motion.div style={{ ...CENTRE, opacity: introOpacity, y: introY }}>
-            <h2
-              style={{
-                fontSize: "clamp(2.6rem, 2rem + 4vw, 6.5rem)",
-                fontWeight: 300,
-                color: "#111111",
-                lineHeight: 1.05,
-                letterSpacing: "-0.03em",
-                margin: "0 0 clamp(20px, 2.4vw, 34px)",
-              }}
-            >
-              Marcas Representadas
-            </h2>
-            <p
-              style={{
-                fontSize: "clamp(0.88rem, 0.76rem + 0.45vw, 1.05rem)",
-                color: "rgba(0,0,0,0.48)",
-                lineHeight: 1.75,
-                maxWidth: "420px",
-              }}
-            >
-              Trabalhamos com marcas internacionais de referência para garantir
-              qualidade e confiança em cada produto que disponibilizamos.
-            </p>
-          </motion.div>
-
-          {/* Phase 2 — brand */}
-          <motion.div style={{ ...CENTRE, opacity: brandOpacity, y: brandY }}>
-            <span
-              style={{
-                fontSize: "0.68rem",
-                fontWeight: 600,
-                letterSpacing: "0.2em",
-                color: "rgba(0,0,0,0.3)",
-                textTransform: "uppercase",
-                marginBottom: "14px",
-              }}
-            >
-              Marcas Representadas
-            </span>
-            <span
-              style={{
-                fontSize: "0.78rem",
-                fontWeight: 700,
-                letterSpacing: "0.24em",
-                color: "#003591",
-                textTransform: "uppercase",
-                marginBottom: "20px",
-              }}
-            >
-              Nergytech
-            </span>
-            <h2
-              style={{
-                fontSize: "clamp(1.8rem, 1.2rem + 2.4vw, 3.6rem)",
-                fontWeight: 300,
-                color: "#111111",
-                lineHeight: 1.1,
-                letterSpacing: "-0.025em",
-                margin: "0 0 clamp(20px, 2.4vw, 34px)",
-                whiteSpace: "pre-line",
-              }}
-            >
-              {"Lubrificantes premium.\nDesempenho que não falha."}
-            </h2>
-            <p
-              style={{
-                fontSize: "clamp(0.82rem, 0.72rem + 0.36vw, 0.98rem)",
-                color: "rgba(0,0,0,0.5)",
-                lineHeight: 1.8,
-                maxWidth: "420px",
-              }}
-            >
-              A Nergytech é uma marca de excelência internacional em lubrificantes
-              de alto desempenho. A Gasosa Auto Agro detém a representação
-              exclusiva em Angola — levando ao mercado angolano produtos
-              desenvolvidos para as mais exigentes condições de operação, nos
-              sectores automóvel, industrial e agrícola.
-            </p>
-          </motion.div>
-        </div>
+        {/* ── Centre text — single block, drifts up gently ── */}
+        <motion.div
+          style={{
+            y: textY,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            textAlign: "center",
+            padding: "0 clamp(16px, 3vw, 48px)",
+          }}
+        >
+          <h2
+            style={{
+              fontSize: "clamp(2.6rem, 2rem + 4vw, 6.5rem)",
+              fontWeight: 300,
+              color: "#111111",
+              lineHeight: 1.05,
+              letterSpacing: "-0.03em",
+              margin: "0 0 clamp(20px, 2.4vw, 34px)",
+            }}
+          >
+            Marcas Representadas
+          </h2>
+          <p
+            style={{
+              fontSize: "clamp(0.88rem, 0.76rem + 0.45vw, 1.05rem)",
+              color: "rgba(0,0,0,0.48)",
+              lineHeight: 1.75,
+              maxWidth: "420px",
+              margin: 0,
+            }}
+          >
+            Trabalhamos com marcas internacionais de referência para garantir
+            qualidade e confiança em cada produto que disponibilizamos.
+          </p>
+        </motion.div>
 
         {/* ── Right image ── */}
         <div style={{ height: "100%", position: "relative", overflow: "hidden" }}>
