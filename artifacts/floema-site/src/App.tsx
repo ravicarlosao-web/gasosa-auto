@@ -5,7 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChevronDown, Check, Menu, X, Mail } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
-import { useState, useRef, useEffect, useContext, createContext } from "react";
+import { useState, useRef, useEffect, useContext, createContext, useMemo } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import NotFound from "@/pages/not-found";
 import { LangProvider, useLang } from "./i18n";
 import type { Lang } from "./translations";
@@ -756,17 +757,19 @@ function SectoresSection() {
 // ─── MarcasRepresentadasSection ───────────────────────────────────────────────
 function MarcasRepresentadasSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Images travel from well below the viewport all the way through
-  // and exit off the top — purely scroll-driven, no physics.
-  // The stagger (left starts at 0, right at 0.06) makes them feel individual.
-  const imgLeftY  = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
-  const imgRightY = useTransform(scrollYProgress, [0.06, 1], ["110vh", "-110vh"]);
+  // Left image travels the full range.
+  // Right image starts 40vh lower — same speed, permanent vertical gap.
+  // On mobile a single centred image uses its own range.
+  const imgLeftY   = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
+  const imgRightY  = useTransform(scrollYProgress, [0, 1], ["150vh",  "-70vh"]);
+  const imgMobileY = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
 
   return (
     <div
@@ -783,7 +786,7 @@ function MarcasRepresentadasSection() {
           fontFamily: "'Poppins', sans-serif",
         }}
       >
-        {/* ── Centre text — absolutely static, behind the images ── */}
+        {/* ── Centre text — absolutely static ── */}
         <div
           style={{
             position: "absolute",
@@ -793,28 +796,28 @@ function MarcasRepresentadasSection() {
             alignItems: "center",
             justifyContent: "center",
             textAlign: "center",
-            padding: "0 clamp(16px, 3vw, 48px)",
+            padding: "0 clamp(16px, 6vw, 160px)",
             zIndex: 0,
           }}
         >
           <h2
             style={{
-              fontSize: "clamp(2.6rem, 2rem + 4vw, 6.5rem)",
+              fontSize: "clamp(2rem, 1.4rem + 3.5vw, 6rem)",
               fontWeight: 300,
               color: "#111111",
               lineHeight: 1.05,
               letterSpacing: "-0.03em",
-              margin: "0 0 clamp(20px, 2.4vw, 34px)",
+              margin: "0 0 clamp(16px, 2vw, 28px)",
             }}
           >
             Marcas Representadas
           </h2>
           <p
             style={{
-              fontSize: "clamp(0.88rem, 0.76rem + 0.45vw, 1.05rem)",
+              fontSize: "clamp(0.82rem, 0.72rem + 0.4vw, 1rem)",
               color: "rgba(0,0,0,0.48)",
               lineHeight: 1.75,
-              maxWidth: "420px",
+              maxWidth: "380px",
               margin: 0,
             }}
           >
@@ -823,33 +826,53 @@ function MarcasRepresentadasSection() {
           </p>
         </div>
 
-        {/* ── Left image — enters from bottom, exits through top ── */}
-        <motion.div
-          style={{
-            y: imgLeftY,
-            position: "absolute",
-            top: 0,
-            left: "clamp(24px, 5vw, 80px)",
-            width: "clamp(180px, 26vw, 380px)",
-            aspectRatio: "3 / 4",
-            background: "#D4C9BE",
-            zIndex: 1,
-          }}
-        />
+        {isMobile ? (
+          /* ── Mobile: single centred image ── */
+          <motion.div
+            style={{
+              y: imgMobileY,
+              position: "absolute",
+              top: 0,
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "62vw",
+              maxWidth: "260px",
+              aspectRatio: "3 / 4",
+              background: "#D4C9BE",
+              zIndex: 1,
+            }}
+          />
+        ) : (
+          <>
+            {/* ── Desktop left — enters first ── */}
+            <motion.div
+              style={{
+                y: imgLeftY,
+                position: "absolute",
+                top: 0,
+                left: "clamp(24px, 5vw, 80px)",
+                width: "clamp(200px, 24vw, 360px)",
+                aspectRatio: "3 / 4",
+                background: "#D4C9BE",
+                zIndex: 1,
+              }}
+            />
 
-        {/* ── Right image — enters slightly later, exits through top ── */}
-        <motion.div
-          style={{
-            y: imgRightY,
-            position: "absolute",
-            top: 0,
-            right: "clamp(24px, 5vw, 80px)",
-            width: "clamp(180px, 26vw, 380px)",
-            aspectRatio: "3 / 4",
-            background: "#C8BEB3",
-            zIndex: 1,
-          }}
-        />
+            {/* ── Desktop right — starts 40 vh lower, permanent gap ── */}
+            <motion.div
+              style={{
+                y: imgRightY,
+                position: "absolute",
+                top: 0,
+                right: "clamp(24px, 5vw, 80px)",
+                width: "clamp(200px, 24vw, 360px)",
+                aspectRatio: "3 / 4",
+                background: "#C8BEB3",
+                zIndex: 1,
+              }}
+            />
+          </>
+        )}
       </div>
     </div>
   );
