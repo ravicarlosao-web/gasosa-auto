@@ -760,7 +760,7 @@ function MarcasRepresentadasSection() {
   return (
     <section
       style={{
-        background: "#F0EBE3",
+        background: "#F5EFE9",
         fontFamily: "'Poppins', sans-serif",
         display: "flex",
         flexDirection: "column",
