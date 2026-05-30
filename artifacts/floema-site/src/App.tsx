@@ -4,7 +4,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChevronDown, Check, Menu, X, Mail } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
-import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
+import nergyImg1 from "@assets/ChatGPT_Image_26_de_mai._de_2026,_14_26_17_2_1780147809888.png";
+import nergyImg2 from "@assets/ChatGPT_Image_26_de_mai._de_2026,_14_26_17_3_1780147827214.png";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import { useState, useRef, useEffect, useContext, createContext, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import NotFound from "@/pages/not-found";
@@ -755,21 +757,46 @@ function SectoresSection() {
 }
 
 // ─── MarcasRepresentadasSection ───────────────────────────────────────────────
+const MARCAS_DEFAULT = {
+  title: "Marcas Representadas",
+  body: "Trabalhamos com marcas internacionais de referência para garantir qualidade e confiança em cada produto que disponibilizamos.",
+};
+
+const MARCAS_NERGY = {
+  title: "Nergytech",
+  body: "A Nergytech é uma marca de excelência internacional em lubrificantes de alto desempenho. A Gasosa Auto Agro detém a representação exclusiva em Angola — levando ao mercado angolano produtos desenvolvidos para as mais exigentes condições de operação, nos sectores automóvel, industrial e agrícola.",
+};
+
 function MarcasRepresentadasSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  const [showBrand, setShowBrand] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
+  // Switch text as soon as the left image becomes clearly visible (~12% scroll).
+  // Revert to default when the user scrolls back up past that point.
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    setShowBrand(v > 0.12);
+  });
+
   // Left image travels the full range.
-  // Right image starts 40vh lower — same speed, permanent vertical gap.
-  // On mobile a single centred image uses its own range.
+  // Right image starts 40 vh lower — same speed, permanent vertical gap.
   const imgLeftY   = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
   const imgRightY  = useTransform(scrollYProgress, [0, 1], ["150vh",  "-70vh"]);
   const imgMobileY = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
+
+  const content = showBrand ? MARCAS_NERGY : MARCAS_DEFAULT;
+
+  const imgStyle: React.CSSProperties = {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    display: "block",
+  };
 
   return (
     <div
@@ -786,7 +813,7 @@ function MarcasRepresentadasSection() {
           fontFamily: "'Poppins', sans-serif",
         }}
       >
-        {/* ── Centre text — absolutely static ── */}
+        {/* ── Centre text — static container, animated content ── */}
         <div
           style={{
             position: "absolute",
@@ -797,33 +824,44 @@ function MarcasRepresentadasSection() {
             justifyContent: "center",
             textAlign: "center",
             padding: "0 clamp(16px, 6vw, 160px)",
-            zIndex: 0,
+            zIndex: 2,
+            pointerEvents: "none",
           }}
         >
-          <h2
-            style={{
-              fontSize: "clamp(2rem, 1.4rem + 3.5vw, 6rem)",
-              fontWeight: 300,
-              color: "#111111",
-              lineHeight: 1.05,
-              letterSpacing: "-0.03em",
-              margin: "0 0 clamp(16px, 2vw, 28px)",
-            }}
-          >
-            Marcas Representadas
-          </h2>
-          <p
-            style={{
-              fontSize: "clamp(0.82rem, 0.72rem + 0.4vw, 1rem)",
-              color: "rgba(0,0,0,0.48)",
-              lineHeight: 1.75,
-              maxWidth: "380px",
-              margin: 0,
-            }}
-          >
-            Trabalhamos com marcas internacionais de referência para garantir
-            qualidade e confiança em cada produto que disponibilizamos.
-          </p>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={showBrand ? "brand" : "default"}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+            >
+              <h2
+                style={{
+                  fontSize: "clamp(2rem, 1.4rem + 3.5vw, 6rem)",
+                  fontWeight: 300,
+                  color: "#111111",
+                  lineHeight: 1.05,
+                  letterSpacing: "-0.03em",
+                  margin: "0 0 clamp(16px, 2vw, 28px)",
+                }}
+              >
+                {content.title}
+              </h2>
+              <p
+                style={{
+                  fontSize: "clamp(0.82rem, 0.72rem + 0.4vw, 1rem)",
+                  color: "rgba(0,0,0,0.48)",
+                  lineHeight: 1.75,
+                  maxWidth: "400px",
+                  margin: 0,
+                }}
+              >
+                {content.body}
+              </p>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {isMobile ? (
@@ -834,14 +872,16 @@ function MarcasRepresentadasSection() {
               position: "absolute",
               top: 0,
               left: "50%",
-              transform: "translateX(-50%)",
+              x: "-50%",
               width: "62vw",
               maxWidth: "260px",
               aspectRatio: "3 / 4",
-              background: "#D4C9BE",
+              overflow: "hidden",
               zIndex: 1,
             }}
-          />
+          >
+            <img src={nergyImg1} alt="Nergytech" style={imgStyle} />
+          </motion.div>
         ) : (
           <>
             {/* ── Desktop left — enters first ── */}
@@ -853,12 +893,14 @@ function MarcasRepresentadasSection() {
                 left: "clamp(24px, 5vw, 80px)",
                 width: "clamp(200px, 24vw, 360px)",
                 aspectRatio: "3 / 4",
-                background: "#D4C9BE",
+                overflow: "hidden",
                 zIndex: 1,
               }}
-            />
+            >
+              <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
+            </motion.div>
 
-            {/* ── Desktop right — starts 40 vh lower, permanent gap ── */}
+            {/* ── Desktop right — 40 vh lower, permanent gap ── */}
             <motion.div
               style={{
                 y: imgRightY,
@@ -867,10 +909,12 @@ function MarcasRepresentadasSection() {
                 right: "clamp(24px, 5vw, 80px)",
                 width: "clamp(200px, 24vw, 360px)",
                 aspectRatio: "3 / 4",
-                background: "#C8BEB3",
+                overflow: "hidden",
                 zIndex: 1,
               }}
-            />
+            >
+              <img src={nergyImg2} alt="Nergytech loja" style={imgStyle} />
+            </motion.div>
           </>
         )}
       </div>
