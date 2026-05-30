@@ -788,12 +788,12 @@ function MarcasRepresentadasSection() {
         viewport={viewport}
         style={{
           fontSize: "clamp(2.6rem, 2rem + 4vw, 6.5rem)",
-          fontWeight: 700,
+          fontWeight: 300,
           color: "#111111",
-          lineHeight: 1.05,
-          letterSpacing: "-0.04em",
+          lineHeight: 1.1,
+          letterSpacing: "-0.02em",
           maxWidth: "860px",
-          margin: "0 auto 40px",
+          margin: "0 auto 80px",
         }}
       >
         Marcas Representadas
