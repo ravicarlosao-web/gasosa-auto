@@ -811,15 +811,15 @@ function MarcasRepresentadasSection() {
     display: "block",
   };
 
-  // ── Responsive image dimensions ──────────────────────────────────────────────
-  // Desktop: generous size, well inset from edge
-  const desktopImgWidth = "clamp(200px, 22vw, 340px)";
-  const desktopImgInset = "clamp(24px, 4vw, 64px)";
-  // Tablet: proportionally smaller, tight to edges
-  const tabletImgWidth  = "clamp(130px, 18vw, 220px)";
-  const tabletImgInset  = "16px";
-  // Mobile: single wide image, centred
-  const mobileImgWidth  = "min(74vw, 300px)";
+  // ── Responsive image dimensions — fully fluid (vw-based, no hard px floors) ──
+  // Desktop: scales from tiny screens all the way up to wide monitors
+  const desktopImgWidth = "min(22vw, 340px)";
+  const desktopImgInset = "min(4vw, 64px)";
+  // Tablet: proportionally smaller, fluid to edges
+  const tabletImgWidth  = "min(18vw, 220px)";
+  const tabletImgInset  = "2.5vw";
+  // Mobile: each image is half the viewport minus a small gap — always fluid
+  const mobileImgWidth  = "43vw";
 
   // ── Responsive text max-width ─────────────────────────────────────────────────
   const paraMaxWidth = isMobile
@@ -924,10 +924,10 @@ function MarcasRepresentadasSection() {
                 position: "absolute",
                 top: "52vh",
                 left: "4vw",
-                width: "43vw",
+                width: mobileImgWidth,
                 aspectRatio: "3 / 4",
                 overflow: "hidden",
-                zIndex: 1,
+                zIndex: 3,
               }}
             >
               <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
@@ -938,10 +938,10 @@ function MarcasRepresentadasSection() {
                 position: "absolute",
                 top: "52vh",
                 right: "4vw",
-                width: "43vw",
+                width: mobileImgWidth,
                 aspectRatio: "3 / 4",
                 overflow: "hidden",
-                zIndex: 1,
+                zIndex: 3,
               }}
             >
               <img src={nergyImg2} alt="Nergytech loja" style={imgStyle} />
@@ -959,7 +959,7 @@ function MarcasRepresentadasSection() {
                 width: tabletImgWidth,
                 aspectRatio: "3 / 4",
                 overflow: "hidden",
-                zIndex: 1,
+                zIndex: 3,
               }}
             >
               <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
@@ -973,7 +973,7 @@ function MarcasRepresentadasSection() {
                 width: tabletImgWidth,
                 aspectRatio: "3 / 4",
                 overflow: "hidden",
-                zIndex: 1,
+                zIndex: 3,
               }}
             >
               <img src={nergyImg2} alt="Nergytech loja" style={imgStyle} />
@@ -991,7 +991,7 @@ function MarcasRepresentadasSection() {
                 width: desktopImgWidth,
                 aspectRatio: "3 / 4",
                 overflow: "hidden",
-                zIndex: 1,
+                zIndex: 3,
               }}
             >
               <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
@@ -1005,7 +1005,7 @@ function MarcasRepresentadasSection() {
                 width: desktopImgWidth,
                 aspectRatio: "3 / 4",
                 overflow: "hidden",
-                zIndex: 1,
+                zIndex: 3,
               }}
             >
               <img src={nergyImg2} alt="Nergytech loja" style={imgStyle} />
