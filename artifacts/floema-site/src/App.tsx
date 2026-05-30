@@ -753,6 +753,114 @@ function SectoresSection() {
   );
 }
 
+// ─── MarcasRepresentadasSection ───────────────────────────────────────────────
+function MarcasRepresentadasSection() {
+  const viewport = { once: false, amount: 0.25 } as const;
+
+  return (
+    <section
+      style={{
+        background: "#F0EBE3",
+        fontFamily: "'Poppins', sans-serif",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "72vh",
+        padding: "clamp(80px, 12vw, 160px) clamp(24px, 6vw, 80px)",
+        textAlign: "center",
+      }}
+    >
+      <motion.h2
+        variants={{
+          hidden: { opacity: 0, y: 40, filter: "blur(12px)" },
+          visible: {
+            opacity: 1, y: 0, filter: "blur(0px)",
+            transition: {
+              y: { type: "spring", stiffness: 48, damping: 18 },
+              opacity: { duration: 1.1, ease: [0, 0, 0.18, 1] },
+              filter: { duration: 1.0, ease: [0, 0, 0.18, 1] },
+            },
+          },
+        }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewport}
+        style={{
+          fontSize: "clamp(2.6rem, 2rem + 4vw, 6.5rem)",
+          fontWeight: 700,
+          color: "#111111",
+          lineHeight: 1.05,
+          letterSpacing: "-0.04em",
+          maxWidth: "860px",
+          margin: "0 auto 40px",
+        }}
+      >
+        Marcas Representadas
+      </motion.h2>
+
+      <motion.div
+        variants={{
+          hidden: { opacity: 0, scale: 0.8 },
+          visible: {
+            opacity: 1, scale: 1,
+            transition: { duration: 0.7, ease: [0, 0, 0.18, 1], delay: 0.2 },
+          },
+        }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewport}
+        style={{ marginBottom: "22px" }}
+      >
+        <div
+          style={{
+            width: "40px",
+            height: "40px",
+            borderRadius: "50%",
+            border: "2px solid rgba(0,0,0,0.22)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            margin: "0 auto",
+          }}
+        >
+          <div
+            style={{
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              background: "#111111",
+            }}
+          />
+        </div>
+      </motion.div>
+
+      <motion.p
+        variants={{
+          hidden: { opacity: 0, y: 20 },
+          visible: {
+            opacity: 1, y: 0,
+            transition: { duration: 0.9, ease: [0, 0, 0.18, 1], delay: 0.35 },
+          },
+        }}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewport}
+        style={{
+          fontSize: "clamp(0.9rem, 0.78rem + 0.5vw, 1.1rem)",
+          color: "rgba(0,0,0,0.5)",
+          lineHeight: 1.7,
+          maxWidth: "480px",
+          margin: "0 auto",
+        }}
+      >
+        Trabalhamos com marcas internacionais de referência para garantir
+        qualidade e confiança em cada produto que disponibilizamos.
+      </motion.p>
+    </section>
+  );
+}
+
 // ─── ParceirosSection ─────────────────────────────────────────────────────────
 
 const PARCEIROS_ROW1 = [
@@ -1241,6 +1349,11 @@ function Home() {
       {/* ── Sectores Section ─────────────────────────────────────────── */}
       <div className="relative z-10">
         <SectoresSection />
+      </div>
+
+      {/* ── Marcas Representadas Section ──────────────────────────────── */}
+      <div className="relative z-10">
+        <MarcasRepresentadasSection />
       </div>
 
       {/* ── Parceiros & Clientes Section ──────────────────────────────── */}
