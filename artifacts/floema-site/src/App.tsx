@@ -863,7 +863,7 @@ function MarcasRepresentadasSection() {
                   fontSize: "clamp(0.85rem, 0.74rem + 0.42vw, 1.02rem)",
                   color: "rgba(0,0,0,0.48)",
                   lineHeight: 1.85,
-                  maxWidth: "clamp(260px, 32vw, 440px)",
+                  maxWidth: "clamp(300px, 44vw, 600px)",
                   textAlign: "center",
                   margin: "0 auto",
                 }}
