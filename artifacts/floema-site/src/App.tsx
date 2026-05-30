@@ -762,15 +762,20 @@ function MarcasRepresentadasSection() {
     offset: ["start start", "end end"],
   });
 
-  const smooth = useSpring(scrollYProgress, { stiffness: 55, damping: 22, restDelta: 0.001 });
+  const smooth = useSpring(scrollYProgress, { stiffness: 50, damping: 20, restDelta: 0.001 });
 
-  const imageY = useTransform(smooth, [0, 1], ["62%", "-18%"]);
-  const imageScale = useTransform(smooth, [0, 0.25], [0.9, 1]);
+  const imgLeftY  = useTransform(smooth, [0, 1], ["72%", "-22%"]);
+  const imgRightY = useTransform(smooth, [0, 1], ["90%", "-8%"]);
+  const imgLeftScale  = useTransform(smooth, [0, 0.3], [0.88, 1]);
+  const imgRightScale = useTransform(smooth, [0, 0.3], [0.88, 1]);
+
+  const textOpacity = useTransform(smooth, [0, 0.18], [0, 1]);
+  const textY       = useTransform(smooth, [0, 0.22], [36, 0]);
 
   return (
     <div
       ref={containerRef}
-      style={{ height: "260vh", background: "#F5EFE9", position: "relative" }}
+      style={{ height: "280vh", background: "#F5EFE9", position: "relative" }}
     >
       <div
         style={{
@@ -778,56 +783,51 @@ function MarcasRepresentadasSection() {
           top: 0,
           height: "100vh",
           overflow: "hidden",
-          display: "flex",
+          display: "grid",
+          gridTemplateColumns: "1fr auto 1fr",
+          alignItems: "center",
           fontFamily: "'Poppins', sans-serif",
         }}
       >
-        {/* ── Left: rising image ── */}
-        <div
-          style={{
-            width: "45%",
-            height: "100%",
-            position: "relative",
-            overflow: "hidden",
-            flexShrink: 0,
-          }}
-        >
+        {/* ── Left image ── */}
+        <div style={{ height: "100%", position: "relative", overflow: "hidden" }}>
           <motion.div
             style={{
-              y: imageY,
-              scale: imageScale,
+              y: imgLeftY,
+              scale: imgLeftScale,
               position: "absolute",
               bottom: 0,
-              left: "clamp(24px, 5vw, 72px)",
-              right: "clamp(16px, 2vw, 32px)",
+              left: "clamp(24px, 4vw, 56px)",
+              right: "clamp(12px, 1.5vw, 20px)",
               aspectRatio: "3 / 4",
-              borderRadius: "20px",
-              background: "#D8CFC5",
-              overflow: "hidden",
-              boxShadow: "0 24px 80px rgba(0,0,0,0.10)",
+              borderRadius: "18px",
+              background: "#D4C9BE",
+              boxShadow: "0 20px 70px rgba(0,0,0,0.09)",
             }}
           />
         </div>
 
-        {/* ── Right: static text ── */}
-        <div
+        {/* ── Centre text ── */}
+        <motion.div
           style={{
-            width: "55%",
+            opacity: textOpacity,
+            y: textY,
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
-            padding: "0 clamp(24px, 6vw, 88px) 0 clamp(16px, 3vw, 40px)",
+            alignItems: "center",
+            textAlign: "center",
+            padding: "0 clamp(16px, 3vw, 48px)",
+            maxWidth: "560px",
           }}
         >
           <span
             style={{
-              display: "inline-block",
-              fontSize: "0.7rem",
+              fontSize: "0.68rem",
               fontWeight: 600,
-              letterSpacing: "0.18em",
-              color: "rgba(0,0,0,0.35)",
+              letterSpacing: "0.2em",
+              color: "rgba(0,0,0,0.32)",
               textTransform: "uppercase",
-              marginBottom: "20px",
+              marginBottom: "18px",
             }}
           >
             Marcas Representadas
@@ -835,13 +835,12 @@ function MarcasRepresentadasSection() {
 
           <span
             style={{
-              display: "inline-block",
-              fontSize: "0.8rem",
+              fontSize: "0.78rem",
               fontWeight: 700,
-              letterSpacing: "0.22em",
+              letterSpacing: "0.24em",
               color: "#003591",
               textTransform: "uppercase",
-              marginBottom: "18px",
+              marginBottom: "20px",
             }}
           >
             Nergytech
@@ -849,12 +848,12 @@ function MarcasRepresentadasSection() {
 
           <h2
             style={{
-              fontSize: "clamp(2rem, 1.4rem + 2.8vw, 4rem)",
+              fontSize: "clamp(1.9rem, 1.3rem + 2.6vw, 3.8rem)",
               fontWeight: 300,
               color: "#111111",
-              lineHeight: 1.12,
+              lineHeight: 1.1,
               letterSpacing: "-0.025em",
-              margin: "0 0 clamp(24px, 3vw, 40px)",
+              margin: "0 0 clamp(22px, 2.8vw, 38px)",
               whiteSpace: "pre-line",
             }}
           >
@@ -863,11 +862,10 @@ function MarcasRepresentadasSection() {
 
           <p
             style={{
-              fontSize: "clamp(0.88rem, 0.78rem + 0.4vw, 1.05rem)",
-              color: "rgba(0,0,0,0.52)",
-              lineHeight: 1.78,
-              maxWidth: "500px",
-              margin: 0,
+              fontSize: "clamp(0.85rem, 0.75rem + 0.38vw, 1rem)",
+              color: "rgba(0,0,0,0.5)",
+              lineHeight: 1.8,
+              maxWidth: "440px",
             }}
           >
             A Nergytech é uma marca de excelência internacional em lubrificantes
@@ -876,6 +874,24 @@ function MarcasRepresentadasSection() {
             desenvolvidos para as mais exigentes condições de operação, nos
             sectores automóvel, industrial e agrícola.
           </p>
+        </motion.div>
+
+        {/* ── Right image ── */}
+        <div style={{ height: "100%", position: "relative", overflow: "hidden" }}>
+          <motion.div
+            style={{
+              y: imgRightY,
+              scale: imgRightScale,
+              position: "absolute",
+              bottom: 0,
+              left: "clamp(12px, 1.5vw, 20px)",
+              right: "clamp(24px, 4vw, 56px)",
+              aspectRatio: "3 / 4",
+              borderRadius: "18px",
+              background: "#C8BEB3",
+              boxShadow: "0 20px 70px rgba(0,0,0,0.09)",
+            }}
+          />
         </div>
       </div>
     </div>
