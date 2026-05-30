@@ -769,22 +769,35 @@ const MARCAS_NERGY = {
 
 function MarcasRepresentadasSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
   const [showBrand, setShowBrand] = useState(false);
+
+  // Three-breakpoint responsive system:
+  // small mobile < 600  → 1 image centred
+  // tablet  600–1023    → 2 images, smaller, tight to edges
+  // desktop ≥ 1024      → 2 images, wider, breathing room
+  const [winWidth, setWinWidth] = useState(
+    () => (typeof window !== "undefined" ? window.innerWidth : 1280)
+  );
+  useEffect(() => {
+    const onResize = () => setWinWidth(window.innerWidth);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const isMobile  = winWidth < 600;
+  const isTablet  = winWidth >= 600 && winWidth < 1024;
+  const isDesktop = winWidth >= 1024;
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Switch text as soon as the left image becomes clearly visible (~12% scroll).
-  // Revert to default when the user scrolls back up past that point.
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     setShowBrand(v > 0.12);
   });
 
-  // Left image travels the full range.
-  // Right image starts 40 vh lower — same speed, permanent vertical gap.
+  // Travel ranges — same physics across breakpoints
   const imgLeftY   = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
   const imgRightY  = useTransform(scrollYProgress, [0, 1], ["150vh",  "-70vh"]);
   const imgMobileY = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
@@ -797,6 +810,23 @@ function MarcasRepresentadasSection() {
     objectFit: "cover",
     display: "block",
   };
+
+  // ── Responsive image dimensions ──────────────────────────────────────────────
+  // Desktop: generous size, well inset from edge
+  const desktopImgWidth = "clamp(200px, 22vw, 340px)";
+  const desktopImgInset = "clamp(24px, 4vw, 64px)";
+  // Tablet: proportionally smaller, tight to edges
+  const tabletImgWidth  = "clamp(130px, 18vw, 220px)";
+  const tabletImgInset  = "16px";
+  // Mobile: single wide image, centred
+  const mobileImgWidth  = "min(74vw, 300px)";
+
+  // ── Responsive text max-width ─────────────────────────────────────────────────
+  const paraMaxWidth = isMobile
+    ? "min(88vw, 400px)"
+    : isTablet
+    ? "min(56vw, 500px)"
+    : "clamp(320px, 44vw, 600px)";
 
   return (
     <div
@@ -813,7 +843,7 @@ function MarcasRepresentadasSection() {
           fontFamily: "'Poppins', sans-serif",
         }}
       >
-        {/* ── Centre text — static container, animated content ── */}
+        {/* ── Centre text ── */}
         <div
           style={{
             position: "absolute",
@@ -825,6 +855,7 @@ function MarcasRepresentadasSection() {
             textAlign: "center",
             zIndex: 2,
             pointerEvents: "none",
+            padding: isMobile ? "0 24px" : "0 16px",
           }}
         >
           <AnimatePresence mode="wait">
@@ -841,15 +872,18 @@ function MarcasRepresentadasSection() {
                 width: "100%",
               }}
             >
-              {/* Title — unconstrained so it centres perfectly at any size */}
               <h2
                 style={{
-                  fontSize: "clamp(2rem, 1.4rem + 3.5vw, 6rem)",
+                  fontSize: isMobile
+                    ? "clamp(2.2rem, 8vw, 3.2rem)"
+                    : isTablet
+                    ? "clamp(2.4rem, 5vw, 4rem)"
+                    : "clamp(2.8rem, 3.5vw, 6rem)",
                   fontWeight: 300,
                   color: "#111111",
                   lineHeight: 1.08,
                   letterSpacing: "-0.03em",
-                  margin: "0 0 clamp(20px, 2.4vw, 36px)",
+                  margin: "0 0 clamp(16px, 2.4vw, 36px)",
                   textAlign: "center",
                   width: "100%",
                   padding: 0,
@@ -857,13 +891,14 @@ function MarcasRepresentadasSection() {
               >
                 {content.title}
               </h2>
-              {/* Body — its own maxWidth so it doesn't spread too wide */}
               <p
                 style={{
-                  fontSize: "clamp(0.85rem, 0.74rem + 0.42vw, 1.02rem)",
+                  fontSize: isMobile
+                    ? "clamp(0.88rem, 3.5vw, 1rem)"
+                    : "clamp(0.85rem, 0.74rem + 0.42vw, 1.02rem)",
                   color: "rgba(0,0,0,0.48)",
                   lineHeight: 1.85,
-                  maxWidth: "clamp(300px, 44vw, 600px)",
+                  maxWidth: paraMaxWidth,
                   textAlign: "center",
                   margin: "0 auto",
                 }}
@@ -874,8 +909,9 @@ function MarcasRepresentadasSection() {
           </AnimatePresence>
         </div>
 
+        {/* ── Images ── */}
         {isMobile ? (
-          /* ── Mobile: single centred image ── */
+          /* Small mobile: one centred image */
           <motion.div
             style={{
               y: imgMobileY,
@@ -883,8 +919,7 @@ function MarcasRepresentadasSection() {
               top: 0,
               left: "50%",
               x: "-50%",
-              width: "62vw",
-              maxWidth: "260px",
+              width: mobileImgWidth,
               aspectRatio: "3 / 4",
               overflow: "hidden",
               zIndex: 1,
@@ -892,16 +927,16 @@ function MarcasRepresentadasSection() {
           >
             <img src={nergyImg1} alt="Nergytech" style={imgStyle} />
           </motion.div>
-        ) : (
+        ) : isTablet ? (
+          /* Tablet: two smaller images, tight to edges */
           <>
-            {/* ── Desktop left — inset from edge so image is never clipped ── */}
             <motion.div
               style={{
                 y: imgLeftY,
                 position: "absolute",
                 top: 0,
-                left: "clamp(20px, 3.5vw, 60px)",
-                width: "clamp(160px, 20vw, 300px)",
+                left: tabletImgInset,
+                width: tabletImgWidth,
                 aspectRatio: "3 / 4",
                 overflow: "hidden",
                 zIndex: 1,
@@ -909,15 +944,45 @@ function MarcasRepresentadasSection() {
             >
               <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
             </motion.div>
-
-            {/* ── Desktop right — inset from edge, 40 vh lower ── */}
             <motion.div
               style={{
                 y: imgRightY,
                 position: "absolute",
                 top: 0,
-                right: "clamp(20px, 3.5vw, 60px)",
-                width: "clamp(160px, 20vw, 300px)",
+                right: tabletImgInset,
+                width: tabletImgWidth,
+                aspectRatio: "3 / 4",
+                overflow: "hidden",
+                zIndex: 1,
+              }}
+            >
+              <img src={nergyImg2} alt="Nergytech loja" style={imgStyle} />
+            </motion.div>
+          </>
+        ) : (
+          /* Desktop: two images with breathing room */
+          <>
+            <motion.div
+              style={{
+                y: imgLeftY,
+                position: "absolute",
+                top: 0,
+                left: desktopImgInset,
+                width: desktopImgWidth,
+                aspectRatio: "3 / 4",
+                overflow: "hidden",
+                zIndex: 1,
+              }}
+            >
+              <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
+            </motion.div>
+            <motion.div
+              style={{
+                y: imgRightY,
+                position: "absolute",
+                top: 0,
+                right: desktopImgInset,
+                width: desktopImgWidth,
                 aspectRatio: "3 / 4",
                 overflow: "hidden",
                 zIndex: 1,
