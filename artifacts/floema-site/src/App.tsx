@@ -823,7 +823,6 @@ function MarcasRepresentadasSection() {
             alignItems: "center",
             justifyContent: "center",
             textAlign: "center",
-            padding: "0 clamp(16px, 6vw, 160px)",
             zIndex: 2,
             pointerEvents: "none",
           }}
@@ -835,7 +834,15 @@ function MarcasRepresentadasSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
-              style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                width: "100%",
+                maxWidth: "clamp(280px, 34vw, 480px)",
+                margin: "0 auto",
+                padding: "0 16px",
+              }}
             >
               <h2
                 style={{
@@ -844,17 +851,20 @@ function MarcasRepresentadasSection() {
                   color: "#111111",
                   lineHeight: 1.05,
                   letterSpacing: "-0.03em",
-                  margin: "0 0 clamp(16px, 2vw, 28px)",
+                  margin: "0 0 clamp(20px, 2.4vw, 36px)",
+                  width: "100%",
+                  textAlign: "center",
                 }}
               >
                 {content.title}
               </h2>
               <p
                 style={{
-                  fontSize: "clamp(0.82rem, 0.72rem + 0.4vw, 1rem)",
+                  fontSize: "clamp(0.85rem, 0.74rem + 0.42vw, 1.02rem)",
                   color: "rgba(0,0,0,0.48)",
-                  lineHeight: 1.75,
-                  maxWidth: "400px",
+                  lineHeight: 1.85,
+                  width: "100%",
+                  textAlign: "center",
                   margin: 0,
                 }}
               >
@@ -884,14 +894,14 @@ function MarcasRepresentadasSection() {
           </motion.div>
         ) : (
           <>
-            {/* ── Desktop left — enters first ── */}
+            {/* ── Desktop left — flush to left edge ── */}
             <motion.div
               style={{
                 y: imgLeftY,
                 position: "absolute",
                 top: 0,
-                left: "clamp(24px, 5vw, 80px)",
-                width: "clamp(200px, 24vw, 360px)",
+                left: 0,
+                width: "clamp(160px, 20vw, 300px)",
                 aspectRatio: "3 / 4",
                 overflow: "hidden",
                 zIndex: 1,
@@ -900,14 +910,14 @@ function MarcasRepresentadasSection() {
               <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
             </motion.div>
 
-            {/* ── Desktop right — 40 vh lower, permanent gap ── */}
+            {/* ── Desktop right — flush to right edge, 40 vh lower ── */}
             <motion.div
               style={{
                 y: imgRightY,
                 position: "absolute",
                 top: 0,
-                right: "clamp(24px, 5vw, 80px)",
-                width: "clamp(200px, 24vw, 360px)",
+                right: 0,
+                width: "clamp(160px, 20vw, 300px)",
                 aspectRatio: "3 / 4",
                 overflow: "hidden",
                 zIndex: 1,
