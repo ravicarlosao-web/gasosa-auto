@@ -762,15 +762,13 @@ function MarcasRepresentadasSection() {
     offset: ["start start", "end end"],
   });
 
-  // Very slow, heavy spring — feels like real physical weight
-  const smooth = useSpring(scrollYProgress, { stiffness: 28, damping: 16, restDelta: 0.001 });
+  // Each image gets its own independent spring — disconnected feel
+  const smoothLeft  = useSpring(scrollYProgress, { stiffness: 22, damping: 14, restDelta: 0.001 });
+  const smoothRight = useSpring(scrollYProgress, { stiffness: 16, damping: 12, restDelta: 0.001 });
 
-  // Images emerge from far below — slow and deliberate
-  const imgLeftY  = useTransform(smooth, [0, 1], ["140%", "-15%"]);
-  const imgRightY = useTransform(smooth, [0, 1], ["160%", "-8%"]);
-
-  // Text drifts upward very subtly — never disappears, just a gentle lift
-  const textY = useTransform(smooth, [0, 1], [0, -28]);
+  // Images emerge from far below independently
+  const imgLeftY  = useTransform(smoothLeft,  [0, 1], ["150%", "-18%"]);
+  const imgRightY = useTransform(smoothRight, [0, 1], ["170%", "-10%"]);
 
   return (
     <div
@@ -805,10 +803,9 @@ function MarcasRepresentadasSection() {
           />
         </div>
 
-        {/* ── Centre text — single block, drifts up gently ── */}
-        <motion.div
+        {/* ── Centre text — completely static ── */}
+        <div
           style={{
-            y: textY,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -841,7 +838,7 @@ function MarcasRepresentadasSection() {
             Trabalhamos com marcas internacionais de referência para garantir
             qualidade e confiança em cada produto que disponibilizamos.
           </p>
-        </motion.div>
+        </div>
 
         {/* ── Right image ── */}
         <div style={{ height: "100%", position: "relative", overflow: "hidden" }}>
