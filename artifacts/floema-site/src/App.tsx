@@ -762,57 +762,39 @@ function MarcasRepresentadasSection() {
     offset: ["start start", "end end"],
   });
 
-  // Pure scroll-driven rise — no springs, no physics.
-  // Each image has its own scroll window so they enter individually.
-  // Left starts moving immediately; right only begins after a delay.
-  // easeOutQuart: decelerates sharply so the image glides in and settles.
-  const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
-
-  const imgLeftY  = useTransform(scrollYProgress, [0, 0.55], ["105vh", "0px"], { ease: easeOutQuart });
-  const imgRightY = useTransform(scrollYProgress, [0.12, 0.67], ["105vh", "0px"], { ease: easeOutQuart });
+  // Images travel from well below the viewport all the way through
+  // and exit off the top — purely scroll-driven, no physics.
+  // The stagger (left starts at 0, right at 0.06) makes them feel individual.
+  const imgLeftY  = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
+  const imgRightY = useTransform(scrollYProgress, [0.06, 1], ["110vh", "-110vh"]);
 
   return (
     <div
       ref={containerRef}
-      style={{ height: "300vh", background: "#F5EFE9", position: "relative" }}
+      style={{ height: "350vh", background: "#F5EFE9", position: "relative" }}
     >
+      {/* sticky viewport — clips the travelling images */}
       <div
         style={{
           position: "sticky",
           top: 0,
           height: "100vh",
           overflow: "hidden",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
           fontFamily: "'Poppins', sans-serif",
         }}
       >
-        {/* ── Left image ── */}
-        <div style={{ height: "100%", position: "relative", overflow: "hidden" }}>
-          <motion.div
-            style={{
-              y: imgLeftY,
-              position: "absolute",
-              bottom: 0,
-              left: "clamp(20px, 4vw, 52px)",
-              right: "clamp(8px, 1vw, 14px)",
-              aspectRatio: "3 / 4",
-              borderRadius: "18px",
-              background: "#D4C9BE",
-              boxShadow: "0 24px 80px rgba(0,0,0,0.09)",
-            }}
-          />
-        </div>
-
-        {/* ── Centre text — completely static ── */}
+        {/* ── Centre text — absolutely static, behind the images ── */}
         <div
           style={{
+            position: "absolute",
+            inset: 0,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             textAlign: "center",
             padding: "0 clamp(16px, 3vw, 48px)",
+            zIndex: 0,
           }}
         >
           <h2
@@ -841,22 +823,33 @@ function MarcasRepresentadasSection() {
           </p>
         </div>
 
-        {/* ── Right image ── */}
-        <div style={{ height: "100%", position: "relative", overflow: "hidden" }}>
-          <motion.div
-            style={{
-              y: imgRightY,
-              position: "absolute",
-              bottom: 0,
-              left: "clamp(8px, 1vw, 14px)",
-              right: "clamp(20px, 4vw, 52px)",
-              aspectRatio: "3 / 4",
-              borderRadius: "18px",
-              background: "#C8BEB3",
-              boxShadow: "0 24px 80px rgba(0,0,0,0.09)",
-            }}
-          />
-        </div>
+        {/* ── Left image — enters from bottom, exits through top ── */}
+        <motion.div
+          style={{
+            y: imgLeftY,
+            position: "absolute",
+            top: 0,
+            left: "clamp(24px, 5vw, 80px)",
+            width: "clamp(180px, 26vw, 380px)",
+            aspectRatio: "3 / 4",
+            background: "#D4C9BE",
+            zIndex: 1,
+          }}
+        />
+
+        {/* ── Right image — enters slightly later, exits through top ── */}
+        <motion.div
+          style={{
+            y: imgRightY,
+            position: "absolute",
+            top: 0,
+            right: "clamp(24px, 5vw, 80px)",
+            width: "clamp(180px, 26vw, 380px)",
+            aspectRatio: "3 / 4",
+            background: "#C8BEB3",
+            zIndex: 1,
+          }}
+        />
       </div>
     </div>
   );
