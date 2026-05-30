@@ -755,73 +755,130 @@ function SectoresSection() {
 
 // ─── MarcasRepresentadasSection ───────────────────────────────────────────────
 function MarcasRepresentadasSection() {
-  const viewport = { once: false, amount: 0.25 } as const;
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const smooth = useSpring(scrollYProgress, { stiffness: 55, damping: 22, restDelta: 0.001 });
+
+  const imageY = useTransform(smooth, [0, 1], ["62%", "-18%"]);
+  const imageScale = useTransform(smooth, [0, 0.25], [0.9, 1]);
 
   return (
-    <section
-      style={{
-        background: "#F5EFE9",
-        fontFamily: "'Poppins', sans-serif",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "72vh",
-        padding: "clamp(80px, 12vw, 160px) clamp(24px, 6vw, 80px)",
-        textAlign: "center",
-      }}
+    <div
+      ref={containerRef}
+      style={{ height: "260vh", background: "#F5EFE9", position: "relative" }}
     >
-      <motion.h2
-        variants={{
-          hidden: { opacity: 0, y: 40, filter: "blur(12px)" },
-          visible: {
-            opacity: 1, y: 0, filter: "blur(0px)",
-            transition: {
-              y: { type: "spring", stiffness: 48, damping: 18 },
-              opacity: { duration: 1.1, ease: [0, 0, 0.18, 1] },
-              filter: { duration: 1.0, ease: [0, 0, 0.18, 1] },
-            },
-          },
-        }}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewport}
+      <div
         style={{
-          fontSize: "clamp(2.6rem, 2rem + 4vw, 6.5rem)",
-          fontWeight: 300,
-          color: "#111111",
-          lineHeight: 1.1,
-          letterSpacing: "-0.02em",
-          maxWidth: "860px",
-          margin: "0 auto 80px",
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          overflow: "hidden",
+          display: "flex",
+          fontFamily: "'Poppins', sans-serif",
         }}
       >
-        Marcas Representadas
-      </motion.h2>
+        {/* ── Left: rising image ── */}
+        <div
+          style={{
+            width: "45%",
+            height: "100%",
+            position: "relative",
+            overflow: "hidden",
+            flexShrink: 0,
+          }}
+        >
+          <motion.div
+            style={{
+              y: imageY,
+              scale: imageScale,
+              position: "absolute",
+              bottom: 0,
+              left: "clamp(24px, 5vw, 72px)",
+              right: "clamp(16px, 2vw, 32px)",
+              aspectRatio: "3 / 4",
+              borderRadius: "20px",
+              background: "#D8CFC5",
+              overflow: "hidden",
+              boxShadow: "0 24px 80px rgba(0,0,0,0.10)",
+            }}
+          />
+        </div>
 
-      <motion.p
-        variants={{
-          hidden: { opacity: 0, y: 20 },
-          visible: {
-            opacity: 1, y: 0,
-            transition: { duration: 0.9, ease: [0, 0, 0.18, 1], delay: 0.35 },
-          },
-        }}
-        initial="hidden"
-        whileInView="visible"
-        viewport={viewport}
-        style={{
-          fontSize: "clamp(0.9rem, 0.78rem + 0.5vw, 1.1rem)",
-          color: "rgba(0,0,0,0.5)",
-          lineHeight: 1.7,
-          maxWidth: "480px",
-          margin: "0 auto",
-        }}
-      >
-        Trabalhamos com marcas internacionais de referência para garantir
-        qualidade e confiança em cada produto que disponibilizamos.
-      </motion.p>
-    </section>
+        {/* ── Right: static text ── */}
+        <div
+          style={{
+            width: "55%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            padding: "0 clamp(24px, 6vw, 88px) 0 clamp(16px, 3vw, 40px)",
+          }}
+        >
+          <span
+            style={{
+              display: "inline-block",
+              fontSize: "0.7rem",
+              fontWeight: 600,
+              letterSpacing: "0.18em",
+              color: "rgba(0,0,0,0.35)",
+              textTransform: "uppercase",
+              marginBottom: "20px",
+            }}
+          >
+            Marcas Representadas
+          </span>
+
+          <span
+            style={{
+              display: "inline-block",
+              fontSize: "0.8rem",
+              fontWeight: 700,
+              letterSpacing: "0.22em",
+              color: "#003591",
+              textTransform: "uppercase",
+              marginBottom: "18px",
+            }}
+          >
+            Nergytech
+          </span>
+
+          <h2
+            style={{
+              fontSize: "clamp(2rem, 1.4rem + 2.8vw, 4rem)",
+              fontWeight: 300,
+              color: "#111111",
+              lineHeight: 1.12,
+              letterSpacing: "-0.025em",
+              margin: "0 0 clamp(24px, 3vw, 40px)",
+              whiteSpace: "pre-line",
+            }}
+          >
+            {"Lubrificantes premium.\nDesempenho que não falha."}
+          </h2>
+
+          <p
+            style={{
+              fontSize: "clamp(0.88rem, 0.78rem + 0.4vw, 1.05rem)",
+              color: "rgba(0,0,0,0.52)",
+              lineHeight: 1.78,
+              maxWidth: "500px",
+              margin: 0,
+            }}
+          >
+            A Nergytech é uma marca de excelência internacional em lubrificantes
+            de alto desempenho. A Gasosa Auto Agro detém a representação
+            exclusiva em Angola — levando ao mercado angolano produtos
+            desenvolvidos para as mais exigentes condições de operação, nos
+            sectores automóvel, industrial e agrícola.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
 
