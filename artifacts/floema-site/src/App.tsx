@@ -762,13 +762,14 @@ function MarcasRepresentadasSection() {
     offset: ["start start", "end end"],
   });
 
-  // Each image gets its own independent spring — disconnected feel
-  const smoothLeft  = useSpring(scrollYProgress, { stiffness: 22, damping: 14, restDelta: 0.001 });
-  const smoothRight = useSpring(scrollYProgress, { stiffness: 16, damping: 12, restDelta: 0.001 });
+  // Pure scroll-driven rise — no springs, no physics.
+  // Each image has its own scroll window so they enter individually.
+  // Left starts moving immediately; right only begins after a delay.
+  // easeOutQuart: decelerates sharply so the image glides in and settles.
+  const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
 
-  // Images emerge from far below independently
-  const imgLeftY  = useTransform(smoothLeft,  [0, 1], ["150%", "-18%"]);
-  const imgRightY = useTransform(smoothRight, [0, 1], ["170%", "-10%"]);
+  const imgLeftY  = useTransform(scrollYProgress, [0, 0.55], ["105vh", "0px"], { ease: easeOutQuart });
+  const imgRightY = useTransform(scrollYProgress, [0.12, 0.67], ["105vh", "0px"], { ease: easeOutQuart });
 
   return (
     <div
