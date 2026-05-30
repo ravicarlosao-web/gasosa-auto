@@ -839,33 +839,33 @@ function MarcasRepresentadasSection() {
                 flexDirection: "column",
                 alignItems: "center",
                 width: "100%",
-                maxWidth: "clamp(280px, 34vw, 480px)",
-                margin: "0 auto",
-                padding: "0 16px",
               }}
             >
+              {/* Title — unconstrained so it centres perfectly at any size */}
               <h2
                 style={{
                   fontSize: "clamp(2rem, 1.4rem + 3.5vw, 6rem)",
                   fontWeight: 300,
                   color: "#111111",
-                  lineHeight: 1.05,
+                  lineHeight: 1.08,
                   letterSpacing: "-0.03em",
                   margin: "0 0 clamp(20px, 2.4vw, 36px)",
-                  width: "100%",
                   textAlign: "center",
+                  width: "100%",
+                  padding: 0,
                 }}
               >
                 {content.title}
               </h2>
+              {/* Body — its own maxWidth so it doesn't spread too wide */}
               <p
                 style={{
                   fontSize: "clamp(0.85rem, 0.74rem + 0.42vw, 1.02rem)",
                   color: "rgba(0,0,0,0.48)",
                   lineHeight: 1.85,
-                  width: "100%",
+                  maxWidth: "clamp(260px, 32vw, 440px)",
                   textAlign: "center",
-                  margin: 0,
+                  margin: "0 auto",
                 }}
               >
                 {content.body}
@@ -894,13 +894,13 @@ function MarcasRepresentadasSection() {
           </motion.div>
         ) : (
           <>
-            {/* ── Desktop left — flush to left edge ── */}
+            {/* ── Desktop left — inset from edge so image is never clipped ── */}
             <motion.div
               style={{
                 y: imgLeftY,
                 position: "absolute",
                 top: 0,
-                left: 0,
+                left: "clamp(20px, 3.5vw, 60px)",
                 width: "clamp(160px, 20vw, 300px)",
                 aspectRatio: "3 / 4",
                 overflow: "hidden",
@@ -910,13 +910,13 @@ function MarcasRepresentadasSection() {
               <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
             </motion.div>
 
-            {/* ── Desktop right — flush to right edge, 40 vh lower ── */}
+            {/* ── Desktop right — inset from edge, 40 vh lower ── */}
             <motion.div
               style={{
                 y: imgRightY,
                 position: "absolute",
                 top: 0,
-                right: 0,
+                right: "clamp(20px, 3.5vw, 60px)",
                 width: "clamp(160px, 20vw, 300px)",
                 aspectRatio: "3 / 4",
                 overflow: "hidden",
