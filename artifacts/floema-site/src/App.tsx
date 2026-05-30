@@ -851,11 +851,13 @@ function MarcasRepresentadasSection() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
+            // Mobile: text lives in the top half so images (lower half) never overlap it
+            justifyContent: isMobile ? "flex-start" : "center",
+            paddingTop: isMobile ? "8vh" : undefined,
             textAlign: "center",
             zIndex: 2,
             pointerEvents: "none",
-            padding: isMobile ? "0 24px" : "0 16px",
+            padding: isMobile ? "8vh 24px 0" : "0 16px",
           }}
         >
           <AnimatePresence mode="wait">
@@ -911,22 +913,40 @@ function MarcasRepresentadasSection() {
 
         {/* ── Images ── */}
         {isMobile ? (
-          /* Small mobile: one centred image */
-          <motion.div
-            style={{
-              y: imgMobileY,
-              position: "absolute",
-              top: 0,
-              left: "50%",
-              x: "-50%",
-              width: mobileImgWidth,
-              aspectRatio: "3 / 4",
-              overflow: "hidden",
-              zIndex: 1,
-            }}
-          >
-            <img src={nergyImg1} alt="Nergytech" style={imgStyle} />
-          </motion.div>
+          /* Mobile: two images anchored to the LOWER half so they never
+             overlap the text block that lives in the top half.
+             top:"52vh" means the natural resting point is below the midline;
+             imgLeftY / imgRightY carry them from off-screen-bottom upward. */
+          <>
+            <motion.div
+              style={{
+                y: imgLeftY,
+                position: "absolute",
+                top: "52vh",
+                left: "4vw",
+                width: "43vw",
+                aspectRatio: "3 / 4",
+                overflow: "hidden",
+                zIndex: 1,
+              }}
+            >
+              <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
+            </motion.div>
+            <motion.div
+              style={{
+                y: imgRightY,
+                position: "absolute",
+                top: "52vh",
+                right: "4vw",
+                width: "43vw",
+                aspectRatio: "3 / 4",
+                overflow: "hidden",
+                zIndex: 1,
+              }}
+            >
+              <img src={nergyImg2} alt="Nergytech loja" style={imgStyle} />
+            </motion.div>
+          </>
         ) : isTablet ? (
           /* Tablet: two smaller images, tight to edges */
           <>
