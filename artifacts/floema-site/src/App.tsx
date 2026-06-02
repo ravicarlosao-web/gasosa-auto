@@ -6,6 +6,10 @@ import { ChevronDown, Check, Menu, X, Mail } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import nergyImg1 from "@assets/ChatGPT_Image_26_de_mai._de_2026,_14_26_17_2_1780147809888.png";
 import nergyImg2 from "@assets/ChatGPT_Image_26_de_mai._de_2026,_14_26_17_3_1780147827214.png";
+import nergyImg3 from "@assets/IMG_20250903_113401_1780387574299.jpg";
+import nergyImg4 from "@assets/IMG_20250903_111532_1780387597136.jpg";
+import nergyImg5 from "@assets/1000015282_1780387656692.jpg";
+import nergyImg6 from "@assets/WhatsApp_Image_2025-09-03_at_11.33.28_(2)_1780387695350.jpeg";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import { useState, useRef, useEffect, useContext, createContext, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -771,10 +775,6 @@ function MarcasRepresentadasSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [showBrand, setShowBrand] = useState(false);
 
-  // Three-breakpoint responsive system:
-  // small mobile < 600  → 1 image centred
-  // tablet  600–1023    → 2 images, smaller, tight to edges
-  // desktop ≥ 1024      → 2 images, wider, breathing room
   const [winWidth, setWinWidth] = useState(
     () => (typeof window !== "undefined" ? window.innerWidth : 1280)
   );
@@ -797,10 +797,16 @@ function MarcasRepresentadasSection() {
     setShowBrand(v > 0.12);
   });
 
-  // Travel ranges — same physics across breakpoints
-  const imgLeftY   = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
-  const imgRightY  = useTransform(scrollYProgress, [0, 1], ["150vh",  "-70vh"]);
-  const imgMobileY = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
+  // ── Parallax travel ranges — 3 depth layers ─────────────────────────────────
+  // Outer (fastest): enters first, exits last — strongest parallax
+  const yOuter  = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
+  // Middle: slightly delayed entry
+  const yMiddle = useTransform(scrollYProgress, [0, 1], ["130vh",  "-90vh"]);
+  // Inner (slowest): closest to text, most delayed
+  const yInner  = useTransform(scrollYProgress, [0, 1], ["155vh",  "-65vh"]);
+  // Mobile pair
+  const yMobLeft  = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
+  const yMobRight = useTransform(scrollYProgress, [0, 1], ["140vh",  "-80vh"]);
 
   const content = showBrand ? MARCAS_NERGY : MARCAS_DEFAULT;
 
@@ -808,32 +814,46 @@ function MarcasRepresentadasSection() {
     width: "100%",
     height: "100%",
     objectFit: "cover",
+    objectPosition: "center center",
     display: "block",
   };
 
-  // ── Responsive image dimensions — fully fluid (vw-based, no hard px floors) ──
-  // Desktop: scales from tiny screens all the way up to wide monitors
-  const desktopImgWidth = "min(22vw, 340px)";
-  const desktopImgInset = "min(4vw, 64px)";
-  // Tablet: proportionally smaller, fluid to edges
-  const tabletImgWidth  = "min(18vw, 220px)";
-  const tabletImgInset  = "2.5vw";
-  // Mobile: each image is half the viewport minus a small gap — always fluid
-  const mobileImgWidth  = "43vw";
+  const imgBox = (
+    y: ReturnType<typeof useTransform>,
+    src: string,
+    alt: string,
+    pos: React.CSSProperties,
+    width: string,
+    zIndex = 3,
+  ) => (
+    <motion.div
+      style={{
+        y,
+        position: "absolute",
+        width,
+        aspectRatio: "3 / 4",
+        overflow: "hidden",
+        zIndex,
+        ...pos,
+      }}
+    >
+      <img src={src} alt={alt} style={imgStyle} />
+    </motion.div>
+  );
 
   // ── Responsive text max-width ─────────────────────────────────────────────────
   const paraMaxWidth = isMobile
     ? "min(88vw, 400px)"
     : isTablet
-    ? "min(56vw, 500px)"
-    : "clamp(320px, 44vw, 600px)";
+    ? "min(52vw, 460px)"
+    : "clamp(280px, 28vw, 480px)";
 
   return (
     <div
       ref={containerRef}
       style={{ height: "350vh", background: "#F5EFE9", position: "relative" }}
     >
-      {/* sticky viewport — clips the travelling images */}
+      {/* sticky viewport */}
       <div
         style={{
           position: "sticky",
@@ -851,11 +871,10 @@ function MarcasRepresentadasSection() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            // Mobile: text lives in the top half so images (lower half) never overlap it
             justifyContent: isMobile ? "flex-start" : "center",
             paddingTop: isMobile ? "8vh" : undefined,
             textAlign: "center",
-            zIndex: 2,
+            zIndex: 4,
             pointerEvents: "none",
             padding: isMobile ? "8vh 24px 0" : "0 16px",
           }}
@@ -880,7 +899,7 @@ function MarcasRepresentadasSection() {
                     ? "clamp(2.2rem, 8vw, 3.2rem)"
                     : isTablet
                     ? "clamp(2.4rem, 5vw, 4rem)"
-                    : "clamp(2.8rem, 3.5vw, 6rem)",
+                    : "clamp(2.4rem, 3vw, 5rem)",
                   fontWeight: 300,
                   color: "#111111",
                   lineHeight: 1.08,
@@ -913,103 +932,30 @@ function MarcasRepresentadasSection() {
 
         {/* ── Images ── */}
         {isMobile ? (
-          /* Mobile: two images anchored to the LOWER half so they never
-             overlap the text block that lives in the top half.
-             top:"52vh" means the natural resting point is below the midline;
-             imgLeftY / imgRightY carry them from off-screen-bottom upward. */
+          // Mobile: 2 images side-by-side in the lower half
           <>
-            <motion.div
-              style={{
-                y: imgLeftY,
-                position: "absolute",
-                top: "52vh",
-                left: "4vw",
-                width: mobileImgWidth,
-                aspectRatio: "3 / 4",
-                overflow: "hidden",
-                zIndex: 3,
-              }}
-            >
-              <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
-            </motion.div>
-            <motion.div
-              style={{
-                y: imgRightY,
-                position: "absolute",
-                top: "52vh",
-                right: "4vw",
-                width: mobileImgWidth,
-                aspectRatio: "3 / 4",
-                overflow: "hidden",
-                zIndex: 3,
-              }}
-            >
-              <img src={nergyImg2} alt="Nergytech loja" style={imgStyle} />
-            </motion.div>
+            {imgBox(yMobLeft,  nergyImg1, "Nergytech lubrificantes", { top: "52vh", left: "4vw"  }, "43vw")}
+            {imgBox(yMobRight, nergyImg4, "Nergytech armazém",       { top: "52vh", right: "4vw" }, "43vw")}
           </>
         ) : isTablet ? (
-          /* Tablet: two smaller images, tight to edges */
+          // Tablet: 4 images — 2 per side, staggered depths
           <>
-            <motion.div
-              style={{
-                y: imgLeftY,
-                position: "absolute",
-                top: 0,
-                left: tabletImgInset,
-                width: tabletImgWidth,
-                aspectRatio: "3 / 4",
-                overflow: "hidden",
-                zIndex: 3,
-              }}
-            >
-              <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
-            </motion.div>
-            <motion.div
-              style={{
-                y: imgRightY,
-                position: "absolute",
-                top: 0,
-                right: tabletImgInset,
-                width: tabletImgWidth,
-                aspectRatio: "3 / 4",
-                overflow: "hidden",
-                zIndex: 3,
-              }}
-            >
-              <img src={nergyImg2} alt="Nergytech loja" style={imgStyle} />
-            </motion.div>
+            {imgBox(yOuter,  nergyImg1, "Nergytech lubrificantes",  { top: 0, left:  "1.5vw" }, "min(17vw, 210px)")}
+            {imgBox(yMiddle, nergyImg3, "Nergytech armazém",        { top: 0, left:  "20vw"  }, "min(15vw, 185px)")}
+            {imgBox(yMiddle, nergyImg4, "Nergytech baterias",       { top: 0, right: "20vw"  }, "min(15vw, 185px)")}
+            {imgBox(yOuter,  nergyImg2, "Nergytech loja",           { top: 0, right: "1.5vw" }, "min(17vw, 210px)")}
           </>
         ) : (
-          /* Desktop: two images with breathing room */
+          // Desktop: 6 images — 3 per side with 3 depth layers
           <>
-            <motion.div
-              style={{
-                y: imgLeftY,
-                position: "absolute",
-                top: 0,
-                left: desktopImgInset,
-                width: desktopImgWidth,
-                aspectRatio: "3 / 4",
-                overflow: "hidden",
-                zIndex: 3,
-              }}
-            >
-              <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
-            </motion.div>
-            <motion.div
-              style={{
-                y: imgRightY,
-                position: "absolute",
-                top: 0,
-                right: desktopImgInset,
-                width: desktopImgWidth,
-                aspectRatio: "3 / 4",
-                overflow: "hidden",
-                zIndex: 3,
-              }}
-            >
-              <img src={nergyImg2} alt="Nergytech loja" style={imgStyle} />
-            </motion.div>
+            {/* Left side — outer → inner */}
+            {imgBox(yOuter,  nergyImg1, "Nergytech lubrificantes", { top: 0, left: "1.5vw"  }, "min(13vw, 200px)")}
+            {imgBox(yMiddle, nergyImg3, "Nergytech armazém",       { top: 0, left: "15.5vw" }, "min(11vw, 170px)")}
+            {imgBox(yInner,  nergyImg5, "Nergytech stock",         { top: 0, left: "27.5vw" }, "min(10vw, 155px)")}
+            {/* Right side — inner → outer */}
+            {imgBox(yInner,  nergyImg6, "Nergytech empilhador",    { top: 0, right: "27.5vw" }, "min(10vw, 155px)")}
+            {imgBox(yMiddle, nergyImg4, "Nergytech baterias",      { top: 0, right: "15.5vw" }, "min(11vw, 170px)")}
+            {imgBox(yOuter,  nergyImg2, "Nergytech loja",          { top: 0, right: "1.5vw"  }, "min(13vw, 200px)")}
           </>
         )}
       </div>
