@@ -2,7 +2,7 @@ export type Lang = "PT" | "EN" | "ES";
 
 export const translations = {
   PT: {
-    nav: ["QUEM SOMOS", "SECTORES", "INFRAESTRUTURAS", "PARCEIROS", "CONTACTOS"],
+    nav: ["QUEM SOMOS", "SECTORES", "INFRAESTRUTURAS", "NOTÍCIAS", "CONTACTOS"],
     hero: {
       title1: "Referência angolana no",
       title2: "sector automóvel e agrícola.",
@@ -86,7 +86,7 @@ export const translations = {
   },
 
   EN: {
-    nav: ["ABOUT US", "SECTORS", "INFRASTRUCTURE", "PARTNERS", "CONTACTS"],
+    nav: ["ABOUT US", "SECTORS", "INFRASTRUCTURE", "NEWS", "CONTACTS"],
     hero: {
       title1: "Angola's reference in the",
       title2: "automotive and agricultural sector.",
@@ -171,7 +171,7 @@ export const translations = {
   },
 
   ES: {
-    nav: ["QUIÉNES SOMOS", "SECTORES", "INFRAESTRUCTURAS", "SOCIOS", "CONTACTOS"],
+    nav: ["QUIÉNES SOMOS", "SECTORES", "INFRAESTRUCTURAS", "NOTICIAS", "CONTACTOS"],
     hero: {
       title1: "Referencia angoleña en el",
       title2: "sector automovilístico y agrícola.",
