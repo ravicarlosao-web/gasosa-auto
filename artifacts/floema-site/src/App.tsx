@@ -76,8 +76,8 @@ const SECTORES_DATA = [
     description:
       "Fornecemos peças, acessórios e lubrificantes de alta performance para veículos ligeiros, pesados e industriais. Com marcas de referência internacional como Nergytech, Petronas, Castrol e Galp, garantimos qualidade e durabilidade em cada produto — para frotas empresariais e particulares.",
     tagline: "Alta performance para cada veículo",
-    thumbnail: "/historia-2020.png",
-    image: "/historia-2020.png",
+    thumbnail: "/automovel-sector.jpeg",
+    image: "/automovel-sector.jpeg",
   },
   {
     key: "agricola",
