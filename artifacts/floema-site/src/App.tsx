@@ -96,8 +96,8 @@ const SECTORES_DATA = [
     description:
       "Servimos indústrias, unidades fabris e empresas de logística com lubrificantes, materiais de manutenção e ferramentas diversas. A nossa equipa experiente garante o produto certo para cada aplicação — com stock permanente e atendimento especializado nas três províncias onde operamos.",
     tagline: "Stock permanente, atendimento especializado",
-    thumbnail: "/historia-2019.png",
-    image: "/historia-2019.png",
+    thumbnail: "/industrial-sector.jpeg",
+    image: "/industrial-sector.jpeg",
   },
 ] as const;
 
