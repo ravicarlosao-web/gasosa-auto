@@ -18,6 +18,13 @@ import logoCfm       from "@assets/image_3_1780391778427.png";
 import logoJmas      from "@assets/image_4_1780391793814.png";
 import logoBioprev   from "@assets/image_1780391882163.png";
 import logoYoba      from "@assets/image_6_1780392078746.png";
+import logoAldeia    from "@assets/image_1780392699971.png";
+import logoHma       from "@assets/image_1780392954482.png";
+import logoOcolil    from "@assets/image_1780393050404.png";
+import logoTchissola from "@assets/ChatGPT_Image_2_de_jun._de_2026,_10_37_44_1_1780393102918.png";
+import logoSonangalp from "@assets/image_8_1780393190380.png";
+import logoGranisul  from "@assets/image_9_1780393311051.png";
+import logoWix       from "@assets/image_1780393362613.png";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import { useState, useRef, useEffect, useContext, createContext, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -988,36 +995,57 @@ function MarcasRepresentadasSection() {
 type PartnerItem = { name: string; logo: string };
 
 const PARCEIROS_ROW1: PartnerItem[] = [
-  { name: "Carrinho",              logo: logoCarrinho },
-  { name: "Sucoma",                logo: logoSucoma   },
-  { name: "Noble Group",           logo: logoNoble    },
-  { name: "AGT",                   logo: logoAgt      },
-  { name: "CFM",                   logo: logoCfm      },
-  { name: "JMAS",                  logo: logoJmas     },
-  { name: "BioPrev",               logo: logoBioprev  },
-  { name: "Jardins da Yoba",       logo: logoYoba     },
+  { name: "Carrinho",              logo: logoCarrinho  },
+  { name: "Sonangalp",             logo: logoSonangalp },
+  { name: "Noble Group",           logo: logoNoble     },
+  { name: "AGT",                   logo: logoAgt       },
+  { name: "Aldeia Nova",           logo: logoAldeia    },
+  { name: "JMAS",                  logo: logoJmas      },
+  { name: "BioPrev",               logo: logoBioprev   },
+  { name: "Hipermaquinas Angola",  logo: logoHma       },
+  { name: "CFM",                   logo: logoCfm       },
+  { name: "Granisul",              logo: logoGranisul  },
+  { name: "Sucoma",                logo: logoSucoma    },
+  { name: "WIX Filters",           logo: logoWix       },
+  { name: "Jardins da Yoba",       logo: logoYoba      },
+  { name: "OCOLIL",                logo: logoOcolil    },
+  { name: "Fazenda Tchissola",     logo: logoTchissola },
 ];
 
 const PARCEIROS_ROW2: PartnerItem[] = [
-  { name: "AGT",                   logo: logoAgt      },
-  { name: "Jardins da Yoba",       logo: logoYoba     },
-  { name: "Carrinho",              logo: logoCarrinho },
-  { name: "JMAS",                  logo: logoJmas     },
-  { name: "Noble Group",           logo: logoNoble    },
-  { name: "BioPrev",               logo: logoBioprev  },
-  { name: "Sucoma",                logo: logoSucoma   },
-  { name: "CFM",                   logo: logoCfm      },
+  { name: "AGT",                   logo: logoAgt       },
+  { name: "Fazenda Tchissola",     logo: logoTchissola },
+  { name: "Carrinho",              logo: logoCarrinho  },
+  { name: "Granisul",              logo: logoGranisul  },
+  { name: "Noble Group",           logo: logoNoble     },
+  { name: "BioPrev",               logo: logoBioprev   },
+  { name: "Sonangalp",             logo: logoSonangalp },
+  { name: "OCOLIL",                logo: logoOcolil    },
+  { name: "JMAS",                  logo: logoJmas      },
+  { name: "Aldeia Nova",           logo: logoAldeia    },
+  { name: "Sucoma",                logo: logoSucoma    },
+  { name: "Hipermaquinas Angola",  logo: logoHma       },
+  { name: "CFM",                   logo: logoCfm       },
+  { name: "WIX Filters",           logo: logoWix       },
+  { name: "Jardins da Yoba",       logo: logoYoba      },
 ];
 
 const PARCEIROS_ROW3: PartnerItem[] = [
-  { name: "CFM",                   logo: logoCfm      },
-  { name: "BioPrev",               logo: logoBioprev  },
-  { name: "Sucoma",                logo: logoSucoma   },
-  { name: "Jardins da Yoba",       logo: logoYoba     },
-  { name: "Carrinho",              logo: logoCarrinho },
-  { name: "AGT",                   logo: logoAgt      },
-  { name: "JMAS",                  logo: logoJmas     },
-  { name: "Noble Group",           logo: logoNoble    },
+  { name: "CFM",                   logo: logoCfm       },
+  { name: "WIX Filters",           logo: logoWix       },
+  { name: "Sucoma",                logo: logoSucoma    },
+  { name: "Jardins da Yoba",       logo: logoYoba      },
+  { name: "Hipermaquinas Angola",  logo: logoHma       },
+  { name: "AGT",                   logo: logoAgt       },
+  { name: "OCOLIL",                logo: logoOcolil    },
+  { name: "Carrinho",              logo: logoCarrinho  },
+  { name: "Sonangalp",             logo: logoSonangalp },
+  { name: "JMAS",                  logo: logoJmas      },
+  { name: "Noble Group",           logo: logoNoble     },
+  { name: "Fazenda Tchissola",     logo: logoTchissola },
+  { name: "BioPrev",               logo: logoBioprev   },
+  { name: "Granisul",              logo: logoGranisul  },
+  { name: "Aldeia Nova",           logo: logoAldeia    },
 ];
 
 function LogoChip({ item }: { item: PartnerItem }) {
