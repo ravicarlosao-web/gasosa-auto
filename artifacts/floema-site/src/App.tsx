@@ -10,6 +10,14 @@ import nergyImg3 from "@assets/IMG_20250903_113401_1780387574299.jpg";
 import nergyImg4 from "@assets/IMG_20250903_111532_1780387597136.jpg";
 import nergyImg5 from "@assets/1000015282_1780387656692.jpg";
 import nergyImg6 from "@assets/WhatsApp_Image_2025-09-03_at_11.33.28_(2)_1780387695350.jpeg";
+import logoCarrinho  from "@assets/image_1780391470570.png";
+import logoSucoma    from "@assets/image_1780391556771.png";
+import logoNoble     from "@assets/image_1_1780391743801.png";
+import logoAgt       from "@assets/image_2_1780391759740.png";
+import logoCfm       from "@assets/image_3_1780391778427.png";
+import logoJmas      from "@assets/image_4_1780391793814.png";
+import logoBioprev   from "@assets/image_1780391882163.png";
+import logoYoba      from "@assets/image_6_1780392078746.png";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import { useState, useRef, useEffect, useContext, createContext, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -977,87 +985,70 @@ function MarcasRepresentadasSection() {
 
 // ─── ParceirosSection ─────────────────────────────────────────────────────────
 
-const PARCEIROS_ROW1 = [
-  { name: "Parceiro A", color: "#E8391D", initial: "A" },
-  { name: "Parceiro B", color: "#111111", initial: "B" },
-  { name: "Parceiro C", color: "#003591", initial: "C" },
-  { name: "Parceiro D", color: "#E67E22", initial: "D" },
-  { name: "Parceiro E", color: "#27AE60", initial: "E" },
-  { name: "Parceiro F", color: "#8E44AD", initial: "F" },
-  { name: "Parceiro G", color: "#C0392B", initial: "G" },
-  { name: "Parceiro H", color: "#2980B9", initial: "H" },
-  { name: "Parceiro I", color: "#16A085", initial: "I" },
+type PartnerItem = { name: string; logo: string };
+
+const PARCEIROS_ROW1: PartnerItem[] = [
+  { name: "Carrinho",              logo: logoCarrinho },
+  { name: "Sucoma",                logo: logoSucoma   },
+  { name: "Noble Group",           logo: logoNoble    },
+  { name: "AGT",                   logo: logoAgt      },
+  { name: "CFM",                   logo: logoCfm      },
+  { name: "JMAS",                  logo: logoJmas     },
+  { name: "BioPrev",               logo: logoBioprev  },
+  { name: "Jardins da Yoba",       logo: logoYoba     },
 ];
 
-const PARCEIROS_ROW2 = [
-  { name: "Cliente A",  color: "#F39C12", initial: "A" },
-  { name: "Cliente B",  color: "#1ABC9C", initial: "B" },
-  { name: "Cliente C",  color: "#E74C3C", initial: "C" },
-  { name: "Cliente D",  color: "#2C3E50", initial: "D" },
-  { name: "Cliente E",  color: "#3498DB", initial: "E" },
-  { name: "Cliente F",  color: "#9B59B6", initial: "F" },
-  { name: "Cliente G",  color: "#E67E22", initial: "G" },
-  { name: "Cliente H",  color: "#27AE60", initial: "H" },
-  { name: "Cliente I",  color: "#003591", initial: "I" },
+const PARCEIROS_ROW2: PartnerItem[] = [
+  { name: "AGT",                   logo: logoAgt      },
+  { name: "Jardins da Yoba",       logo: logoYoba     },
+  { name: "Carrinho",              logo: logoCarrinho },
+  { name: "JMAS",                  logo: logoJmas     },
+  { name: "Noble Group",           logo: logoNoble    },
+  { name: "BioPrev",               logo: logoBioprev  },
+  { name: "Sucoma",                logo: logoSucoma   },
+  { name: "CFM",                   logo: logoCfm      },
 ];
 
-const PARCEIROS_ROW3 = [
-  { name: "Empresa A",  color: "#2ECC71", initial: "A" },
-  { name: "Empresa B",  color: "#E74C3C", initial: "B" },
-  { name: "Empresa C",  color: "#F1C40F", initial: "C" },
-  { name: "Empresa D",  color: "#003591", initial: "D" },
-  { name: "Empresa E",  color: "#1ABC9C", initial: "E" },
-  { name: "Empresa F",  color: "#E8391D", initial: "F" },
-  { name: "Empresa G",  color: "#8E44AD", initial: "G" },
-  { name: "Empresa H",  color: "#2980B9", initial: "H" },
-  { name: "Empresa I",  color: "#111111", initial: "I" },
+const PARCEIROS_ROW3: PartnerItem[] = [
+  { name: "CFM",                   logo: logoCfm      },
+  { name: "BioPrev",               logo: logoBioprev  },
+  { name: "Sucoma",                logo: logoSucoma   },
+  { name: "Jardins da Yoba",       logo: logoYoba     },
+  { name: "Carrinho",              logo: logoCarrinho },
+  { name: "AGT",                   logo: logoAgt      },
+  { name: "JMAS",                  logo: logoJmas     },
+  { name: "Noble Group",           logo: logoNoble    },
 ];
 
-function LogoChip({ item }: { item: { name: string; color: string; initial: string } }) {
+function LogoChip({ item }: { item: PartnerItem }) {
   return (
     <div
       style={{
         display: "flex",
         alignItems: "center",
-        gap: "10px",
-        padding: "10px 22px 10px 10px",
+        justifyContent: "center",
+        padding: "14px 24px",
         background: "#ffffff",
         borderRadius: "14px",
         flexShrink: 0,
-        boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+        boxShadow: "0 1px 6px rgba(0,0,0,0.07)",
         border: "1px solid rgba(0,0,0,0.06)",
+        height: "72px",
+        minWidth: "120px",
+        maxWidth: "240px",
       }}
     >
-      <div
+      <img
+        src={item.logo}
+        alt={item.name}
         style={{
-          width: "38px",
-          height: "38px",
-          borderRadius: "9px",
-          background: item.color,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "#ffffff",
-          fontWeight: 700,
-          fontSize: "15px",
-          flexShrink: 0,
-          fontFamily: "'Poppins', sans-serif",
+          height: "44px",
+          width: "auto",
+          maxWidth: "180px",
+          objectFit: "contain",
+          display: "block",
         }}
-      >
-        {item.initial}
-      </div>
-      <span
-        style={{
-          fontWeight: 500,
-          fontSize: "15px",
-          color: "#111111",
-          whiteSpace: "nowrap",
-          fontFamily: "'Poppins', sans-serif",
-          letterSpacing: "-0.01em",
-        }}
-      >
-        {item.name}
-      </span>
+      />
     </div>
   );
 }
