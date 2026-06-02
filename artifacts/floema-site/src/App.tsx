@@ -1091,12 +1091,14 @@ function MarqueeRow({
   direction,
   speed = "60s",
 }: {
-  items: typeof PARCEIROS_ROW1;
+  items: PartnerItem[];
   direction: "rtl" | "ltr";
   speed?: string;
 }) {
+  // 4 copies → translate by exactly -25% (= 1 copy width) for a seamless loop
+  const quad = [...items, ...items, ...items, ...items];
   const cls = direction === "rtl" ? "marquee-rtl" : "marquee-ltr";
-  const doubled = [...items, ...items];
+
   return (
     <div style={{ overflow: "hidden", width: "100%" }}>
       <div
@@ -1108,7 +1110,7 @@ function MarqueeRow({
           animationDuration: speed,
         }}
       >
-        {doubled.map((item, i) => (
+        {quad.map((item, i) => (
           <LogoChip key={i} item={item} />
         ))}
       </div>

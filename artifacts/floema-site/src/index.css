@@ -302,15 +302,15 @@
  */
 @keyframes marquee-rtl {
   0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-25%); }
 }
 @keyframes marquee-ltr {
-  0%   { transform: translateX(-50%); }
+  0%   { transform: translateX(-25%); }
   100% { transform: translateX(0); }
 }
-.marquee-rtl { animation: marquee-rtl 32s linear infinite; }
-.marquee-ltr { animation: marquee-ltr 32s linear infinite; }
-.marquee-rtl-slow { animation: marquee-rtl 44s linear infinite; }
+.marquee-rtl { animation: marquee-rtl 60s linear infinite; }
+.marquee-ltr { animation: marquee-ltr 60s linear infinite; }
+.marquee-rtl-slow { animation: marquee-rtl 80s linear infinite; }
 
 @layer utilities {
 
