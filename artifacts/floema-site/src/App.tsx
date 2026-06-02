@@ -784,9 +784,8 @@ function MarcasRepresentadasSection() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const isMobile  = winWidth < 600;
-  const isTablet  = winWidth >= 600 && winWidth < 1024;
-  const isDesktop = winWidth >= 1024;
+  const isMobile = winWidth < 600;
+  const isTablet = winWidth >= 600 && winWidth < 1024;
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -794,19 +793,23 @@ function MarcasRepresentadasSection() {
   });
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    setShowBrand(v > 0.12);
+    setShowBrand(v > 0.08);
   });
 
-  // ── Parallax travel ranges — 3 depth layers ─────────────────────────────────
-  // Outer (fastest): enters first, exits last — strongest parallax
-  const yOuter  = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
-  // Middle: slightly delayed entry
-  const yMiddle = useTransform(scrollYProgress, [0, 1], ["130vh",  "-90vh"]);
-  // Inner (slowest): closest to text, most delayed
-  const yInner  = useTransform(scrollYProgress, [0, 1], ["155vh",  "-65vh"]);
-  // Mobile pair
-  const yMobLeft  = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
-  const yMobRight = useTransform(scrollYProgress, [0, 1], ["140vh",  "-80vh"]);
+  // ── 3 sequential pairs — each pair has its own scroll window ────────────────
+  // Pair 1 travels: scroll 0.00 → 0.40  (left slightly ahead of right)
+  const y1L = useTransform(scrollYProgress, [0.00, 0.40, 1], ["110vh", "-110vh", "-110vh"]);
+  const y1R = useTransform(scrollYProgress, [0.00, 0.46, 1], ["140vh", "-110vh", "-110vh"]);
+  // Pair 2 travels: scroll 0.30 → 0.70
+  const y2L = useTransform(scrollYProgress, [0, 0.30, 0.70, 1], ["110vh", "110vh", "-110vh", "-110vh"]);
+  const y2R = useTransform(scrollYProgress, [0, 0.30, 0.76, 1], ["140vh", "140vh", "-110vh", "-110vh"]);
+  // Pair 3 travels: scroll 0.60 → 1.00
+  const y3L = useTransform(scrollYProgress, [0, 0.60, 1.00], ["110vh", "110vh", "-110vh"]);
+  const y3R = useTransform(scrollYProgress, [0, 0.60, 1.00], ["140vh", "140vh", "-110vh"]);
+
+  // Mobile: only 2 images total, sequential
+  const yMobL = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
+  const yMobR = useTransform(scrollYProgress, [0, 1], ["150vh",  "-70vh"]);
 
   const content = showBrand ? MARCAS_NERGY : MARCAS_DEFAULT;
 
@@ -818,42 +821,51 @@ function MarcasRepresentadasSection() {
     display: "block",
   };
 
+  // Responsive image dimensions — same as original
+  const desktopImgWidth = "min(22vw, 340px)";
+  const desktopImgInset = "min(4vw, 64px)";
+  const tabletImgWidth  = "min(18vw, 220px)";
+  const tabletImgInset  = "2.5vw";
+  const mobileImgWidth  = "43vw";
+
+  const paraMaxWidth = isMobile
+    ? "min(88vw, 400px)"
+    : isTablet
+    ? "min(56vw, 500px)"
+    : "clamp(320px, 44vw, 600px)";
+
   const imgBox = (
     y: ReturnType<typeof useTransform>,
     src: string,
     alt: string,
-    pos: React.CSSProperties,
-    width: string,
-    zIndex = 3,
+    left?: string,
+    right?: string,
+    top: string | number = 0,
+    width = desktopImgWidth,
   ) => (
     <motion.div
       style={{
         y,
         position: "absolute",
+        top,
+        ...(left  !== undefined ? { left  } : {}),
+        ...(right !== undefined ? { right } : {}),
         width,
         aspectRatio: "3 / 4",
         overflow: "hidden",
-        zIndex,
-        ...pos,
+        zIndex: 3,
       }}
     >
       <img src={src} alt={alt} style={imgStyle} />
     </motion.div>
   );
 
-  // ── Responsive text max-width ─────────────────────────────────────────────────
-  const paraMaxWidth = isMobile
-    ? "min(88vw, 400px)"
-    : isTablet
-    ? "min(52vw, 460px)"
-    : "clamp(280px, 28vw, 480px)";
-
   return (
     <div
       ref={containerRef}
-      style={{ height: "350vh", background: "#F5EFE9", position: "relative" }}
+      // Taller section = more scroll time for 3 pairs to pass through
+      style={{ height: "520vh", background: "#F5EFE9", position: "relative" }}
     >
-      {/* sticky viewport */}
       <div
         style={{
           position: "sticky",
@@ -872,9 +884,8 @@ function MarcasRepresentadasSection() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: isMobile ? "flex-start" : "center",
-            paddingTop: isMobile ? "8vh" : undefined,
             textAlign: "center",
-            zIndex: 4,
+            zIndex: 2,
             pointerEvents: "none",
             padding: isMobile ? "8vh 24px 0" : "0 16px",
           }}
@@ -886,12 +897,7 @@ function MarcasRepresentadasSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                width: "100%",
-              }}
+              style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}
             >
               <h2
                 style={{
@@ -899,7 +905,7 @@ function MarcasRepresentadasSection() {
                     ? "clamp(2.2rem, 8vw, 3.2rem)"
                     : isTablet
                     ? "clamp(2.4rem, 5vw, 4rem)"
-                    : "clamp(2.4rem, 3vw, 5rem)",
+                    : "clamp(2.8rem, 3.5vw, 6rem)",
                   fontWeight: 300,
                   color: "#111111",
                   lineHeight: 1.08,
@@ -930,32 +936,36 @@ function MarcasRepresentadasSection() {
           </AnimatePresence>
         </div>
 
-        {/* ── Images ── */}
+        {/* ── Images — 3 sequential pairs ── */}
         {isMobile ? (
-          // Mobile: 2 images side-by-side in the lower half
+          // Mobile: 2 images in the lower half (original behaviour)
           <>
-            {imgBox(yMobLeft,  nergyImg1, "Nergytech lubrificantes", { top: "52vh", left: "4vw"  }, "43vw")}
-            {imgBox(yMobRight, nergyImg4, "Nergytech armazém",       { top: "52vh", right: "4vw" }, "43vw")}
+            <motion.div style={{ y: yMobL, position: "absolute", top: "52vh", left: "4vw", width: mobileImgWidth, aspectRatio: "3 / 4", overflow: "hidden", zIndex: 3 }}>
+              <img src={nergyImg1} alt="Nergytech lubrificantes" style={imgStyle} />
+            </motion.div>
+            <motion.div style={{ y: yMobR, position: "absolute", top: "52vh", right: "4vw", width: mobileImgWidth, aspectRatio: "3 / 4", overflow: "hidden", zIndex: 3 }}>
+              <img src={nergyImg4} alt="Nergytech armazém" style={imgStyle} />
+            </motion.div>
           </>
         ) : isTablet ? (
-          // Tablet: 4 images — 2 per side, staggered depths
+          // Tablet: same 2-column layout, 3 sequential pairs
           <>
-            {imgBox(yOuter,  nergyImg1, "Nergytech lubrificantes",  { top: 0, left:  "1.5vw" }, "min(17vw, 210px)")}
-            {imgBox(yMiddle, nergyImg3, "Nergytech armazém",        { top: 0, left:  "20vw"  }, "min(15vw, 185px)")}
-            {imgBox(yMiddle, nergyImg4, "Nergytech baterias",       { top: 0, right: "20vw"  }, "min(15vw, 185px)")}
-            {imgBox(yOuter,  nergyImg2, "Nergytech loja",           { top: 0, right: "1.5vw" }, "min(17vw, 210px)")}
+            {imgBox(y1L, nergyImg1, "Nergytech lubrificantes", tabletImgInset, undefined, 0, tabletImgWidth)}
+            {imgBox(y1R, nergyImg2, "Nergytech loja",          undefined, tabletImgInset, 0, tabletImgWidth)}
+            {imgBox(y2L, nergyImg3, "Nergytech armazém",       tabletImgInset, undefined, 0, tabletImgWidth)}
+            {imgBox(y2R, nergyImg4, "Nergytech baterias",      undefined, tabletImgInset, 0, tabletImgWidth)}
+            {imgBox(y3L, nergyImg5, "Nergytech stock",         tabletImgInset, undefined, 0, tabletImgWidth)}
+            {imgBox(y3R, nergyImg6, "Nergytech empilhador",    undefined, tabletImgInset, 0, tabletImgWidth)}
           </>
         ) : (
-          // Desktop: 6 images — 3 per side with 3 depth layers
+          // Desktop: same 2-column layout, 3 sequential pairs
           <>
-            {/* Left side — outer → inner */}
-            {imgBox(yOuter,  nergyImg1, "Nergytech lubrificantes", { top: 0, left: "1.5vw"  }, "min(13vw, 200px)")}
-            {imgBox(yMiddle, nergyImg3, "Nergytech armazém",       { top: 0, left: "15.5vw" }, "min(11vw, 170px)")}
-            {imgBox(yInner,  nergyImg5, "Nergytech stock",         { top: 0, left: "27.5vw" }, "min(10vw, 155px)")}
-            {/* Right side — inner → outer */}
-            {imgBox(yInner,  nergyImg6, "Nergytech empilhador",    { top: 0, right: "27.5vw" }, "min(10vw, 155px)")}
-            {imgBox(yMiddle, nergyImg4, "Nergytech baterias",      { top: 0, right: "15.5vw" }, "min(11vw, 170px)")}
-            {imgBox(yOuter,  nergyImg2, "Nergytech loja",          { top: 0, right: "1.5vw"  }, "min(13vw, 200px)")}
+            {imgBox(y1L, nergyImg1, "Nergytech lubrificantes", desktopImgInset, undefined, 0, desktopImgWidth)}
+            {imgBox(y1R, nergyImg2, "Nergytech loja",          undefined, desktopImgInset, 0, desktopImgWidth)}
+            {imgBox(y2L, nergyImg3, "Nergytech armazém",       desktopImgInset, undefined, 0, desktopImgWidth)}
+            {imgBox(y2R, nergyImg4, "Nergytech baterias",      undefined, desktopImgInset, 0, desktopImgWidth)}
+            {imgBox(y3L, nergyImg5, "Nergytech stock",         desktopImgInset, undefined, 0, desktopImgWidth)}
+            {imgBox(y3R, nergyImg6, "Nergytech empilhador",    undefined, desktopImgInset, 0, desktopImgWidth)}
           </>
         )}
       </div>
