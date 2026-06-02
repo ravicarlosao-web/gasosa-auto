@@ -1263,7 +1263,7 @@ function UltimasNoticiasSection() {
   return (
     <section
       style={{
-        background: "#FFFFFF",
+        background: "#F5EFE9",
         fontFamily: "'Poppins', sans-serif",
         paddingTop: "clamp(64px, 9vw, 120px)",
         paddingBottom: "clamp(72px, 10vw, 140px)",
