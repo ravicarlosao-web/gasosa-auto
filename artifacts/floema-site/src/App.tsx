@@ -1079,24 +1079,24 @@ function LogoChip({ item }: { item: PartnerItem }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "14px 24px",
+        padding: "10px 18px",
         background: "#ffffff",
-        borderRadius: "14px",
+        borderRadius: "12px",
         flexShrink: 0,
         boxShadow: "0 1px 6px rgba(0,0,0,0.07)",
         border: "1px solid rgba(0,0,0,0.06)",
-        height: "72px",
-        minWidth: "120px",
-        maxWidth: "240px",
+        height: "56px",
+        minWidth: "90px",
+        maxWidth: "190px",
       }}
     >
       <img
         src={item.logo}
         alt={item.name}
         style={{
-          height: "44px",
+          height: "34px",
           width: "auto",
-          maxWidth: "180px",
+          maxWidth: "150px",
           objectFit: "contain",
           display: "block",
         }}
@@ -1108,7 +1108,7 @@ function LogoChip({ item }: { item: PartnerItem }) {
 function MarqueeRow({
   items,
   direction,
-  speed = "32s",
+  speed = "60s",
 }: {
   items: typeof PARCEIROS_ROW1;
   direction: "rtl" | "ltr";
