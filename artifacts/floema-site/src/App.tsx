@@ -41,7 +41,14 @@ import logoOuroVerde     from "@assets/image_19_1780395214382.png";
 import logoTchimbolelo   from "@assets/{A6CD87C3-8D82-402E-9926-B0F1BC28201C}_1_1780395413717.png";
 import logoAdra          from "@assets/image_20_1780395539424.png";
 import logoProTuning     from "@assets/image_22_1780395677753.png";
-import infraHeroImg     from "@assets/20250903_123036_1780417176290.jpg";
+import infraHeroImg        from "@assets/20250903_123036_1780417176290.jpg";
+import infraLubangoExt    from "@assets/20250903_123815_1780417632798.jpg";
+import infraLubangoAerial from "@assets/20250903_124326_1780417637563.jpg";
+import infraLubangoInside from "@assets/20250903_125127_1780417648038.jpg";
+import infraLubangoWide   from "@assets/20250903_124357_1780417657961.jpg";
+import infraHuamboExt     from "@assets/20250903_124447_1780417641736.jpg";
+import infraLuandaBarrels from "@assets/WhatsApp_Image_2025-09-03_at_11.33.28_1780417689459.jpeg";
+import infraFuturas       from "@assets/20250903_123030_1780417662829.jpg";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import { useState, useRef, useEffect, useContext, createContext, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -1885,7 +1892,7 @@ function InfraestrutrasPage() {
       </div>
 
       {/* ────────────────────────────────────────────────────────────────
-          FEATURED PANEL — full-width tall (à la Molson)
+          FEATURED PANEL — Lubango (full-width tall)
       ──────────────────────────────────────────────────────────────── */}
       <div
         style={{
@@ -1896,15 +1903,20 @@ function InfraestrutrasPage() {
           background: "#111c2b",
         }}
       >
-        {/* Placeholder gradient — replace with real image */}
-        <div
+        <motion.img
+          src={infraLubangoExt}
+          alt="Instalações Lubango"
+          whileHover={{ scale: 1.04 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(160deg, #1b2f45 0%, #0d1e30 60%, #0a1628 100%)",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
           }}
         />
-        {/* Bottom-left gradient overlay */}
         <div
           style={{
             position: "absolute",
@@ -1913,8 +1925,6 @@ function InfraestrutrasPage() {
             zIndex: 1,
           }}
         />
-
-        {/* Text — bottom-left */}
         <motion.div
           variants={FADE_UP}
           initial="hidden"
@@ -1926,7 +1936,7 @@ function InfraestrutrasPage() {
             bottom: "clamp(32px, 5vh, 64px)",
             left: "clamp(20px, 5vw, 80px)",
             zIndex: 2,
-            maxWidth: "520px",
+            maxWidth: "560px",
           }}
         >
           <span
@@ -1945,7 +1955,7 @@ function InfraestrutrasPage() {
             style={{
               fontFamily: "'Poppins', sans-serif",
               fontSize: "clamp(1.6rem, 1rem + 2.5vw, 3rem)",
-              fontWeight: 700,
+              fontWeight: 600,
               color: "#ffffff",
               letterSpacing: "-0.025em",
               lineHeight: 1.1,
@@ -1964,36 +1974,54 @@ function InfraestrutrasPage() {
           >
             {inf.featured.descricao}
           </p>
-          <a
-            href="#"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              fontSize: "0.78rem",
-              fontWeight: 600,
-              letterSpacing: "0.1em",
-              color: "#ffffff",
-              textDecoration: "none",
-              borderBottom: "1px solid rgba(255,255,255,0.4)",
-              paddingBottom: "2px",
-              transition: "border-color 0.2s, color 0.2s",
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.borderColor = "#ffffff";
-              e.currentTarget.style.color = "#ffffff";
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)";
-            }}
-          >
-            {inf.featured.cta} →
-          </a>
         </motion.div>
       </div>
 
       {/* ────────────────────────────────────────────────────────────────
-          SPLIT PANELS — two side-by-side (à la Écoparc + ESG)
+          PHOTO STRIP — 3 images Lubango
+      ──────────────────────────────────────────────────────────────── */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          width: "100%",
+          gap: "2px",
+        }}
+      >
+        {[infraLubangoAerial, infraLubangoInside, infraLubangoWide].map((src, i) => (
+          <motion.div
+            key={i}
+            variants={FADE_UP}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.2 }}
+            custom={i * 0.1}
+            style={{
+              position: "relative",
+              height: "clamp(200px, 28vh, 380px)",
+              overflow: "hidden",
+              background: "#111",
+            }}
+          >
+            <motion.img
+              src={src}
+              alt={`Lubango ${i + 1}`}
+              whileHover={{ scale: 1.06 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </motion.div>
+        ))}
+      </div>
+
+      {/* ────────────────────────────────────────────────────────────────
+          SPLIT PANELS — Luanda (left) | Huambo (right)
       ──────────────────────────────────────────────────────────────── */}
       <div
         style={{
@@ -2002,7 +2030,7 @@ function InfraestrutrasPage() {
           width: "100%",
         }}
       >
-        {inf.paineis.map((painel, i) => (
+        {[infraLuandaBarrels, infraHuamboExt].map((src, i) => (
           <motion.div
             key={i}
             variants={FADE_UP}
@@ -2014,39 +2042,31 @@ function InfraestrutrasPage() {
               position: "relative",
               height: "clamp(400px, 60vh, 720px)",
               overflow: "hidden",
-              background: i === 0 ? "#0f1e30" : "#1a2a1a",
+              background: "#111",
             }}
           >
-            {/* Placeholder gradient per panel */}
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: i === 0
-                  ? "linear-gradient(135deg, #0f2035 0%, #1a3050 100%)"
-                  : "linear-gradient(135deg, #1a2a18 0%, #253d20 100%)",
-              }}
-            />
-            {/* Hover zoom layer */}
-            <motion.div
+            <motion.img
+              src={src}
+              alt={inf.paineis[i].titulo}
               whileHover={{ scale: 1.04 }}
-              transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               style={{
                 position: "absolute",
                 inset: 0,
-                background: "transparent",
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center",
               }}
             />
-            {/* Gradient overlay */}
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                background: "linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.2) 55%, transparent 100%)",
+                background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.2) 55%, transparent 100%)",
                 zIndex: 1,
               }}
             />
-            {/* Divider */}
             {i === 0 && (
               <div
                 style={{
@@ -2060,7 +2080,6 @@ function InfraestrutrasPage() {
                 }}
               />
             )}
-            {/* Text */}
             <div
               style={{
                 position: "absolute",
@@ -2080,20 +2099,20 @@ function InfraestrutrasPage() {
                   marginBottom: "10px",
                 }}
               >
-                {painel.tag}
+                {inf.paineis[i].tag}
               </span>
               <h3
                 style={{
                   fontFamily: "'Poppins', sans-serif",
                   fontSize: "clamp(1.1rem, 0.8rem + 1.5vw, 2rem)",
-                  fontWeight: 700,
+                  fontWeight: 600,
                   color: "#ffffff",
                   letterSpacing: "-0.02em",
                   lineHeight: 1.15,
                   margin: "0 0 12px",
                 }}
               >
-                {painel.titulo}
+                {inf.paineis[i].titulo}
               </h3>
               <p
                 style={{
@@ -2104,32 +2123,99 @@ function InfraestrutrasPage() {
                   maxWidth: "380px",
                 }}
               >
-                {painel.descricao}
+                {inf.paineis[i].descricao}
               </p>
-              <a
-                href="#"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  fontSize: "0.74rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.1em",
-                  color: "#ffffff",
-                  textDecoration: "none",
-                  borderBottom: "1px solid rgba(255,255,255,0.35)",
-                  paddingBottom: "2px",
-                  transition: "border-color 0.2s",
-                }}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = "#ffffff")}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)")}
-              >
-                {painel.cta} →
-              </a>
             </div>
           </motion.div>
         ))}
       </div>
+
+      {/* ────────────────────────────────────────────────────────────────
+          FUTURAS INSTALAÇÕES — full-width dark panel
+      ──────────────────────────────────────────────────────────────── */}
+      <motion.div
+        variants={FADE_UP}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.15 }}
+        custom={0}
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "clamp(420px, 55vh, 680px)",
+          overflow: "hidden",
+          background: "#0a1628",
+        }}
+      >
+        <motion.img
+          src={infraFuturas}
+          alt="Futuras instalações"
+          whileHover={{ scale: 1.04 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center 40%",
+            opacity: 0.65,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(to top, rgba(10,22,40,0.92) 0%, rgba(10,22,40,0.5) 50%, rgba(10,22,40,0.3) 100%)",
+            zIndex: 1,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "clamp(40px, 6vh, 80px)",
+            left: "clamp(20px, 5vw, 80px)",
+            zIndex: 2,
+            maxWidth: "600px",
+          }}
+        >
+          <span
+            style={{
+              display: "inline-block",
+              fontSize: "0.68rem",
+              fontWeight: 700,
+              letterSpacing: "0.18em",
+              color: "rgba(255,255,255,0.45)",
+              marginBottom: "14px",
+            }}
+          >
+            {inf.futuras.tag}
+          </span>
+          <h2
+            style={{
+              fontFamily: "'Poppins', sans-serif",
+              fontSize: "clamp(1.8rem, 1rem + 3vw, 3.5rem)",
+              fontWeight: 500,
+              color: "#ffffff",
+              letterSpacing: "-0.025em",
+              lineHeight: 1.05,
+              margin: "0 0 20px",
+            }}
+          >
+            {inf.futuras.titulo}
+          </h2>
+          <p
+            style={{
+              fontSize: "clamp(0.85rem, 0.75rem + 0.4vw, 1rem)",
+              color: "rgba(255,255,255,0.6)",
+              lineHeight: 1.7,
+              margin: 0,
+            }}
+          >
+            {inf.futuras.descricao}
+          </p>
+        </div>
+      </motion.div>
 
       {/* ── Footer ── */}
       <Footer />
