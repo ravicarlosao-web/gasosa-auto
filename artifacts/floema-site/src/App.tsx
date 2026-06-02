@@ -796,20 +796,22 @@ function MarcasRepresentadasSection() {
     setShowBrand(v > 0.08);
   });
 
-  // ── 3 sequential pairs — each pair has its own scroll window ────────────────
-  // Pair 1 travels: scroll 0.00 → 0.40  (left slightly ahead of right)
-  const y1L = useTransform(scrollYProgress, [0.00, 0.40, 1], ["110vh", "-110vh", "-110vh"]);
-  const y1R = useTransform(scrollYProgress, [0.00, 0.46, 1], ["140vh", "-110vh", "-110vh"]);
-  // Pair 2 travels: scroll 0.30 → 0.70
-  const y2L = useTransform(scrollYProgress, [0, 0.30, 0.70, 1], ["110vh", "110vh", "-110vh", "-110vh"]);
-  const y2R = useTransform(scrollYProgress, [0, 0.30, 0.76, 1], ["140vh", "140vh", "-110vh", "-110vh"]);
-  // Pair 3 travels: scroll 0.60 → 1.00
-  const y3L = useTransform(scrollYProgress, [0, 0.60, 1.00], ["110vh", "110vh", "-110vh"]);
-  const y3R = useTransform(scrollYProgress, [0, 0.60, 1.00], ["140vh", "140vh", "-110vh"]);
+  // ── 3 sequential pairs — all locked below screen until showBrand (scroll > 0.08) ──
+  // Before 0.08: all images sit at +110/140vh (off-screen bottom) → invisible
+  // After 0.08: pairs travel through one by one
+  // Pair 1 travels: 0.08 → 0.42
+  const y1L = useTransform(scrollYProgress, [0, 0.08, 0.42, 1   ], ["110vh", "110vh", "-110vh", "-110vh"]);
+  const y1R = useTransform(scrollYProgress, [0, 0.08, 0.48, 1   ], ["140vh", "140vh", "-110vh", "-110vh"]);
+  // Pair 2 travels: 0.38 → 0.72
+  const y2L = useTransform(scrollYProgress, [0, 0.38, 0.72, 1   ], ["110vh", "110vh", "-110vh", "-110vh"]);
+  const y2R = useTransform(scrollYProgress, [0, 0.38, 0.78, 1   ], ["140vh", "140vh", "-110vh", "-110vh"]);
+  // Pair 3 travels: 0.68 → 1.00
+  const y3L = useTransform(scrollYProgress, [0, 0.68, 1.00      ], ["110vh", "110vh", "-110vh"]);
+  const y3R = useTransform(scrollYProgress, [0, 0.68, 1.00      ], ["140vh", "140vh", "-110vh"]);
 
-  // Mobile: only 2 images total, sequential
-  const yMobL = useTransform(scrollYProgress, [0, 1], ["110vh", "-110vh"]);
-  const yMobR = useTransform(scrollYProgress, [0, 1], ["150vh",  "-70vh"]);
+  // Mobile: same rule — images only visible after showBrand
+  const yMobL = useTransform(scrollYProgress, [0, 0.08, 0.55, 1 ], ["110vh", "110vh", "-110vh", "-110vh"]);
+  const yMobR = useTransform(scrollYProgress, [0, 0.08, 0.65, 1 ], ["140vh", "140vh", "-110vh", "-110vh"]);
 
   const content = showBrand ? MARCAS_NERGY : MARCAS_DEFAULT;
 
