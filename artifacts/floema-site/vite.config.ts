@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
 export default defineConfig(async ({ command }) => {
   const isBuild = command === "build";
@@ -26,6 +27,14 @@ export default defineConfig(async ({ command }) => {
       react(),
       tailwindcss(),
       runtimeErrorOverlay(),
+      ...(isBuild ? [
+        ViteImageOptimizer({
+          jpg: { quality: 72 },
+          jpeg: { quality: 72 },
+          png: { quality: 75 },
+          webp: { quality: 72 },
+        }),
+      ] : []),
       ...(process.env.NODE_ENV !== "production" &&
       process.env.REPL_ID !== undefined
         ? [

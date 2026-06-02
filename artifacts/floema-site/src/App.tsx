@@ -1809,6 +1809,9 @@ function InfraestrutrasPage() {
         <img
           src={infraHeroImg}
           alt="Infraestruturas Gasosa Auto Agro"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
           style={{
             position: "absolute",
             inset: 0,
@@ -1914,6 +1917,8 @@ function InfraestrutrasPage() {
         <motion.img
           src={infraLubangoExt}
           alt="Instalações Lubango"
+          loading="lazy"
+          decoding="async"
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{
@@ -2014,6 +2019,8 @@ function InfraestrutrasPage() {
             <motion.img
               src={src}
               alt={`Lubango ${i + 1}`}
+              loading="lazy"
+              decoding="async"
               whileHover={{ scale: 1.06 }}
               transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               style={{
@@ -2043,6 +2050,8 @@ function InfraestrutrasPage() {
         <motion.img
           src={infraLuandaFachada}
           alt="Loja Luanda — fachada"
+          loading="lazy"
+          decoding="async"
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{
@@ -2103,6 +2112,8 @@ function InfraestrutrasPage() {
             <motion.img
               src={src}
               alt={`Luanda loja ${i + 1}`}
+              loading="lazy"
+              decoding="async"
               whileHover={{ scale: 1.07 }}
               transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
@@ -2126,6 +2137,8 @@ function InfraestrutrasPage() {
             <motion.img
               src={src}
               alt={`Luanda oficina ${i + 1}`}
+              loading="lazy"
+              decoding="async"
               whileHover={{ scale: 1.06 }}
               transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
@@ -2154,6 +2167,8 @@ function InfraestrutrasPage() {
         <motion.img
           src={infraHuamboExt}
           alt="Instalações Huambo"
+          loading="lazy"
+          decoding="async"
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{
@@ -2219,6 +2234,8 @@ function InfraestrutrasPage() {
         <motion.img
           src={infraFuturas}
           alt="Futuras instalações"
+          loading="lazy"
+          decoding="async"
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{
