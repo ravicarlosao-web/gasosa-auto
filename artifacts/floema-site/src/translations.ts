@@ -80,6 +80,32 @@ export const translations = {
       heading: "Empresas que confiam em nós.",
       subheading: "Uma rede crescente de parceiros e clientes que escolheram a Gasosa Auto Agro como fornecedor de referência em Angola.",
     },
+    infraestruturas: {
+      hero: {
+        label: "INFRAESTRUTURAS",
+        subtitle: "As nossas instalações ao serviço de Angola.",
+      },
+      featured: {
+        tag: "LUANDA",
+        titulo: "Sede Nacional — Luanda",
+        descricao: "A nossa sede em Luanda é o centro operacional da Gasosa Auto Agro — onde coordenamos a distribuição, o atendimento a clientes e a gestão das marcas que representamos em Angola.",
+        cta: "Saber mais",
+      },
+      paineis: [
+        {
+          tag: "LUBANGO · HUÍLA",
+          titulo: "Instalações no Lubango",
+          descricao: "Mais de 10 000 m² de infraestrutura no Lubango, com loja, armazém e oficina especializados ao serviço das províncias do sul do país.",
+          cta: "Explorar",
+        },
+        {
+          tag: "HUAMBO · PLANALTO CENTRAL",
+          titulo: "Instalações no Huambo",
+          descricao: "A presença no planalto central garante uma resposta rápida às necessidades agrícolas e industriais das províncias do interior.",
+          cta: "Explorar",
+        },
+      ],
+    },
     footer: {
       tagline: "Qualidade e confiança para quem impulsiona Angola.",
       navLabel: "Navegação",
@@ -205,6 +231,32 @@ export const translations = {
       heading: "Companies that trust us.",
       subheading: "A growing network of partners and clients who have chosen Gasosa Auto Agro as their reference supplier in Angola.",
     },
+    infraestruturas: {
+      hero: {
+        label: "INFRASTRUCTURE",
+        subtitle: "Our facilities at Angola's service.",
+      },
+      featured: {
+        tag: "LUANDA",
+        titulo: "National Headquarters — Luanda",
+        descricao: "Our Luanda headquarters is the operational hub of Gasosa Auto Agro — where we coordinate distribution, client support and the management of the brands we represent in Angola.",
+        cta: "Learn more",
+      },
+      paineis: [
+        {
+          tag: "LUBANGO · HUÍLA",
+          titulo: "Lubango Facilities",
+          descricao: "Over 10,000 m² of infrastructure in Lubango, with a shop, warehouse and specialist workshop serving the southern provinces.",
+          cta: "Explore",
+        },
+        {
+          tag: "HUAMBO · CENTRAL PLATEAU",
+          titulo: "Huambo Facilities",
+          descricao: "Our presence on the central plateau ensures a fast response to the agricultural and industrial needs of the interior provinces.",
+          cta: "Explore",
+        },
+      ],
+    },
     footer: {
       tagline: "Quality and trust for those who drive Angola forward.",
       navLabel: "Navigation",
@@ -329,6 +381,32 @@ export const translations = {
       tag: "SOCIOS & CLIENTES",
       heading: "Empresas que confían en nosotros.",
       subheading: "Una red creciente de socios y clientes que han elegido a Gasosa Auto Agro como proveedor de referencia en Angola.",
+    },
+    infraestruturas: {
+      hero: {
+        label: "INFRAESTRUCTURAS",
+        subtitle: "Nuestras instalaciones al servicio de Angola.",
+      },
+      featured: {
+        tag: "LUANDA",
+        titulo: "Sede Nacional — Luanda",
+        descricao: "Nuestra sede en Luanda es el centro operacional de Gasosa Auto Agro — donde coordinamos la distribución, la atención al cliente y la gestión de las marcas que representamos en Angola.",
+        cta: "Saber más",
+      },
+      paineis: [
+        {
+          tag: "LUBANGO · HUÍLA",
+          titulo: "Instalaciones en Lubango",
+          descricao: "Más de 10 000 m² de infraestructura en Lubango, con tienda, almacén y taller especializado al servicio de las provincias del sur.",
+          cta: "Explorar",
+        },
+        {
+          tag: "HUAMBO · ALTIPLANO CENTRAL",
+          titulo: "Instalaciones en Huambo",
+          descricao: "Nuestra presencia en el altiplano central garantiza una respuesta rápida a las necesidades agrícolas e industriales de las provincias del interior.",
+          cta: "Explorar",
+        },
+      ],
     },
     footer: {
       tagline: "Calidad y confianza para quienes impulsan Angola.",

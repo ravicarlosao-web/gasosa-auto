@@ -1712,6 +1712,425 @@ function Home() {
   );
 }
 
+// ─── InfraestrutrasPage ───────────────────────────────────────────────────────
+function InfraestrutrasPage() {
+  const { t } = useLang();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const inf = t.infraestruturas;
+
+  // Parallax on hero title
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroTitleY = useTransform(heroScroll, [0, 1], ["0%", "30%"]);
+  const heroOverlayOpacity = useTransform(heroScroll, [0, 0.8], [0.45, 0.72]);
+
+  const viewport = { once: false, amount: 0.18 } as const;
+
+  return (
+    <div className="w-full flex flex-col" style={{ fontFamily: "'Poppins', sans-serif" }}>
+
+      {/* ── Header ── */}
+      <NavThemeCtx.Provider value={true}>
+        <header
+          className="fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between"
+          style={{
+            maxWidth: "1400px",
+            margin: "0 auto",
+            padding: "clamp(12px, 2vh, 22px) clamp(16px, 4vw, 64px)",
+          }}
+        >
+          <Link href="/" className="flex items-center">
+            <motion.img
+              src={logoSrc}
+              alt="Gasosa Auto Agro"
+              style={{ height: "clamp(32px, 4.5vw, 48px)", width: "auto", objectFit: "contain" }}
+              animate={{ filter: "brightness(0) invert(1)" }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+            />
+          </Link>
+          <nav className="hidden lg:flex items-center gap-3">
+            <div className="flex items-center gap-0.5">
+              {t.nav.map((item) => (
+                <NavPill key={item} item={item} />
+              ))}
+            </div>
+            <LangDropdown />
+          </nav>
+          <motion.button
+            className="lg:hidden"
+            style={{ padding: "clamp(6px, 1.2vw, 10px)", color: "#ffffff" }}
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label={t.mobile.openMenu}
+          >
+            <Menu style={{ width: "clamp(20px, 3vw, 26px)", height: "clamp(20px, 3vw, 26px)" }} />
+          </motion.button>
+        </header>
+      </NavThemeCtx.Provider>
+
+      <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+
+      {/* ────────────────────────────────────────────────────────────────
+          HERO — full viewport, centered title (à la Montoni)
+      ──────────────────────────────────────────────────────────────── */}
+      <div
+        ref={heroRef}
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100dvh",
+          minHeight: "560px",
+          overflow: "hidden",
+          background: "#0c1a2e",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {/* Placeholder gradient — swap for <img> or background-image later */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(135deg, #0c1a2e 0%, #1a2f4a 40%, #0d2035 100%)",
+          }}
+        />
+        {/* Dark overlay */}
+        <motion.div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "#000",
+            opacity: heroOverlayOpacity,
+          }}
+        />
+
+        {/* Centered title */}
+        <motion.div
+          style={{
+            position: "relative",
+            zIndex: 2,
+            textAlign: "center",
+            y: heroTitleY,
+          }}
+        >
+          <motion.h1
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              fontFamily: "'Poppins', sans-serif",
+              fontSize: "clamp(3.5rem, 2rem + 8vw, 10rem)",
+              fontWeight: 700,
+              color: "#ffffff",
+              letterSpacing: "-0.02em",
+              lineHeight: 0.95,
+              margin: 0,
+            }}
+          >
+            {inf.hero.label}
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
+            style={{
+              fontFamily: "'Poppins', sans-serif",
+              fontSize: "clamp(0.85rem, 0.7rem + 0.6vw, 1.1rem)",
+              fontWeight: 400,
+              color: "rgba(255,255,255,0.55)",
+              letterSpacing: "0.06em",
+              marginTop: "24px",
+            }}
+          >
+            {inf.hero.subtitle}
+          </motion.p>
+        </motion.div>
+
+        {/* Scroll hint */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
+          style={{
+            position: "absolute",
+            bottom: "clamp(28px, 4vh, 48px)",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 2,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "6px",
+          }}
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            style={{
+              width: "1px",
+              height: "48px",
+              background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.5))",
+            }}
+          />
+        </motion.div>
+      </div>
+
+      {/* ────────────────────────────────────────────────────────────────
+          FEATURED PANEL — full-width tall (à la Molson)
+      ──────────────────────────────────────────────────────────────── */}
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "clamp(480px, 65vh, 800px)",
+          overflow: "hidden",
+          background: "#111c2b",
+        }}
+      >
+        {/* Placeholder gradient — replace with real image */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(160deg, #1b2f45 0%, #0d1e30 60%, #0a1628 100%)",
+          }}
+        />
+        {/* Bottom-left gradient overlay */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.28) 50%, transparent 100%)",
+            zIndex: 1,
+          }}
+        />
+
+        {/* Text — bottom-left */}
+        <motion.div
+          variants={FADE_UP}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
+          custom={0}
+          style={{
+            position: "absolute",
+            bottom: "clamp(32px, 5vh, 64px)",
+            left: "clamp(20px, 5vw, 80px)",
+            zIndex: 2,
+            maxWidth: "520px",
+          }}
+        >
+          <span
+            style={{
+              display: "inline-block",
+              fontSize: "0.68rem",
+              fontWeight: 700,
+              letterSpacing: "0.18em",
+              color: "rgba(255,255,255,0.5)",
+              marginBottom: "12px",
+            }}
+          >
+            {inf.featured.tag}
+          </span>
+          <h2
+            style={{
+              fontFamily: "'Poppins', sans-serif",
+              fontSize: "clamp(1.6rem, 1rem + 2.5vw, 3rem)",
+              fontWeight: 700,
+              color: "#ffffff",
+              letterSpacing: "-0.025em",
+              lineHeight: 1.1,
+              margin: "0 0 16px",
+            }}
+          >
+            {inf.featured.titulo}
+          </h2>
+          <p
+            style={{
+              fontSize: "clamp(0.85rem, 0.75rem + 0.4vw, 1rem)",
+              color: "rgba(255,255,255,0.65)",
+              lineHeight: 1.65,
+              margin: "0 0 24px",
+            }}
+          >
+            {inf.featured.descricao}
+          </p>
+          <a
+            href="#"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              fontSize: "0.78rem",
+              fontWeight: 600,
+              letterSpacing: "0.1em",
+              color: "#ffffff",
+              textDecoration: "none",
+              borderBottom: "1px solid rgba(255,255,255,0.4)",
+              paddingBottom: "2px",
+              transition: "border-color 0.2s, color 0.2s",
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = "#ffffff";
+              e.currentTarget.style.color = "#ffffff";
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)";
+            }}
+          >
+            {inf.featured.cta} →
+          </a>
+        </motion.div>
+      </div>
+
+      {/* ────────────────────────────────────────────────────────────────
+          SPLIT PANELS — two side-by-side (à la Écoparc + ESG)
+      ──────────────────────────────────────────────────────────────── */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          width: "100%",
+        }}
+      >
+        {inf.paineis.map((painel, i) => (
+          <motion.div
+            key={i}
+            variants={FADE_UP}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, amount: 0.15 }}
+            custom={i * 0.15}
+            style={{
+              position: "relative",
+              height: "clamp(400px, 60vh, 720px)",
+              overflow: "hidden",
+              background: i === 0 ? "#0f1e30" : "#1a2a1a",
+            }}
+          >
+            {/* Placeholder gradient per panel */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: i === 0
+                  ? "linear-gradient(135deg, #0f2035 0%, #1a3050 100%)"
+                  : "linear-gradient(135deg, #1a2a18 0%, #253d20 100%)",
+              }}
+            />
+            {/* Hover zoom layer */}
+            <motion.div
+              whileHover={{ scale: 1.04 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "transparent",
+              }}
+            />
+            {/* Gradient overlay */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(to top, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.2) 55%, transparent 100%)",
+                zIndex: 1,
+              }}
+            />
+            {/* Divider */}
+            {i === 0 && (
+              <div
+                style={{
+                  position: "absolute",
+                  right: 0,
+                  top: "10%",
+                  bottom: "10%",
+                  width: "1px",
+                  background: "rgba(255,255,255,0.12)",
+                  zIndex: 3,
+                }}
+              />
+            )}
+            {/* Text */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: "clamp(28px, 4.5vh, 52px)",
+                left: "clamp(20px, 4vw, 52px)",
+                right: "clamp(20px, 4vw, 52px)",
+                zIndex: 2,
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  fontSize: "0.63rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.18em",
+                  color: "rgba(255,255,255,0.45)",
+                  marginBottom: "10px",
+                }}
+              >
+                {painel.tag}
+              </span>
+              <h3
+                style={{
+                  fontFamily: "'Poppins', sans-serif",
+                  fontSize: "clamp(1.1rem, 0.8rem + 1.5vw, 2rem)",
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  letterSpacing: "-0.02em",
+                  lineHeight: 1.15,
+                  margin: "0 0 12px",
+                }}
+              >
+                {painel.titulo}
+              </h3>
+              <p
+                style={{
+                  fontSize: "clamp(0.78rem, 0.7rem + 0.35vw, 0.95rem)",
+                  color: "rgba(255,255,255,0.6)",
+                  lineHeight: 1.6,
+                  margin: "0 0 20px",
+                  maxWidth: "380px",
+                }}
+              >
+                {painel.descricao}
+              </p>
+              <a
+                href="#"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontSize: "0.74rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.1em",
+                  color: "#ffffff",
+                  textDecoration: "none",
+                  borderBottom: "1px solid rgba(255,255,255,0.35)",
+                  paddingBottom: "2px",
+                  transition: "border-color 0.2s",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = "#ffffff")}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.35)")}
+              >
+                {painel.cta} →
+              </a>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* ── Footer ── */}
+      <Footer />
+    </div>
+  );
+}
+
 // ─── Footer ───────────────────────────────────────────────────────────────────
 function Footer() {
   const { t } = useLang();
@@ -1954,6 +2373,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/infraestruturas" component={InfraestrutrasPage} />
       <Route component={NotFound} />
     </Switch>
   );
