@@ -41,6 +41,7 @@ import logoOuroVerde     from "@assets/image_19_1780395214382.png";
 import logoTchimbolelo   from "@assets/{A6CD87C3-8D82-402E-9926-B0F1BC28201C}_1_1780395413717.png";
 import logoAdra          from "@assets/image_20_1780395539424.png";
 import logoProTuning     from "@assets/image_22_1780395677753.png";
+import infraHeroImg     from "@assets/20250903_123036_1780417176290.jpg";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import { useState, useRef, useEffect, useContext, createContext, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -1789,12 +1790,17 @@ function InfraestrutrasPage() {
           justifyContent: "center",
         }}
       >
-        {/* Placeholder gradient — swap for <img> or background-image later */}
-        <div
+        {/* Hero image */}
+        <img
+          src={infraHeroImg}
+          alt="Infraestruturas Gasosa Auto Agro"
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(135deg, #0c1a2e 0%, #1a2f4a 40%, #0d2035 100%)",
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center 40%",
           }}
         />
         {/* Dark overlay */}
