@@ -80,6 +80,30 @@ export const translations = {
       heading: "Empresas que confiam em nós.",
       subheading: "Uma rede crescente de parceiros e clientes que escolheram a Gasosa Auto Agro como fornecedor de referência em Angola.",
     },
+    noticias: {
+      tag: "ÚLTIMAS NOTÍCIAS",
+      heading: "O que está a acontecer.",
+      subheading: "Fique a par das novidades, expansões e iniciativas da Gasosa Auto Agro.",
+      lerMais: "Ler mais",
+      items: [
+        {
+          titulo: "Gasosa Auto Agro expande presença no Huambo",
+          resumo: "A nova instalação no Huambo reforça a capacidade de resposta da empresa às províncias do planalto central, com mais de 3 000 m² dedicados a armazém e oficina.",
+        },
+        {
+          titulo: "Parceria exclusiva Nergytech reforçada para 2025",
+          resumo: "A Gasosa Auto Agro renova e amplia o acordo de representação exclusiva com a Nergytech em Angola, trazendo novas referências de baterias e acessórios ao mercado.",
+        },
+        {
+          titulo: "Pangulino lança linha de ferramentas para o campo angolano",
+          resumo: "A marca própria da Gasosa Auto Agro apresenta uma nova gama de ferramentas agrícolas desenvolvida especificamente para as condições do solo angolano.",
+        },
+        {
+          titulo: "Gasosa presente na Feira Internacional de Luanda 2025",
+          resumo: "Com um stand de mais de 200 m², a Gasosa Auto Agro marcou presença na FILDA 2025, apresentando ao público as suas marcas representadas e produtos Pangulino.",
+        },
+      ],
+    },
     mobile: {
       openMenu: "Abrir menu",
     },
@@ -165,6 +189,30 @@ export const translations = {
       heading: "Companies that trust us.",
       subheading: "A growing network of partners and clients who have chosen Gasosa Auto Agro as their reference supplier in Angola.",
     },
+    noticias: {
+      tag: "LATEST NEWS",
+      heading: "What's happening.",
+      subheading: "Stay up to date with the latest news, expansions and initiatives from Gasosa Auto Agro.",
+      lerMais: "Read more",
+      items: [
+        {
+          titulo: "Gasosa Auto Agro expands presence in Huambo",
+          resumo: "The new facility in Huambo strengthens the company's ability to serve the central plateau provinces, with over 3,000 m² dedicated to warehousing and workshop operations.",
+        },
+        {
+          titulo: "Exclusive Nergytech partnership strengthened for 2025",
+          resumo: "Gasosa Auto Agro renews and expands its exclusive representation agreement with Nergytech in Angola, bringing new battery and accessories references to the market.",
+        },
+        {
+          titulo: "Pangulino launches tool range for Angolan farmers",
+          resumo: "Gasosa Auto Agro's own brand presents a new range of agricultural tools developed specifically for Angolan soil conditions.",
+        },
+        {
+          titulo: "Gasosa at Luanda International Fair 2025",
+          resumo: "With a stand of over 200 m², Gasosa Auto Agro featured at FILDA 2025, showcasing its represented brands and Pangulino products to the public.",
+        },
+      ],
+    },
     mobile: {
       openMenu: "Open menu",
     },
@@ -249,6 +297,30 @@ export const translations = {
       tag: "SOCIOS & CLIENTES",
       heading: "Empresas que confían en nosotros.",
       subheading: "Una red creciente de socios y clientes que han elegido a Gasosa Auto Agro como proveedor de referencia en Angola.",
+    },
+    noticias: {
+      tag: "ÚLTIMAS NOTICIAS",
+      heading: "Lo que está pasando.",
+      subheading: "Manténgase al día de las novedades, expansiones e iniciativas de Gasosa Auto Agro.",
+      lerMais: "Leer más",
+      items: [
+        {
+          titulo: "Gasosa Auto Agro amplía su presencia en Huambo",
+          resumo: "Las nuevas instalaciones en Huambo refuerzan la capacidad de respuesta de la empresa en las provincias del altiplano central, con más de 3 000 m² dedicados a almacén y taller.",
+        },
+        {
+          titulo: "Alianza exclusiva con Nergytech reforzada para 2025",
+          resumo: "Gasosa Auto Agro renueva y amplía su acuerdo de representación exclusiva con Nergytech en Angola, incorporando nuevas referencias de baterías y accesorios al mercado.",
+        },
+        {
+          titulo: "Pangulino lanza gama de herramientas para el campo angoleño",
+          resumo: "La marca propia de Gasosa Auto Agro presenta una nueva gama de herramientas agrícolas desarrollada específicamente para las condiciones del suelo angoleño.",
+        },
+        {
+          titulo: "Gasosa presente en la Feria Internacional de Luanda 2025",
+          resumo: "Con un stand de más de 200 m², Gasosa Auto Agro participó en la FILDA 2025, presentando al público sus marcas representadas y los productos Pangulino.",
+        },
+      ],
     },
     mobile: {
       openMenu: "Abrir menú",
