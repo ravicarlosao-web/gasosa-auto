@@ -1829,7 +1829,7 @@ function InfraestrutrasPage() {
             style={{
               fontFamily: "'Poppins', sans-serif",
               fontSize: "clamp(3.5rem, 2rem + 8vw, 10rem)",
-              fontWeight: 700,
+              fontWeight: 500,
               color: "#ffffff",
               letterSpacing: "-0.02em",
               lineHeight: 0.95,
