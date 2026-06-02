@@ -31,11 +31,16 @@ import logoGroup2      from "@assets/Group_2_1780393968510.png";
 import logoAngostone   from "@assets/image_13_1780394045997.png";
 import logoAndaimes    from "@assets/image_1780394305539.png";
 import logoLiberatos   from "@assets/Gemini_Generated_Image_ddemvbddemvbddem_1_1780394376935.png";
-import logoGirassol   from "@assets/image_1780394586799.png";
-import logoPumangol   from "@assets/image_15_1780394660962.png";
-import logoAngola     from "@assets/image_1780394698602.png";
-import logoPlanasul   from "@assets/image_16_1780394769545.png";
-import logoMetalosul  from "@assets/image_17_1780394882779.png";
+import logoGirassol      from "@assets/image_1780394586799.png";
+import logoPumangol      from "@assets/image_15_1780394660962.png";
+import logoAngola        from "@assets/image_1780394698602.png";
+import logoPlanasul      from "@assets/image_16_1780394769545.png";
+import logoMetalosul     from "@assets/image_17_1780394882779.png";
+import logoBoiVerde      from "@assets/image_18_1780395087642.png";
+import logoOuroVerde     from "@assets/image_19_1780395214382.png";
+import logoTchimbolelo   from "@assets/{A6CD87C3-8D82-402E-9926-B0F1BC28201C}_1_1780395413717.png";
+import logoAdra          from "@assets/image_20_1780395539424.png";
+import logoProTuning     from "@assets/image_22_1780395677753.png";
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import { useState, useRef, useEffect, useContext, createContext, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -1005,42 +1010,47 @@ function MarcasRepresentadasSection() {
 
 type PartnerItem = { name: string; logo: string };
 
-// Row 1 — logos exclusivos (9)
+// Row 1 — logos exclusivos (11)
 const PARCEIROS_ROW1: PartnerItem[] = [
-  { name: "Carrinho",             logo: logoCarrinho  },
-  { name: "Sonangalp",            logo: logoSonangalp },
-  { name: "Noble Group",          logo: logoNoble     },
-  { name: "Lubafrica",            logo: logoLubafrica },
-  { name: "AGT",                  logo: logoAgt       },
-  { name: "Aldeia Nova",          logo: logoAldeia    },
-  { name: "JMAS",                 logo: logoJmas      },
-  { name: "Jambo",                logo: logoJambo     },
-  { name: "BioPrev",              logo: logoBioprev   },
+  { name: "Carrinho",             logo: logoCarrinho   },
+  { name: "Sonangalp",            logo: logoSonangalp  },
+  { name: "Noble Group",          logo: logoNoble      },
+  { name: "Lubafrica",            logo: logoLubafrica  },
+  { name: "AGT",                  logo: logoAgt        },
+  { name: "Aldeia Nova",          logo: logoAldeia     },
+  { name: "JMAS",                 logo: logoJmas       },
+  { name: "Jambo",                logo: logoJambo      },
+  { name: "BioPrev",              logo: logoBioprev    },
+  { name: "Fazenda Boi Verde",    logo: logoBoiVerde   },
+  { name: "Fazenda Ouro Verde",   logo: logoOuroVerde  },
 ];
 
-// Row 2 — logos exclusivos (9)
+// Row 2 — logos exclusivos (11)
 const PARCEIROS_ROW2: PartnerItem[] = [
-  { name: "Hipermaquinas Angola", logo: logoHma       },
-  { name: "CFM",                  logo: logoCfm       },
-  { name: "Granisul",             logo: logoGranisul  },
-  { name: "Angostone",            logo: logoAngostone },
-  { name: "Sucoma",               logo: logoSucoma    },
-  { name: "WIX Filters",          logo: logoWix       },
-  { name: "Andaimes Carvalho",    logo: logoAndaimes  },
-  { name: "Jardins da Yoba",      logo: logoYoba      },
-  { name: "OCOLIL",               logo: logoOcolil    },
+  { name: "Hipermaquinas Angola", logo: logoHma        },
+  { name: "CFM",                  logo: logoCfm        },
+  { name: "Granisul",             logo: logoGranisul   },
+  { name: "Angostone",            logo: logoAngostone  },
+  { name: "Sucoma",               logo: logoSucoma     },
+  { name: "WIX Filters",          logo: logoWix        },
+  { name: "Andaimes Carvalho",    logo: logoAndaimes   },
+  { name: "Jardins da Yoba",      logo: logoYoba       },
+  { name: "OCOLIL",               logo: logoOcolil     },
+  { name: "Fazenda Tchimbolelo",  logo: logoTchimbolelo},
+  { name: "ADRA",                 logo: logoAdra       },
 ];
 
-// Row 3 — logos exclusivos (8)
+// Row 3 — logos exclusivos (9)
 const PARCEIROS_ROW3: PartnerItem[] = [
-  { name: "Grupo Liberatos",      logo: logoLiberatos },
-  { name: "Fazenda Tchissola",    logo: logoTchissola },
-  { name: "Group 2",              logo: logoGroup2    },
-  { name: "Fazenda Girassol",     logo: logoGirassol  },
-  { name: "Pumangol",             logo: logoPumangol  },
-  { name: "Angola",               logo: logoAngola    },
-  { name: "Planasul",             logo: logoPlanasul  },
-  { name: "Metalosul",            logo: logoMetalosul },
+  { name: "Grupo Liberatos",      logo: logoLiberatos  },
+  { name: "Fazenda Tchissola",    logo: logoTchissola  },
+  { name: "Group 2",              logo: logoGroup2     },
+  { name: "Fazenda Girassol",     logo: logoGirassol   },
+  { name: "Pumangol",             logo: logoPumangol   },
+  { name: "Angola",               logo: logoAngola     },
+  { name: "Planasul",             logo: logoPlanasul   },
+  { name: "Metalosul",            logo: logoMetalosul  },
+  { name: "ProTuning",            logo: logoProTuning  },
 ];
 
 function LogoChip({ item }: { item: PartnerItem }) {
