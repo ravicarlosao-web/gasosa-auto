@@ -2896,6 +2896,15 @@ function NoticiaDrawer({
   onClose: () => void;
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [winW, setWinW] = useState(() => typeof window !== "undefined" ? window.innerWidth : 1280);
+
+  useEffect(() => {
+    const onResize = () => setWinW(window.innerWidth);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const isMobile = winW < 768;
 
   useEffect(() => {
     if (article && scrollRef.current) scrollRef.current.scrollTop = 0;
@@ -2935,10 +2944,27 @@ function NoticiaDrawer({
 
           <motion.div
             ref={scrollRef}
-            initial={{ x: "100%" }}
-            animate={{ x: 0, transition: { type: "tween", duration: 0.78, ease: [0.16, 1, 0.3, 1] } }}
-            exit={{ x: "100%", transition: { type: "tween", duration: 0.42, ease: [0.4, 0, 1, 1] } }}
-            style={{
+            initial={isMobile ? { y: "100%" } : { x: "100%" }}
+            animate={isMobile
+              ? { y: 0, transition: { type: "tween", duration: 0.62, ease: [0.16, 1, 0.3, 1] } }
+              : { x: 0, transition: { type: "tween", duration: 0.78, ease: [0.16, 1, 0.3, 1] } }
+            }
+            exit={isMobile
+              ? { y: "100%", transition: { type: "tween", duration: 0.36, ease: [0.4, 0, 1, 1] } }
+              : { x: "100%", transition: { type: "tween", duration: 0.42, ease: [0.4, 0, 1, 1] } }
+            }
+            style={isMobile ? {
+              position: "fixed",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              height: "92vh",
+              borderRadius: "20px 20px 0 0",
+              background: "#F5EFE9",
+              zIndex: 301,
+              overflowY: "auto",
+              fontFamily: "'Poppins', sans-serif",
+            } : {
               position: "fixed",
               top: 0,
               right: 0,
@@ -2950,16 +2976,23 @@ function NoticiaDrawer({
               fontFamily: "'Poppins', sans-serif",
             }}
           >
+            {/* ── Mobile drag handle ── */}
+            {isMobile && (
+              <div style={{ display: "flex", justifyContent: "center", paddingTop: "14px", paddingBottom: "2px", flexShrink: 0 }}>
+                <div style={{ width: "40px", height: "4px", borderRadius: "99px", background: "rgba(0,0,0,0.18)" }} />
+              </div>
+            )}
+
             <motion.button
               onClick={onClose}
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.92 }}
               style={{
                 position: "sticky",
-                top: "20px",
+                top: isMobile ? "12px" : "20px",
                 float: "right",
                 marginRight: "20px",
-                marginTop: "20px",
+                marginTop: isMobile ? "12px" : "20px",
                 width: "44px",
                 height: "44px",
                 borderRadius: "50%",
@@ -3136,6 +3169,16 @@ function NoticiasPage() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<(typeof NOTICIAS_ARTICLES)[0] | null>(null);
+  const [winW, setWinW] = useState(() => typeof window !== "undefined" ? window.innerWidth : 1280);
+
+  useEffect(() => {
+    const onResize = () => setWinW(window.innerWidth);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  const isMobile = winW < 640;
+  const isTablet = winW >= 640 && winW < 1024;
 
   const filters = ["Todos", "Automóvel", "Agrícola", "Industrial", "Institucional", "Press"];
 
@@ -3240,10 +3283,18 @@ function NoticiasPage() {
           style={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "center",
-            flexWrap: "wrap",
+            justifyContent: isMobile ? "flex-start" : "center",
+            overflowX: isMobile ? "auto" : "visible",
+            flexWrap: isMobile ? "nowrap" : "wrap",
             gap: "0",
-          }}
+            paddingBottom: isMobile ? "4px" : "0",
+            paddingLeft: isMobile ? "clamp(20px, 5vw, 80px)" : "0",
+            paddingRight: isMobile ? "clamp(20px, 5vw, 80px)" : "0",
+            marginLeft: isMobile ? "clamp(-20px, -5vw, -80px)" : "0",
+            marginRight: isMobile ? "clamp(-20px, -5vw, -80px)" : "0",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          } as React.CSSProperties}
         >
           {filters.map((f, i) => {
             const isActive = f === activeFilter;
@@ -3260,12 +3311,13 @@ function NoticiasPage() {
                   borderRadius: "99px",
                   padding: "5px 18px",
                   cursor: "pointer",
-                  marginRight: i < filters.length - 1 ? "12px" : "0",
-                  marginBottom: "8px",
+                  marginRight: i < filters.length - 1 ? "10px" : "0",
+                  marginBottom: isMobile ? "0" : "8px",
                   transition: "all 0.2s ease",
                   fontFamily: "'Poppins', sans-serif",
                   letterSpacing: "0.01em",
                   whiteSpace: "nowrap",
+                  flexShrink: 0,
                 }}
               >
                 {f}
@@ -3289,7 +3341,7 @@ function NoticiasPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gridTemplateColumns: isMobile ? "1fr" : isTablet ? "repeat(2, 1fr)" : "repeat(3, 1fr)",
               gridTemplateRows: "auto",
               gap: "clamp(12px, 2vw, 24px)",
             }}
@@ -3303,7 +3355,7 @@ function NoticiasPage() {
                 viewport={viewport}
                 transition={{ type: "spring", stiffness: 85, damping: 22 }}
                 style={{
-                  gridColumn: "span 2",
+                  gridColumn: isMobile ? "1" : "span 2",
                   borderRadius: "16px",
                   overflow: "hidden",
                   background: "#EDE6DF",
