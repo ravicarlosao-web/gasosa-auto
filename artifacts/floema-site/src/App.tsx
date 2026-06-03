@@ -3220,12 +3220,12 @@ function NoticiasPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 90, damping: 22, delay: 0.07 }}
           style={{
-            fontSize: "clamp(1.9rem, 1.2rem + 3.5vw, 4.2rem)",
+            fontSize: "clamp(1.55rem, 0.9rem + 2.8vw, 3.4rem)",
             fontWeight: 500,
             color: "#111111",
             lineHeight: 1.18,
             letterSpacing: "-0.025em",
-            maxWidth: "820px",
+            maxWidth: "1060px",
             margin: "0 auto 44px",
           }}
         >
