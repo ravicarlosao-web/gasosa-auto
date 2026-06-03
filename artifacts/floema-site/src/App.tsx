@@ -2897,6 +2897,8 @@ function NoticiaDrawer({
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [winW, setWinW] = useState(() => typeof window !== "undefined" ? window.innerWidth : 1280);
+  const { t: drawerLang } = useLang();
+  const drawerT = drawerLang.noticias;
 
   useEffect(() => {
     const onResize = () => setWinW(window.innerWidth);
@@ -3069,7 +3071,7 @@ function NoticiaDrawer({
                   letterSpacing: "0.04em",
                 }}
               >
-                Continuar a ler ↓
+                {drawerT.continuarLer}
               </div>
             </div>
 
@@ -3170,6 +3172,7 @@ function NoticiasPage() {
   const [subscribed, setSubscribed] = useState(false);
   const [selectedArticle, setSelectedArticle] = useState<(typeof NOTICIAS_ARTICLES)[0] | null>(null);
   const [winW, setWinW] = useState(() => typeof window !== "undefined" ? window.innerWidth : 1280);
+  const { t } = useLang();
 
   useEffect(() => {
     const onResize = () => setWinW(window.innerWidth);
@@ -3179,8 +3182,16 @@ function NoticiasPage() {
 
   const isMobile = winW < 640;
   const isTablet = winW >= 640 && winW < 1024;
+  const tn = t.noticias;
 
-  const filters = ["Todos", "Automóvel", "Agrícola", "Industrial", "Institucional", "Press"];
+  const filterDefs = [
+    { value: "Todos",         label: tn.filterAll },
+    { value: "Automóvel",     label: tn.filterAutomovel },
+    { value: "Agrícola",      label: tn.filterAgricola },
+    { value: "Industrial",    label: tn.filterIndustrial },
+    { value: "Institucional", label: tn.filterInstitucional },
+    { value: "Press",         label: tn.filterPress },
+  ];
 
   const filtered = activeFilter === "Todos"
     ? NOTICIAS_ARTICLES
@@ -3221,7 +3232,7 @@ function NoticiasPage() {
           </Link>
           <nav className="hidden lg:flex items-center gap-3">
             <div className="flex items-center gap-0.5">
-              {["Quem Somos", "Sectores", "Infraestruturas", "Notícias", "Contactos"].map(item => (
+              {t.nav.map((item) => (
                 <NavPill key={item} item={item} />
               ))}
             </div>
@@ -3231,7 +3242,7 @@ function NoticiasPage() {
             className="lg:hidden"
             style={{ padding: "clamp(6px, 1.2vw, 10px)", color: "#111111", background: "none", border: "none", cursor: "pointer" }}
             onClick={() => setMobileMenuOpen(true)}
-            aria-label="Abrir menu"
+            aria-label={t.mobile.openMenu}
           >
             <Menu style={{ width: "clamp(20px, 3vw, 26px)", height: "clamp(20px, 3vw, 26px)" }} />
           </button>
@@ -3255,7 +3266,7 @@ function NoticiasPage() {
           transition={{ type: "spring", stiffness: 200, damping: 28 }}
           style={{ fontSize: "0.78rem", fontWeight: 500, letterSpacing: "0.14em", color: "rgba(0,0,0,0.4)", marginBottom: "28px" }}
         >
-          Notícias
+          {tn.pageLabel}
         </motion.p>
 
         <motion.h1
@@ -3272,7 +3283,7 @@ function NoticiasPage() {
             margin: "0 auto 44px",
           }}
         >
-          Registos das actividades, projectos e marcos que definem a Gasosa Auto Agro.
+          {tn.pageTitle}
         </motion.h1>
 
         {/* Filter tabs */}
@@ -3296,12 +3307,12 @@ function NoticiasPage() {
             msOverflowStyle: "none",
           } as React.CSSProperties}
         >
-          {filters.map((f, i) => {
-            const isActive = f === activeFilter;
+          {filterDefs.map(({ value, label }, i) => {
+            const isActive = value === activeFilter;
             return (
               <button
-                key={f}
-                onClick={() => setActiveFilter(f)}
+                key={value}
+                onClick={() => setActiveFilter(value)}
                 style={{
                   fontSize: "clamp(0.72rem, 0.65rem + 0.3vw, 0.88rem)",
                   fontWeight: isActive ? 600 : 400,
@@ -3311,7 +3322,7 @@ function NoticiasPage() {
                   borderRadius: "99px",
                   padding: "5px 18px",
                   cursor: "pointer",
-                  marginRight: i < filters.length - 1 ? "10px" : "0",
+                  marginRight: i < filterDefs.length - 1 ? "10px" : "0",
                   marginBottom: isMobile ? "0" : "8px",
                   transition: "all 0.2s ease",
                   fontFamily: "'Poppins', sans-serif",
@@ -3320,7 +3331,7 @@ function NoticiasPage() {
                   flexShrink: 0,
                 }}
               >
-                {f}
+                {label}
               </button>
             );
           })}
@@ -3332,7 +3343,7 @@ function NoticiasPage() {
         {/* Section label */}
         <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(24px, 3vw, 40px)" }}>
           <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>
-            Últimos Artigos
+            {tn.ultimosArtigos}
           </span>
           <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
         </div>
@@ -3442,7 +3453,7 @@ function NoticiasPage() {
 
       {/* ── Category: Institucional ── */}
       <NoticiasCategorySection
-        titulo="Institucional"
+        titulo={tn.categoriaInstitucional}
         articles={institucional}
         viewport={viewport}
         onSelect={setSelectedArticle}
@@ -3450,7 +3461,7 @@ function NoticiasPage() {
 
       {/* ── Category: Automóvel ── */}
       <NoticiasCategorySection
-        titulo="Automóvel"
+        titulo={tn.categoriaAutomovel}
         articles={automovel}
         viewport={viewport}
         onSelect={setSelectedArticle}
@@ -3491,7 +3502,7 @@ function NoticiasPage() {
             margin: "0 auto 40px",
           }}
         >
-          As últimas novidades, servidas na tua caixa de entrada.
+          {tn.newsletterTitle}
         </motion.h2>
 
         <motion.form
@@ -3508,7 +3519,7 @@ function NoticiasPage() {
               animate={{ opacity: 1, scale: 1 }}
               style={{ fontSize: "1rem", fontWeight: 500, color: "#003591" }}
             >
-              Obrigado! Irá receber as nossas novidades em breve.
+              {tn.newsletterSuccess}
             </motion.p>
           ) : (
             <>
@@ -3517,7 +3528,7 @@ function NoticiasPage() {
                   type="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
-                  placeholder="O seu email *"
+                  placeholder={tn.emailPlaceholder}
                   required
                   style={{
                     width: "100%",
@@ -3554,13 +3565,13 @@ function NoticiasPage() {
                 onMouseEnter={e => (e.currentTarget.style.background = "#003591")}
                 onMouseLeave={e => (e.currentTarget.style.background = "#111111")}
               >
-                Subscrever
+                {tn.subscribeBtn}
               </button>
             </>
           )}
           <p style={{ fontSize: "0.72rem", color: "rgba(0,0,0,0.4)", maxWidth: "400px", lineHeight: 1.6, margin: 0 }}>
-            Ao submeter o seu e-mail, você concorda com a nossa{" "}
-            <a href="#" style={{ color: "rgba(0,0,0,0.55)", textDecoration: "underline" }}>Política de Privacidade</a>.
+            {tn.privacyText}{" "}
+            <a href="#" style={{ color: "rgba(0,0,0,0.55)", textDecoration: "underline" }}>{tn.privacyLink}</a>.
           </p>
         </motion.form>
       </section>
@@ -3585,6 +3596,7 @@ function NoticiasCategorySection({
 }) {
   const PAD = { paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" };
   const WRAP = { maxWidth: "1400px", margin: "0 auto", ...PAD };
+  const { t: catLang } = useLang();
   const [winW, setWinW] = useState(() => (typeof window !== "undefined" ? window.innerWidth : 1280));
   useEffect(() => {
     const onResize = () => setWinW(window.innerWidth);
@@ -3636,7 +3648,7 @@ function NoticiasCategorySection({
           onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#111111")}
           onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(0,0,0,0.45)")}
         >
-          Ver todos →
+          {catLang.noticias.verTodos}
         </motion.a>
       </div>
 
