@@ -230,40 +230,59 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
     <AnimatePresence>
       {open && (
         <motion.div
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
-          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          initial={{ opacity: 0, y: "-6%", scale: 0.98 }}
+          animate={{ opacity: 1, y: "0%", scale: 1 }}
+          exit={{ opacity: 0, y: "-4%", scale: 0.98 }}
+          transition={{ type: "spring", stiffness: 340, damping: 32, mass: 0.85 }}
           className="fixed inset-0 z-[60] bg-background flex flex-col px-6 pt-6 pb-12"
+          style={{ transformOrigin: "top center" }}
         >
           <div className="flex items-center justify-between mb-10">
             <Link href="/" onClick={onClose}>
               <img src={logoSrc} alt="Gasosa Auto Agro" className="h-11 w-auto object-contain" />
             </Link>
-            <button onClick={onClose} className="p-2 text-foreground">
+            <motion.button
+              onClick={onClose}
+              className="p-2 text-foreground"
+              whileTap={{ scale: 0.88, rotate: 90 }}
+              transition={{ type: "spring", stiffness: 400, damping: 22 }}
+            >
               <X className="w-6 h-6" />
-            </button>
+            </motion.button>
           </div>
-          <nav className="flex flex-col gap-2">
+          <nav className="flex flex-col gap-0">
             {t.nav.map((item, i) => (
               <motion.div
                 key={item}
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.06, type: "spring", stiffness: 400, damping: 28 }}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.055, type: "spring", stiffness: 280, damping: 28 }}
               >
                 <Link
                   href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
                   onClick={onClose}
-                  className="text-xl font-semibold tracking-wide text-foreground py-3 border-b border-foreground/10 flex items-center justify-between"
+                  className="text-2xl font-medium tracking-tight text-foreground py-4 border-b border-foreground/8 flex items-center justify-between"
+                  style={{ letterSpacing: "-0.02em" }}
                 >
                   {item}
-                  <span style={{ color: "#003591" }}>→</span>
+                  <motion.span
+                    style={{ color: "#003591", display: "inline-block" }}
+                    initial={{ x: -4, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: i * 0.055 + 0.12, type: "spring", stiffness: 300, damping: 24 }}
+                  >
+                    →
+                  </motion.span>
                 </Link>
               </motion.div>
             ))}
           </nav>
-          <div className="mt-8 flex gap-2">
+          <motion.div
+            className="mt-10 flex gap-2"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: t.nav.length * 0.055 + 0.08, type: "spring", stiffness: 240, damping: 26 }}
+          >
             {LANGUAGES.map((l) => (
               <button
                 key={l.code}
@@ -276,7 +295,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                 {l.label}
               </button>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
@@ -510,14 +529,24 @@ function HistoriaSection() {
 
 // ─── SectoresSection ──────────────────────────────────────────────────────────
 
+const EASE_OUT: [number, number, number, number] = [0.0, 0, 0.18, 1];
+
 const textVariants = {
-  enter: (d: number) => ({ opacity: 0, y: d > 0 ? 36 : -36 }),
-  center: { opacity: 1, y: 0, transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } },
-  exit: (d: number) => ({ opacity: 0, y: d > 0 ? 36 : -36, transition: { duration: 0.38, ease: [0.4, 0, 0.6, 1] } }),
+  enter: (d: number) => ({ opacity: 0, y: d > 0 ? 30 : -30 }),
+  center: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      y:      { type: "spring" as const, stiffness: 120, damping: 24, restDelta: 0.001 },
+      opacity:{ duration: 0.6, ease: EASE_OUT },
+    },
+  },
+  exit: (d: number) => ({ opacity: 0, y: d > 0 ? 30 : -30, transition: { duration: 0.28, ease: [0.4, 0, 0.6, 1] as [number, number, number, number] } }),
 };
 
 function SectoresSection() {
   const { t } = useLang();
+  const isMobile = useIsMobile();
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const directionRef = useRef<number>(1);
@@ -529,6 +558,7 @@ function SectoresSection() {
   });
 
   useEffect(() => {
+    if (isMobile) return;
     return scrollYProgress.on("change", (v) => {
       const next = v < 1 / 3 ? 0 : v < 2 / 3 ? 1 : 2;
       if (next !== activeIndexRef.current) {
@@ -537,7 +567,7 @@ function SectoresSection() {
         setActiveIndex(next);
       }
     });
-  }, [scrollYProgress]);
+  }, [scrollYProgress, isMobile]);
 
   const sectorsT = SECTORES_DATA.map((s, i) => ({
     ...s,
@@ -559,6 +589,81 @@ function SectoresSection() {
       });
     });
   }, []);
+
+  /* ── Mobile version — tabbed card layout (no sticky scroll) ──── */
+  if (isMobile) {
+    return (
+      <div style={{ background: "#F5EFE9", fontFamily: "'Poppins', sans-serif", padding: "clamp(48px, 8vw, 80px) 0" }}>
+        <div style={{ maxWidth: "480px", margin: "0 auto", padding: "0 clamp(20px, 5vw, 32px)" }}>
+          {/* Tab bar */}
+          <div style={{ display: "flex", gap: "8px", marginBottom: "clamp(28px, 6vw, 44px)", flexWrap: "wrap" }}>
+            {sectorsT.map((s, i) => (
+              <motion.button
+                key={s.key}
+                onClick={() => {
+                  directionRef.current = i > activeIndex ? 1 : -1;
+                  activeIndexRef.current = i;
+                  setActiveIndex(i);
+                }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 24 }}
+                style={{
+                  fontSize: "0.82rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.01em",
+                  padding: "8px 18px",
+                  borderRadius: "99px",
+                  border: "none",
+                  cursor: "pointer",
+                  fontFamily: "'Poppins', sans-serif",
+                  transition: "background 0.25s, color 0.25s",
+                  background: i === activeIndex ? "#111111" : "rgba(0,0,0,0.08)",
+                  color: i === activeIndex ? "#ffffff" : "rgba(0,0,0,0.55)",
+                }}
+              >
+                {s.name}
+              </motion.button>
+            ))}
+          </div>
+
+          {/* Active sector content */}
+          <AnimatePresence mode="wait" custom={dir}>
+            <motion.div
+              key={`mobile-sector-${activeIndex}`}
+              custom={dir}
+              variants={{
+                enter: (d: number) => ({ opacity: 0, x: d > 0 ? 24 : -24 }),
+                center: { opacity: 1, x: 0, transition: { type: "spring" as const, stiffness: 280, damping: 28, mass: 0.85 } },
+                exit: (d: number) => ({ opacity: 0, x: d > 0 ? -24 : 24, transition: { duration: 0.22 } }),
+              }}
+              initial="enter"
+              animate="center"
+              exit="exit"
+            >
+              {/* Image */}
+              <div style={{ width: "100%", aspectRatio: "4/3", borderRadius: "16px", overflow: "hidden", marginBottom: "24px" }}>
+                <img
+                  src={active.image}
+                  alt={active.name}
+                  style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                />
+              </div>
+              {/* Name */}
+              <p style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.15em", color: "#F5A000", marginBottom: "10px", textTransform: "uppercase" }}>
+                {active.tagline}
+              </p>
+              <h2 style={{ fontSize: "clamp(1.6rem, 5vw, 2.2rem)", fontWeight: 400, color: "#111111", lineHeight: 1.18, letterSpacing: "-0.03em", margin: "0 0 16px" }}>
+                {active.subtitle}
+              </h2>
+              <p style={{ fontSize: "0.92rem", color: "rgba(0,0,0,0.55)", lineHeight: 1.78, fontWeight: 400, margin: 0 }}>
+                {active.description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} style={{ height: "200vh", position: "relative" }}>
@@ -959,10 +1064,10 @@ function MarcasRepresentadasSection() {
           <AnimatePresence mode="wait">
             <motion.div
               key={showBrand ? "brand" : "default"}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+              exit={{ opacity: 0, y: -14 }}
+              transition={{ type: "spring", stiffness: 200, damping: 28 }}
               style={{ display: "flex", flexDirection: "column", alignItems: "center", width: "100%" }}
             >
               <h2
@@ -1152,29 +1257,29 @@ function MarqueeRow({
 }
 
 const FADE_UP = {
-  hidden: { opacity: 0, y: 36, filter: "blur(10px)" },
+  hidden: { opacity: 0, y: 28, filter: "blur(8px)" },
   visible: (delay: number) => ({
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
     transition: {
-      y:      { type: "spring", stiffness: 52, damping: 18, restDelta: 0.001, delay },
-      opacity:{ duration: 1.0, ease: [0.0, 0, 0.18, 1], delay },
-      filter: { duration: 0.9, ease: [0.0, 0, 0.18, 1], delay: delay + 0.04 },
+      y:      { type: "spring" as const, stiffness: 90, damping: 22, restDelta: 0.001, delay },
+      opacity:{ duration: 0.85, ease: EASE_OUT, delay },
+      filter: { duration: 0.75, ease: EASE_OUT, delay: delay + 0.04 },
     },
   }),
 };
 
 const REVEAL_ROW = {
-  hidden: { opacity: 0, y: 52, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 44, filter: "blur(6px)" },
   visible: (delay: number) => ({
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
     transition: {
-      y:      { type: "spring", stiffness: 44, damping: 16, restDelta: 0.001, delay },
-      opacity:{ duration: 1.1, ease: [0.0, 0, 0.18, 1], delay },
-      filter: { duration: 1.0, ease: [0.0, 0, 0.18, 1], delay: delay + 0.06 },
+      y:      { type: "spring" as const, stiffness: 75, damping: 20, restDelta: 0.001, delay },
+      opacity:{ duration: 0.95, ease: EASE_OUT, delay },
+      filter: { duration: 0.85, ease: EASE_OUT, delay: delay + 0.06 },
     },
   }),
 };
@@ -1396,7 +1501,8 @@ function UltimasNoticiasSection() {
                 transition: "box-shadow 0.25s",
                 cursor: "pointer",
               }}
-              whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(0,0,0,0.13)" }}
+              whileHover={{ y: -6, boxShadow: "0 16px 48px rgba(0,0,0,0.14)" }}
+              whileTap={{ scale: 0.99 }}
             >
               {/* Photo */}
               <div
@@ -1415,7 +1521,7 @@ function UltimasNoticiasSection() {
                     height: "100%",
                     objectFit: "cover",
                     display: "block",
-                    transition: "transform 0.45s ease",
+                    transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)",
                   }}
                   onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.06)")}
                   onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
@@ -1748,6 +1854,7 @@ function Home() {
 // ─── InfraestrutrasPage ───────────────────────────────────────────────────────
 function InfraestrutrasPage() {
   const { t } = useLang();
+  const isMobile = useIsMobile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const inf = t.infraestruturas;
 
@@ -1880,9 +1987,9 @@ function InfraestrutrasPage() {
 
           {/* Main title */}
           <motion.h1
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 44 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+            transition={{ type: "spring", stiffness: 80, damping: 22, delay: 0.15 }}
             style={{
               fontFamily: "'Poppins', sans-serif",
               fontSize: "clamp(3rem, 1.5rem + 7vw, 8.5rem)",
@@ -2052,7 +2159,7 @@ function InfraestrutrasPage() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
+          gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr",
           width: "100%",
           gap: "2px",
         }}
@@ -2064,10 +2171,10 @@ function InfraestrutrasPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
-            custom={i * 0.1}
+            custom={i * 0.08}
             style={{
               position: "relative",
-              height: "clamp(200px, 28vh, 380px)",
+              height: isMobile ? "clamp(180px, 55vw, 320px)" : "clamp(200px, 28vh, 380px)",
               overflow: "hidden",
               background: "#111",
             }}
@@ -2078,7 +2185,7 @@ function InfraestrutrasPage() {
               loading="lazy"
               decoding="async"
               whileHover={{ scale: 1.06 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ type: "spring", stiffness: 120, damping: 22 }}
               style={{
                 position: "absolute",
                 inset: 0,
@@ -2154,7 +2261,7 @@ function InfraestrutrasPage() {
       </div>
 
       {/* ── Luanda — strip loja (4 fotos) ── */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", width: "100%", gap: "2px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr 1fr 1fr", width: "100%", gap: "2px" }}>
         {[infraLuandaLoja1, infraLuandaLoja2, infraLuandaLoja3, infraLuandaLoja4].map((src, i) => (
           <motion.div
             key={i}
@@ -2162,8 +2269,8 @@ function InfraestrutrasPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
-            custom={i * 0.08}
-            style={{ position: "relative", height: "clamp(180px, 24vh, 320px)", overflow: "hidden", background: "#111" }}
+            custom={i * 0.07}
+            style={{ position: "relative", height: isMobile ? "clamp(140px, 44vw, 240px)" : "clamp(180px, 24vh, 320px)", overflow: "hidden", background: "#111" }}
           >
             <motion.img
               src={src}
@@ -2171,7 +2278,7 @@ function InfraestrutrasPage() {
               loading="lazy"
               decoding="async"
               whileHover={{ scale: 1.07 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ type: "spring", stiffness: 120, damping: 22 }}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
             />
           </motion.div>
@@ -2179,7 +2286,7 @@ function InfraestrutrasPage() {
       </div>
 
       {/* ── Luanda — strip oficina (3 fotos) ── */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", width: "100%", gap: "2px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", width: "100%", gap: "2px" }}>
         {[infraLuandaOfic1, infraLuandaOfic2, infraLuandaOfic3].map((src, i) => (
           <motion.div
             key={i}
@@ -2187,8 +2294,8 @@ function InfraestrutrasPage() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
-            custom={i * 0.1}
-            style={{ position: "relative", height: "clamp(200px, 28vh, 360px)", overflow: "hidden", background: "#111" }}
+            custom={i * 0.09}
+            style={{ position: "relative", height: isMobile ? "clamp(180px, 55vw, 320px)" : "clamp(200px, 28vh, 360px)", overflow: "hidden", background: "#111" }}
           >
             <motion.img
               src={src}
@@ -2196,7 +2303,7 @@ function InfraestrutrasPage() {
               loading="lazy"
               decoding="async"
               whileHover={{ scale: 1.06 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ type: "spring", stiffness: 120, damping: 22 }}
               style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
             />
           </motion.div>
@@ -2769,18 +2876,18 @@ function NoticiasPage() {
         }}
       >
         <motion.p
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ type: "spring", stiffness: 200, damping: 28 }}
           style={{ fontSize: "0.78rem", fontWeight: 500, letterSpacing: "0.14em", color: "rgba(0,0,0,0.4)", marginBottom: "28px" }}
         >
           Notícias
         </motion.p>
 
         <motion.h1
-          initial={{ opacity: 0, y: 28 }}
+          initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          transition={{ type: "spring", stiffness: 90, damping: 22, delay: 0.07 }}
           style={{
             fontSize: "clamp(1.9rem, 1.2rem + 3.5vw, 4.2rem)",
             fontWeight: 500,
@@ -2796,9 +2903,9 @@ function NoticiasPage() {
 
         {/* Filter tabs */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.28 }}
+          transition={{ type: "spring", stiffness: 180, damping: 26, delay: 0.18 }}
           style={{
             display: "flex",
             alignItems: "center",
@@ -2862,7 +2969,7 @@ function NoticiasPage() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewport}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ type: "spring", stiffness: 85, damping: 22 }}
                 style={{
                   gridColumn: "span 2",
                   borderRadius: "16px",
@@ -2872,13 +2979,14 @@ function NoticiasPage() {
                   display: "flex",
                   flexDirection: "column",
                 }}
-                whileHover={{ y: -3 }}
+                whileHover={{ y: -6 }}
+                whileTap={{ scale: 0.99 }}
               >
                 <div style={{ width: "100%", aspectRatio: "16/9", overflow: "hidden", flexShrink: 0 }}>
                   <img
                     src={latest[0].img}
                     alt={latest[0].titulo}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease" }}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)" }}
                     onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.04)")}
                     onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
                   />
@@ -2908,7 +3016,7 @@ function NoticiasPage() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewport}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: (i + 1) * 0.1 }}
+                transition={{ type: "spring", stiffness: 85, damping: 22, delay: (i + 1) * 0.07 }}
                 style={{
                   borderRadius: "16px",
                   overflow: "hidden",
@@ -2917,13 +3025,14 @@ function NoticiasPage() {
                   display: "flex",
                   flexDirection: "column",
                 }}
-                whileHover={{ y: -3 }}
+                whileHover={{ y: -6 }}
+                whileTap={{ scale: 0.99 }}
               >
                 <div style={{ width: "100%", aspectRatio: "4/3", overflow: "hidden", flexShrink: 0 }}>
                   <img
                     src={article.img}
                     alt={article.titulo}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease" }}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)" }}
                     onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
                     onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
                   />
@@ -3086,6 +3195,12 @@ function NoticiasCategorySection({
 }) {
   const PAD = { paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" };
   const WRAP = { maxWidth: "1400px", margin: "0 auto", ...PAD };
+  const [winW, setWinW] = useState(() => (typeof window !== "undefined" ? window.innerWidth : 1280));
+  useEffect(() => {
+    const onResize = () => setWinW(window.innerWidth);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   return (
     <section style={{ ...WRAP, marginBottom: "clamp(64px, 9vw, 120px)" }}>
@@ -3135,11 +3250,11 @@ function NoticiasCategorySection({
         </motion.a>
       </div>
 
-      {/* 3-col grid — first card spans 2 rows (taller) */}
+      {/* responsive grid — 1 col mobile / 2 col tablet / 3 col desktop */}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateColumns: winW < 580 ? "1fr" : winW < 900 ? "repeat(2, 1fr)" : "repeat(3, 1fr)",
           gridTemplateRows: "auto",
           gap: "clamp(10px, 1.8vw, 20px)",
         }}
@@ -3150,7 +3265,7 @@ function NoticiasCategorySection({
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewport}
-            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
+            transition={{ type: "spring", stiffness: 80, damping: 20, delay: i * 0.07 }}
             style={{
               borderRadius: "14px",
               overflow: "hidden",
@@ -3158,9 +3273,10 @@ function NoticiasCategorySection({
               cursor: "pointer",
               display: "flex",
               flexDirection: "column",
-              gridRow: i === 0 ? "span 2" : undefined,
+              gridRow: i === 0 && winW >= 900 ? "span 2" : undefined,
             }}
-            whileHover={{ y: -3 }}
+            whileHover={{ y: -5 }}
+            whileTap={{ scale: 0.98 }}
           >
             <div
               style={{
@@ -3173,7 +3289,7 @@ function NoticiasCategorySection({
               <img
                 src={article.img}
                 alt={article.titulo}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease" }}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)" }}
                 onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
                 onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
               />
