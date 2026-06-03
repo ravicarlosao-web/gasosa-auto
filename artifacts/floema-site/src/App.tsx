@@ -2710,7 +2710,20 @@ function Footer() {
 }
 
 // ─── NoticiasPage ─────────────────────────────────────────────────────────────
-const NOTICIAS_ARTICLES = [
+type NoticiaBlock =
+  | { type: "paragraph"; text: string }
+  | { type: "heading"; text: string }
+  | { type: "image"; src: string; caption?: string };
+
+const NOTICIAS_ARTICLES: {
+  img: string;
+  categoria: string;
+  titulo: string;
+  resumo: string;
+  data: string;
+  featured?: boolean;
+  conteudo: NoticiaBlock[];
+}[] = [
   {
     img: infraHeroImg,
     categoria: "Institucional",
@@ -2718,6 +2731,13 @@ const NOTICIAS_ARTICLES = [
     resumo: "A nova estrutura no Huambo reforça a capacidade de resposta nas províncias do planalto central, com mais de 3 000 m² dedicados a armazém, loja e oficina.",
     data: "3 de Junho de 2026",
     featured: true,
+    conteudo: [
+      { type: "paragraph", text: "A inauguração das novas instalações no Huambo marca um passo decisivo na estratégia de expansão nacional da Gasosa Auto Agro. Com mais de 3 000 m² de área construída, a unidade integra um amplo armazém, uma loja equipada com toda a gama de produtos da empresa e uma oficina de serviços rápidos com equipamento de diagnóstico de última geração." },
+      { type: "image", src: infraHuamboExt, caption: "Exterior das novas instalações no Huambo" },
+      { type: "heading", text: "Investimento no coração de Angola" },
+      { type: "paragraph", text: "O Huambo, cidade de referência do planalto central, representa um mercado estratégico para a Gasosa Auto Agro. A região concentra uma actividade agrícola e industrial crescente, e a nova unidade posiciona a empresa como parceiro de proximidade para cooperativas, empresas de construção, frotas e particulares." },
+      { type: "paragraph", text: "A unidade passa a disponibilizar toda a gama de lubrificantes Nergytech, Petronas, Castrol e Galp, ferramentas agrícolas Pangulino e peças para veículos ligeiros, pesados e industriais — com stock permanente e atendimento especializado." },
+    ],
   },
   {
     img: nergyImg3,
@@ -2726,6 +2746,13 @@ const NOTICIAS_ARTICLES = [
     resumo: "Gasosa Auto Agro renova e amplia o acordo exclusivo com a Nergytech em Angola, trazendo novas referências de baterias e acessórios ao mercado nacional.",
     data: "26 de Maio de 2026",
     featured: false,
+    conteudo: [
+      { type: "paragraph", text: "A Gasosa Auto Agro renova e amplia o acordo de representação exclusiva com a Nergytech em Angola para o período 2025-2027. O novo contrato alarga o âmbito da parceria a toda a gama de produtos Nergytech, incluindo baterias de alto desempenho, sistemas de iluminação e acessórios para veículos ligeiros, pesados e industriais." },
+      { type: "image", src: nergyImg4, caption: "Gama de baterias Nergytech disponíveis nas lojas Gasosa Auto Agro" },
+      { type: "heading", text: "Uma parceria de referência" },
+      { type: "paragraph", text: "A Nergytech é reconhecida internacionalmente pela qualidade e durabilidade dos seus produtos. Com a Gasosa Auto Agro como representante exclusivo em Angola, os clientes angolanos têm acesso garantido às mais recentes referências da marca em stock permanente nas três unidades da empresa: Luanda, Lubango e Huambo." },
+      { type: "paragraph", text: "Para 2025, estão previstas acções de formação técnica para a equipa da Gasosa Auto Agro e campanhas de comunicação conjunta, reforçando o posicionamento das duas marcas no mercado angolano." },
+    ],
   },
   {
     img: infraHuamboExt,
@@ -2734,6 +2761,13 @@ const NOTICIAS_ARTICLES = [
     resumo: "A marca própria da Gasosa Auto Agro apresenta uma gama de ferramentas desenvolvidas especificamente para as condições do solo angolano.",
     data: "20 de Maio de 2026",
     featured: false,
+    conteudo: [
+      { type: "paragraph", text: "A Pangulino, marca própria da Gasosa Auto Agro, apresenta uma nova linha de ferramentas agrícolas desenvolvida especificamente para as condições do solo e do clima angolano. A gama inclui enxadas, saracotes, catanas, pás e utensílios de irrigação, produzidos com materiais resistentes ao desgaste e às temperaturas elevadas." },
+      { type: "image", src: nergyImg5, caption: "Nova gama de ferramentas Pangulino para uso agrícola" },
+      { type: "heading", text: "Desenvolvida para o campo angolano" },
+      { type: "paragraph", text: "O desenvolvimento desta nova linha resultou de um processo de pesquisa junto de agricultores e cooperativas nas províncias do Cuando Cubango, Bié e Huambo. As ferramentas foram testadas em condições reais durante vários meses, antes de serem lançadas comercialmente." },
+      { type: "paragraph", text: "A Pangulino está disponível nas três unidades da Gasosa Auto Agro e numa rede crescente de distribuidores parceiros, tornando estas ferramentas acessíveis a agricultores em todo o território nacional — com qualidade que rivaliza com marcas internacionais, a preços adaptados ao mercado angolano." },
+    ],
   },
   {
     img: infraLuandaFachada,
@@ -2741,6 +2775,12 @@ const NOTICIAS_ARTICLES = [
     titulo: "Gasosa presente na FILDA 2025 com stand de 200 m²",
     resumo: "Com presença de destaque na Feira Internacional de Luanda, a Gasosa Auto Agro apresentou as suas marcas representadas e a gama Pangulino ao público angolano.",
     data: "12 de Maio de 2026",
+    conteudo: [
+      { type: "paragraph", text: "A Gasosa Auto Agro marcou presença na Feira Internacional de Luanda 2025 (FILDA) com um stand de mais de 200 m², onde apresentou ao público a sua vasta gama de produtos e serviços. O espaço, cuidadosamente desenhado para reflectir os valores da empresa, recebeu milhares de visitantes ao longo dos cinco dias de feira." },
+      { type: "image", src: infraLuandaLoja1, caption: "Stand da Gasosa Auto Agro na FILDA 2025" },
+      { type: "heading", text: "Apresentação das marcas representadas" },
+      { type: "paragraph", text: "No stand, estiveram em destaque as marcas Nergytech, Petronas, Castrol e Galp, bem como a gama completa de produtos Pangulino. A participação na FILDA reforça o compromisso da Gasosa Auto Agro com o desenvolvimento económico de Angola e com a visibilidade das marcas internacionais que representa no país." },
+    ],
   },
   {
     img: infraLubangoExt,
@@ -2748,6 +2788,13 @@ const NOTICIAS_ARTICLES = [
     titulo: "Expansão no Lubango: mais de 10 000 m² ao serviço do sul de Angola",
     resumo: "As novas instalações no Lubango representam o maior investimento em infraestrutura da história da empresa, servindo as províncias do sul e centro do país.",
     data: "5 de Abril de 2026",
+    conteudo: [
+      { type: "paragraph", text: "O Lubango consolida-se como o maior polo de distribuição da Gasosa Auto Agro fora de Luanda. As novas instalações, com mais de 10 000 m² de área construída, integram lojas, armazéns de grande capacidade e oficinas técnicas especializadas, posicionando a empresa como o principal fornecedor do sul e centro de Angola." },
+      { type: "image", src: infraLubangoAerial, caption: "Vista aérea das instalações no Lubango" },
+      { type: "heading", text: "Infra-estrutura ao serviço das províncias do sul" },
+      { type: "paragraph", text: "A unidade do Lubango serve as províncias da Huíla, Namibe, Cunene e Cuando Cubango, garantindo proximidade e agilidade na resposta às necessidades de clientes empresariais e particulares. A oficina técnica está equipada com tecnologia de diagnóstico avançado para veículos ligeiros e pesados." },
+      { type: "paragraph", text: "O investimento no Lubango reflecte a visão estratégica da Gasosa Auto Agro de descentralizar os seus serviços e estar presente onde os clientes estão — com a mesma qualidade e rigor de sempre." },
+    ],
   },
   {
     img: infraLuandaLoja1,
@@ -2755,6 +2802,13 @@ const NOTICIAS_ARTICLES = [
     titulo: "30 anos de compromisso com Angola e o desenvolvimento nacional",
     resumo: "Três décadas de presença no mercado angolano, com uma trajetória marcada pelo crescimento, inovação e compromisso com os parceiros e clientes.",
     data: "20 de Março de 2026",
+    conteudo: [
+      { type: "paragraph", text: "Fundada em 2016 em Luanda com capital próprio, a Gasosa Auto Agro celebra uma trajetória de crescimento consistente assente na confiança dos seus clientes e na qualidade dos produtos e serviços que oferece. Ao longo destes anos, a empresa passou de uma pequena loja em Luanda a uma referência nacional com presença em três províncias." },
+      { type: "image", src: infraLuandaLoja2, caption: "Loja de Luanda — a primeira unidade da Gasosa Auto Agro" },
+      { type: "heading", text: "Uma empresa construída para durar" },
+      { type: "paragraph", text: "O crescimento da Gasosa Auto Agro reflecte a diversificação da economia angolana e o desenvolvimento dos sectores automóvel, agrícola e industrial no país. A empresa apostou sempre na formação das suas equipas, na qualidade dos produtos e na proximidade com os clientes — valores que continuam a guiar cada decisão." },
+      { type: "paragraph", text: "Com mais de 30 parceiros e clientes de referência, uma marca própria consolidada (Pangulino) e a representação exclusiva da Nergytech em Angola, a Gasosa Auto Agro olha para o futuro com ambição e solidez." },
+    ],
   },
   {
     img: nergyImg4,
@@ -2762,6 +2816,12 @@ const NOTICIAS_ARTICLES = [
     titulo: "Nova gama de baterias Nergytech disponível nas nossas lojas",
     resumo: "A Gasosa Auto Agro passa a disponibilizar a mais recente gama de baterias de alta performance da Nergytech em todas as suas unidades a nível nacional.",
     data: "15 de Fevereiro de 2026",
+    conteudo: [
+      { type: "paragraph", text: "A Gasosa Auto Agro anuncia a chegada da mais recente gama de baterias de alta performance da Nergytech a todas as suas unidades a nível nacional. A nova linha inclui baterias para veículos ligeiros, SUV, veículos comerciais e de utilização industrial, com tecnologias AGM e EFB para veículos com sistema start-stop." },
+      { type: "image", src: nergyImg3, caption: "Nova gama de baterias Nergytech de alta performance" },
+      { type: "heading", text: "Tecnologia para o exigente mercado angolano" },
+      { type: "paragraph", text: "As novas baterias Nergytech foram desenvolvidas para resistir às condições climáticas exigentes de Angola, incluindo temperaturas elevadas e estradas de difícil acessibilidade. Com garantia alargada e suporte técnico especializado nas lojas da Gasosa Auto Agro, o cliente tem a segurança de um produto de topo com assistência local." },
+    ],
   },
   {
     img: nergyImg5,
@@ -2769,6 +2829,12 @@ const NOTICIAS_ARTICLES = [
     titulo: "Oficina Luanda reforça capacidade de serviços rápidos",
     resumo: "A unidade de Luanda amplia a sua capacidade de atendimento com novos equipamentos de diagnóstico e uma equipa técnica especializada.",
     data: "8 de Fevereiro de 2026",
+    conteudo: [
+      { type: "paragraph", text: "A oficina de serviços rápidos da loja de Luanda foi renovada e ampliada, passando a contar com novos equipamentos de diagnóstico electrónico compatíveis com as mais recentes plataformas de veículos. A equipa técnica foi reforçada com especialistas em sistemas de injecção, transmissão e electricidade automóvel." },
+      { type: "image", src: infraLuandaOfic1, caption: "Nova área de oficina e diagnóstico em Luanda" },
+      { type: "heading", text: "Serviço rápido, sem compromissos de qualidade" },
+      { type: "paragraph", text: "O conceito de serviço rápido da Gasosa Auto Agro garante intervenções de rotina — mudanças de óleo, filtros, baterias e inspecção de travões — num prazo máximo de 60 minutos, sem necessidade de marcação prévia. Com uma equipa de técnicos certificados, a unidade de Luanda está preparada para servir frotas empresariais e clientes particulares." },
+    ],
   },
   {
     img: nergyImg6,
@@ -2776,6 +2842,11 @@ const NOTICIAS_ARTICLES = [
     titulo: "Gasosa firma parcerias com as maiores marcas do sector automóvel",
     resumo: "Novos acordos de representação reforçam o portefólio da Gasosa Auto Agro, garantindo aos clientes angolanos acesso às melhores marcas do sector.",
     data: "22 de Janeiro de 2026",
+    conteudo: [
+      { type: "paragraph", text: "A Gasosa Auto Agro anuncia a assinatura de novos acordos de representação e distribuição com marcas de referência do sector automóvel internacional. Os contratos abrangem lubrificantes, filtros, acessórios e componentes de manutenção — alargando significativamente a oferta disponível nas lojas da empresa." },
+      { type: "heading", text: "Portefólio reforçado para responder a todas as necessidades" },
+      { type: "paragraph", text: "Com este reforço do portefólio, a Gasosa Auto Agro passa a cobrir praticamente todas as necessidades de manutenção e reparação de veículos presentes no mercado angolano. Os novos produtos estarão disponíveis em stock permanente nas unidades de Luanda, Lubango e Huambo." },
+    ],
   },
   {
     img: infraLuandaLoja2,
@@ -2783,6 +2854,12 @@ const NOTICIAS_ARTICLES = [
     titulo: "Equipamentos agrícolas Pangulino chegam ao interior do país",
     resumo: "A rede de distribuição da gama Pangulino expande-se para novas províncias, aproximando o agricultor angolano das ferramentas que precisa.",
     data: "10 de Janeiro de 2026",
+    conteudo: [
+      { type: "paragraph", text: "A marca Pangulino expande a sua rede de distribuição para novas províncias de Angola, tornando os seus equipamentos agrícolas acessíveis a agricultores e cooperativas em regiões anteriormente dependentes de importações irregulares ou de longa distância. A expansão faz parte da estratégia de democratização do acesso a ferramentas de qualidade no sector primário angolano." },
+      { type: "image", src: infraFuturas, caption: "Distribuição de equipamentos Pangulino no interior do país" },
+      { type: "heading", text: "Mais perto do agricultor angolano" },
+      { type: "paragraph", text: "A Gasosa Auto Agro estabeleceu parcerias com distribuidores locais nas províncias do Malanje, Lunda Norte, Lunda Sul e Moxico para assegurar a disponibilidade regular dos produtos Pangulino. Cada distribuidor recebe formação técnica sobre os produtos e acesso a suporte pós-venda da empresa." },
+    ],
   },
   {
     img: infraLuandaOfic1,
@@ -2790,6 +2867,11 @@ const NOTICIAS_ARTICLES = [
     titulo: "Sector industrial: Gasosa reforça oferta de equipamentos pesados",
     resumo: "A nova gama de equipamentos industriais consolida a presença da empresa nos sectores de construção, mineração e agro-indústria.",
     data: "5 de Janeiro de 2026",
+    conteudo: [
+      { type: "paragraph", text: "A Gasosa Auto Agro reforça a sua presença no sector industrial com a introdução de uma nova gama de lubrificantes e fluidos de alta performance para equipamentos pesados, compressores, geradores e maquinaria agroindustrial. A oferta responde a uma necessidade crescente de clientes nos sectores de construção, mineração e transformação agro-alimentar." },
+      { type: "heading", text: "Soluções para a indústria angolana" },
+      { type: "paragraph", text: "Com stock permanente e atendimento especializado nas unidades de Luanda, Lubango e Huambo, a Gasosa Auto Agro garante tempos de resposta rápidos e apoio técnico qualificado para clientes industriais. A equipa técnica está capacitada para recomendar os produtos mais adequados para cada aplicação específica." },
+    ],
   },
   {
     img: infraFuturas,
@@ -2797,14 +2879,264 @@ const NOTICIAS_ARTICLES = [
     titulo: "Jornal de Angola destaca crescimento da Gasosa Auto Agro",
     resumo: "O Jornal de Angola dedica reportagem especial ao percurso e visão estratégica da Gasosa Auto Agro no contexto da diversificação económica angolana.",
     data: "28 de Dezembro de 2025",
+    conteudo: [
+      { type: "paragraph", text: "O Jornal de Angola publicou uma extensa reportagem sobre a trajectória e visão estratégica da Gasosa Auto Agro, destacando o papel da empresa como um caso de sucesso empresarial angolano no contexto da diversificação económica do país. A peça jornalística, publicada na edição de fim de ano, sublinha o crescimento consistente da empresa desde a sua fundação em 2016." },
+      { type: "heading", text: "Reconhecimento nacional" },
+      { type: "paragraph", text: "A reportagem destaca a criação da marca própria Pangulino, a parceria exclusiva com a Nergytech e a expansão nacional como marcos que distinguem a Gasosa Auto Agro no panorama empresarial angolano. A administração da empresa falou sobre a visão para os próximos anos, incluindo planos de expansão para novas províncias e o desenvolvimento de novas linhas de produto." },
+    ],
   },
 ];
+
+// ─── NoticiaDrawer ────────────────────────────────────────────────────────────
+function NoticiaDrawer({
+  article,
+  onClose,
+}: {
+  article: (typeof NOTICIAS_ARTICLES)[0] | null;
+  onClose: () => void;
+}) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (article && scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, [article]);
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  useEffect(() => {
+    document.body.style.overflow = article ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [article]);
+
+  return (
+    <AnimatePresence>
+      {article && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.32 }}
+            onClick={onClose}
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(0,0,0,0.52)",
+              zIndex: 300,
+              cursor: "pointer",
+            }}
+          />
+
+          <motion.div
+            ref={scrollRef}
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", stiffness: 280, damping: 34, mass: 0.9 }}
+            style={{
+              position: "fixed",
+              top: 0,
+              right: 0,
+              width: "clamp(320px, 55vw, 860px)",
+              height: "100vh",
+              background: "#F5EFE9",
+              zIndex: 301,
+              overflowY: "auto",
+              fontFamily: "'Poppins', sans-serif",
+            }}
+          >
+            <motion.button
+              onClick={onClose}
+              whileHover={{ scale: 1.08 }}
+              whileTap={{ scale: 0.92 }}
+              style={{
+                position: "sticky",
+                top: "20px",
+                float: "right",
+                marginRight: "20px",
+                marginTop: "20px",
+                width: "44px",
+                height: "44px",
+                borderRadius: "50%",
+                background: "#111111",
+                color: "#ffffff",
+                border: "none",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 10,
+                flexShrink: 0,
+              }}
+            >
+              <X style={{ width: "16px", height: "16px" }} />
+            </motion.button>
+
+            <div
+              style={{
+                clear: "both",
+                padding: "clamp(48px, 7vh, 80px) clamp(28px, 5vw, 64px) clamp(24px, 4vh, 40px)",
+                textAlign: "center",
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-block",
+                  fontSize: "0.72rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.12em",
+                  color: "rgba(0,0,0,0.6)",
+                  background: "rgba(0,0,0,0.08)",
+                  padding: "5px 14px",
+                  borderRadius: "99px",
+                  marginBottom: "22px",
+                  textTransform: "uppercase",
+                }}
+              >
+                {article.categoria}
+              </span>
+
+              <h1
+                style={{
+                  fontSize: "clamp(1.45rem, 1.0rem + 2.2vw, 2.6rem)",
+                  fontWeight: 500,
+                  color: "#111111",
+                  lineHeight: 1.18,
+                  letterSpacing: "-0.025em",
+                  margin: "0 auto 16px",
+                  maxWidth: "600px",
+                }}
+              >
+                {article.titulo}
+              </h1>
+
+              <p
+                style={{
+                  fontSize: "0.8rem",
+                  color: "rgba(0,0,0,0.38)",
+                  marginBottom: "36px",
+                  letterSpacing: "0.02em",
+                }}
+              >
+                {article.data}
+              </p>
+
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  fontSize: "0.78rem",
+                  color: "rgba(0,0,0,0.38)",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                Continuar a ler ↓
+              </div>
+            </div>
+
+            <div style={{ width: "100%", overflow: "hidden" }}>
+              <img
+                src={article.img}
+                alt={article.titulo}
+                style={{
+                  width: "100%",
+                  aspectRatio: "16/9",
+                  objectFit: "cover",
+                  display: "block",
+                }}
+              />
+            </div>
+
+            <div
+              style={{
+                padding: "clamp(28px, 5vw, 56px) clamp(28px, 5vw, 64px) clamp(56px, 9vw, 100px)",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "clamp(1rem, 0.88rem + 0.5vw, 1.2rem)",
+                  color: "#111111",
+                  lineHeight: 1.8,
+                  marginBottom: "40px",
+                  fontWeight: 400,
+                }}
+              >
+                {article.resumo}
+              </p>
+
+              {article.conteudo.map((block, i) =>
+                block.type === "heading" ? (
+                  <h2
+                    key={i}
+                    style={{
+                      fontSize: "clamp(1.05rem, 0.9rem + 0.75vw, 1.45rem)",
+                      fontWeight: 500,
+                      color: "#111111",
+                      margin: "44px 0 18px",
+                      letterSpacing: "-0.02em",
+                      lineHeight: 1.3,
+                    }}
+                  >
+                    {block.text}
+                  </h2>
+                ) : block.type === "paragraph" ? (
+                  <p
+                    key={i}
+                    style={{
+                      fontSize: "clamp(0.88rem, 0.82rem + 0.28vw, 1rem)",
+                      color: "rgba(0,0,0,0.68)",
+                      lineHeight: 1.82,
+                      marginBottom: "28px",
+                    }}
+                  >
+                    {block.text}
+                  </p>
+                ) : block.type === "image" ? (
+                  <div key={i} style={{ margin: "40px 0" }}>
+                    <div style={{ borderRadius: "12px", overflow: "hidden" }}>
+                      <img
+                        src={block.src}
+                        alt={block.caption ?? ""}
+                        style={{ width: "100%", display: "block", objectFit: "cover" }}
+                      />
+                    </div>
+                    {block.caption && (
+                      <p
+                        style={{
+                          fontSize: "0.7rem",
+                          color: "rgba(0,0,0,0.36)",
+                          textAlign: "center",
+                          marginTop: "10px",
+                          letterSpacing: "0.02em",
+                        }}
+                      >
+                        {block.caption}
+                      </p>
+                    )}
+                  </div>
+                ) : null
+              )}
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
 
 function NoticiasPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState("Todos");
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState<(typeof NOTICIAS_ARTICLES)[0] | null>(null);
 
   const filters = ["Todos", "Automóvel", "Agrícola", "Industrial", "Institucional", "Press"];
 
@@ -2966,6 +3298,7 @@ function NoticiasPage() {
             {/* Featured large card */}
             {latest[0] && (
               <motion.article
+                onClick={() => setSelectedArticle(latest[0])}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewport}
@@ -3013,6 +3346,7 @@ function NoticiasPage() {
             {latest.slice(1).map((article, i) => (
               <motion.article
                 key={i}
+                onClick={() => setSelectedArticle(article)}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewport}
@@ -3060,6 +3394,7 @@ function NoticiasPage() {
         titulo="Institucional"
         articles={institucional}
         viewport={viewport}
+        onSelect={setSelectedArticle}
       />
 
       {/* ── Category: Automóvel ── */}
@@ -3067,6 +3402,7 @@ function NoticiasPage() {
         titulo="Automóvel"
         articles={automovel}
         viewport={viewport}
+        onSelect={setSelectedArticle}
       />
 
       {/* ── Newsletter CTA ── */}
@@ -3179,6 +3515,7 @@ function NoticiasPage() {
       </section>
 
       <Footer />
+      <NoticiaDrawer article={selectedArticle} onClose={() => setSelectedArticle(null)} />
     </div>
   );
 }
@@ -3188,10 +3525,12 @@ function NoticiasCategorySection({
   titulo,
   articles,
   viewport,
+  onSelect,
 }: {
   titulo: string;
   articles: typeof NOTICIAS_ARTICLES;
   viewport: { once: boolean; amount: number };
+  onSelect?: (a: (typeof NOTICIAS_ARTICLES)[0]) => void;
 }) {
   const PAD = { paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" };
   const WRAP = { maxWidth: "1400px", margin: "0 auto", ...PAD };
@@ -3262,6 +3601,7 @@ function NoticiasCategorySection({
         {articles.map((article, i) => (
           <motion.article
             key={i}
+            onClick={() => onSelect?.(article)}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewport}
