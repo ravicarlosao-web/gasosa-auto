@@ -1741,7 +1741,7 @@ function InfraestrutrasPage() {
     offset: ["start start", "end start"],
   });
   const heroTitleY = useTransform(heroScroll, [0, 1], ["0%", "30%"]);
-  const heroOverlayOpacity = useTransform(heroScroll, [0, 0.8], [0.45, 0.72]);
+  const heroOverlayOpacity = useTransform(heroScroll, [0, 0.8], [0.68, 0.85]);
 
   const viewport = { once: false, amount: 0.18 } as const;
 
@@ -1762,7 +1762,7 @@ function InfraestrutrasPage() {
             <motion.img
               src={logoSrc}
               alt="Gasosa Auto Agro"
-              style={{ height: "clamp(32px, 4.5vw, 48px)", width: "auto", objectFit: "contain" }}
+              style={{ height: "clamp(42px, 6vw, 66px)", width: "auto", objectFit: "contain" }}
               animate={{ filter: "brightness(0) invert(1)" }}
               transition={{ duration: 0.35, ease: "easeOut" }}
             />
@@ -1789,7 +1789,7 @@ function InfraestrutrasPage() {
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
       {/* ────────────────────────────────────────────────────────────────
-          HERO — full viewport, centered title (à la Montoni)
+          HERO — full viewport, left-bottom title
       ──────────────────────────────────────────────────────────────── */}
       <div
         ref={heroRef}
@@ -1801,8 +1801,8 @@ function InfraestrutrasPage() {
           overflow: "hidden",
           background: "#0c1a2e",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+          alignItems: "flex-end",
+          justifyContent: "flex-start",
         }}
       >
         {/* Hero image */}
@@ -1831,46 +1831,85 @@ function InfraestrutrasPage() {
           }}
         />
 
-        {/* Centered title */}
+        {/* Bottom-left title block */}
         <motion.div
           style={{
             position: "relative",
             zIndex: 2,
-            textAlign: "center",
+            textAlign: "left",
             y: heroTitleY,
+            padding: "clamp(32px, 5vw, 80px) clamp(20px, 5vw, 80px)",
+            paddingBottom: "clamp(60px, 9vh, 110px)",
+            maxWidth: "860px",
           }}
         >
+          {/* Eyebrow */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            style={{
+              fontFamily: "'Poppins', sans-serif",
+              fontSize: "clamp(0.65rem, 0.55rem + 0.4vw, 0.8rem)",
+              fontWeight: 600,
+              color: "#F5A000",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              margin: "0 0 14px",
+            }}
+          >
+            — ESTRUTURA. CAPACIDADE. CONFIANÇA.
+          </motion.p>
+
+          {/* Main title */}
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             style={{
               fontFamily: "'Poppins', sans-serif",
-              fontSize: "clamp(3.5rem, 2rem + 8vw, 10rem)",
-              fontWeight: 500,
+              fontSize: "clamp(3rem, 1.5rem + 7vw, 8.5rem)",
+              fontWeight: 700,
               color: "#ffffff",
               letterSpacing: "-0.02em",
-              lineHeight: 0.95,
-              margin: 0,
+              lineHeight: 0.93,
+              margin: "0 0 28px",
             }}
           >
             {inf.hero.label}
           </motion.h1>
-          <motion.p
+
+          {/* Subtitles */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
-            style={{
-              fontFamily: "'Poppins', sans-serif",
-              fontSize: "clamp(0.85rem, 0.7rem + 0.6vw, 1.1rem)",
-              fontWeight: 400,
-              color: "rgba(255,255,255,0.55)",
-              letterSpacing: "0.06em",
-              marginTop: "24px",
-            }}
+            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.38 }}
           >
-            {inf.hero.subtitle}
-          </motion.p>
+            <p
+              style={{
+                fontFamily: "'Poppins', sans-serif",
+                fontSize: "clamp(0.82rem, 0.68rem + 0.55vw, 1.05rem)",
+                fontWeight: 400,
+                color: "rgba(255,255,255,0.82)",
+                letterSpacing: "0.01em",
+                margin: "0 0 6px",
+              }}
+            >
+              Infraestruturas ao serviço do crescimento de Angola.
+            </p>
+            <p
+              style={{
+                fontFamily: "'Poppins', sans-serif",
+                fontSize: "clamp(0.82rem, 0.68rem + 0.55vw, 1.05rem)",
+                fontWeight: 400,
+                color: "rgba(255,255,255,0.55)",
+                letterSpacing: "0.01em",
+                margin: 0,
+              }}
+            >
+              Logística inteligente. Operações eficientes.
+            </p>
+          </motion.div>
         </motion.div>
 
         {/* Scroll hint */}
