@@ -2936,9 +2936,8 @@ function NoticiaDrawer({
           <motion.div
             ref={scrollRef}
             initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", stiffness: 280, damping: 34, mass: 0.9 }}
+            animate={{ x: 0, transition: { type: "tween", duration: 0.78, ease: [0.16, 1, 0.3, 1] } }}
+            exit={{ x: "100%", transition: { type: "tween", duration: 0.42, ease: [0.4, 0, 1, 1] } }}
             style={{
               position: "fixed",
               top: 0,
