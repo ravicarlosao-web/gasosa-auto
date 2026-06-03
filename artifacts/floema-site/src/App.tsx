@@ -2602,12 +2602,617 @@ function Footer() {
   );
 }
 
+// ─── NoticiasPage ─────────────────────────────────────────────────────────────
+const NOTICIAS_ARTICLES = [
+  {
+    img: infraHeroImg,
+    categoria: "Institucional",
+    titulo: "Gasosa Auto Agro inaugura nova instalação no Huambo",
+    resumo: "A nova estrutura no Huambo reforça a capacidade de resposta nas províncias do planalto central, com mais de 3 000 m² dedicados a armazém, loja e oficina.",
+    data: "3 de Junho de 2026",
+    featured: true,
+  },
+  {
+    img: nergyImg3,
+    categoria: "Automóvel",
+    titulo: "Nova parceria Nergytech consolida liderança no sector energético",
+    resumo: "Gasosa Auto Agro renova e amplia o acordo exclusivo com a Nergytech em Angola, trazendo novas referências de baterias e acessórios ao mercado nacional.",
+    data: "26 de Maio de 2026",
+    featured: false,
+  },
+  {
+    img: infraHuamboExt,
+    categoria: "Agrícola",
+    titulo: "Pangulino lança nova linha de ferramentas para o campo angolano",
+    resumo: "A marca própria da Gasosa Auto Agro apresenta uma gama de ferramentas desenvolvidas especificamente para as condições do solo angolano.",
+    data: "20 de Maio de 2026",
+    featured: false,
+  },
+  {
+    img: infraLuandaFachada,
+    categoria: "Institucional",
+    titulo: "Gasosa presente na FILDA 2025 com stand de 200 m²",
+    resumo: "Com presença de destaque na Feira Internacional de Luanda, a Gasosa Auto Agro apresentou as suas marcas representadas e a gama Pangulino ao público angolano.",
+    data: "12 de Maio de 2026",
+  },
+  {
+    img: infraLubangoExt,
+    categoria: "Institucional",
+    titulo: "Expansão no Lubango: mais de 10 000 m² ao serviço do sul de Angola",
+    resumo: "As novas instalações no Lubango representam o maior investimento em infraestrutura da história da empresa, servindo as províncias do sul e centro do país.",
+    data: "5 de Abril de 2026",
+  },
+  {
+    img: infraLuandaLoja1,
+    categoria: "Institucional",
+    titulo: "30 anos de compromisso com Angola e o desenvolvimento nacional",
+    resumo: "Três décadas de presença no mercado angolano, com uma trajetória marcada pelo crescimento, inovação e compromisso com os parceiros e clientes.",
+    data: "20 de Março de 2026",
+  },
+  {
+    img: nergyImg4,
+    categoria: "Automóvel",
+    titulo: "Nova gama de baterias Nergytech disponível nas nossas lojas",
+    resumo: "A Gasosa Auto Agro passa a disponibilizar a mais recente gama de baterias de alta performance da Nergytech em todas as suas unidades a nível nacional.",
+    data: "15 de Fevereiro de 2026",
+  },
+  {
+    img: nergyImg5,
+    categoria: "Automóvel",
+    titulo: "Oficina Luanda reforça capacidade de serviços rápidos",
+    resumo: "A unidade de Luanda amplia a sua capacidade de atendimento com novos equipamentos de diagnóstico e uma equipa técnica especializada.",
+    data: "8 de Fevereiro de 2026",
+  },
+  {
+    img: nergyImg6,
+    categoria: "Automóvel",
+    titulo: "Gasosa firma parcerias com as maiores marcas do sector automóvel",
+    resumo: "Novos acordos de representação reforçam o portefólio da Gasosa Auto Agro, garantindo aos clientes angolanos acesso às melhores marcas do sector.",
+    data: "22 de Janeiro de 2026",
+  },
+  {
+    img: infraLuandaLoja2,
+    categoria: "Agrícola",
+    titulo: "Equipamentos agrícolas Pangulino chegam ao interior do país",
+    resumo: "A rede de distribuição da gama Pangulino expande-se para novas províncias, aproximando o agricultor angolano das ferramentas que precisa.",
+    data: "10 de Janeiro de 2026",
+  },
+  {
+    img: infraLuandaOfic1,
+    categoria: "Industrial",
+    titulo: "Sector industrial: Gasosa reforça oferta de equipamentos pesados",
+    resumo: "A nova gama de equipamentos industriais consolida a presença da empresa nos sectores de construção, mineração e agro-indústria.",
+    data: "5 de Janeiro de 2026",
+  },
+  {
+    img: infraFuturas,
+    categoria: "Press",
+    titulo: "Jornal de Angola destaca crescimento da Gasosa Auto Agro",
+    resumo: "O Jornal de Angola dedica reportagem especial ao percurso e visão estratégica da Gasosa Auto Agro no contexto da diversificação económica angolana.",
+    data: "28 de Dezembro de 2025",
+  },
+];
+
+function NoticiasPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("Todos");
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const filters = ["Todos", "Automóvel", "Agrícola", "Industrial", "Institucional", "Press"];
+
+  const filtered = activeFilter === "Todos"
+    ? NOTICIAS_ARTICLES
+    : NOTICIAS_ARTICLES.filter(a => a.categoria === activeFilter);
+
+  const latest = filtered.slice(0, 3);
+
+  const institucional = NOTICIAS_ARTICLES.filter(a => a.categoria === "Institucional").slice(0, 3);
+  const automovel    = NOTICIAS_ARTICLES.filter(a => a.categoria === "Automóvel").slice(0, 3);
+
+  const viewport = { once: true, amount: 0.12 } as const;
+
+  const PAD = { paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" };
+  const WRAP = { maxWidth: "1400px", margin: "0 auto", ...PAD };
+
+  return (
+    <div className="w-full flex flex-col" style={{ fontFamily: "'Poppins', sans-serif", background: "#F5EFE9" }}>
+
+      {/* ── Header (dark on light bg) ── */}
+      <NavThemeCtx.Provider value={false}>
+        <header
+          className="fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between"
+          style={{
+            maxWidth: "1400px",
+            margin: "0 auto",
+            padding: "clamp(12px, 2vh, 22px) clamp(16px, 4vw, 64px)",
+            background: "rgba(245,239,233,0.92)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+          }}
+        >
+          <Link href="/" className="flex items-center">
+            <img
+              src={logoSrc}
+              alt="Gasosa Auto Agro"
+              style={{ height: "clamp(38px, 5.5vw, 58px)", width: "auto", objectFit: "contain" }}
+            />
+          </Link>
+          <nav className="hidden lg:flex items-center gap-3">
+            <div className="flex items-center gap-0.5">
+              {["Quem Somos", "Sectores", "Infraestruturas", "Notícias", "Contactos"].map(item => (
+                <NavPill key={item} item={item} />
+              ))}
+            </div>
+            <LangDropdown />
+          </nav>
+          <button
+            className="lg:hidden"
+            style={{ padding: "clamp(6px, 1.2vw, 10px)", color: "#111111", background: "none", border: "none", cursor: "pointer" }}
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Abrir menu"
+          >
+            <Menu style={{ width: "clamp(20px, 3vw, 26px)", height: "clamp(20px, 3vw, 26px)" }} />
+          </button>
+        </header>
+      </NavThemeCtx.Provider>
+
+      <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+
+      {/* ── Intro ── */}
+      <section
+        style={{
+          paddingTop: "clamp(130px, 18vh, 200px)",
+          paddingBottom: "clamp(56px, 7vw, 96px)",
+          textAlign: "center",
+          ...PAD,
+        }}
+      >
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          style={{ fontSize: "0.78rem", fontWeight: 500, letterSpacing: "0.14em", color: "rgba(0,0,0,0.4)", marginBottom: "28px" }}
+        >
+          Notícias
+        </motion.p>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          style={{
+            fontSize: "clamp(1.9rem, 1.2rem + 3.5vw, 4.2rem)",
+            fontWeight: 500,
+            color: "#111111",
+            lineHeight: 1.18,
+            letterSpacing: "-0.025em",
+            maxWidth: "820px",
+            margin: "0 auto 44px",
+          }}
+        >
+          Registos das actividades, projectos e marcos que definem a Gasosa Auto Agro.
+        </motion.h1>
+
+        {/* Filter tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.28 }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            gap: "0",
+          }}
+        >
+          {filters.map((f, i) => {
+            const isActive = f === activeFilter;
+            return (
+              <button
+                key={f}
+                onClick={() => setActiveFilter(f)}
+                style={{
+                  fontSize: "clamp(0.72rem, 0.65rem + 0.3vw, 0.88rem)",
+                  fontWeight: isActive ? 600 : 400,
+                  background: isActive ? "#111111" : "transparent",
+                  color: isActive ? "#ffffff" : "rgba(0,0,0,0.55)",
+                  border: isActive ? "1.5px solid #111111" : "1.5px solid transparent",
+                  borderRadius: "99px",
+                  padding: "5px 18px",
+                  cursor: "pointer",
+                  marginRight: i < filters.length - 1 ? "12px" : "0",
+                  marginBottom: "8px",
+                  transition: "all 0.2s ease",
+                  fontFamily: "'Poppins', sans-serif",
+                  letterSpacing: "0.01em",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {f}
+              </button>
+            );
+          })}
+        </motion.div>
+      </section>
+
+      {/* ── Últimos Artigos ── */}
+      <section style={{ ...WRAP, marginBottom: "clamp(64px, 9vw, 120px)" }}>
+        {/* Section label */}
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(24px, 3vw, 40px)" }}>
+          <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>
+            Últimos Artigos
+          </span>
+          <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
+        </div>
+
+        {latest.length > 0 && (
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gridTemplateRows: "auto",
+              gap: "clamp(12px, 2vw, 24px)",
+            }}
+          >
+            {/* Featured large card */}
+            {latest[0] && (
+              <motion.article
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={viewport}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                style={{
+                  gridColumn: "span 2",
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                  background: "#EDE6DF",
+                  cursor: "pointer",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                whileHover={{ y: -3 }}
+              >
+                <div style={{ width: "100%", aspectRatio: "16/9", overflow: "hidden", flexShrink: 0 }}>
+                  <img
+                    src={latest[0].img}
+                    alt={latest[0].titulo}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease" }}
+                    onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.04)")}
+                    onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+                  />
+                </div>
+                <div style={{ padding: "clamp(20px, 2.5vw, 32px)", display: "flex", flexDirection: "column", gap: "10px" }}>
+                  <span style={{ fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.14em", color: "#F5A000", textTransform: "uppercase" }}>
+                    {latest[0].categoria}
+                  </span>
+                  <h2 style={{ fontSize: "clamp(1.15rem, 0.9rem + 1.2vw, 1.9rem)", fontWeight: 600, color: "#111111", lineHeight: 1.25, letterSpacing: "-0.02em", margin: 0 }}>
+                    {latest[0].titulo}
+                  </h2>
+                  <p style={{ fontSize: "clamp(0.82rem, 0.76rem + 0.2vw, 0.95rem)", color: "rgba(0,0,0,0.5)", lineHeight: 1.65, margin: 0 }}>
+                    {latest[0].resumo}
+                  </p>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "8px" }}>
+                    <span style={{ fontSize: "0.78rem", color: "rgba(0,0,0,0.4)" }}>{latest[0].data}</span>
+                    <span style={{ fontSize: "1rem", color: "rgba(0,0,0,0.4)" }}>→</span>
+                  </div>
+                </div>
+              </motion.article>
+            )}
+
+            {/* Two smaller cards */}
+            {latest.slice(1).map((article, i) => (
+              <motion.article
+                key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={viewport}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: (i + 1) * 0.1 }}
+                style={{
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                  background: "#EDE6DF",
+                  cursor: "pointer",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+                whileHover={{ y: -3 }}
+              >
+                <div style={{ width: "100%", aspectRatio: "4/3", overflow: "hidden", flexShrink: 0 }}>
+                  <img
+                    src={article.img}
+                    alt={article.titulo}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease" }}
+                    onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
+                    onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+                  />
+                </div>
+                <div style={{ padding: "clamp(16px, 2vw, 24px)", display: "flex", flexDirection: "column", gap: "8px", flex: 1 }}>
+                  <span style={{ fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.14em", color: "#F5A000", textTransform: "uppercase" }}>
+                    {article.categoria}
+                  </span>
+                  <h3 style={{ fontSize: "clamp(0.95rem, 0.82rem + 0.6vw, 1.2rem)", fontWeight: 600, color: "#111111", lineHeight: 1.3, letterSpacing: "-0.015em", margin: 0 }}>
+                    {article.titulo}
+                  </h3>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto", paddingTop: "12px" }}>
+                    <span style={{ fontSize: "0.76rem", color: "rgba(0,0,0,0.4)" }}>{article.data}</span>
+                    <span style={{ fontSize: "1rem", color: "rgba(0,0,0,0.4)" }}>→</span>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {/* ── Category: Institucional ── */}
+      <NoticiasCategorySection
+        titulo="Institucional"
+        articles={institucional}
+        viewport={viewport}
+      />
+
+      {/* ── Category: Automóvel ── */}
+      <NoticiasCategorySection
+        titulo="Automóvel"
+        articles={automovel}
+        viewport={viewport}
+      />
+
+      {/* ── Newsletter CTA ── */}
+      <section
+        style={{
+          paddingTop: "clamp(80px, 12vw, 160px)",
+          paddingBottom: "clamp(80px, 12vw, 160px)",
+          textAlign: "center",
+          ...PAD,
+        }}
+      >
+        {/* Arrow icon */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewport}
+          transition={{ duration: 0.7 }}
+          style={{ marginBottom: "28px", color: "rgba(0,0,0,0.2)", fontSize: "clamp(2rem, 4vw, 3.5rem)", lineHeight: 1 }}
+        >
+          ↖
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewport}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+          style={{
+            fontSize: "clamp(1.8rem, 1.2rem + 3vw, 4rem)",
+            fontWeight: 500,
+            color: "#111111",
+            lineHeight: 1.2,
+            letterSpacing: "-0.025em",
+            maxWidth: "680px",
+            margin: "0 auto 40px",
+          }}
+        >
+          As últimas novidades, servidas na tua caixa de entrada.
+        </motion.h2>
+
+        <motion.form
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewport}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          onSubmit={e => { e.preventDefault(); if (email.trim()) setSubscribed(true); }}
+          style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "16px" }}
+        >
+          {subscribed ? (
+            <motion.p
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              style={{ fontSize: "1rem", fontWeight: 500, color: "#003591" }}
+            >
+              Obrigado! Irá receber as nossas novidades em breve.
+            </motion.p>
+          ) : (
+            <>
+              <div style={{ position: "relative", width: "100%", maxWidth: "480px" }}>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder="O seu email *"
+                  required
+                  style={{
+                    width: "100%",
+                    padding: "16px 24px",
+                    borderRadius: "99px",
+                    border: "1.5px solid rgba(0,0,0,0.15)",
+                    background: "transparent",
+                    fontSize: "0.93rem",
+                    color: "#111111",
+                    fontFamily: "'Poppins', sans-serif",
+                    outline: "none",
+                    transition: "border-color 0.2s",
+                    boxSizing: "border-box",
+                  }}
+                  onFocus={e => (e.currentTarget.style.borderColor = "#111111")}
+                  onBlur={e => (e.currentTarget.style.borderColor = "rgba(0,0,0,0.15)")}
+                />
+              </div>
+              <button
+                type="submit"
+                style={{
+                  padding: "14px 36px",
+                  borderRadius: "99px",
+                  background: "#111111",
+                  color: "#ffffff",
+                  fontSize: "0.85rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.06em",
+                  border: "none",
+                  cursor: "pointer",
+                  fontFamily: "'Poppins', sans-serif",
+                  transition: "background 0.2s",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background = "#003591")}
+                onMouseLeave={e => (e.currentTarget.style.background = "#111111")}
+              >
+                Subscrever
+              </button>
+            </>
+          )}
+          <p style={{ fontSize: "0.72rem", color: "rgba(0,0,0,0.4)", maxWidth: "400px", lineHeight: 1.6, margin: 0 }}>
+            Ao submeter o seu e-mail, você concorda com a nossa{" "}
+            <a href="#" style={{ color: "rgba(0,0,0,0.55)", textDecoration: "underline" }}>Política de Privacidade</a>.
+          </p>
+        </motion.form>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}
+
+// ─── NoticiasCategorySection ──────────────────────────────────────────────────
+function NoticiasCategorySection({
+  titulo,
+  articles,
+  viewport,
+}: {
+  titulo: string;
+  articles: typeof NOTICIAS_ARTICLES;
+  viewport: { once: boolean; amount: number };
+}) {
+  const PAD = { paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" };
+  const WRAP = { maxWidth: "1400px", margin: "0 auto", ...PAD };
+
+  return (
+    <section style={{ ...WRAP, marginBottom: "clamp(64px, 9vw, 120px)" }}>
+      {/* Section header */}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "baseline",
+          gap: "20px",
+          marginBottom: "clamp(24px, 3.5vw, 44px)",
+        }}
+      >
+        <motion.h2
+          initial={{ opacity: 0, x: -16 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={viewport}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            fontSize: "clamp(1.5rem, 1rem + 2.5vw, 3.2rem)",
+            fontWeight: 500,
+            color: "#111111",
+            letterSpacing: "-0.025em",
+            margin: 0,
+            lineHeight: 1,
+          }}
+        >
+          {titulo}
+        </motion.h2>
+        <motion.a
+          href="#"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={viewport}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          style={{
+            fontSize: "clamp(0.78rem, 0.7rem + 0.3vw, 0.92rem)",
+            color: "rgba(0,0,0,0.45)",
+            textDecoration: "none",
+            whiteSpace: "nowrap",
+            transition: "color 0.2s",
+            letterSpacing: "0.01em",
+          }}
+          onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#111111")}
+          onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(0,0,0,0.45)")}
+        >
+          Ver todos →
+        </motion.a>
+      </div>
+
+      {/* 3-col grid — first card spans 2 rows (taller) */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateRows: "auto",
+          gap: "clamp(10px, 1.8vw, 20px)",
+        }}
+      >
+        {articles.map((article, i) => (
+          <motion.article
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewport}
+            transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
+            style={{
+              borderRadius: "14px",
+              overflow: "hidden",
+              background: "#EDE6DF",
+              cursor: "pointer",
+              display: "flex",
+              flexDirection: "column",
+              gridRow: i === 0 ? "span 2" : undefined,
+            }}
+            whileHover={{ y: -3 }}
+          >
+            <div
+              style={{
+                width: "100%",
+                aspectRatio: i === 0 ? "3/4" : "4/3",
+                overflow: "hidden",
+                flexShrink: 0,
+              }}
+            >
+              <img
+                src={article.img}
+                alt={article.titulo}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.5s ease" }}
+                onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
+                onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+              />
+            </div>
+            <div style={{ padding: "clamp(14px, 1.8vw, 22px)", display: "flex", flexDirection: "column", gap: "8px", flex: 1 }}>
+              <h3
+                style={{
+                  fontSize: i === 0
+                    ? "clamp(1rem, 0.85rem + 0.9vw, 1.45rem)"
+                    : "clamp(0.88rem, 0.78rem + 0.5vw, 1.08rem)",
+                  fontWeight: 600,
+                  color: "#111111",
+                  lineHeight: 1.28,
+                  letterSpacing: "-0.015em",
+                  margin: 0,
+                }}
+              >
+                {article.titulo}
+              </h3>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto", paddingTop: "10px" }}>
+                <span style={{ fontSize: "0.74rem", color: "rgba(0,0,0,0.38)" }}>{article.data}</span>
+                <span style={{ fontSize: "0.95rem", color: "rgba(0,0,0,0.35)" }}>→</span>
+              </div>
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 // ─── Router & App ─────────────────────────────────────────────────────────────
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/infraestruturas" component={InfraestrutrasPage} />
+      <Route path="/notícias" component={NoticiasPage} />
+      <Route path="/noticias" component={NoticiasPage} />
       <Route component={NotFound} />
     </Switch>
   );
