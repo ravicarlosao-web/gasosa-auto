@@ -4089,47 +4089,45 @@ function ContactosPage() {
           <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
         </motion.div>
 
-        {/* Title — full width, above the grid */}
-        <motion.h2
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={viewport}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            fontSize: "clamp(2.4rem, 4.5vw, 5rem)",
-            fontWeight: 500,
-            lineHeight: 1.1,
-            color: "#1a1a2e",
-            margin: 0,
-            marginBottom: "clamp(40px, 5vw, 72px)",
-            whiteSpace: "pre-line",
-          }}
-        >
-          {tc.locationsTitle}
-        </motion.h2>
-
-        {/* Two-column grid: location list + map */}
-        {/* Map column is pinned to clamp(360px,38vw,540px) so it stays the same size at any viewport */}
+        {/* Two-column grid: map LEFT, title+cities RIGHT */}
         <div
           ref={locationsGridRef}
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile || isTablet ? "1fr" : `1fr clamp(360px, 38vw, 540px)`,
+            gridTemplateColumns: isMobile || isTablet ? "1fr" : `clamp(360px, 38vw, 540px) 1fr`,
             gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(48px, 5vw, 72px)",
             alignItems: "center",
             position: "relative",
           }}
         >
 
-          {/* ── Location list ── */}
+          {/* ── Location list + title (right column on desktop) ── */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               gap: "clamp(32px, 5vw, 56px)",
-              order: isMobile || isTablet ? 2 : 1,
+              order: isMobile || isTablet ? 2 : 2,
             }}
           >
+            {/* Title */}
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewport}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                fontSize: "clamp(2.4rem, 4.5vw, 5rem)",
+                fontWeight: 500,
+                lineHeight: 1.1,
+                color: "#1a1a2e",
+                margin: 0,
+                whiteSpace: "pre-line",
+              }}
+            >
+              {tc.locationsTitle}
+            </motion.h2>
+
             {tc.locations.map((loc, i) => (
               <motion.div
                 key={loc.city}
@@ -4196,7 +4194,7 @@ function ContactosPage() {
           </div>
 
           {/* ── Angola Map ── */}
-          <div ref={mapDivRef} style={{ order: isMobile || isTablet ? 1 : 2 }}>
+          <div ref={mapDivRef} style={{ order: 1 }}>
             <AngolaMap />
           </div>
 
