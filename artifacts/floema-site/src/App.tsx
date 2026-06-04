@@ -4066,10 +4066,10 @@ function ContactosPage() {
       {/* ── Locations ── */}
       <section
         style={{
-          maxWidth: "1050px",
+          maxWidth: "1280px",
           margin: "0 auto",
-          paddingLeft: "clamp(20px, 4vw, 60px)",
-          paddingRight: "clamp(16px, 3vw, 48px)",
+          paddingLeft: "clamp(24px, 5vw, 80px)",
+          paddingRight: "clamp(24px, 5vw, 80px)",
           marginBottom: "clamp(80px, 11vw, 160px)",
         }}
       >
@@ -4089,12 +4089,13 @@ function ContactosPage() {
         </motion.div>
 
         {/* Two-column grid: location list + map */}
+        {/* Map column is pinned to clamp(360px,38vw,540px) so it stays the same size at any viewport */}
         <div
           ref={locationsGridRef}
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile || isTablet ? "1fr" : "200px 1fr",
-            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(40px, 5vw, 64px)",
+            gridTemplateColumns: isMobile || isTablet ? "1fr" : `1fr clamp(360px, 38vw, 540px)`,
+            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(48px, 5vw, 72px)",
             alignItems: "center",
             position: "relative",
           }}
