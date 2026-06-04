@@ -3750,9 +3750,9 @@ function AngolaMap() {
   /* City centres in the SVG's own viewBox (612.3866 × 684.8916)         */
   /* Calculated from real geo-coords using Angola bounding-box projection  */
   const cities = [
-    { id: "Luanda",  cx: 77,  cy: 230, label: "LUANDA"  },
-    { id: "Huambo",  cx: 201, cy: 420, label: "HUAMBO"  },
-    { id: "Lubango", cx: 90,  cy: 528, label: "HUÍLA"   },
+    { id: "Luanda",  cx: 77,  cy: 230, label: "LUANDA",  pillW: 74 },
+    { id: "Huambo",  cx: 201, cy: 420, label: "HUAMBO",  pillW: 78 },
+    { id: "Lubango", cx: 90,  cy: 528, label: "HUÍLA",   pillW: 66 },
   ] as const;
 
   return (
@@ -3772,21 +3772,28 @@ function AngolaMap() {
         style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none" }}
         xmlns="http://www.w3.org/2000/svg"
       >
-        {cities.map(({ id, cx, cy, label }, i) => (
+        {cities.map(({ id, cx, cy, label, pillW }, i) => (
           <g key={id}>
             <motion.g
               style={{ originX: `${cx}px`, originY: `${cy}px` }}
-              animate={{ scale: [0.5, 2.4, 0.5], opacity: [0.6, 0, 0.6] }}
+              animate={{ scale: [0.5, 2.8, 0.5], opacity: [0.7, 0, 0.7] }}
               transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.75 }}
             >
-              <circle cx={cx} cy={cy} r={8} fill="none" stroke="#111111" strokeWidth="1.5" />
+              <circle cx={cx} cy={cy} r={9} fill="none" stroke={Y} strokeWidth="1.5" />
             </motion.g>
-            <circle cx={cx} cy={cy} r={6}   fill="#111111" />
-            <circle cx={cx} cy={cy} r={3}   fill={Y} />
+            <circle cx={cx} cy={cy} r={6} fill={Y} />
+            <circle cx={cx} cy={cy} r={2.5} fill="#111111" />
+            {/* Pill label */}
+            <rect
+              x={cx - pillW / 2} y={cy + 11}
+              width={pillW} height={21} rx={10.5}
+              fill={Y}
+            />
             <text
-              x={cx + 10} y={cy + 4}
-              fontSize="13" fontFamily="Poppins,sans-serif" fontWeight="700"
-              fill="#111111" letterSpacing="1"
+              x={cx} y={cy + 25.5}
+              textAnchor="middle"
+              fontSize="10" fontFamily="Poppins,sans-serif" fontWeight="700"
+              fill="#111111" letterSpacing="0.08em"
             >{label}</text>
           </g>
         ))}
@@ -3803,10 +3810,48 @@ function ContactosPage() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
 
+  const entryRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const mapDivRef = useRef<HTMLDivElement | null>(null);
+  const locationsGridRef = useRef<HTMLDivElement | null>(null);
+  const [connectorLines, setConnectorLines] = useState<{x1:number;y1:number;x2:number;y2:number}[]>([]);
+
+  const MAP_SVG_W = 612.3866;
+  const MAP_SVG_H = 684.8916;
+  const MAP_CITIES = [
+    { cx: 77,  cy: 230 },
+    { cx: 201, cy: 420 },
+    { cx: 90,  cy: 528 },
+  ];
+
   useEffect(() => {
     const onResize = () => setWinW(window.innerWidth);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    const calculate = () => {
+      if (!locationsGridRef.current || !mapDivRef.current) return;
+      const gridRect = locationsGridRef.current.getBoundingClientRect();
+      const mapRect  = mapDivRef.current.getBoundingClientRect();
+      const newLines = MAP_CITIES.map((city, i) => {
+        const entry = entryRefs.current[i];
+        if (!entry) return null;
+        const r = entry.getBoundingClientRect();
+        return {
+          x1: r.right  - gridRect.left,
+          y1: r.top    - gridRect.top + r.height * 0.28,
+          x2: mapRect.left - gridRect.left + (city.cx / MAP_SVG_W) * mapRect.width,
+          y2: mapRect.top  - gridRect.top  + (city.cy / MAP_SVG_H) * mapRect.height,
+        };
+      }).filter(Boolean) as {x1:number;y1:number;x2:number;y2:number}[];
+      setConnectorLines(newLines);
+    };
+    calculate();
+    window.addEventListener("resize", calculate);
+    const ro = new ResizeObserver(calculate);
+    if (locationsGridRef.current) ro.observe(locationsGridRef.current);
+    return () => { window.removeEventListener("resize", calculate); ro.disconnect(); };
   }, []);
 
   const isMobile = winW < 640;
@@ -4031,141 +4076,126 @@ function ContactosPage() {
           <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
         </motion.div>
 
-        {/* Two-column grid: cards + map */}
+        {/* Two-column grid: location list + map */}
         <div
+          ref={locationsGridRef}
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile || isTablet ? "1fr" : "0.88fr 1fr",
-            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(52px, 7vw, 96px)",
-            alignItems: "start",
+            gridTemplateColumns: isMobile || isTablet ? "1fr" : "0.52fr 1fr",
+            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(28px, 3vw, 48px)",
+            alignItems: "center",
+            position: "relative",
           }}
         >
 
-          {/* ── Cards ── */}
+          {/* ── Location list ── */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: "clamp(12px, 1.8vw, 18px)",
+              gap: "clamp(32px, 5vw, 56px)",
               order: isMobile || isTablet ? 2 : 1,
             }}
           >
             {tc.locations.map((loc, i) => (
               <motion.div
                 key={loc.city}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                ref={(el: HTMLDivElement | null) => { entryRefs.current[i] = el; }}
+                initial={{ opacity: 0, x: -28 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={viewport}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
-                whileHover={{ y: -4, boxShadow: "0 14px 42px rgba(0,0,0,0.12)" }}
-                style={{
-                  background: "#EDE6DF",
-                  borderRadius: "16px",
-                  padding: "clamp(22px, 3vw, 32px) clamp(22px, 3.5vw, 36px)",
-                  boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
-                  cursor: "default",
-                }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }}
+                style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}
               >
-                {/* Top: index + city name + role badge */}
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "clamp(14px, 2vw, 20px)" }}>
-                  <div>
-                    <span
-                      style={{
-                        display: "block",
-                        fontSize: "0.7rem",
-                        fontWeight: 600,
-                        color: "rgba(0,0,0,0.28)",
-                        letterSpacing: "0.12em",
-                        marginBottom: "7px",
-                      }}
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3
-                      style={{
-                        fontSize: "clamp(1.45rem, 0.9rem + 2.2vw, 2.2rem)",
-                        fontWeight: 600,
-                        color: "#111111",
-                        letterSpacing: "-0.03em",
-                        lineHeight: 1.1,
-                        margin: 0,
-                      }}
-                    >
-                      {loc.city}
-                    </h3>
-                  </div>
-                  <span
-                    style={{
-                      fontSize: "0.68rem",
-                      fontWeight: 600,
-                      color: "#003591",
-                      background: "rgba(0,53,145,0.09)",
-                      borderRadius: "99px",
-                      padding: "4px 12px",
-                      letterSpacing: "0.04em",
-                      marginTop: "4px",
-                      flexShrink: 0,
-                      marginLeft: "12px",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {loc.role}
-                  </span>
+                {/* Pin icon */}
+                <div style={{ flexShrink: 0, marginTop: "5px" }}>
+                  <MapPin
+                    size={26}
+                    style={{ color: "#F5A000", display: "block" }}
+                    fill="#F5A000"
+                    strokeWidth={1}
+                  />
                 </div>
 
-                {/* Separator */}
-                <div style={{ height: "1px", background: "rgba(0,0,0,0.09)", marginBottom: "clamp(14px, 2vw, 20px)" }} />
-
-                {/* Contact info */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
-
-                  {/* Address */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <MapPin size={13} style={{ color: "#F5A000", flexShrink: 0 }} />
-                    <span style={{ fontSize: "clamp(0.76rem, 0.68rem + 0.3vw, 0.86rem)", color: "rgba(0,0,0,0.55)", fontWeight: 400 }}>
-                      {loc.address}
-                    </span>
-                  </div>
-
-                  {/* Phones */}
-                  {(loc.phones as readonly string[]).map((phone, pi) => (
-                    <div key={pi} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                      {pi === 0
-                        ? <Phone size={13} style={{ color: "#F5A000", flexShrink: 0 }} />
-                        : <span style={{ width: 13, flexShrink: 0 }} />}
-                      <a
-                        href={`tel:${phone.replace(/\s/g, "")}`}
-                        style={{ fontSize: "clamp(0.76rem, 0.68rem + 0.3vw, 0.86rem)", color: "#111111", textDecoration: "none", fontWeight: 500, transition: "color 0.2s" }}
-                        onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#003591")}
-                        onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#111111")}
-                      >
-                        {phone}
-                      </a>
-                    </div>
-                  ))}
-
-                  {/* Email */}
-                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                    <Mail size={13} style={{ color: "#F5A000", flexShrink: 0 }} />
-                    <a
-                      href={`mailto:${loc.email}`}
-                      style={{ fontSize: "clamp(0.73rem, 0.65rem + 0.3vw, 0.83rem)", color: "rgba(0,0,0,0.48)", textDecoration: "none", transition: "color 0.2s" }}
-                      onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#003591")}
-                      onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(0,0,0,0.48)")}
+                {/* Info */}
+                <div>
+                  <h3
+                    style={{
+                      fontSize: "clamp(1.55rem, 1rem + 2.2vw, 2.4rem)",
+                      fontWeight: 700,
+                      color: "#111111",
+                      letterSpacing: "-0.025em",
+                      lineHeight: 1.05,
+                      margin: "0 0 8px",
+                    }}
+                  >
+                    {loc.city.toUpperCase()}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "clamp(0.76rem, 0.68rem + 0.3vw, 0.86rem)",
+                      color: "rgba(0,0,0,0.42)",
+                      margin: "0 0 6px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
+                    {loc.address}
+                  </p>
+                  {(loc.phones as readonly string[]).map((phone) => (
+                    <p
+                      key={phone}
+                      style={{
+                        fontSize: "clamp(0.84rem, 0.76rem + 0.3vw, 0.96rem)",
+                        color: "#111111",
+                        margin: "2px 0",
+                        fontWeight: 500,
+                      }}
                     >
-                      {loc.email}
-                    </a>
-                  </div>
-
+                      {phone}
+                    </p>
+                  ))}
                 </div>
               </motion.div>
             ))}
           </div>
 
           {/* ── Angola Map ── */}
-          <div style={{ order: isMobile || isTablet ? 1 : 2 }}>
+          <div ref={mapDivRef} style={{ order: isMobile || isTablet ? 1 : 2 }}>
             <AngolaMap />
           </div>
+
+          {/* ── Connector dashed lines SVG overlay ── */}
+          {!isMobile && !isTablet && connectorLines.length > 0 && (
+            <svg
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                pointerEvents: "none",
+                overflow: "visible",
+              }}
+              aria-hidden="true"
+            >
+              {connectorLines.map((line, i) => (
+                <line
+                  key={i}
+                  x1={line.x1}
+                  y1={line.y1}
+                  x2={line.x2}
+                  y2={line.y2}
+                  stroke="#F5A000"
+                  strokeWidth="1.5"
+                  strokeDasharray="5 4"
+                  strokeOpacity="0.7"
+                />
+              ))}
+            </svg>
+          )}
 
         </div>
       </section>
