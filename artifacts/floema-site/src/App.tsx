@@ -4066,11 +4066,11 @@ function ContactosPage() {
       {/* ── Locations ── */}
       <section
         style={{
-          maxWidth: "1400px",
-          margin: "0 auto",
-          paddingLeft: "clamp(20px, 5vw, 80px)",
-          paddingRight: "clamp(8px, 1.5vw, 24px)",
+          width: "100%",
           marginBottom: "clamp(80px, 11vw, 160px)",
+          paddingLeft: "clamp(20px, 5vw, 80px)",
+          paddingRight: 0,
+          boxSizing: "border-box",
         }}
       >
 
@@ -4080,7 +4080,7 @@ function ContactosPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewport}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(40px, 6vw, 72px)" }}
+          style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(40px, 6vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" }}
         >
           <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>
             {tc.locationsLabel}
@@ -4093,10 +4093,11 @@ function ContactosPage() {
           ref={locationsGridRef}
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile || isTablet ? "1fr" : "0.28fr 1fr",
-            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(56px, 7vw, 96px)",
+            gridTemplateColumns: isMobile || isTablet ? "1fr" : "240px 1fr",
+            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(48px, 6vw, 80px)",
             alignItems: "center",
             position: "relative",
+            paddingRight: isMobile || isTablet ? "clamp(20px, 5vw, 80px)" : 0,
           }}
         >
 
