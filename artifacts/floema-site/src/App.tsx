@@ -4089,13 +4089,13 @@ function ContactosPage() {
           <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
         </motion.div>
 
-        {/* Three-column grid: title | cities | map */}
+        {/* Grid: [title LEFT] [cities + map RIGHT] */}
         <div
           ref={locationsGridRef}
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile || isTablet ? "1fr" : `220px 1fr clamp(340px, 35vw, 500px)`,
-            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(40px, 4vw, 60px)",
+            gridTemplateColumns: isMobile || isTablet ? "1fr" : `220px 1fr`,
+            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(40px, 5vw, 72px)",
             alignItems: "start",
             position: "relative",
           }}
@@ -4115,89 +4115,100 @@ function ContactosPage() {
               margin: 0,
               whiteSpace: "pre-line",
               order: isMobile || isTablet ? 1 : 1,
-              paddingTop: "clamp(8px, 1vw, 16px)",
+              paddingTop: "clamp(4px, 0.8vw, 12px)",
             }}
           >
             {tc.locationsTitle}
           </motion.h2>
 
-          {/* ── Location list (centre column) ── */}
+          {/* ── Right group: city list + map side-by-side ── */}
           <div
             style={{
-              display: "flex",
+              display: isMobile || isTablet ? "flex" : "grid",
+              gridTemplateColumns: `1fr clamp(300px, 34vw, 480px)`,
               flexDirection: "column",
-              gap: "clamp(32px, 5vw, 56px)",
-              order: isMobile || isTablet ? 3 : 2,
+              gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(36px, 4vw, 56px)",
+              alignItems: "center",
+              order: isMobile || isTablet ? 2 : 2,
             }}
           >
-            {tc.locations.map((loc, i) => (
-              <motion.div
-                key={loc.city}
-                ref={(el: HTMLDivElement | null) => { entryRefs.current[i] = el; }}
-                initial={{ opacity: 0, x: -28 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={viewport}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }}
-                style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}
-              >
-                {/* Pin icon */}
-                <div style={{ flexShrink: 0, marginTop: "5px" }}>
-                  <MapPin
-                    size={26}
-                    style={{ color: "#F5A000", display: "block" }}
-                    fill="#F5A000"
-                    strokeWidth={1}
-                  />
-                </div>
+            {/* City list */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "clamp(28px, 4vw, 48px)",
+              }}
+            >
+              {tc.locations.map((loc, i) => (
+                <motion.div
+                  key={loc.city}
+                  ref={(el: HTMLDivElement | null) => { entryRefs.current[i] = el; }}
+                  initial={{ opacity: 0, x: -28 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={viewport}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }}
+                  style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}
+                >
+                  {/* Pin icon */}
+                  <div style={{ flexShrink: 0, marginTop: "5px" }}>
+                    <MapPin
+                      size={26}
+                      style={{ color: "#F5A000", display: "block" }}
+                      fill="#F5A000"
+                      strokeWidth={1}
+                    />
+                  </div>
 
-                {/* Info */}
-                <div>
-                  <h3
-                    style={{
-                      fontSize: "clamp(1.55rem, 1rem + 2.2vw, 2.4rem)",
-                      fontWeight: 700,
-                      color: "#111111",
-                      letterSpacing: "-0.025em",
-                      lineHeight: 1.05,
-                      margin: "0 0 8px",
-                    }}
-                  >
-                    {loc.city.toUpperCase()}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "clamp(0.76rem, 0.68rem + 0.3vw, 0.86rem)",
-                      color: "rgba(0,0,0,0.42)",
-                      margin: "0 0 6px",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "5px",
-                    }}
-                  >
-                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
-                    {loc.address}
-                  </p>
-                  {(loc.phones as readonly string[]).map((phone) => (
-                    <p
-                      key={phone}
+                  {/* Info */}
+                  <div>
+                    <h3
                       style={{
-                        fontSize: "clamp(0.84rem, 0.76rem + 0.3vw, 0.96rem)",
+                        fontSize: "clamp(1.55rem, 1rem + 2.2vw, 2.4rem)",
+                        fontWeight: 700,
                         color: "#111111",
-                        margin: "2px 0",
-                        fontWeight: 500,
+                        letterSpacing: "-0.025em",
+                        lineHeight: 1.05,
+                        margin: "0 0 8px",
                       }}
                     >
-                      {phone}
+                      {loc.city.toUpperCase()}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "clamp(0.76rem, 0.68rem + 0.3vw, 0.86rem)",
+                        color: "rgba(0,0,0,0.42)",
+                        margin: "0 0 6px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
+                      {loc.address}
                     </p>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                    {(loc.phones as readonly string[]).map((phone) => (
+                      <p
+                        key={phone}
+                        style={{
+                          fontSize: "clamp(0.84rem, 0.76rem + 0.3vw, 0.96rem)",
+                          color: "#111111",
+                          margin: "2px 0",
+                          fontWeight: 500,
+                        }}
+                      >
+                        {phone}
+                      </p>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
 
-          {/* ── Angola Map ── */}
-          <div ref={mapDivRef} style={{ order: isMobile || isTablet ? 2 : 3 }}>
-            <AngolaMap />
+            {/* Angola Map */}
+            <div ref={mapDivRef}>
+              <AngolaMap />
+            </div>
           </div>
 
           {/* ── Connector dashed lines SVG overlay ── */}
