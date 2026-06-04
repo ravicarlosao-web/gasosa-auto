@@ -4067,9 +4067,10 @@ function ContactosPage() {
       <section
         style={{
           maxWidth: "1280px",
-          margin: "0 auto",
+          marginLeft: "auto",
+          marginRight: "clamp(24px, 6vw, 100px)",
           paddingLeft: "clamp(24px, 5vw, 80px)",
-          paddingRight: "clamp(24px, 5vw, 80px)",
+          paddingRight: "clamp(16px, 3vw, 48px)",
           marginBottom: "clamp(80px, 11vw, 160px)",
         }}
       >
@@ -4110,6 +4111,24 @@ function ContactosPage() {
               order: isMobile || isTablet ? 2 : 1,
             }}
           >
+            {/* Title */}
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewport}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                fontSize: "clamp(1.15rem, 2vw, 1.55rem)",
+                fontWeight: 700,
+                lineHeight: 1.25,
+                color: "#1a1a2e",
+                margin: 0,
+                whiteSpace: "pre-line",
+              }}
+            >
+              {tc.locationsTitle}
+            </motion.h2>
+
             {tc.locations.map((loc, i) => (
               <motion.div
                 key={loc.city}

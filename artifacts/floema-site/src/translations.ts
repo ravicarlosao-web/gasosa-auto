@@ -177,6 +177,7 @@ export const translations = {
       pageSubtitle: "Estamos presentes em três províncias de Angola. Encontre a unidade mais próxima ou envie-nos uma mensagem.",
       directLabel: "Contacto directo",
       locationsLabel: "As nossas unidades",
+      locationsTitle: "Onde estamos\nlocalizados",
       locations: [
         { city: "Luanda", role: "Sede Nacional", address: "Av. 21 de Janeiro", phones: ["+244 951 025 435", "+244 931 242 408"], email: "geral@gasosaautoagro.ao" },
         { city: "Huambo", role: "Planalto Central", address: "Cidade Baixa", phones: ["+244 941 066 420"], email: "huambo@gasosaautoagro.ao" },
@@ -374,6 +375,7 @@ export const translations = {
       pageSubtitle: "We are present in three provinces of Angola. Find your nearest unit or send us a message.",
       directLabel: "Direct contact",
       locationsLabel: "Our units",
+      locationsTitle: "Where we\nare located",
       locations: [
         { city: "Luanda", role: "National Headquarters", address: "Av. 21 de Janeiro", phones: ["+244 951 025 435", "+244 931 242 408"], email: "geral@gasosaautoagro.ao" },
         { city: "Huambo", role: "Central Plateau", address: "Cidade Baixa", phones: ["+244 941 066 420"], email: "huambo@gasosaautoagro.ao" },
