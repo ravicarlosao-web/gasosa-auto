@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { ChevronDown, Check, Menu, X, Mail, Phone, MapPin } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
+import angolaMapRaw from "@assets/angola_1780611247454.svg?raw";
 import nergyImg1 from "@assets/ChatGPT_Image_26_de_mai._de_2026,_14_26_17_2_1780147809888.png";
 import nergyImg2 from "@assets/ChatGPT_Image_26_de_mai._de_2026,_14_26_17_3_1780147827214.png";
 import nergyImg3 from "@assets/IMG_20250903_113401_1780387574299.jpg";
@@ -3726,107 +3727,65 @@ function NoticiasCategorySection({
 
 // ─── Angola Map SVG ───────────────────────────────────────────────────────────
 function AngolaMap() {
-  const B      = "#003591";
-  const Y      = "#F5A000";
-  const border = "rgba(255,255,255,0.22)";
-  const grid   = "rgba(255,255,255,0.10)";
-  const OUTLINE = "M 54,44 C 98,25 158,16 220,24 L 292,48 L 297,128 L 290,210 L 276,298 L 255,380 C 210,396 162,400 112,390 L 65,374 C 38,352 16,314 15,274 C 13,230 16,185 24,148 C 32,110 44,72 54,44 Z";
+  const Y = "#F5A000";
 
+  const styledSvg = angolaMapRaw
+    .replace(
+      /(<svg[^>]*)(>)/,
+      '$1 style="width:100%;height:auto;display:block;"$2' +
+      '<style>' +
+        'path{fill:#003591;stroke:rgba(255,255,255,0.18);stroke-width:0.6;stroke-linejoin:round;}' +
+        'path#AO-LUA{fill:#F5A000;}' +
+        'path#AO-HUA{fill:#F5A000;}' +
+        'path#AO-HUI{fill:#F5A000;}' +
+      '</style>'
+    );
+
+  /* City centres in the SVG's own viewBox (612.3866 × 684.8916)         */
+  /* Calculated from real geo-coords using Angola bounding-box projection  */
   const cities = [
-    { id: "Luanda", cx: 36,  cy: 148 },
-    { id: "Huambo", cx: 107, cy: 256 },
-    { id: "Huíla",  cx: 142, cy: 316 },
+    { id: "Luanda",  cx: 77,  cy: 230, label: "LUANDA"  },
+    { id: "Huambo",  cx: 201, cy: 420, label: "HUAMBO"  },
+    { id: "Lubango", cx: 90,  cy: 528, label: "HUÍLA"   },
   ] as const;
 
   return (
-    <motion.svg
-      viewBox="0 0 300 405"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{ width: "100%", height: "auto", display: "block", maxHeight: "520px" }}
+    <motion.div
+      style={{ position: "relative", width: "100%", maxWidth: "480px", margin: "0 auto" }}
       initial={{ opacity: 0, x: 28 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.18 }}
       transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
     >
-      <defs>
-        <clipPath id="angola-clip">
-          <path d={OUTLINE} />
-        </clipPath>
-      </defs>
+      {/* Real Angola SVG — all provinces coloured via injected <style> */}
+      <div dangerouslySetInnerHTML={{ __html: styledSvg }} />
 
-      {/* Cabinda enclave */}
-      <rect x="64" y="5" width="26" height="20" rx="3" fill={B} stroke={border} strokeWidth="0.9" />
-      <line x1="77" y1="25" x2="68" y2="44" stroke={border} strokeWidth="0.8" strokeDasharray="2.5 2" />
-
-      {/* Main Angola body */}
-      <path d={OUTLINE} fill={B} />
-
-      {/* Province grid lines — clipped */}
-      <g clipPath="url(#angola-clip)" stroke={grid} strokeWidth="0.7" fill="none">
-        {[88, 130, 180, 232, 296, 348].map(y => (
-          <line key={`h${y}`} x1="0" y1={y} x2="300" y2={y} />
+      {/* Overlay SVG — same viewBox — for animated city markers & labels */}
+      <svg
+        viewBox="0 0 612.3866 684.8916"
+        style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none" }}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        {cities.map(({ id, cx, cy, label }, i) => (
+          <g key={id}>
+            <motion.g
+              style={{ originX: `${cx}px`, originY: `${cy}px` }}
+              animate={{ scale: [0.5, 2.4, 0.5], opacity: [0.6, 0, 0.6] }}
+              transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.75 }}
+            >
+              <circle cx={cx} cy={cy} r={8} fill="none" stroke="#111111" strokeWidth="1.5" />
+            </motion.g>
+            <circle cx={cx} cy={cy} r={6}   fill="#111111" />
+            <circle cx={cx} cy={cy} r={3}   fill={Y} />
+            <text
+              x={cx + 10} y={cy + 4}
+              fontSize="13" fontFamily="Poppins,sans-serif" fontWeight="700"
+              fill="#111111" letterSpacing="1"
+            >{label}</text>
+          </g>
         ))}
-        {[72, 142, 210, 254].map(x => (
-          <line key={`v${x}`} x1={x} y1="0" x2={x} y2="405" />
-        ))}
-      </g>
-
-      {/* Highlighted provinces — clipped to Angola outline */}
-      <g clipPath="url(#angola-clip)">
-        {/* Luanda */}
-        <motion.rect
-          x="0" y="130" width="72" height="50"
-          fill={Y}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.9 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        />
-        {/* Huambo */}
-        <motion.rect
-          x="72" y="232" width="70" height="64"
-          fill={Y}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.9 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.45 }}
-        />
-        {/* Huíla */}
-        <motion.rect
-          x="72" y="296" width="140" height="52"
-          fill={Y}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.9 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        />
-      </g>
-
-      {/* Angola border overlay */}
-      <path d={OUTLINE} fill="none" stroke={border} strokeWidth="1.5" />
-
-      {/* Province name labels */}
-      <text x="36"  y="168" textAnchor="middle" fontSize="6.5" fontFamily="Poppins,sans-serif" fontWeight="700" fill="#111111" letterSpacing="0.8">LUANDA</text>
-      <text x="107" y="274" textAnchor="middle" fontSize="6"   fontFamily="Poppins,sans-serif" fontWeight="700" fill="#111111" letterSpacing="0.7">HUAMBO</text>
-      <text x="142" y="334" textAnchor="middle" fontSize="6"   fontFamily="Poppins,sans-serif" fontWeight="700" fill="#111111" letterSpacing="0.7">HUÍLA</text>
-
-      {/* City dots with pulsing ring */}
-      {cities.map(({ id, cx, cy }, i) => (
-        <g key={id}>
-          {/* Pulsing ring — scale-based to avoid SVG attr animation issues */}
-          <motion.g
-            style={{ originX: `${cx}px`, originY: `${cy}px` }}
-            animate={{ scale: [0.5, 2.2, 0.5], opacity: [0.55, 0, 0.55] }}
-            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.75 }}
-          >
-            <circle cx={cx} cy={cy} r={6} fill="none" stroke="#111111" strokeWidth="1.1" />
-          </motion.g>
-          <circle cx={cx} cy={cy} r={4.5} fill="#111111" />
-          <circle cx={cx} cy={cy} r={2.2} fill={Y} />
-        </g>
-      ))}
-    </motion.svg>
+      </svg>
+    </motion.div>
   );
 }
 
