@@ -4067,8 +4067,8 @@ function ContactosPage() {
       <section
         style={{
           maxWidth: "1280px",
-          marginLeft: 0,
-          marginRight: "auto",
+          marginLeft: "auto",
+          marginRight: 0,
           paddingLeft: "clamp(24px, 5vw, 80px)",
           paddingRight: "clamp(16px, 3vw, 48px)",
           marginBottom: "clamp(80px, 11vw, 160px)",
