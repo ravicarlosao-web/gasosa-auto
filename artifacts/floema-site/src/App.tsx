@@ -4089,45 +4089,47 @@ function ContactosPage() {
           <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
         </motion.div>
 
-        {/* Two-column grid: map LEFT, title+cities RIGHT */}
+        {/* Three-column grid: title | cities | map */}
         <div
           ref={locationsGridRef}
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile || isTablet ? "1fr" : `clamp(360px, 38vw, 540px) 1fr`,
-            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(48px, 5vw, 72px)",
-            alignItems: "center",
+            gridTemplateColumns: isMobile || isTablet ? "1fr" : `220px 1fr clamp(340px, 35vw, 500px)`,
+            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(40px, 4vw, 60px)",
+            alignItems: "start",
             position: "relative",
           }}
         >
 
-          {/* ── Location list + title (right column on desktop) ── */}
+          {/* ── Title (left column) ── */}
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewport}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              fontSize: "clamp(2rem, 3.5vw, 4rem)",
+              fontWeight: 500,
+              lineHeight: 1.1,
+              color: "#1a1a2e",
+              margin: 0,
+              whiteSpace: "pre-line",
+              order: isMobile || isTablet ? 1 : 1,
+              paddingTop: "clamp(8px, 1vw, 16px)",
+            }}
+          >
+            {tc.locationsTitle}
+          </motion.h2>
+
+          {/* ── Location list (centre column) ── */}
           <div
             style={{
               display: "flex",
               flexDirection: "column",
               gap: "clamp(32px, 5vw, 56px)",
-              order: isMobile || isTablet ? 2 : 2,
+              order: isMobile || isTablet ? 3 : 2,
             }}
           >
-            {/* Title */}
-            <motion.h2
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewport}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              style={{
-                fontSize: "clamp(2.4rem, 4.5vw, 5rem)",
-                fontWeight: 500,
-                lineHeight: 1.1,
-                color: "#1a1a2e",
-                margin: 0,
-                whiteSpace: "pre-line",
-              }}
-            >
-              {tc.locationsTitle}
-            </motion.h2>
-
             {tc.locations.map((loc, i) => (
               <motion.div
                 key={loc.city}
@@ -4194,7 +4196,7 @@ function ContactosPage() {
           </div>
 
           {/* ── Angola Map ── */}
-          <div ref={mapDivRef} style={{ order: 1 }}>
+          <div ref={mapDivRef} style={{ order: isMobile || isTablet ? 2 : 3 }}>
             <AngolaMap />
           </div>
 
