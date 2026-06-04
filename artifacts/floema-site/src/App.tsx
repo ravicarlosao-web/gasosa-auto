@@ -3729,11 +3729,17 @@ function NoticiasCategorySection({
 function AngolaMap() {
   const Y = "#F5A000";
 
+  /* The source SVG has explicit width/height but NO viewBox.
+     Without viewBox, CSS scaling clips instead of scaling.
+     Fix: swap the pixel dimensions for viewBox + 100% width.  */
   const styledSvg = angolaMapRaw
     .replace(
-      /(<svg[^>]*)(>)/,
-      '$1 style="width:100%;height:auto;display:block;"$2' +
-      '<style>' +
+      'width="612.3866" height="684.8916"',
+      'viewBox="0 0 612.3866 684.8916" width="100%" style="display:block;height:auto;"'
+    )
+    .replace(
+      /(<svg[^>]*>)/,
+      '$1<style>' +
         'path{fill:#003591;stroke:rgba(255,255,255,0.18);stroke-width:0.6;stroke-linejoin:round;}' +
         'path#AO-LUA{fill:#F5A000;}' +
         'path#AO-HUA{fill:#F5A000;}' +
@@ -3751,7 +3757,7 @@ function AngolaMap() {
 
   return (
     <motion.div
-      style={{ position: "relative", width: "100%", maxWidth: "480px", margin: "0 auto" }}
+      style={{ position: "relative", width: "100%" }}
       initial={{ opacity: 0, x: 28 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, amount: 0.18 }}
@@ -4157,13 +4163,7 @@ function ContactosPage() {
           </div>
 
           {/* ── Angola Map ── */}
-          <div
-            style={{
-              order: isMobile || isTablet ? 1 : 2,
-              position: isMobile || isTablet ? "relative" : "sticky",
-              top: isMobile || isTablet ? undefined : "clamp(88px, 12vh, 120px)",
-            }}
-          >
+          <div style={{ order: isMobile || isTablet ? 1 : 2 }}>
             <AngolaMap />
           </div>
 
