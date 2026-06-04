@@ -4064,7 +4064,15 @@ function ContactosPage() {
       </div>
 
       {/* ── Locations ── */}
-      <section style={{ ...WRAP, marginBottom: "clamp(80px, 11vw, 160px)" }}>
+      <section
+        style={{
+          maxWidth: "1400px",
+          margin: "0 auto",
+          paddingLeft: "clamp(20px, 5vw, 80px)",
+          paddingRight: "clamp(8px, 1.5vw, 24px)",
+          marginBottom: "clamp(80px, 11vw, 160px)",
+        }}
+      >
 
         {/* Section label */}
         <motion.div
@@ -4072,7 +4080,7 @@ function ContactosPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewport}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(36px, 5vw, 60px)" }}
+          style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(40px, 6vw, 72px)" }}
         >
           <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>
             {tc.locationsLabel}
@@ -4085,8 +4093,8 @@ function ContactosPage() {
           ref={locationsGridRef}
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile || isTablet ? "1fr" : "0.36fr 1fr",
-            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(16px, 2vw, 32px)",
+            gridTemplateColumns: isMobile || isTablet ? "1fr" : "0.28fr 1fr",
+            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(56px, 7vw, 96px)",
             alignItems: "center",
             position: "relative",
           }}
