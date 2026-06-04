@@ -4064,44 +4064,30 @@ function ContactosPage() {
       </div>
 
       {/* ── Locations ── */}
-      <section
-        style={{
-          maxWidth: "1280px",
-          marginLeft: "auto",
-          marginRight: 0,
-          paddingLeft: "clamp(24px, 5vw, 80px)",
-          paddingRight: "clamp(16px, 3vw, 48px)",
-          marginBottom: "clamp(80px, 11vw, 160px)",
-        }}
-      >
+      {/*
+        TWO INDEPENDENT BLOCKS:
+        1. Title block — full-width, always anchored to the left via paddingLeft.
+           Moving this does NOT affect the map/cities.
+        2. Cities+Map block — has its own maxWidth and margin, move independently.
+           marginLeft:auto + marginRight:0 pushes it to the right.
+      */}
+      <section style={{ marginBottom: "clamp(80px, 11vw, 160px)" }}>
 
-        {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={viewport}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(40px, 6vw, 72px)" }}
-        >
-          <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>
-            {tc.locationsLabel}
-          </span>
-          <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
-        </motion.div>
+        {/* ── BLOCK 1: Label + Title — independent, left-anchored ── */}
+        <div style={{ paddingLeft: "clamp(24px, 5vw, 80px)", marginBottom: "clamp(32px, 5vw, 56px)" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewport}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(24px, 3vw, 40px)" }}
+          >
+            <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>
+              {tc.locationsLabel}
+            </span>
+            <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
+          </motion.div>
 
-        {/* Grid: [title LEFT] [cities + map RIGHT] */}
-        <div
-          ref={locationsGridRef}
-          style={{
-            display: "grid",
-            gridTemplateColumns: isMobile || isTablet ? "1fr" : `220px 1fr`,
-            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(40px, 5vw, 72px)",
-            alignItems: "start",
-            position: "relative",
-          }}
-        >
-
-          {/* ── Title (left column) ── */}
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -4114,133 +4100,74 @@ function ContactosPage() {
               color: "#1a1a2e",
               margin: 0,
               whiteSpace: "pre-line",
-              order: isMobile || isTablet ? 1 : 1,
-              paddingTop: "clamp(4px, 0.8vw, 12px)",
             }}
           >
             {tc.locationsTitle}
           </motion.h2>
+        </div>
 
-          {/* ── Right group: city list + map side-by-side ── */}
-          <div
-            style={{
-              display: isMobile || isTablet ? "flex" : "grid",
-              gridTemplateColumns: `1fr clamp(300px, 34vw, 480px)`,
-              flexDirection: "column",
-              gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(36px, 4vw, 56px)",
-              alignItems: "center",
-              order: isMobile || isTablet ? 2 : 2,
-            }}
-          >
-            {/* City list */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "clamp(28px, 4vw, 48px)",
-              }}
-            >
-              {tc.locations.map((loc, i) => (
-                <motion.div
-                  key={loc.city}
-                  ref={(el: HTMLDivElement | null) => { entryRefs.current[i] = el; }}
-                  initial={{ opacity: 0, x: -28 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={viewport}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }}
-                  style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}
-                >
-                  {/* Pin icon */}
-                  <div style={{ flexShrink: 0, marginTop: "5px" }}>
-                    <MapPin
-                      size={26}
-                      style={{ color: "#F5A000", display: "block" }}
-                      fill="#F5A000"
-                      strokeWidth={1}
-                    />
-                  </div>
-
-                  {/* Info */}
-                  <div>
-                    <h3
-                      style={{
-                        fontSize: "clamp(1.55rem, 1rem + 2.2vw, 2.4rem)",
-                        fontWeight: 700,
-                        color: "#111111",
-                        letterSpacing: "-0.025em",
-                        lineHeight: 1.05,
-                        margin: "0 0 8px",
-                      }}
-                    >
-                      {loc.city.toUpperCase()}
-                    </h3>
-                    <p
-                      style={{
-                        fontSize: "clamp(0.76rem, 0.68rem + 0.3vw, 0.86rem)",
-                        color: "rgba(0,0,0,0.42)",
-                        margin: "0 0 6px",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "5px",
-                      }}
-                    >
-                      <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
-                      {loc.address}
+        {/* ── BLOCK 2: Cities + Map — independent, right-aligned ── */}
+        <div
+          ref={locationsGridRef}
+          style={{
+            display: "grid",
+            gridTemplateColumns: isMobile || isTablet ? "1fr" : `1fr clamp(300px, 34vw, 480px)`,
+            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(36px, 4vw, 56px)",
+            alignItems: "center",
+            position: "relative",
+            maxWidth: "1050px",
+            marginLeft: "auto",
+            marginRight: 0,
+            paddingLeft: "clamp(16px, 3vw, 48px)",
+            paddingRight: "clamp(16px, 3vw, 48px)",
+          }}
+        >
+          {/* City list */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(28px, 4vw, 48px)" }}>
+            {tc.locations.map((loc, i) => (
+              <motion.div
+                key={loc.city}
+                ref={(el: HTMLDivElement | null) => { entryRefs.current[i] = el; }}
+                initial={{ opacity: 0, x: -28 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={viewport}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }}
+                style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}
+              >
+                <div style={{ flexShrink: 0, marginTop: "5px" }}>
+                  <MapPin size={26} style={{ color: "#F5A000", display: "block" }} fill="#F5A000" strokeWidth={1} />
+                </div>
+                <div>
+                  <h3 style={{ fontSize: "clamp(1.55rem, 1rem + 2.2vw, 2.4rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.025em", lineHeight: 1.05, margin: "0 0 8px" }}>
+                    {loc.city.toUpperCase()}
+                  </h3>
+                  <p style={{ fontSize: "clamp(0.76rem, 0.68rem + 0.3vw, 0.86rem)", color: "rgba(0,0,0,0.42)", margin: "0 0 6px", display: "flex", alignItems: "center", gap: "5px" }}>
+                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
+                    {loc.address}
+                  </p>
+                  {(loc.phones as readonly string[]).map((phone) => (
+                    <p key={phone} style={{ fontSize: "clamp(0.84rem, 0.76rem + 0.3vw, 0.96rem)", color: "#111111", margin: "2px 0", fontWeight: 500 }}>
+                      {phone}
                     </p>
-                    {(loc.phones as readonly string[]).map((phone) => (
-                      <p
-                        key={phone}
-                        style={{
-                          fontSize: "clamp(0.84rem, 0.76rem + 0.3vw, 0.96rem)",
-                          color: "#111111",
-                          margin: "2px 0",
-                          fontWeight: 500,
-                        }}
-                      >
-                        {phone}
-                      </p>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Angola Map */}
-            <div ref={mapDivRef}>
-              <AngolaMap />
-            </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
           </div>
 
-          {/* ── Connector dashed lines SVG overlay ── */}
+          {/* Angola Map */}
+          <div ref={mapDivRef}>
+            <AngolaMap />
+          </div>
+
+          {/* Connector dashed lines */}
           {!isMobile && !isTablet && connectorLines.length > 0 && (
-            <svg
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                pointerEvents: "none",
-                overflow: "visible",
-              }}
-              aria-hidden="true"
-            >
+            <svg style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", overflow: "visible" }} aria-hidden="true">
               {connectorLines.map((line, i) => (
-                <line
-                  key={i}
-                  x1={line.x1}
-                  y1={line.y1}
-                  x2={line.x2}
-                  y2={line.y2}
-                  stroke="#F5A000"
-                  strokeWidth="1.5"
-                  strokeDasharray="5 4"
-                  strokeOpacity="0.7"
-                />
+                <line key={i} x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} stroke="#F5A000" strokeWidth="1.5" strokeDasharray="5 4" strokeOpacity="0.7" />
               ))}
             </svg>
           )}
-
         </div>
       </section>
 
