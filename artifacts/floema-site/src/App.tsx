@@ -3838,11 +3838,15 @@ function ContactosPage() {
         const entry = entryRefs.current[i];
         if (!entry) return null;
         const r = entry.getBoundingClientRect();
+        // Province position on the map
+        const provinceX = mapRect.left - gridRect.left + (city.cx / MAP_SVG_W) * mapRect.width;
+        const provinceY = mapRect.top  - gridRect.top  + (city.cy / MAP_SVG_H) * mapRect.height;
+        // Horizontal line: y1 = y2 = province height, x1 = right edge of entry
         return {
-          x1: r.right  - gridRect.left,
-          y1: r.top    - gridRect.top + r.height * 0.28,
-          x2: mapRect.left - gridRect.left + (city.cx / MAP_SVG_W) * mapRect.width,
-          y2: mapRect.top  - gridRect.top  + (city.cy / MAP_SVG_H) * mapRect.height,
+          x1: r.right - gridRect.left,
+          y1: provinceY,
+          x2: provinceX,
+          y2: provinceY,
         };
       }).filter(Boolean) as {x1:number;y1:number;x2:number;y2:number}[];
       setConnectorLines(newLines);
@@ -4081,8 +4085,8 @@ function ContactosPage() {
           ref={locationsGridRef}
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile || isTablet ? "1fr" : "0.52fr 1fr",
-            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(28px, 3vw, 48px)",
+            gridTemplateColumns: isMobile || isTablet ? "1fr" : "0.36fr 1fr",
+            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(16px, 2vw, 32px)",
             alignItems: "center",
             position: "relative",
           }}
