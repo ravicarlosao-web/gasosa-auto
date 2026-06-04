@@ -1,0 +1,1 @@
+- [SVG animation in Framer Motion](svg-framer-motion.md) — animating SVG `r` attribute with motion.circle causes "Expected length, undefined" errors; use motion.g with scale instead.

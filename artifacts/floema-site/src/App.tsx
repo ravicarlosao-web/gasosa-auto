@@ -3724,7 +3724,112 @@ function NoticiasCategorySection({
   );
 }
 
-// ─── ContactosPage ─────────────────────────────────────────────────────────────
+// ─── Angola Map SVG ───────────────────────────────────────────────────────────
+function AngolaMap() {
+  const B      = "#003591";
+  const Y      = "#F5A000";
+  const border = "rgba(255,255,255,0.22)";
+  const grid   = "rgba(255,255,255,0.10)";
+  const OUTLINE = "M 54,44 C 98,25 158,16 220,24 L 292,48 L 297,128 L 290,210 L 276,298 L 255,380 C 210,396 162,400 112,390 L 65,374 C 38,352 16,314 15,274 C 13,230 16,185 24,148 C 32,110 44,72 54,44 Z";
+
+  const cities = [
+    { id: "Luanda", cx: 36,  cy: 148 },
+    { id: "Huambo", cx: 107, cy: 256 },
+    { id: "Huíla",  cx: 142, cy: 316 },
+  ] as const;
+
+  return (
+    <motion.svg
+      viewBox="0 0 300 405"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ width: "100%", height: "auto", display: "block", maxHeight: "520px" }}
+      initial={{ opacity: 0, x: 28 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.18 }}
+      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <defs>
+        <clipPath id="angola-clip">
+          <path d={OUTLINE} />
+        </clipPath>
+      </defs>
+
+      {/* Cabinda enclave */}
+      <rect x="64" y="5" width="26" height="20" rx="3" fill={B} stroke={border} strokeWidth="0.9" />
+      <line x1="77" y1="25" x2="68" y2="44" stroke={border} strokeWidth="0.8" strokeDasharray="2.5 2" />
+
+      {/* Main Angola body */}
+      <path d={OUTLINE} fill={B} />
+
+      {/* Province grid lines — clipped */}
+      <g clipPath="url(#angola-clip)" stroke={grid} strokeWidth="0.7" fill="none">
+        {[88, 130, 180, 232, 296, 348].map(y => (
+          <line key={`h${y}`} x1="0" y1={y} x2="300" y2={y} />
+        ))}
+        {[72, 142, 210, 254].map(x => (
+          <line key={`v${x}`} x1={x} y1="0" x2={x} y2="405" />
+        ))}
+      </g>
+
+      {/* Highlighted provinces — clipped to Angola outline */}
+      <g clipPath="url(#angola-clip)">
+        {/* Luanda */}
+        <motion.rect
+          x="0" y="130" width="72" height="50"
+          fill={Y}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.9 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        />
+        {/* Huambo */}
+        <motion.rect
+          x="72" y="232" width="70" height="64"
+          fill={Y}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.9 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.45 }}
+        />
+        {/* Huíla */}
+        <motion.rect
+          x="72" y="296" width="140" height="52"
+          fill={Y}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.9 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        />
+      </g>
+
+      {/* Angola border overlay */}
+      <path d={OUTLINE} fill="none" stroke={border} strokeWidth="1.5" />
+
+      {/* Province name labels */}
+      <text x="36"  y="168" textAnchor="middle" fontSize="6.5" fontFamily="Poppins,sans-serif" fontWeight="700" fill="#111111" letterSpacing="0.8">LUANDA</text>
+      <text x="107" y="274" textAnchor="middle" fontSize="6"   fontFamily="Poppins,sans-serif" fontWeight="700" fill="#111111" letterSpacing="0.7">HUAMBO</text>
+      <text x="142" y="334" textAnchor="middle" fontSize="6"   fontFamily="Poppins,sans-serif" fontWeight="700" fill="#111111" letterSpacing="0.7">HUÍLA</text>
+
+      {/* City dots with pulsing ring */}
+      {cities.map(({ id, cx, cy }, i) => (
+        <g key={id}>
+          {/* Pulsing ring — scale-based to avoid SVG attr animation issues */}
+          <motion.g
+            style={{ originX: `${cx}px`, originY: `${cy}px` }}
+            animate={{ scale: [0.5, 2.2, 0.5], opacity: [0.55, 0, 0.55] }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.75 }}
+          >
+            <circle cx={cx} cy={cy} r={6} fill="none" stroke="#111111" strokeWidth="1.1" />
+          </motion.g>
+          <circle cx={cx} cy={cy} r={4.5} fill="#111111" />
+          <circle cx={cx} cy={cy} r={2.2} fill={Y} />
+        </g>
+      ))}
+    </motion.svg>
+  );
+}
+
 function ContactosPage() {
   const { t } = useLang();
   const tc = t.contactos;
@@ -3917,7 +4022,7 @@ function ContactosPage() {
 
             {/* Phone */}
             <motion.a
-              href="tel:+244923000000"
+              href="tel:+244951025435"
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewport}
@@ -3937,7 +4042,7 @@ function ContactosPage() {
               }}
               whileHover={{ color: "#003591" }}
             >
-              +244 923 000 000
+              +244 951 025 435
             </motion.a>
           </div>
           <div style={{ borderTop: "1.5px solid rgba(0,0,0,0.1)" }} />
@@ -3946,13 +4051,14 @@ function ContactosPage() {
 
       {/* ── Locations ── */}
       <section style={{ ...WRAP, marginBottom: "clamp(80px, 11vw, 160px)" }}>
+
         {/* Section label */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewport}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(28px, 4vw, 52px)" }}
+          style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(36px, 5vw, 60px)" }}
         >
           <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>
             {tc.locationsLabel}
@@ -3960,106 +4066,148 @@ function ContactosPage() {
           <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
         </motion.div>
 
-        {/* Cards grid */}
+        {/* Two-column grid: cards + map */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : isTablet ? "repeat(2, 1fr)" : "repeat(3, 1fr)",
-            gap: "clamp(14px, 2vw, 24px)",
+            gridTemplateColumns: isMobile || isTablet ? "1fr" : "0.88fr 1fr",
+            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(52px, 7vw, 96px)",
+            alignItems: "start",
           }}
         >
-          {tc.locations.map((loc, i) => (
-            <motion.div
-              key={loc.city}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewport}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
-              style={{
-                background: "#EDE6DF",
-                borderRadius: "16px",
-                padding: "clamp(28px, 3.5vw, 44px)",
-                display: "flex",
-                flexDirection: "column",
-                gap: "0",
-                minHeight: "clamp(260px, 28vw, 340px)",
-              }}
-            >
-              {/* Index */}
-              <span
+
+          {/* ── Cards ── */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "clamp(12px, 1.8vw, 18px)",
+              order: isMobile || isTablet ? 2 : 1,
+            }}
+          >
+            {tc.locations.map((loc, i) => (
+              <motion.div
+                key={loc.city}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={viewport}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
+                whileHover={{ y: -4, boxShadow: "0 14px 42px rgba(0,0,0,0.12)" }}
                 style={{
-                  fontSize: "0.72rem",
-                  fontWeight: 600,
-                  color: "rgba(0,0,0,0.3)",
-                  letterSpacing: "0.1em",
-                  marginBottom: "auto",
-                  paddingBottom: "clamp(20px, 3vw, 36px)",
+                  background: "#EDE6DF",
+                  borderRadius: "16px",
+                  padding: "clamp(22px, 3vw, 32px) clamp(22px, 3.5vw, 36px)",
+                  boxShadow: "0 2px 12px rgba(0,0,0,0.05)",
+                  cursor: "default",
                 }}
               >
-                {String(i + 1).padStart(2, "0")}
-              </span>
+                {/* Top: index + city name + role badge */}
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "clamp(14px, 2vw, 20px)" }}>
+                  <div>
+                    <span
+                      style={{
+                        display: "block",
+                        fontSize: "0.7rem",
+                        fontWeight: 600,
+                        color: "rgba(0,0,0,0.28)",
+                        letterSpacing: "0.12em",
+                        marginBottom: "7px",
+                      }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <h3
+                      style={{
+                        fontSize: "clamp(1.45rem, 0.9rem + 2.2vw, 2.2rem)",
+                        fontWeight: 600,
+                        color: "#111111",
+                        letterSpacing: "-0.03em",
+                        lineHeight: 1.1,
+                        margin: 0,
+                      }}
+                    >
+                      {loc.city}
+                    </h3>
+                  </div>
+                  <span
+                    style={{
+                      fontSize: "0.68rem",
+                      fontWeight: 600,
+                      color: "#003591",
+                      background: "rgba(0,53,145,0.09)",
+                      borderRadius: "99px",
+                      padding: "4px 12px",
+                      letterSpacing: "0.04em",
+                      marginTop: "4px",
+                      flexShrink: 0,
+                      marginLeft: "12px",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {loc.role}
+                  </span>
+                </div>
 
-              {/* City */}
-              <h3
-                style={{
-                  fontSize: "clamp(1.5rem, 1rem + 2vw, 2.4rem)",
-                  fontWeight: 600,
-                  color: "#111111",
-                  letterSpacing: "-0.03em",
-                  lineHeight: 1.1,
-                  margin: "0 0 6px",
-                }}
-              >
-                {loc.city}
-              </h3>
+                {/* Separator */}
+                <div style={{ height: "1px", background: "rgba(0,0,0,0.09)", marginBottom: "clamp(14px, 2vw, 20px)" }} />
 
-              {/* Role / description */}
-              <p
-                style={{
-                  fontSize: "clamp(0.78rem, 0.7rem + 0.3vw, 0.9rem)",
-                  color: "rgba(0,0,0,0.45)",
-                  margin: "0 0 clamp(20px, 2.5vw, 32px)",
-                  fontWeight: 400,
-                }}
-              >
-                {loc.role}
-              </p>
+                {/* Contact info */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "9px" }}>
 
-              {/* Divider */}
-              <div style={{ height: "1px", background: "rgba(0,0,0,0.1)", marginBottom: "clamp(18px, 2vw, 26px)" }} />
+                  {/* Address */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <MapPin size={13} style={{ color: "#F5A000", flexShrink: 0 }} />
+                    <span style={{ fontSize: "clamp(0.76rem, 0.68rem + 0.3vw, 0.86rem)", color: "rgba(0,0,0,0.55)", fontWeight: 400 }}>
+                      {loc.address}
+                    </span>
+                  </div>
 
-              {/* Contact details */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-                <a
-                  href={`tel:${loc.phone.replace(/\s/g, "")}`}
-                  style={{
-                    fontSize: "clamp(0.8rem, 0.73rem + 0.3vw, 0.92rem)",
-                    color: "#111111",
-                    textDecoration: "none",
-                    fontWeight: 500,
-                    transition: "color 0.2s",
-                  }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#003591")}
-                  onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#111111")}
-                >
-                  {loc.phone}
-                </a>
-                <a
-                  href={`mailto:${loc.email}`}
-                  style={{
-                    fontSize: "clamp(0.78rem, 0.7rem + 0.3vw, 0.88rem)",
-                    color: "rgba(0,0,0,0.5)",
-                    textDecoration: "none",
-                    transition: "color 0.2s",
-                  }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#003591")}
-                  onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(0,0,0,0.5)")}
-                >
-                  {loc.email}
-                </a>
-              </div>
-            </motion.div>
-          ))}
+                  {/* Phones */}
+                  {(loc.phones as readonly string[]).map((phone, pi) => (
+                    <div key={pi} style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      {pi === 0
+                        ? <Phone size={13} style={{ color: "#F5A000", flexShrink: 0 }} />
+                        : <span style={{ width: 13, flexShrink: 0 }} />}
+                      <a
+                        href={`tel:${phone.replace(/\s/g, "")}`}
+                        style={{ fontSize: "clamp(0.76rem, 0.68rem + 0.3vw, 0.86rem)", color: "#111111", textDecoration: "none", fontWeight: 500, transition: "color 0.2s" }}
+                        onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#003591")}
+                        onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#111111")}
+                      >
+                        {phone}
+                      </a>
+                    </div>
+                  ))}
+
+                  {/* Email */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <Mail size={13} style={{ color: "#F5A000", flexShrink: 0 }} />
+                    <a
+                      href={`mailto:${loc.email}`}
+                      style={{ fontSize: "clamp(0.73rem, 0.65rem + 0.3vw, 0.83rem)", color: "rgba(0,0,0,0.48)", textDecoration: "none", transition: "color 0.2s" }}
+                      onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#003591")}
+                      onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(0,0,0,0.48)")}
+                    >
+                      {loc.email}
+                    </a>
+                  </div>
+
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* ── Angola Map ── */}
+          <div
+            style={{
+              order: isMobile || isTablet ? 1 : 2,
+              position: isMobile || isTablet ? "relative" : "sticky",
+              top: isMobile || isTablet ? undefined : "clamp(88px, 12vh, 120px)",
+            }}
+          >
+            <AngolaMap />
+          </div>
+
         </div>
       </section>
 
@@ -4134,7 +4282,7 @@ function ContactosPage() {
                 geral@gasosaautoagro.ao
               </a>
               <a
-                href="tel:+244923000000"
+                href="tel:+244951025435"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -4148,7 +4296,7 @@ function ContactosPage() {
                 onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)")}
               >
                 <span style={{ width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>✆</span>
-                +244 923 000 000
+                +244 951 025 435
               </a>
             </motion.div>
           </div>
