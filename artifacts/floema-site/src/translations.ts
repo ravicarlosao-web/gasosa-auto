@@ -115,7 +115,7 @@ export const translations = {
     footer: {
       tagline: "Qualidade e confiança para quem impulsiona Angola.",
       navLabel: "Navegação",
-      navLinks: ["Quem Somos", "Sectores", "Infraestruturas", "Notícias", "Contactos"],
+      navLinks: ["Quem Somos", "PANGULINO", "Infraestruturas", "Notícias", "Contactos"],
       contactLabel: "Contactos",
       email: "geral@cfagasosa.com",
       phone: "+244 951 025 435",
@@ -313,7 +313,7 @@ export const translations = {
     footer: {
       tagline: "Quality and trust for those who drive Angola forward.",
       navLabel: "Navigation",
-      navLinks: ["About Us", "Sectors", "Infrastructure", "News", "Contacts"],
+      navLinks: ["About Us", "PANGULINO", "Infrastructure", "News", "Contacts"],
       contactLabel: "Contacts",
       email: "geral@cfagasosa.com",
       phone: "+244 951 025 435",
@@ -511,7 +511,7 @@ export const translations = {
     footer: {
       tagline: "Calidad y confianza para quienes impulsan Angola.",
       navLabel: "Navegación",
-      navLinks: ["Quiénes Somos", "Sectores", "Infraestructuras", "Noticias", "Contactos"],
+      navLinks: ["Quiénes Somos", "PANGULINO", "Infraestructuras", "Noticias", "Contactos"],
       contactLabel: "Contactos",
       email: "geral@cfagasosa.com",
       phone: "+244 951 025 435",
