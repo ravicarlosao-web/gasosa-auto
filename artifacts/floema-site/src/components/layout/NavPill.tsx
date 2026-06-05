@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { NavThemeCtx, MotionLink } from "../../lib/nav-theme";
+import { NavThemeCtx, NavAccentCtx, MotionLink } from "../../lib/nav-theme";
 import { setPendingAnchor } from "../../lib/scroll-anchor";
 
 const SCROLL_MAP: Record<string, string> = {
@@ -12,6 +12,7 @@ const SCROLL_MAP: Record<string, string> = {
 
 export function NavPill({ item }: { item: string }) {
   const light = useContext(NavThemeCtx);
+  const accent = useContext(NavAccentCtx);
   const [location, navigate] = useLocation();
   const href = `/${item.toLowerCase().replace(/\s+/g, "-")}`;
   const anchorId = SCROLL_MAP[href];
@@ -37,7 +38,7 @@ export function NavPill({ item }: { item: string }) {
         display: "block",
         height: "2px",
         borderRadius: "2px",
-        background: "#F5A000",
+        background: accent,
         width: "100%",
         marginTop: "3px",
       }}

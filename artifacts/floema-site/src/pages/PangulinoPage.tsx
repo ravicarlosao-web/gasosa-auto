@@ -2,11 +2,11 @@ import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { Menu, MapPin } from "lucide-react";
-import logoSrc      from "@assets/Design_sem_nome__3_-removebg-preview_1780700183210.png";
+import logoSrc      from "@assets/Design_sem_nome__3_-removebg-preview_1780700241547.png";
 import heroImg      from "@assets/pangulino-hero-optimized.jpg";
 import pangLogoImg  from "@assets/image_1780664916930.png";
 import { LazyImage } from "../components/ui/lazy-image";
-import { NavThemeCtx } from "../lib/nav-theme";
+import { NavThemeCtx, NavAccentCtx } from "../lib/nav-theme";
 import { NavPill }    from "../components/layout/NavPill";
 import { LangDropdown } from "../components/layout/LangDropdown";
 import { MobileMenu }  from "../components/layout/MobileMenu";
@@ -76,6 +76,7 @@ export function PangulinoPage() {
     <div className="w-full flex flex-col" style={{ fontFamily: "'Poppins', sans-serif" }}>
 
       {/* ── Header ── */}
+      <NavAccentCtx.Provider value="#2D7A22">
       <NavThemeCtx.Provider value={true}>
         <header
           className="fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between"
@@ -86,12 +87,12 @@ export function PangulinoPage() {
           }}
         >
           <Link href="/" className="flex items-center">
-            <motion.img
+            <img
               src={logoSrc}
               alt="Gasosa Auto Agro"
+              fetchPriority="high"
+              decoding="sync"
               style={{ height: "clamp(42px, 6vw, 66px)", width: "auto", objectFit: "contain" }}
-              animate={{ filter: "brightness(0) invert(1)" }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
             />
           </Link>
           <nav className="hidden lg:flex items-center gap-3">
@@ -112,6 +113,7 @@ export function PangulinoPage() {
           </motion.button>
         </header>
       </NavThemeCtx.Provider>
+      </NavAccentCtx.Provider>
 
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 

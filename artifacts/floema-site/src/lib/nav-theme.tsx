@@ -4,6 +4,7 @@ import { Link } from "wouter";
 import type { Lang } from "../translations";
 
 export const NavThemeCtx = createContext(false);
+export const NavAccentCtx = createContext("#F5A000");
 
 export const MotionLink = motion.create(Link) as React.ComponentType<
   React.ComponentPropsWithRef<typeof Link> &
