@@ -32,7 +32,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer style={{ background: BG, fontFamily: "'Poppins', sans-serif", color: TEXT }}>
+    <footer style={{ background: BG, fontFamily: "'Poppins', sans-serif", color: TEXT, borderTop: "1.5px solid rgba(0,0,0,0.1)" }}>
 
       {/* ══ Main info grid ══ */}
       <div
