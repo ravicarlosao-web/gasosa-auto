@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { Menu, MapPin } from "lucide-react";
-import logoSrc      from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
+import logoSrc      from "@assets/Design_sem_nome__3_-removebg-preview_1780700183210.png";
 import heroImg      from "@assets/pangulino-hero-optimized.jpg";
 import pangLogoImg  from "@assets/image_1780664916930.png";
 import { LazyImage } from "../components/ui/lazy-image";
