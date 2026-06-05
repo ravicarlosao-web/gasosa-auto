@@ -6,6 +6,14 @@ import brandPang    from "@assets/Design_sem_nome__6_-removebg-preview_178070310
 import brandNergy   from "@assets/Design_sem_nome__7_-removebg-preview_1780703177496.png";
 import { useLang } from "../../i18n";
 
+/* ── Paleta do site ── */
+const BG      = "#F5EFE9";
+const NAVY    = "#003591";
+const TEXT    = "#111111";
+const MUTED   = "rgba(0,0,0,0.45)";
+const FAINT   = "rgba(0,0,0,0.28)";
+const DIVIDER = "rgba(0,0,0,0.08)";
+
 const BRANDS = [
   { src: brandGasosa, alt: "Gasosa Auto Agro" },
   { src: brand55,     alt: "55"               },
@@ -25,7 +33,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer style={{ background: "#0A1628", fontFamily: "'Poppins', sans-serif", color: "#ffffff" }}>
+    <footer style={{ background: BG, fontFamily: "'Poppins', sans-serif", color: TEXT }}>
 
       {/* ══ Main info grid ══ */}
       <div
@@ -44,9 +52,9 @@ export function Footer() {
           <img
             src={logoSrc}
             alt="Gasosa Auto Agro"
-            style={{ height: "40px", marginBottom: "18px", display: "block", filter: "brightness(0) invert(1)" }}
+            style={{ height: "40px", marginBottom: "18px", display: "block" }}
           />
-          <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.65, margin: "0 0 24px", maxWidth: "220px" }}>
+          <p style={{ fontSize: "0.85rem", color: MUTED, lineHeight: 1.65, margin: "0 0 24px", maxWidth: "220px" }}>
             {f.tagline}
           </p>
           <div style={{ display: "flex", gap: "10px" }}>
@@ -57,9 +65,9 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                style={{ width: "34px", height: "34px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.13)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.55)", transition: "all 0.2s", textDecoration: "none" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "#003591"; (e.currentTarget as HTMLAnchorElement).style.color = "#fff"; (e.currentTarget as HTMLAnchorElement).style.background = "#003591"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.13)"; (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)"; (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; }}
+                style={{ width: "34px", height: "34px", borderRadius: "8px", border: `1px solid ${DIVIDER}`, display: "flex", alignItems: "center", justifyContent: "center", color: MUTED, transition: "all 0.2s", textDecoration: "none" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = NAVY; (e.currentTarget as HTMLAnchorElement).style.color = "#fff"; (e.currentTarget as HTMLAnchorElement).style.background = NAVY; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = DIVIDER; (e.currentTarget as HTMLAnchorElement).style.color = MUTED; (e.currentTarget as HTMLAnchorElement).style.background = "transparent"; }}
               >
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d={path} />
@@ -71,7 +79,7 @@ export function Footer() {
 
         {/* Navigation column */}
         <div>
-          <h4 style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.16em", color: "rgba(255,255,255,0.35)", marginBottom: "18px", textTransform: "uppercase" }}>
+          <h4 style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.16em", color: FAINT, marginBottom: "18px", textTransform: "uppercase" }}>
             {f.navLabel}
           </h4>
           <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -79,9 +87,9 @@ export function Footer() {
               <li key={link}>
                 <a
                   href="#"
-                  style={{ fontSize: "0.88rem", color: "rgba(255,255,255,0.6)", textDecoration: "none", transition: "color 0.2s" }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "#ffffff")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
+                  style={{ fontSize: "0.88rem", color: MUTED, textDecoration: "none", transition: "color 0.2s" }}
+                  onMouseEnter={e => (e.currentTarget.style.color = TEXT)}
+                  onMouseLeave={e => (e.currentTarget.style.color = MUTED)}
                 >
                   {link}
                 </a>
@@ -92,26 +100,26 @@ export function Footer() {
 
         {/* Contacts column */}
         <div>
-          <h4 style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.16em", color: "rgba(255,255,255,0.35)", marginBottom: "18px", textTransform: "uppercase" }}>
+          <h4 style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.16em", color: FAINT, marginBottom: "18px", textTransform: "uppercase" }}>
             {f.contactLabel}
           </h4>
           <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
             <a
               href={`mailto:${f.email}`}
-              style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.85rem", color: "rgba(255,255,255,0.6)", textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#ffffff")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
+              style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.85rem", color: MUTED, textDecoration: "none", transition: "color 0.2s" }}
+              onMouseEnter={e => (e.currentTarget.style.color = TEXT)}
+              onMouseLeave={e => (e.currentTarget.style.color = MUTED)}
             >
-              <Mail size={14} style={{ flexShrink: 0, color: "#003591" }} />
+              <Mail size={14} style={{ flexShrink: 0, color: NAVY }} />
               {f.email}
             </a>
             <a
               href={`tel:${f.phone.replace(/\s/g, "")}`}
-              style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.85rem", color: "rgba(255,255,255,0.6)", textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#ffffff")}
-              onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.6)")}
+              style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.85rem", color: MUTED, textDecoration: "none", transition: "color 0.2s" }}
+              onMouseEnter={e => (e.currentTarget.style.color = TEXT)}
+              onMouseLeave={e => (e.currentTarget.style.color = MUTED)}
             >
-              <Phone size={14} style={{ flexShrink: 0, color: "#003591" }} />
+              <Phone size={14} style={{ flexShrink: 0, color: NAVY }} />
               {f.phone}
             </a>
           </div>
@@ -119,16 +127,16 @@ export function Footer() {
 
         {/* Locations column */}
         <div>
-          <h4 style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.16em", color: "rgba(255,255,255,0.35)", marginBottom: "18px", textTransform: "uppercase" }}>
+          <h4 style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.16em", color: FAINT, marginBottom: "18px", textTransform: "uppercase" }}>
             {f.locationsLabel}
           </h4>
           <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
             {f.locations.map(({ city, detail }) => (
               <div key={city} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                <MapPin size={14} style={{ flexShrink: 0, color: "#003591", marginTop: "2px" }} />
+                <MapPin size={14} style={{ flexShrink: 0, color: NAVY, marginTop: "2px" }} />
                 <div>
-                  <div style={{ fontSize: "0.88rem", fontWeight: 600, color: "#ffffff", lineHeight: 1.3 }}>{city}</div>
-                  <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", lineHeight: 1.4 }}>{detail}</div>
+                  <div style={{ fontSize: "0.88rem", fontWeight: 600, color: TEXT, lineHeight: 1.3 }}>{city}</div>
+                  <div style={{ fontSize: "0.75rem", color: FAINT, lineHeight: 1.4 }}>{detail}</div>
                 </div>
               </div>
             ))}
@@ -137,7 +145,7 @@ export function Footer() {
       </div>
 
       {/* ══ Brands strip ══ */}
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
+      <div style={{ borderTop: `1px solid ${DIVIDER}` }}>
         <div
           style={{
             maxWidth: "1100px",
@@ -149,33 +157,18 @@ export function Footer() {
             gap: "clamp(24px, 3vw, 36px)",
           }}
         >
-          <p style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: "rgba(255,255,255,0.3)", textTransform: "uppercase", margin: 0 }}>
+          <p style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: FAINT, textTransform: "uppercase", margin: 0 }}>
             As Nossas Marcas
           </p>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "clamp(28px, 5vw, 60px)",
-            }}
-          >
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "clamp(28px, 5vw, 60px)" }}>
             {BRANDS.map(({ src, alt }) => (
               <img
                 key={alt}
                 src={src}
                 alt={alt}
-                style={{
-                  height: "clamp(36px, 4.5vw, 56px)",
-                  width: "auto",
-                  objectFit: "contain",
-                  opacity: 0.88,
-                  filter: "drop-shadow(0 1px 4px rgba(0,0,0,0.4))",
-                  transition: "opacity 0.2s",
-                }}
+                style={{ height: "clamp(36px, 4.5vw, 56px)", width: "auto", objectFit: "contain", opacity: 0.85, transition: "opacity 0.2s" }}
                 onMouseEnter={e => ((e.currentTarget as HTMLImageElement).style.opacity = "1")}
-                onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.opacity = "0.88")}
+                onMouseLeave={e => ((e.currentTarget as HTMLImageElement).style.opacity = "0.85")}
               />
             ))}
           </div>
@@ -185,7 +178,7 @@ export function Footer() {
       {/* ══ Bottom bar ══ */}
       <div
         style={{
-          borderTop: "1px solid rgba(255,255,255,0.07)",
+          borderTop: `1px solid ${DIVIDER}`,
           maxWidth: "1100px",
           margin: "0 auto",
           padding: "18px clamp(24px, 5vw, 48px)",
@@ -197,15 +190,15 @@ export function Footer() {
           textAlign: "center",
         }}
       >
-        <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.28)" }}>
+        <span style={{ fontSize: "0.75rem", color: FAINT }}>
           {f.copyright.replace("2025", String(year))}
         </span>
-        <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.15)" }}>·</span>
+        <span style={{ fontSize: "0.75rem", color: "rgba(0,0,0,0.15)" }}>·</span>
         <a
           href="#"
-          style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.28)", textDecoration: "none", transition: "color 0.2s" }}
-          onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.7)")}
-          onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.28)")}
+          style={{ fontSize: "0.75rem", color: FAINT, textDecoration: "none", transition: "color 0.2s" }}
+          onMouseEnter={e => (e.currentTarget.style.color = TEXT)}
+          onMouseLeave={e => (e.currentTarget.style.color = FAINT)}
         >
           {f.legal}
         </a>
