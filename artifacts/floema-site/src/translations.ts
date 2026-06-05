@@ -171,6 +171,74 @@ export const translations = {
       privacyText: "Ao submeter o seu e-mail, você concorda com a nossa",
       privacyLink: "Política de Privacidade",
     },
+    pangulino: {
+      hero: {
+        supra: "— FORÇA. PRECISÃO. CAMPO.",
+        heading: "PANGULINO",
+        sub1: "A marca angolana que trabalha tanto quanto o agricultor.",
+        sub2: "Ferramentas para quem vive da terra.",
+      },
+      manifesto: {
+        tag: "A NOSSA MARCA",
+        heading: "Inspirada no pangolim.\nForjada para Angola.",
+        body1: "A Pangulino nasce da convicção de que o agricultor angolano merece ferramentas à altura do seu trabalho. Inspirada no pangolim — símbolo africano de resistência, protecção e persistência — a marca foi criada para responder às exigências reais do campo angolano.",
+        body2: "Cada produto da gama Pangulino é desenvolvido com materiais de alta durabilidade, pensado para os solos, o clima e as práticas agrícolas de Angola. Do Planalto Central às planícies costeiras, a Pangulino está onde o trabalho acontece.",
+        badge: "Marca 100% dedicada ao campo angolano",
+      },
+      produtos: {
+        tag: "GAMA DE PRODUTOS",
+        heading: "Ferramentas para cada fase do campo.",
+        items: [
+          {
+            name: "Ferramentas de Lavoura",
+            desc: "Enxadas, catanas, sachos e gadanhos desenvolvidos para o solo angolano. Cabos reforçados, lâminas tratadas, ergonomia pensada para longas jornadas.",
+            detalhe: "Enxadas • Catanas • Sachos • Gadanhos • Machados",
+          },
+          {
+            name: "Irrigação e Rega",
+            desc: "Sistemas de rega por gotejamento, mangueiras de alta pressão e bombas manuais para garantir produtividade mesmo nas épocas secas.",
+            detalhe: "Mangueiras • Bombas manuais • Sistemas de gotejamento",
+          },
+          {
+            name: "Colheita e Transporte",
+            desc: "Foices, contentores, cestos e sacos de armazenamento para uma colheita eficiente. Construídos para resistir ao uso intensivo diário.",
+            detalhe: "Foices • Contentores • Sacos agrícolas • Cestos",
+          },
+        ],
+      },
+      pilares: {
+        tag: "PORQUE PANGULINO",
+        heading: "Três pilares. Uma só promessa.",
+        items: [
+          {
+            num: "01",
+            title: "Durabilidade comprovada",
+            desc: "Materiais tratados para resistir ao desgaste, à humidade, às temperaturas extremas e ao uso diário intensivo nas condições do campo angolano.",
+          },
+          {
+            num: "02",
+            title: "Adaptado ao solo angolano",
+            desc: "Cada ferramenta é concebida com base nas características dos solos, culturas e práticas agrícolas predominantes em Angola — do norte ao sul do país.",
+          },
+          {
+            num: "03",
+            title: "Acessível a todos",
+            desc: "Preços justos para pequenos agricultores e grandes produções. A qualidade Pangulino não deve ser um privilégio — é um direito de quem trabalha a terra.",
+          },
+        ],
+      },
+      presenca: {
+        tag: "ONDE NOS ENCONTRAR",
+        heading: "Disponível nas três províncias.",
+        desc: "A gama Pangulino está disponível em todas as unidades Gasosa Auto Agro em Luanda, Huambo e Huíla, bem como numa rede crescente de distribuidores parceiros em todo o território nacional.",
+        pontos: ["Luanda — Av. 21 de Janeiro", "Huambo — Cidade Baixa", "Huíla — Rua Aníbal de Melo"],
+      },
+      cta: {
+        heading: "Cultive com qualidade.\nTrabalhe com Pangulino.",
+        body: "Fale com a nossa equipa para saber mais sobre a gama Pangulino, disponibilidade de produtos e condições comerciais.",
+        btn: "Contactar →",
+      },
+    },
     contactos: {
       pageLabel: "Contactos",
       pageTitle: "Fale connosco.",
@@ -369,6 +437,74 @@ export const translations = {
       privacyText: "By submitting your email, you agree to our",
       privacyLink: "Privacy Policy",
     },
+    pangulino: {
+      hero: {
+        supra: "— STRENGTH. PRECISION. FIELD.",
+        heading: "PANGULINO",
+        sub1: "The Angolan brand that works as hard as the farmer.",
+        sub2: "Tools for those who live off the land.",
+      },
+      manifesto: {
+        tag: "OUR BRAND",
+        heading: "Inspired by the pangolin.\nForged for Angola.",
+        body1: "Pangulino was born from the conviction that the Angolan farmer deserves tools that match their work. Inspired by the pangolin — an African symbol of resilience, protection and persistence — the brand was created to meet the real demands of Angola's fields.",
+        body2: "Every Pangulino product is developed with high-durability materials, designed for Angola's soils, climate and agricultural practices. From the Central Plateau to the coastal plains, Pangulino is where work happens.",
+        badge: "100% dedicated to Angolan farmland",
+      },
+      produtos: {
+        tag: "PRODUCT RANGE",
+        heading: "Tools for every stage of the field.",
+        items: [
+          {
+            name: "Tillage Tools",
+            desc: "Hoes, machetes, rakes and scythes developed for Angolan soil. Reinforced handles, treated blades, ergonomics designed for long working days.",
+            detalhe: "Hoes • Machetes • Rakes • Scythes • Axes",
+          },
+          {
+            name: "Irrigation & Watering",
+            desc: "Drip irrigation systems, high-pressure hoses and manual pumps to ensure productivity even in the dry season.",
+            detalhe: "Hoses • Manual pumps • Drip systems",
+          },
+          {
+            name: "Harvest & Transport",
+            desc: "Sickles, containers, baskets and storage bags for efficient harvesting. Built to withstand intensive daily use.",
+            detalhe: "Sickles • Containers • Agricultural bags • Baskets",
+          },
+        ],
+      },
+      pilares: {
+        tag: "WHY PANGULINO",
+        heading: "Three pillars. One promise.",
+        items: [
+          {
+            num: "01",
+            title: "Proven durability",
+            desc: "Treated materials to resist wear, moisture, extreme temperatures and intensive daily use under Angolan field conditions.",
+          },
+          {
+            num: "02",
+            title: "Adapted to Angolan soil",
+            desc: "Every tool is designed based on the characteristics of Angola's soils, crops and prevalent agricultural practices — from north to south.",
+          },
+          {
+            num: "03",
+            title: "Accessible to all",
+            desc: "Fair prices for small farmers and large-scale producers. Pangulino quality should not be a privilege — it is the right of everyone who works the land.",
+          },
+        ],
+      },
+      presenca: {
+        tag: "WHERE TO FIND US",
+        heading: "Available in all three provinces.",
+        desc: "The Pangulino range is available at all Gasosa Auto Agro units in Luanda, Huambo and Huíla, as well as through a growing network of partner distributors across Angola.",
+        pontos: ["Luanda — Av. 21 de Janeiro", "Huambo — Cidade Baixa", "Huíla — Rua Aníbal de Melo"],
+      },
+      cta: {
+        heading: "Grow with quality.\nWork with Pangulino.",
+        body: "Speak with our team to learn more about the Pangulino range, product availability and commercial conditions.",
+        btn: "Contact us →",
+      },
+    },
     contactos: {
       pageLabel: "Contacts",
       pageTitle: "Get in touch.",
@@ -566,6 +702,74 @@ export const translations = {
       newsletterSuccess: "¡Gracias! Recibirá nuestras novedades en breve.",
       privacyText: "Al enviar su correo electrónico, acepta nuestra",
       privacyLink: "Política de Privacidad",
+    },
+    pangulino: {
+      hero: {
+        supra: "— FUERZA. PRECISIÓN. CAMPO.",
+        heading: "PANGULINO",
+        sub1: "La marca angoleña que trabaja tanto como el agricultor.",
+        sub2: "Herramientas para quienes viven de la tierra.",
+      },
+      manifesto: {
+        tag: "NUESTRA MARCA",
+        heading: "Inspirada en el pangolín.\nForjada para Angola.",
+        body1: "Pangulino nace de la convicción de que el agricultor angoleño merece herramientas a la altura de su trabajo. Inspirada en el pangolín — símbolo africano de resistencia, protección y persistencia — la marca fue creada para responder a las exigencias reales del campo angoleño.",
+        body2: "Cada producto de la gama Pangulino está desarrollado con materiales de alta durabilidad, pensado para los suelos, el clima y las prácticas agrícolas de Angola. Desde la Meseta Central hasta las llanuras costeras, Pangulino está donde ocurre el trabajo.",
+        badge: "Marca 100% dedicada al campo angoleño",
+      },
+      produtos: {
+        tag: "GAMA DE PRODUCTOS",
+        heading: "Herramientas para cada etapa del campo.",
+        items: [
+          {
+            name: "Herramientas de Labranza",
+            desc: "Azadas, machetes, escardillos y horcas desarrollados para el suelo angoleño. Mangos reforzados, hojas tratadas, ergonomía pensada para largas jornadas.",
+            detalhe: "Azadas • Machetes • Escardillos • Horcas • Hachas",
+          },
+          {
+            name: "Irrigación y Riego",
+            desc: "Sistemas de riego por goteo, mangueras de alta presión y bombas manuales para garantizar productividad incluso en las épocas de sequía.",
+            detalhe: "Mangueras • Bombas manuales • Sistemas de goteo",
+          },
+          {
+            name: "Cosecha y Transporte",
+            desc: "Hoces, contenedores, cestas y sacos de almacenamiento para una cosecha eficiente. Construidos para resistir el uso intensivo diario.",
+            detalhe: "Hoces • Contenedores • Sacos agrícolas • Cestas",
+          },
+        ],
+      },
+      pilares: {
+        tag: "POR QUÉ PANGULINO",
+        heading: "Tres pilares. Una sola promesa.",
+        items: [
+          {
+            num: "01",
+            title: "Durabilidad comprobada",
+            desc: "Materiales tratados para resistir el desgaste, la humedad, las temperaturas extremas y el uso diario intensivo en las condiciones del campo angoleño.",
+          },
+          {
+            num: "02",
+            title: "Adaptado al suelo angoleño",
+            desc: "Cada herramienta está diseñada en base a las características de los suelos, cultivos y prácticas agrícolas predominantes en Angola — de norte a sur.",
+          },
+          {
+            num: "03",
+            title: "Accesible para todos",
+            desc: "Precios justos para pequeños agricultores y grandes producciones. La calidad Pangulino no debe ser un privilegio — es un derecho de quien trabaja la tierra.",
+          },
+        ],
+      },
+      presenca: {
+        tag: "DÓNDE ENCONTRARNOS",
+        heading: "Disponible en las tres provincias.",
+        desc: "La gama Pangulino está disponible en todas las unidades de Gasosa Auto Agro en Luanda, Huambo y Huíla, así como en una red creciente de distribuidores asociados en todo el territorio nacional.",
+        pontos: ["Luanda — Av. 21 de Janeiro", "Huambo — Cidade Baixa", "Huíla — Rua Aníbal de Melo"],
+      },
+      cta: {
+        heading: "Cultive con calidad.\nTrabaje con Pangulino.",
+        body: "Hable con nuestro equipo para saber más sobre la gama Pangulino, disponibilidad de productos y condiciones comerciales.",
+        btn: "Contactar →",
+      },
     },
     contactos: {
       pageLabel: "Contactos",

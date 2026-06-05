@@ -7,6 +7,7 @@ import { HomePage } from "./pages/HomePage";
 import { InfraestrutrasPage } from "./pages/InfraestrutrasPage";
 import { NoticiasPage } from "./pages/NoticiasPage";
 import { ContactosPage } from "./pages/ContactosPage";
+import { PangulinoPage } from "./pages/PangulinoPage";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -18,6 +19,7 @@ function Router() {
       <Route path="/infraestruturas" component={InfraestrutrasPage} />
       <Route path="/notícias" component={NoticiasPage} />
       <Route path="/noticias" component={NoticiasPage} />
+      <Route path="/pangulino" component={PangulinoPage} />
       <Route path="/contactos" component={ContactosPage} />
       <Route component={NotFound} />
     </Switch>
