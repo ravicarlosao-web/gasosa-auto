@@ -4075,7 +4075,7 @@ function ContactosPage() {
               ? "1fr 1fr"
               : "clamp(180px, 22vw, 320px) clamp(220px, 28vw, 380px) clamp(260px, 32vw, 460px)",
             gap: isMobile ? "clamp(36px, 6vw, 56px)" : isTablet ? "clamp(28px, 4vw, 48px)" : "clamp(24px, 3vw, 40px)",
-            alignItems: "center",
+            alignItems: "end",
             position: "relative",
             maxWidth: "1400px",
             margin: "0 auto",
@@ -4105,7 +4105,7 @@ function ContactosPage() {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               style={{
                 fontSize: "clamp(2rem, 2.8vw, 3.5rem)",
-                fontWeight: 700,
+                fontWeight: 500,
                 lineHeight: 1.1,
                 color: "#1a1a2e",
                 margin: 0,
