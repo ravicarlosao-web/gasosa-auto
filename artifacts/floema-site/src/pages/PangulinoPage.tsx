@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { Menu, MapPin } from "lucide-react";
-import logoSrc      from "@assets/Design_sem_nome__3_-removebg-preview_1780700241547.png";
+import { NavLogo } from "../components/layout/NavLogo";
 import heroImg      from "@assets/pangulino-hero-optimized.jpg";
 import pangLogoImg  from "@assets/image_1780664916930.png";
 import { LazyImage } from "../components/ui/lazy-image";
@@ -87,13 +87,7 @@ export function PangulinoPage() {
           }}
         >
           <Link href="/" className="flex items-center">
-            <img
-              src={logoSrc}
-              alt="Gasosa Auto Agro"
-              fetchPriority="high"
-              decoding="sync"
-              style={{ height: "clamp(42px, 6vw, 66px)", width: "auto", objectFit: "contain" }}
-            />
+            <NavLogo style={{ height: "clamp(42px, 6vw, 66px)" }} />
           </Link>
           <nav className="hidden lg:flex items-center gap-3">
             <div className="flex items-center gap-0.5">

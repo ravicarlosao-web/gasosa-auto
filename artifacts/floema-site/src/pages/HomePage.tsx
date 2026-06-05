@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Menu, Mail } from "lucide-react";
-import logoSrc         from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
+import { NavLogo } from "../components/layout/NavLogo";
 import _pangHero       from "@assets/pangulino-hero-optimized.jpg";
 import _infraHero      from "@assets/20250903_123036_1780417176290.jpg";
 import { NavThemeCtx } from "../lib/nav-theme";
@@ -93,13 +93,7 @@ export function HomePage() {
           }}
         >
           <Link href="/" className="flex items-center">
-            <motion.img
-              src={logoSrc}
-              alt="Gasosa Auto Agro"
-              style={{ height: "clamp(32px, 4.5vw, 48px)", width: "auto", objectFit: "contain" }}
-              animate={{ filter: navLight ? "brightness(0) invert(1)" : "brightness(1) invert(0)" }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-            />
+            <NavLogo style={{ height: "clamp(32px, 4.5vw, 48px)" }} />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-3">

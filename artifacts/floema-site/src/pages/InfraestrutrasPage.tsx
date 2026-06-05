@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { Menu } from "lucide-react";
-import logoSrc from "@assets/Design_sem_nome__2_-removebg-preview_1780700075899.png";
+import { NavLogo } from "../components/layout/NavLogo";
 import infraHeroImg        from "@assets/20250903_123036_1780417176290.jpg";
 import infraLubangoExt    from "@assets/20250903_123815_1780417632798.jpg";
 import infraLubangoAerial from "@assets/20250903_124326_1780417637563.jpg";
@@ -68,11 +68,7 @@ export function InfraestrutrasPage() {
           }}
         >
           <Link href="/" className="flex items-center">
-            <img
-              src={logoSrc}
-              alt="Gasosa Auto Agro"
-              style={{ height: "clamp(42px, 6vw, 66px)", width: "auto", objectFit: "contain" }}
-            />
+            <NavLogo style={{ height: "clamp(42px, 6vw, 66px)" }} />
           </Link>
           <nav className="hidden lg:flex items-center gap-3">
             <div className="flex items-center gap-0.5">
