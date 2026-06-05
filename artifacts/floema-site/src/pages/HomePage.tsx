@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Menu, Mail } from "lucide-react";
-import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
+import logoSrc         from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
+import _pangHero       from "@assets/pangulino-hero-optimized.jpg";
+import _infraHero      from "@assets/20250903_123036_1780417176290.jpg";
 import { NavThemeCtx } from "../lib/nav-theme";
 import { NavPill } from "../components/layout/NavPill";
 import { LangDropdown } from "../components/layout/LangDropdown";
@@ -28,6 +30,17 @@ export function HomePage() {
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const prefetch = () => {
+      [_pangHero, _infraHero].forEach(src => { new Image().src = src; });
+    };
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(prefetch, { timeout: 2000 });
+    } else {
+      setTimeout(prefetch, 1200);
+    }
   }, []);
 
   useEffect(() => {
