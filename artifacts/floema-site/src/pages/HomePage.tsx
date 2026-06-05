@@ -16,9 +16,25 @@ import { MarcasRepresentadasSection } from "../components/sections/MarcasReprese
 import { ParceirosSection } from "../components/sections/ParceirosSection";
 import { UltimasNoticiasSection } from "../components/sections/UltimasNoticiasSection";
 import { useLang } from "../i18n";
+import { useSEO, FAQ_SCHEMA } from "../lib/use-seo";
+
+const FAQ_ITEMS = [
+  { q: "O que é a Pangulino?", a: "A Pangulino é uma marca angolana de ferramentas agrícolas criada em 2019 pela Gasosa Auto Agro. Oferece enxadas, pás, ancas, carrinhos de mão e outros equipamentos para o campo, reconhecida pela durabilidade e qualidade no mercado angolano." },
+  { q: "A Nergytech está disponível em Angola?", a: "Sim. A Gasosa Auto Agro é o representante exclusivo da Nergytech em Angola, oferecendo lubrificantes premium para veículos, máquinas agrícolas e equipamentos industriais." },
+  { q: "A Gasosa tem loja fora de Luanda?", a: "Sim. A Gasosa Auto Agro tem instalações em três cidades: Luanda (Av. 21 de Janeiro), Lubango (Rua Aníbal de Melo) e Huambo (Cidade Baixa), cobrindo o norte, centro e sul de Angola." },
+  { q: "Que lubrificantes a Gasosa vende?", a: "A Gasosa vende lubrificantes das marcas Nergytech (representação exclusiva em Angola), Petronas, Castrol, Galp e Puma, para automóveis, tractores, máquinas agrícolas e equipamentos industriais." },
+  { q: "A Gasosa trabalha com empresas e fazendas?", a: "Sim. A Gasosa é parceira estratégica de mais de 30 empresas e fazendas em Angola, incluindo Sonangol, Governo de Angola, Fazenda Tchissola, Fazenda Boi Verde, entre muitas outras." },
+];
 
 export function HomePage() {
   const { t } = useLang();
+
+  useSEO({
+    title: "Gasosa Auto Agro — Peças, Lubrificantes e Ferramentas Agrícolas em Angola",
+    description: "Empresa angolana especializada em peças automóveis, lubrificantes Nergytech e ferramentas agrícolas Pangulino. Lojas em Luanda, Lubango e Huambo.",
+    path: "/",
+    schema: [FAQ_SCHEMA],
+  });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [navLight, setNavLight] = useState(false);
@@ -259,6 +275,57 @@ export function HomePage() {
 
       <div className="relative z-10">
         <UltimasNoticiasSection />
+      </div>
+
+      {/* ── GEO + FAQ ── */}
+      <div className="relative z-10">
+        <section
+          aria-label="Sobre a Gasosa Auto Agro e Perguntas Frequentes"
+          style={{ background: "#F5EFE9", padding: "clamp(80px,12vw,144px) clamp(20px,6vw,80px)" }}
+        >
+          <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+            <p style={{ fontSize: "clamp(0.78rem,0.3vw + 0.72rem,0.9rem)", color: "rgba(0,0,0,0.42)", lineHeight: 1.85, marginBottom: "clamp(60px,8vw,100px)", maxWidth: "780px", fontFamily: "'Poppins', sans-serif" }}>
+              A Gasosa Auto Agro (CFA GASOSA SU LDA) é uma empresa angolana fundada em 2016,
+              especializada no fornecimento de peças automóveis, lubrificantes, ferramentas agrícolas e
+              serviços de manutenção. Com presença em Luanda, Lubango e Huambo, representa as marcas
+              próprias Pangulino (ferramentas agrícolas) e Nergytech (lubrificantes premium —
+              representação exclusiva em Angola). É parceira de empresas como Sonangol, Governo de Angola
+              e mais de 30 organizações angolanas.
+            </p>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              style={{ fontFamily: "'Poppins', sans-serif", fontSize: "clamp(1.6rem,1rem + 2.5vw,3rem)", fontWeight: 500, color: "#111111", letterSpacing: "-0.028em", lineHeight: 1.1, marginBottom: "clamp(32px,4vw,52px)" }}
+            >
+              Perguntas Frequentes
+            </motion.h2>
+
+            {FAQ_ITEMS.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.48, ease: "easeOut", delay: i * 0.055 }}
+                style={{
+                  borderTop: i === 0 ? "1px solid rgba(0,0,0,0.09)" : undefined,
+                  borderBottom: "1px solid rgba(0,0,0,0.09)",
+                  padding: "clamp(18px,2.5vw,26px) 0",
+                }}
+              >
+                <h3 style={{ fontFamily: "'Poppins', sans-serif", fontSize: "clamp(0.88rem,0.3vw + 0.8rem,1.05rem)", fontWeight: 600, color: "#111111", margin: "0 0 9px", letterSpacing: "-0.01em", lineHeight: 1.4 }}>
+                  {item.q}
+                </h3>
+                <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: "clamp(0.8rem,0.25vw + 0.75rem,0.9rem)", color: "rgba(0,0,0,0.55)", lineHeight: 1.75, margin: 0, maxWidth: "820px" }}>
+                  {item.a}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
       </div>
 
       <div className="relative z-10">

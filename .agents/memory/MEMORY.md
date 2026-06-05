@@ -1,1 +1,2 @@
 - [SVG animation in Framer Motion](svg-framer-motion.md) — animating SVG `r` attribute with motion.circle causes "Expected length, undefined" errors; use motion.g with scale instead.
+- [SEO architecture](seo-architecture.md) — custom useSEO hook (no react-helmet), schemas exported from use-seo.ts, domain placeholder is gasosaautoagro.com.

@@ -23,6 +23,7 @@ import { LangDropdown } from "../components/layout/LangDropdown";
 import { MobileMenu } from "../components/layout/MobileMenu";
 import { Footer } from "../components/layout/Footer";
 import { useLang } from "../i18n";
+import { useSEO } from "../lib/use-seo";
 
 type NoticiaBlock =
   | { type: "paragraph"; text: string }
@@ -459,6 +460,13 @@ export function NoticiasPage() {
   const [selectedArticle, setSelectedArticle] = useState<(typeof NOTICIAS_ARTICLES)[0] | null>(null);
   const [winW, setWinW] = useState(() => typeof window !== "undefined" ? window.innerWidth : 1280);
   const { t } = useLang();
+
+  useSEO({
+    title: "Notícias e Novidades — Gasosa Auto Agro",
+    description: "Notícias, novidades e actualidades da Gasosa Auto Agro — empresa angolana líder em peças automóveis, lubrificantes Nergytech e ferramentas agrícolas Pangulino.",
+    path: "/notícias",
+    breadcrumb: { name: "Notícias", path: "/notícias" },
+  });
 
   useEffect(() => {
     const onResize = () => setWinW(window.innerWidth);

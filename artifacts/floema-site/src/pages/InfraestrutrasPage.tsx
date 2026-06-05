@@ -27,9 +27,19 @@ import { Footer } from "../components/layout/Footer";
 import { FADE_UP } from "../lib/motion-variants";
 import { useLang } from "../i18n";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useSEO, LOCAL_BUSINESS_LUANDA, LOCAL_BUSINESS_LUBANGO, LOCAL_BUSINESS_HUAMBO } from "../lib/use-seo";
 
 export function InfraestrutrasPage() {
   const { t } = useLang();
+
+  useSEO({
+    title: "As Nossas Instalações em Angola",
+    description: "Conheça as instalações da Gasosa Auto Agro: loja principal em Luanda (Av. 21 de Janeiro), Lubango (Rua Aníbal de Melo) e Huambo (Cidade Baixa). Mais de 13.000 m² em Angola.",
+    path: "/infraestruturas",
+    breadcrumb: { name: "Infraestruturas", path: "/infraestruturas" },
+    schema: [LOCAL_BUSINESS_LUANDA, LOCAL_BUSINESS_LUBANGO, LOCAL_BUSINESS_HUAMBO],
+  });
+
   const isMobile = useIsMobile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const inf = t.infraestruturas;

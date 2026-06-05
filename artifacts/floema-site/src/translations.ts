@@ -152,7 +152,7 @@ export const translations = {
         },
       ],
       pageLabel: "Notícias",
-      pageTitle: "Registos das actividades, projectos e marcos que definem a Gasosa Auto Agro.",
+      pageTitle: "Notícias e Novidades — Gasosa Auto Agro",
       filterAll: "Todos",
       filterAutomovel: "Automóvel",
       filterAgricola: "Agrícola",
@@ -241,7 +241,7 @@ export const translations = {
     },
     contactos: {
       pageLabel: "Contactos",
-      pageTitle: "Fale connosco.",
+      pageTitle: "Fale Connosco — Estamos em Luanda, Lubango e Huambo",
       pageSubtitle: "Estamos presentes em três províncias de Angola. Encontre a unidade mais próxima ou envie-nos uma mensagem.",
       directLabel: "Contacto directo",
       locationsLabel: "As nossas unidades",

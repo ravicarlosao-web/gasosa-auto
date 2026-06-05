@@ -1,0 +1,371 @@
+Quero que implementes as melhores e mais modernas técnicas de SEO em todo o site da Gasosa Auto Agro, para que o site seja encontrado facilmente tanto no Google como em motores de busca baseados em IA (ChatGPT, Perplexity, Gemini, Copilot). O site tem 5 páginas: Página Inicial, Pangulino, Infraestruturas, Notícias e Contactos.
+
+O contexto da empresa é o seguinte:
+- Nome: Gasosa Auto Agro (CFA GASOSA SU LDA)
+- Mercado: Angola — Luanda (sede), Lubango e Huambo
+- Sector: peças automóveis, lubrificantes, ferramentas agrícolas e serviços de manutenção
+- Marcas próprias: Pangulino (ferramentas agrícolas) e Nergytech (lubrificantes — representação exclusiva em Angola)
+- Clientes: fazendas, empresas industriais, empresas de logística, sector público (ex: Sonangol, Governo de Angola)
+- Idioma do site: Português (variante angolana)
+
+Aplica TODAS as técnicas abaixo em todo o site, página a página.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TÉCNICA 1 — FUNDAÇÃO TÉCNICA DE SEO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Em todas as páginas, garante que o  contém:
+
+1.1 — Idioma correcto:
+
+
+1.2 — Viewport mobile-first (essencial: a maioria dos angolanos acede pelo telemóvel):
+
+
+1.3 — Charset:
+
+
+1.4 — Tag canónica (evita conteúdo duplicado):
+
+
+1.5 — Meta robots (diz ao Google para indexar):
+
+
+1.6 — Preconnect para recursos externos (melhora velocidade):
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TÉCNICA 2 — TITLE E META DESCRIPTION OPTIMIZADOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Cada página deve ter um 
+
+
+Página Pangulino:
+
+
+
+Página Infraestruturas:
+
+
+
+Página Notícias:
+
+
+
+Página Contactos:
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TÉCNICA 3 — OPEN GRAPH E TWITTER CARDS
+(para partilha no WhatsApp, Facebook, LinkedIn — muito usado em Angola)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Em todas as páginas adiciona:
+
+
+
+
+
+
+
+
+
+
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TÉCNICA 4 — ESTRUTURA DE HEADINGS CORRECTA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Cada página deve ter UM ÚNICO H1 com a keyword principal. Nunca uses headings só para estilo.
+
+Página Inicial:
+H1: "Peças, Lubrificantes e Ferramentas Agrícolas em Angola"
+H2: "Os Nossos Produtos" | "As Nossas Marcas" | "As Nossas Instalações" | "Os Nossos Parceiros"
+
+Página Pangulino:
+H1: "Ferramentas Agrícolas Pangulino — Força e Precisão no Campo Angolano"
+H2: "Linha de Produtos Pangulino" | "Por que escolher Pangulino?" | "Onde Comprar em Angola"
+
+Página Infraestruturas:
+H1: "As Nossas Instalações em Angola"
+H2: "Luanda — Av. 21 de Janeiro" | "Lubango — Rua Aníbal de Melo" | "Huambo — Cidade Baixa" | "Futuras Instalações"
+H3 (dentro de cada cidade): "Loja e Showroom" | "Armazém" | "Oficina"
+
+Página Notícias:
+H1: "Notícias e Novidades — Gasosa Auto Agro"
+H2: (título de cada artigo/notícia, com keywords naturais)
+
+Página Contactos:
+H1: "Fale Connosco — Estamos em Luanda, Lubango e Huambo"
+H2: "Luanda" | "Lubango" | "Huambo" | "Envie-nos uma Mensagem"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TÉCNICA 5 — DADOS ESTRUTURADOS SCHEMA.ORG
+(essencial para Google e para motores de busca com IA)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Os dados estruturados dizem às IAs e ao Google exactamente quem é a empresa, o que faz e onde está. Implementa os seguintes blocos JSON-LD:
+
+5.1 — Organization (em todas as páginas, no ):
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Gasosa Auto Agro",
+  "legalName": "CFA GASOSA SU LDA",
+  "foundingDate": "2016",
+  "url": "https://[dominio]",
+  "logo": "https://[dominio]/logo.png",
+  "email": "geral@cfagasosa.com",
+  "description": "Empresa angolana especializada em peças, lubrificantes, ferramentas agrícolas e serviços de manutenção para os sectores automóvel, industrial e agrícola. Presente em Luanda, Lubango e Huambo.",
+  "areaServed": "Angola",
+  "foundingLocation": "Luanda, Angola",
+  "brand": [
+    { "@type": "Brand", "name": "Pangulino" },
+    { "@type": "Brand", "name": "Nergytech" }
+  ],
+  "contactPoint": [
+    { "@type": "ContactPoint", "telephone": "+244951025435", "contactType": "customer service", "areaServed": "AO", "availableLanguage": "Portuguese" },
+    { "@type": "ContactPoint", "telephone": "+244926445508", "contactType": "customer service", "areaServed": "AO", "availableLanguage": "Portuguese" },
+    { "@type": "ContactPoint", "telephone": "+244941066420", "contactType": "customer service", "areaServed": "AO", "availableLanguage": "Portuguese" }
+  ]
+}
+
+5.2 — LocalBusiness para cada loja (na página Contactos e Infraestruturas):
+Loja Luanda:
+{
+  "@context": "https://schema.org",
+  "@type": "AutoPartsStore",
+  "name": "Gasosa Auto Agro — Luanda",
+  "image": "https://[dominio]/imagens/gasosa-loja-luanda.webp",
+  "description": "Loja principal da Gasosa Auto Agro em Luanda, com mais de 2.000 m² incluindo showroom, armazém e oficina de serviços rápidos.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Avenida 21 de Janeiro",
+    "addressLocality": "Luanda",
+    "addressCountry": "AO"
+  },
+  "telephone": "+244951025435",
+  "email": "geral@cfagasosa.com",
+  "url": "https://[dominio]/contactos",
+  "priceRange": "$$",
+  "currenciesAccepted": "AOA",
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "opens": "08:00",
+    "closes": "18:00"
+  }
+}
+(Repete para Lubango — Rua Aníbal de Melo, tel: +244926445508)
+(Repete para Huambo — Cidade Baixa, tel: +244941066420)
+
+5.3 — Product (na página Pangulino, para cada produto principal):
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Ferramentas Agrícolas Pangulino",
+  "brand": { "@type": "Brand", "name": "Pangulino" },
+  "description": "Linha de ferramentas agrícolas de alta durabilidade para uso no campo angolano. Inclui enxadas, pás, ancas, carrinhos de mão e ancinho.",
+  "manufacturer": { "@type": "Organization", "name": "Gasosa Auto Agro" },
+  "offers": {
+    "@type": "Offer",
+    "availability": "https://schema.org/InStock",
+    "priceCurrency": "AOA",
+    "seller": { "@type": "Organization", "name": "Gasosa Auto Agro" }
+  }
+}
+
+5.4 — FAQPage (cria uma secção de FAQ na página inicial e/ou Pangulino):
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "O que é a Pangulino?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A Pangulino é uma marca angolana de ferramentas agrícolas criada em 2019 pela Gasosa Auto Agro. Oferece enxadas, pás, ancas, carrinhos de mão e outros equipamentos para o campo, reconhecida pela durabilidade e qualidade no mercado angolano." }
+    },
+    {
+      "@type": "Question",
+      "name": "A Nergytech está disponível em Angola?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sim. A Gasosa Auto Agro é o representante exclusivo da Nergytech em Angola, oferecendo lubrificantes premium para veículos, máquinas agrícolas e equipamentos industriais." }
+    },
+    {
+      "@type": "Question",
+      "name": "A Gasosa tem loja fora de Luanda?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sim. A Gasosa Auto Agro tem instalações em três cidades: Luanda (Av. 21 de Janeiro), Lubango (Rua Aníbal de Melo) e Huambo (Cidade Baixa), cobrindo o norte, centro e sul de Angola." }
+    },
+    {
+      "@type": "Question",
+      "name": "Que lubrificantes a Gasosa vende?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A Gasosa vende lubrificantes das marcas Nergytech (representação exclusiva em Angola), Petronas, Castrol, Galp e Puma, para automóveis, tractores, máquinas agrícolas e equipamentos industriais." }
+    },
+    {
+      "@type": "Question",
+      "name": "A Gasosa trabalha com empresas e fazendas?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Sim. A Gasosa é parceira estratégica de mais de 30 empresas e fazendas em Angola, incluindo Sonangol, Governo de Angola, Fazenda Tchissola, Fazenda Boi Verde, entre muitas outras." }
+    }
+  ]
+}
+
+5.5 — BreadcrumbList (em todas as páginas excepto a inicial):
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://[dominio]/" },
+    { "@type": "ListItem", "position": 2, "name": "[Nome da página actual]", "item": "https://[dominio]/[pagina]" }
+  ]
+}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TÉCNICA 6 — SEO PARA IA (GEO — Generative Engine Optimisation)
+(para ser citado pelo ChatGPT, Perplexity, Gemini, Copilot)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+As IAs citam sites quando encontram informação clara, factual e bem estruturada. Para isso:
+
+6.1 — Cria um bloco de texto "Sobre nós" na página inicial com linguagem directa e factual:
+Exemplo de texto a incluir visível na página:
+"A Gasosa Auto Agro (CFA GASOSA SU LDA) é uma empresa angolana fundada em 2016, especializada no fornecimento de peças automóveis, lubrificantes, ferramentas agrícolas e serviços de manutenção. Com presença em Luanda, Lubango e Huambo, representa as marcas próprias Pangulino (ferramentas agrícolas) e Nergytech (lubrificantes premium — representação exclusiva em Angola). É parceira de empresas como Sonangol, Governo de Angola e mais de 30 organizações angolanas."
+
+6.2 — Adiciona um ficheiro /llms.txt na raiz do site (novo padrão para IAs):
+Conteúdo do ficheiro:
+# Gasosa Auto Agro
+> Empresa angolana de peças automóveis, lubrificantes e ferramentas agrícolas. Fundada em 2016.
+
+## Sobre
+- Nome legal: CFA GASOSA SU LDA
+- Fundada: 2016
+- Sede: Luanda, Angola
+- Outras lojas: Lubango, Huambo
+- Email: geral@cfagasosa.com
+
+## Marcas
+- Pangulino: ferramentas agrícolas angolanas (marca própria, criada em 2019)
+- Nergytech: lubrificantes premium (representação exclusiva em Angola)
+- Também disponível: Petronas, Castrol, Galp, Puma, WIX Filters, ag55
+
+## Produtos
+- Ferramentas agrícolas (enxadas, pás, carrinhos de mão, ancas)
+- Lubrificantes para automóveis, tractores e máquinas industriais
+- Filtros, baterias, discos de travão, calços, limpadores para-brisas
+- Serviços de manutenção e oficina rápida em Luanda
+
+## Clientes notáveis
+Sonangol, Governo de Angola, Fazenda Tchissola, Fazenda Boi Verde, AGT, Mercons, Planasul, HMA Hipermaquinas Angola
+
+6.3 — Em cada página de produto/serviço, usa frases completas e directas que respondam a perguntas reais:
+Exemplos de frases a incluir nos textos:
+→ "A Pangulino é a principal marca angolana de ferramentas agrícolas, disponível nas lojas Gasosa em Luanda, Lubango e Huambo."
+→ "A Gasosa Auto Agro é o único distribuidor oficial da Nergytech em Angola."
+→ "Para comprar lubrificantes em Luanda, visite a nossa loja na Avenida 21 de Janeiro."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TÉCNICA 7 — SEO LOCAL ANGOLA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+7.1 — Em todas as páginas, o rodapé deve conter as 3 moradas com telefone e email visíveis em texto (não em imagem).
+
+7.2 — Na página Contactos e Infraestruturas, inclui um parágrafo de texto optimizado para cada cidade:
+Luanda: "A nossa loja principal em Luanda fica na Avenida 21 de Janeiro e dispõe de mais de 2.000 m², incluindo showroom, armazém e oficina de serviços rápidos. Contacte-nos: 951 025 435 / 931 242 408."
+Lubango: "As nossas instalações no Lubango, na Rua Aníbal de Melo, contam com mais de 10.000 m² de área construída, incluindo lojas, armazéns e oficinas. Contacte-nos: 926 445 508."
+Huambo: "A nossa loja no Huambo, na Cidade Baixa, tem mais de 1.200 m² com loja e armazém. Contacte-nos: 941 066 420."
+
+7.3 — Adiciona alt text nas imagens de cada cidade com referência geográfica exacta (ver Técnica 8).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TÉCNICA 8 — SEO DE IMAGENS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+8.1 — Todas as imagens devem ter:
+- Atributo alt descritivo com keyword e localização
+- Atributo title (tooltip) complementar
+- Formato WebP sempre que possível
+- loading="lazy" para imagens abaixo do fold
+- loading="eager" para a imagem principal (hero)
+- Atributos width e height definidos (evita layout shift)
+
+8.2 — Alt texts específicos para as imagens existentes no site:
+→ Fachada loja Luanda: alt="Loja Gasosa Auto Agro na Avenida 21 de Janeiro em Luanda — peças automóveis e lubrificantes"
+→ Interior loja: alt="Interior da loja Gasosa em Luanda com prateleiras de lubrificantes Nergytech, Petronas e Castrol"
+→ Armazém Lubango: alt="Armazém Gasosa Auto Agro no Lubango com mais de 10.000 m² e stock de lubrificantes Nergytech"
+→ Loja Huambo: alt="Loja Gasosa Auto Agro no Huambo — peças, lubrificantes e ferramentas agrícolas"
+→ Ferramentas Pangulino: alt="Ferramentas agrícolas Pangulino — enxadas, pás, ancas e ancinho com cabo de madeira"
+→ Carrinhos de mão Pangulino: alt="Carrinhos de mão Pangulino para uso agrícola — robustos e duráveis, fabricados para Angola"
+→ Oficina Luanda: alt="Oficina de serviços rápidos Gasosa Auto Agro em Luanda — manutenção de veículos e equipamentos"
+→ Futuras instalações: alt="Futuras instalações da Gasosa Auto Agro em construção — expansão do grupo em Angola"
+
+8.3 — Renomeia os ficheiros antes de fazer upload:
+gasosa-loja-luanda-av21-janeiro.webp
+gasosa-armazem-lubango.webp
+gasosa-loja-huambo.webp
+pangulino-ferramentas-agricolas-angola.webp
+pangulino-carrinho-mao-angola.webp
+nergytech-lubrificantes-angola.webp
+gasosa-oficina-luanda.webp
+gasosa-futuras-instalacoes.webp
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TÉCNICA 9 — LINKS INTERNOS E NAVEGAÇÃO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+9.1 — O texto âncora dos links internos deve sempre conter keywords. Nunca usar "clique aqui" ou "saiba mais" sem contexto.
+Correcto: "Ver ferramentas agrícolas Pangulino"
+Errado: "Clique aqui"
+
+9.2 — Mapa de links internos recomendado:
+→ Página Inicial → links para Pangulino, Infraestruturas, Notícias, Contactos
+→ Pangulino → link para Infraestruturas ("onde comprar") e Contactos
+→ Infraestruturas → link para Contactos e Página Inicial
+→ Notícias → cada artigo deve ter link para a página de produto relevante
+→ Contactos → link para Infraestruturas e Página Inicial
+→ Rodapé de todas as páginas → links para as 5 páginas + telefone de Luanda visível
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TÉCNICA 10 — E-E-A-T (EXPERIÊNCIA, EXPERTISE, AUTORIDADE, CONFIANÇA)
+(critério fundamental do Google desde 2023)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+O Google penaliza sites sem sinais de confiança. Para melhorar o E-E-A-T:
+
+10.1 — Na página inicial, adiciona uma secção visível com:
+- "Fundada em 2016" (experiência)
+- "Representante exclusivo da Nergytech em Angola" (expertise)
+- Lista de clientes notáveis: Sonangol, Governo de Angola, AGT, Fazenda Tchissola... (autoridade)
+- Email, telefone e morada visíveis (confiança)
+
+10.2 — Na página Pangulino, menciona:
+- Ano de criação da marca (2019)
+- Inspiração no pangolim (símbolo de resistência e protecção)
+- Disponibilidade nas 3 lojas físicas
+
+10.3 — Na página Notícias, cada artigo deve ter:
+- Data de publicação visível (datetime no HTML)
+- Autor ou "Equipa Gasosa Auto Agro"
+- Categoria (ex: Novidades, Produtos, Angola)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TÉCNICA 11 — SITEMAP, ROBOTS E INDEXAÇÃO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+11.1 — Gera o ficheiro /sitemap.xml com as 5 páginas:
+https://[dominio]/1.0
+https://[dominio]/pangulino0.9
+https://[dominio]/infraestruturas0.8
+https://[dominio]/noticias0.7
+https://[dominio]/contactos0.8
+
+11.2 — Verifica o /robots.txt:
+User-agent: *
+Allow: /
+Sitemap: https://[dominio]/sitemap.xml
+
+11.3 — Cria também o ficheiro /llms.txt (Técnica 6.2) na raiz do site.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+RESULTADO ESPERADO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Após aplicares todas as técnicas, apresenta:
+
+1. Lista de todos os ficheiros alterados ou criados
+2. Código completo de cada página com todas as meta tags implementadas
+3. Os 3 blocos LocalBusiness (Luanda, Lubango, Huambo) em JSON-LD
+4. O ficheiro sitemap.xml completo
+5. O ficheiro robots.txt
+6. O ficheiro llms.txt
+7. Confirmação de que todas as imagens têm alt text, width, height e nome correcto

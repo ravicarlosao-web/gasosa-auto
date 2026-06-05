@@ -10,9 +10,19 @@ import { MobileMenu } from "../components/layout/MobileMenu";
 import { Footer } from "../components/layout/Footer";
 import { AngolaMap } from "../components/AngolaMap";
 import { useLang } from "../i18n";
+import { useSEO, LOCAL_BUSINESS_LUANDA, LOCAL_BUSINESS_LUBANGO, LOCAL_BUSINESS_HUAMBO } from "../lib/use-seo";
 
 export function ContactosPage() {
   const { t } = useLang();
+
+  useSEO({
+    title: "Fale Connosco — Estamos em Luanda, Lubango e Huambo",
+    description: "Entre em contacto com a Gasosa Auto Agro. Luanda: 951 025 435 · Lubango: 926 445 508 · Huambo: 941 066 420. Email: geral@cfagasosa.com.",
+    path: "/contactos",
+    breadcrumb: { name: "Contactos", path: "/contactos" },
+    schema: [LOCAL_BUSINESS_LUANDA, LOCAL_BUSINESS_LUBANGO, LOCAL_BUSINESS_HUAMBO],
+  });
+
   const tc = t.contactos;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [winW, setWinW] = useState(() => (typeof window !== "undefined" ? window.innerWidth : 1280));

@@ -14,6 +14,7 @@ import { Footer }      from "../components/layout/Footer";
 import { FADE_UP }     from "../lib/motion-variants";
 import { useLang }     from "../i18n";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useSEO, PANGULINO_PRODUCT_SCHEMA } from "../lib/use-seo";
 
 const GREEN  = "#2D7A22";
 const AMBER  = "#F5A000";
@@ -45,6 +46,14 @@ const PRODUCT_ICONS = [
 
 export function PangulinoPage() {
   const { t } = useLang();
+
+  useSEO({
+    title: "Ferramentas Agrícolas Pangulino — Força e Precisão no Campo Angolano",
+    description: "Pangulino — a principal marca angolana de ferramentas agrícolas. Enxadas, pás, ancas, carrinhos de mão e mais. Disponível nas lojas Gasosa em Luanda, Lubango e Huambo.",
+    path: "/pangulino",
+    breadcrumb: { name: "Pangulino", path: "/pangulino" },
+    schema: [PANGULINO_PRODUCT_SCHEMA],
+  });
   const isMobile = useIsMobile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const p = t.pangulino;
