@@ -241,7 +241,7 @@ export function HomePage() {
       </div>
 
       {/* ── Sections ── */}
-      <div className="relative z-10" style={{ borderRadius: "28px 28px 0 0", overflow: "hidden", boxShadow: "0 -12px 60px rgba(0,0,0,0.28)" }}>
+      <div id="quem-somos" className="relative z-10" style={{ borderRadius: "28px 28px 0 0", overflow: "hidden", boxShadow: "0 -12px 60px rgba(0,0,0,0.28)" }}>
         <HistoriaSection />
       </div>
 
