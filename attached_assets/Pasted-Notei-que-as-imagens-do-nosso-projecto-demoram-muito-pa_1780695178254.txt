@@ -1,0 +1,35 @@
+Notei que as imagens do nosso projecto demoram muito para carregar, especialmente na página de Infraestruturas (Panguilino). Preciso que faças as seguintes melhorias para acelerar o carregamento das imagens em todo o site:
+
+1. LAZY LOADING
+   - Adiciona o atributo loading="lazy" em todas as tags  que não estejam visíveis imediatamente (above the fold).
+   - Para as imagens que aparecem logo no topo da página (hero/banner), usa loading="eager" para carregar com prioridade.
+
+2. FORMATO WEBP COM FALLBACK
+   - Converte ou substitui as imagens pesadas pelo formato WebP, que é muito mais leve (até 30% menor que JPEG).
+   - Usa a tag  com  e mantém um  de fallback em JPEG para browsers antigos.
+
+3. TAMANHOS CORRECTOS (RESPONSIVE IMAGES)
+   - Usa os atributos srcset e sizes nas tags  para servir imagens de tamanhos diferentes conforme o ecrã do utilizador.
+   - Exemplo: uma imagem que ocupa 100% do ecrã no mobile não precisa ter 2000px de largura.
+
+4. PLACEHOLDER / BLUR-UP EFFECT
+   - Enquanto a imagem carrega, mostra um placeholder: pode ser uma versão tiny da imagem (base64) com blur aplicado via CSS, ou simplesmente um bloco cinza com a mesma proporção (aspect-ratio).
+   - Isso evita que a página "salte" (layout shift) quando a imagem carrega.
+
+5. PRELOAD DAS IMAGENS PRINCIPAIS
+   - Na página de Infraestruturas (Panguilino), identifica as 1 ou 2 imagens mais importantes e adiciona no :
+     
+   - Isso diz ao browser para começar a descarregar essa imagem antes de processar o resto da página.
+
+6. COMPRESSÃO DAS IMAGENS ORIGINAIS
+   - Se as imagens estiverem guardadas no servidor, usa uma biblioteca como sharp (Node.js) para as comprimir automaticamente ao fazer upload.
+   - Configuração recomendada: qualidade 80 para JPEG, qualidade 75 para WebP.
+   - Redimensiona para no máximo 1920px de largura para imagens full-width.
+
+7. ASPECT RATIO FIXO (EVITAR LAYOUT SHIFT)
+   - Sempre que possível, define width e height nas tags , ou usa aspect-ratio no CSS, para o browser reservar o espaço antes de a imagem carregar.
+
+Por favor:
+- Aplica estas melhorias começando pela página de Infraestruturas (Panguilino), que é a mais lenta.
+- Depois aplica as mesmas correcções nas restantes páginas do site.
+- Mostra-me o código alterado e explica brevemente o que mudaste em cada ficheiro.

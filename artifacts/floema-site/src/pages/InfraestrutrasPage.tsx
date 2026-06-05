@@ -18,6 +18,7 @@ import infraLuandaOfic1   from "@assets/WhatsApp_Image_2025-09-05_at_17.29.31_(6
 import infraLuandaOfic2   from "@assets/WhatsApp_Image_2025-09-05_at_17.29.31_(7)_1780420689121.jpeg";
 import infraLuandaOfic3   from "@assets/WhatsApp_Image_2025-09-05_at_17.29.31_(8)_1780420692112.jpeg";
 import infraFuturas       from "@assets/20250903_123030_1780417662829.jpg";
+import { LazyImage } from "../components/ui/lazy-image";
 import { NavThemeCtx } from "../lib/nav-theme";
 import { NavPill } from "../components/layout/NavPill";
 import { LangDropdown } from "../components/layout/LangDropdown";
@@ -170,14 +171,13 @@ export function InfraestrutrasPage() {
 
       {/* ── Featured — Lubango ── */}
       <div style={{ position: "relative", width: "100%", height: "clamp(480px, 65vh, 800px)", overflow: "hidden", background: "#111c2b" }}>
-        <motion.img
+        <LazyImage
+          fill
           src={infraLubangoExt}
           alt="Instalações Lubango"
-          loading="lazy"
-          decoding="async"
+          objectPosition="center"
           whileHover={{ scale: 1.04 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+          motionTransition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.28) 50%, transparent 100%)", zIndex: 1 }} />
         <motion.div
@@ -212,14 +212,12 @@ export function InfraestrutrasPage() {
             custom={i * 0.08}
             style={{ position: "relative", height: isMobile ? "clamp(180px, 55vw, 320px)" : "clamp(200px, 28vh, 380px)", overflow: "hidden", background: "#111" }}
           >
-            <motion.img
+            <LazyImage
+              fill
               src={src}
               alt={`Lubango ${i + 1}`}
-              loading="lazy"
-              decoding="async"
               whileHover={{ scale: 1.06 }}
-              transition={{ type: "spring", stiffness: 120, damping: 22 }}
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+              motionTransition={{ type: "spring", stiffness: 120, damping: 22 }}
             />
           </motion.div>
         ))}
@@ -227,14 +225,13 @@ export function InfraestrutrasPage() {
 
       {/* ── Featured — Luanda fachada ── */}
       <div style={{ position: "relative", width: "100%", height: "clamp(480px, 65vh, 800px)", overflow: "hidden", background: "#0d1520" }}>
-        <motion.img
+        <LazyImage
+          fill
           src={infraLuandaFachada}
           alt="Loja Luanda — fachada"
-          loading="lazy"
-          decoding="async"
+          objectPosition="center 60%"
           whileHover={{ scale: 1.04 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 60%" }}
+          motionTransition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.15) 100%)", zIndex: 1 }} />
         <motion.div
@@ -269,14 +266,12 @@ export function InfraestrutrasPage() {
             custom={i * 0.07}
             style={{ position: "relative", height: isMobile ? "clamp(140px, 44vw, 240px)" : "clamp(180px, 24vh, 320px)", overflow: "hidden", background: "#111" }}
           >
-            <motion.img
+            <LazyImage
+              fill
               src={src}
               alt={`Luanda loja ${i + 1}`}
-              loading="lazy"
-              decoding="async"
               whileHover={{ scale: 1.07 }}
-              transition={{ type: "spring", stiffness: 120, damping: 22 }}
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+              motionTransition={{ type: "spring", stiffness: 120, damping: 22 }}
             />
           </motion.div>
         ))}
@@ -294,14 +289,12 @@ export function InfraestrutrasPage() {
             custom={i * 0.09}
             style={{ position: "relative", height: isMobile ? "clamp(180px, 55vw, 320px)" : "clamp(200px, 28vh, 360px)", overflow: "hidden", background: "#111" }}
           >
-            <motion.img
+            <LazyImage
+              fill
               src={src}
               alt={`Luanda oficina ${i + 1}`}
-              loading="lazy"
-              decoding="async"
               whileHover={{ scale: 1.06 }}
-              transition={{ type: "spring", stiffness: 120, damping: 22 }}
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+              motionTransition={{ type: "spring", stiffness: 120, damping: 22 }}
             />
           </motion.div>
         ))}
@@ -316,14 +309,13 @@ export function InfraestrutrasPage() {
         custom={0}
         style={{ position: "relative", width: "100%", height: "clamp(400px, 55vh, 680px)", overflow: "hidden", background: "#111" }}
       >
-        <motion.img
+        <LazyImage
+          fill
           src={infraHuamboExt}
           alt="Instalações Huambo"
-          loading="lazy"
-          decoding="async"
+          objectPosition="center"
           whileHover={{ scale: 1.04 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+          motionTransition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.2) 55%, transparent 100%)", zIndex: 1 }} />
         <motion.div
@@ -355,14 +347,14 @@ export function InfraestrutrasPage() {
         custom={0}
         style={{ position: "relative", width: "100%", height: "clamp(420px, 55vh, 680px)", overflow: "hidden", background: "#0a1628" }}
       >
-        <motion.img
+        <LazyImage
+          fill
           src={infraFuturas}
           alt="Futuras instalações"
-          loading="lazy"
-          decoding="async"
+          objectPosition="center 40%"
+          imgStyle={{ opacity: 0.65 }}
           whileHover={{ scale: 1.04 }}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 40%", opacity: 0.65 }}
+          motionTransition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
         />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(10,22,40,0.92) 0%, rgba(10,22,40,0.5) 50%, rgba(10,22,40,0.3) 100%)", zIndex: 1 }} />
         <div style={{ position: "absolute", bottom: "clamp(40px, 6vh, 80px)", left: "clamp(20px, 5vw, 80px)", zIndex: 2, maxWidth: "600px" }}>

@@ -16,6 +16,7 @@ import nergyImg3 from "@assets/IMG_20250903_113401_1780387574299.jpg";
 import nergyImg4 from "@assets/IMG_20250903_111532_1780387597136.jpg";
 import nergyImg5 from "@assets/1000015282_1780387656692.jpg";
 import nergyImg6 from "@assets/WhatsApp_Image_2025-09-03_at_11.33.28_(2)_1780387695350.jpeg";
+import { LazyImage } from "../components/ui/lazy-image";
 import { NavThemeCtx } from "../lib/nav-theme";
 import { NavPill } from "../components/layout/NavPill";
 import { LangDropdown } from "../components/layout/LangDropdown";
@@ -309,7 +310,13 @@ function NoticiaDrawer({
             </div>
 
             <div style={{ width: "100%", overflow: "hidden" }}>
-              <img src={article.img} alt={article.titulo} style={{ width: "100%", aspectRatio: "16/9", objectFit: "cover", display: "block" }} />
+              <LazyImage
+                src={article.img}
+                alt={article.titulo}
+                aspectRatio="16/9"
+                loading="lazy"
+                shimmerColor="#e8e0d8"
+              />
             </div>
 
             <div style={{ padding: "clamp(28px, 5vw, 56px) clamp(28px, 5vw, 64px) clamp(56px, 9vw, 100px)" }}>
@@ -329,7 +336,7 @@ function NoticiaDrawer({
                 ) : block.type === "image" ? (
                   <div key={i} style={{ margin: "40px 0" }}>
                     <div style={{ borderRadius: "12px", overflow: "hidden" }}>
-                      <img src={block.src} alt={block.caption ?? ""} style={{ width: "100%", display: "block", objectFit: "cover" }} />
+                      <img src={block.src} alt={block.caption ?? ""} loading="lazy" decoding="async" style={{ width: "100%", display: "block", objectFit: "cover" }} />
                     </div>
                     {block.caption && (
                       <p style={{ fontSize: "0.7rem", color: "rgba(0,0,0,0.36)", textAlign: "center", marginTop: "10px", letterSpacing: "0.02em" }}>
@@ -417,15 +424,17 @@ function NoticiasCategorySection({
             whileHover={{ y: -5 }}
             whileTap={{ scale: 0.98 }}
           >
-            <div style={{ width: "100%", aspectRatio: i === 0 ? "3/4" : "4/3", overflow: "hidden", flexShrink: 0 }}>
-              <img
-                src={article.img}
-                alt={article.titulo}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)" }}
-                onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
-                onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
-              />
-            </div>
+            <LazyImage
+              src={article.img}
+              alt={article.titulo}
+              aspectRatio={i === 0 ? "3/4" : "4/3"}
+              loading="lazy"
+              shimmerColor="#e8e0d8"
+              wrapperStyle={{ flexShrink: 0 }}
+              imgStyle={{ transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)" }}
+              onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
+              onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+            />
             <div style={{ padding: "clamp(14px, 1.8vw, 22px)", display: "flex", flexDirection: "column", gap: "8px", flex: 1 }}>
               <h3 style={{ fontSize: i === 0 ? "clamp(1rem, 0.85rem + 0.9vw, 1.45rem)" : "clamp(0.88rem, 0.78rem + 0.5vw, 1.08rem)", fontWeight: 600, color: "#111111", lineHeight: 1.28, letterSpacing: "-0.015em", margin: 0 }}>
                 {article.titulo}
@@ -619,9 +628,17 @@ export function NoticiasPage() {
                 whileHover={{ y: -6 }}
                 whileTap={{ scale: 0.99 }}
               >
-                <div style={{ width: "100%", aspectRatio: "16/9", overflow: "hidden", flexShrink: 0 }}>
-                  <img src={latest[0].img} alt={latest[0].titulo} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)" }} onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.04)")} onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")} />
-                </div>
+                <LazyImage
+                  src={latest[0].img}
+                  alt={latest[0].titulo}
+                  aspectRatio="16/9"
+                  loading="lazy"
+                  shimmerColor="#e8e0d8"
+                  wrapperStyle={{ flexShrink: 0 }}
+                  imgStyle={{ transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)" }}
+                  onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.04)")}
+                  onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+                />
                 <div style={{ padding: "clamp(20px, 2.5vw, 32px)", display: "flex", flexDirection: "column", gap: "10px" }}>
                   <span style={{ fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.14em", color: "#F5A000", textTransform: "uppercase" }}>{latest[0].categoria}</span>
                   <h2 style={{ fontSize: "clamp(1.15rem, 0.9rem + 1.2vw, 1.9rem)", fontWeight: 600, color: "#111111", lineHeight: 1.25, letterSpacing: "-0.02em", margin: 0 }}>{latest[0].titulo}</h2>
@@ -646,9 +663,17 @@ export function NoticiasPage() {
                 whileHover={{ y: -6 }}
                 whileTap={{ scale: 0.99 }}
               >
-                <div style={{ width: "100%", aspectRatio: "4/3", overflow: "hidden", flexShrink: 0 }}>
-                  <img src={article.img} alt={article.titulo} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)" }} onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")} onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")} />
-                </div>
+                <LazyImage
+                  src={article.img}
+                  alt={article.titulo}
+                  aspectRatio="4/3"
+                  loading="lazy"
+                  shimmerColor="#e8e0d8"
+                  wrapperStyle={{ flexShrink: 0 }}
+                  imgStyle={{ transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)" }}
+                  onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
+                  onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+                />
                 <div style={{ padding: "clamp(16px, 2vw, 24px)", display: "flex", flexDirection: "column", gap: "8px", flex: 1 }}>
                   <span style={{ fontSize: "0.68rem", fontWeight: 600, letterSpacing: "0.14em", color: "#F5A000", textTransform: "uppercase" }}>{article.categoria}</span>
                   <h3 style={{ fontSize: "clamp(0.95rem, 0.82rem + 0.6vw, 1.2rem)", fontWeight: 600, color: "#111111", lineHeight: 1.3, letterSpacing: "-0.015em", margin: 0 }}>{article.titulo}</h3>

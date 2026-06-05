@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useLang } from "../../i18n";
 import { MILESTONE_STATIC } from "../../data/constants";
+import { LazyImage } from "../ui/lazy-image";
 
 function MilestoneCard({
   year,
@@ -75,11 +76,12 @@ function MilestoneCard({
           ref={imgRef}
         >
           <motion.div style={{ y: imageY, height: "220px", position: "relative" }}>
-            <img
+            <LazyImage
+              fill
               src={image}
               alt={`Gasosa Auto Agro — ${year}`}
-              className="w-full h-full object-cover"
-              style={{ filter: "brightness(0.82) saturate(0.9)", display: "block" }}
+              loading="lazy"
+              imgStyle={{ filter: "brightness(0.82) saturate(0.9)" }}
             />
           </motion.div>
         </motion.div>

@@ -5,6 +5,7 @@ import { Menu, MapPin } from "lucide-react";
 import logoSrc      from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import heroImg      from "@assets/pangulino-hero-optimized.jpg";
 import pangLogoImg  from "@assets/image_1780664916930.png";
+import { LazyImage } from "../components/ui/lazy-image";
 import { NavThemeCtx } from "../lib/nav-theme";
 import { NavPill }    from "../components/layout/NavPill";
 import { LangDropdown } from "../components/layout/LangDropdown";
@@ -267,16 +268,11 @@ export function PangulinoPage() {
             background: "#d4e8d0",
           }}
         >
-          <img
+          <LazyImage
+            fill
             src={pangLogoImg}
             alt="Pangulino — marca própria"
-            loading="lazy"
-            decoding="async"
-            style={{
-              width: "100%", height: "100%",
-              objectFit: "cover", objectPosition: "center",
-              display: "block",
-            }}
+            objectPosition="center"
           />
           <div style={{
             position: "absolute", inset: 0,

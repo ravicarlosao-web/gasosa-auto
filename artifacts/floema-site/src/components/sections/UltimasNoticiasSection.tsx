@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useLang } from "../../i18n";
 import { FADE_UP } from "../../lib/motion-variants";
 import { NOTICIAS_IMGS } from "../../data/constants";
+import { LazyImage } from "../ui/lazy-image";
 
 export function UltimasNoticiasSection() {
   const { t } = useLang();
@@ -93,21 +94,17 @@ export function UltimasNoticiasSection() {
               whileHover={{ y: -6, boxShadow: "0 16px 48px rgba(0,0,0,0.14)" }}
               whileTap={{ scale: 0.99 }}
             >
-              <div style={{ width: "100%", aspectRatio: "16 / 9", overflow: "hidden", flexShrink: 0 }}>
-                <img
-                  src={NOTICIAS_IMGS[i % NOTICIAS_IMGS.length]}
-                  alt={item.titulo}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    display: "block",
-                    transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)",
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.06)")}
-                  onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
-                />
-              </div>
+              <LazyImage
+                src={NOTICIAS_IMGS[i % NOTICIAS_IMGS.length]}
+                alt={item.titulo}
+                aspectRatio="16/9"
+                loading="lazy"
+                shimmerColor="#e8e0d8"
+                wrapperStyle={{ flexShrink: 0 }}
+                imgStyle={{ transition: "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)" }}
+                onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.06)")}
+                onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+              />
 
               <div style={{ padding: "clamp(18px, 2.5vw, 28px)", display: "flex", flexDirection: "column", gap: "10px", flex: 1 }}>
                 <h3 style={{ fontSize: "clamp(0.95rem, 0.85rem + 0.4vw, 1.15rem)", fontWeight: 700, color: "#111111", lineHeight: 1.3, margin: 0, letterSpacing: "-0.01em" }}>
