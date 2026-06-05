@@ -4075,7 +4075,7 @@ function ContactosPage() {
               ? "1fr 1fr"
               : "clamp(180px, 22vw, 320px) clamp(220px, 28vw, 380px) clamp(260px, 32vw, 460px)",
             gap: isMobile ? "clamp(36px, 6vw, 56px)" : isTablet ? "clamp(28px, 4vw, 48px)" : "clamp(24px, 3vw, 40px)",
-            alignItems: "end",
+            alignItems: "start",
             position: "relative",
             maxWidth: "1400px",
             margin: "0 auto",
