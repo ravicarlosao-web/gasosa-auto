@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { Menu } from "lucide-react";
-import logoSrc from "@assets/Design_sem_nome_1780699641133.png";
+import logoSrc from "@assets/Design_sem_nome__2_-removebg-preview_1780700075899.png";
 import infraHeroImg        from "@assets/20250903_123036_1780417176290.jpg";
 import infraLubangoExt    from "@assets/20250903_123815_1780417632798.jpg";
 import infraLubangoAerial from "@assets/20250903_124326_1780417637563.jpg";
