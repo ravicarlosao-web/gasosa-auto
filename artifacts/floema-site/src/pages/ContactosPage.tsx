@@ -22,7 +22,8 @@ export function ContactosPage() {
   const entryRefs = useRef<(HTMLDivElement | null)[]>([]);
   const mapDivRef = useRef<HTMLDivElement | null>(null);
   const locationsGridRef = useRef<HTMLDivElement | null>(null);
-  const [connectorLines, setConnectorLines] = useState<{x1:number;y1:number;x2:number;y2:number;mx:number}[]>([]);
+  const [connectorLines, setConnectorLines] = useState<{x1:number;y1:number;x2:number;y2:number}[]>([]);
+  const [mapHeight, setMapHeight] = useState(0);
 
   const MAP_SVG_W = 612.3866;
   const MAP_SVG_H = 684.8916;
@@ -43,22 +44,20 @@ export function ContactosPage() {
       if (!locationsGridRef.current || !mapDivRef.current) return;
       const gridRect = locationsGridRef.current.getBoundingClientRect();
       const mapRect  = mapDivRef.current.getBoundingClientRect();
+      setMapHeight(mapRect.height);
       const newLines = MAP_CITIES.map((city, i) => {
         const entry = entryRefs.current[i];
         if (!entry) return null;
         const r = entry.getBoundingClientRect();
         const provinceX = mapRect.left - gridRect.left + (city.cx / MAP_SVG_W) * mapRect.width;
         const provinceY = mapRect.top  - gridRect.top  + (city.cy / MAP_SVG_H) * mapRect.height;
-        const cardCenterY = r.top - gridRect.top + r.height / 2;
-        const midX = r.right - gridRect.left + (provinceX - (r.right - gridRect.left)) * 0.45;
         return {
           x1: r.right - gridRect.left,
-          y1: cardCenterY,
+          y1: provinceY,
           x2: provinceX,
           y2: provinceY,
-          mx: midX,
         };
-      }).filter(Boolean) as {x1:number;y1:number;x2:number;y2:number;mx:number}[];
+      }).filter(Boolean) as {x1:number;y1:number;x2:number;y2:number}[];
       setConnectorLines(newLines);
     };
     calculate();
@@ -257,39 +256,51 @@ export function ContactosPage() {
             </motion.h2>
           </div>
 
-          {/* Column 2: Cities */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(24px, 3.5vw, 44px)" }}>
-            {tc.locations.map((loc, i) => (
-              <motion.div
-                key={loc.city}
-                ref={(el: HTMLDivElement | null) => { entryRefs.current[i] = el; }}
-                initial={{ opacity: 0, x: -28 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={viewport}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }}
-                style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}
-              >
-                {i > 0 && (
-                  <div style={{ flexShrink: 0, marginTop: "4px" }}>
-                    <MapPin size={22} style={{ color: "#F5A000", display: "block" }} fill="#F5A000" strokeWidth={1} />
+          {/* Column 2: Cities — absolutely positioned to align with map provinces */}
+          <div style={{
+            position: "relative",
+            height: !isMobile && !isTablet && mapHeight > 0 ? `${mapHeight}px` : "auto",
+            display: isMobile || isTablet ? "flex" : "block",
+            flexDirection: "column",
+            gap: isMobile || isTablet ? "clamp(24px, 3.5vw, 44px)" : undefined,
+          }}>
+            {tc.locations.map((loc, i) => {
+              const topPct = MAP_CITIES[i].cy / MAP_SVG_H * 100;
+              return (
+                <motion.div
+                  key={loc.city}
+                  ref={(el: HTMLDivElement | null) => { entryRefs.current[i] = el; }}
+                  initial={{ opacity: 0, x: -28 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={viewport}
+                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }}
+                  style={{
+                    position: !isMobile && !isTablet && mapHeight > 0 ? "absolute" : "relative",
+                    top: !isMobile && !isTablet && mapHeight > 0 ? `${topPct}%` : "auto",
+                    transform: !isMobile && !isTablet && mapHeight > 0 ? "translateY(-50%)" : "none",
+                    display: "flex", alignItems: "flex-start", gap: "12px",
+                  }}
+                >
+                  <div style={{ flexShrink: 0, marginTop: "3px" }}>
+                    <MapPin size={20} style={{ color: "#F5A000", display: "block" }} fill="#F5A000" strokeWidth={1} />
                   </div>
-                )}
-                <div>
-                  <h3 style={{ fontSize: "clamp(1.3rem, 0.9rem + 1.8vw, 2rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.05, margin: "0 0 6px" }}>
-                    {loc.city.toUpperCase()}
-                  </h3>
-                  <p style={{ fontSize: "clamp(0.74rem, 0.66rem + 0.28vw, 0.84rem)", color: "rgba(0,0,0,0.42)", margin: "0 0 5px", display: "flex", alignItems: "center", gap: "5px" }}>
-                    <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
-                    {loc.address}
-                  </p>
-                  {(loc.phones as readonly string[]).map((phone) => (
-                    <p key={phone} style={{ fontSize: "clamp(0.82rem, 0.74rem + 0.28vw, 0.94rem)", color: "#111111", margin: "2px 0", fontWeight: 500 }}>
-                      {phone}
+                  <div>
+                    <h3 style={{ fontSize: "clamp(1.3rem, 0.9rem + 1.8vw, 2rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.05, margin: "0 0 6px" }}>
+                      {loc.city.toUpperCase()}
+                    </h3>
+                    <p style={{ fontSize: "clamp(0.74rem, 0.66rem + 0.28vw, 0.84rem)", color: "rgba(0,0,0,0.42)", margin: "0 0 5px", display: "flex", alignItems: "center", gap: "5px" }}>
+                      <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
+                      {loc.address}
                     </p>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                    {(loc.phones as readonly string[]).map((phone) => (
+                      <p key={phone} style={{ fontSize: "clamp(0.82rem, 0.74rem + 0.28vw, 0.94rem)", color: "#111111", margin: "2px 0", fontWeight: 500 }}>
+                        {phone}
+                      </p>
+                    ))}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
 
           {/* Column 3: Map */}
@@ -297,19 +308,12 @@ export function ContactosPage() {
             <AngolaMap />
           </div>
 
-          {/* Connector lines */}
+          {/* Connector lines — horizontal dashed, from card right edge to province dot */}
           {!isMobile && !isTablet && connectorLines.length > 0 && (
             <svg style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", overflow: "visible" }} aria-hidden="true">
-              {connectorLines.map((line, i) => {
-                const cp1x = line.x1 + (line.x2 - line.x1) * 0.5;
-                const cp1y = line.y1;
-                const cp2x = line.x1 + (line.x2 - line.x1) * 0.5;
-                const cp2y = line.y2;
-                const d = `M ${line.x1},${line.y1} C ${cp1x},${cp1y} ${cp2x},${cp2y} ${line.x2},${line.y2}`;
-                return (
-                  <path key={i} d={d} fill="none" stroke="#F5A000" strokeWidth="1.5" strokeDasharray="5 4" strokeOpacity="0.75" />
-                );
-              })}
+              {connectorLines.map((line, i) => (
+                <line key={i} x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} stroke="#F5A000" strokeWidth="1.5" strokeDasharray="5 4" strokeOpacity="0.7" />
+              ))}
             </svg>
           )}
         </div>
