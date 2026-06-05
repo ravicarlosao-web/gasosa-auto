@@ -277,51 +277,92 @@ export function HomePage() {
         <UltimasNoticiasSection />
       </div>
 
-      {/* ── GEO + FAQ ── */}
+      {/* ── FAQ ── */}
       <div className="relative z-10">
         <section
-          aria-label="Sobre a Gasosa Auto Agro e Perguntas Frequentes"
-          style={{ background: "#F5EFE9", padding: "clamp(80px,12vw,144px) clamp(20px,6vw,80px)" }}
+          aria-label="Perguntas Frequentes sobre a Gasosa Auto Agro"
+          style={{
+            background: "#F5EFE9",
+            fontFamily: "'Poppins', sans-serif",
+            paddingTop: "clamp(80px,12vw,144px)",
+            paddingBottom: "clamp(80px,12vw,144px)",
+            paddingLeft: "clamp(20px,5vw,64px)",
+            paddingRight: "clamp(20px,5vw,64px)",
+          }}
         >
-          <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-            <p style={{ fontSize: "clamp(0.78rem,0.3vw + 0.72rem,0.9rem)", color: "rgba(0,0,0,0.42)", lineHeight: 1.85, marginBottom: "clamp(60px,8vw,100px)", maxWidth: "780px", fontFamily: "'Poppins', sans-serif" }}>
-              A Gasosa Auto Agro (CFA GASOSA SU LDA) é uma empresa angolana fundada em 2016,
-              especializada no fornecimento de peças automóveis, lubrificantes, ferramentas agrícolas e
-              serviços de manutenção. Com presença em Luanda, Lubango e Huambo, representa as marcas
-              próprias Pangulino (ferramentas agrícolas) e Nergytech (lubrificantes premium —
-              representação exclusiva em Angola). É parceira de empresas como Sonangol, Governo de Angola
-              e mais de 30 organizações angolanas.
-            </p>
+          {/* ── Heading block — centrado ── */}
+          <div style={{ maxWidth: "1100px", margin: "0 auto", textAlign: "center", marginBottom: "clamp(48px,7vw,88px)" }}>
+            <div style={{ overflow: "hidden", marginBottom: "18px" }}>
+              <motion.span
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                style={{ display: "inline-block", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", color: "#003591" }}
+              >
+                PERGUNTAS FREQUENTES
+              </motion.span>
+            </div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              style={{ fontFamily: "'Poppins', sans-serif", fontSize: "clamp(1.6rem,1rem + 2.5vw,3rem)", fontWeight: 500, color: "#111111", letterSpacing: "-0.028em", lineHeight: 1.1, marginBottom: "clamp(32px,4vw,52px)" }}
-            >
-              Perguntas Frequentes
-            </motion.h2>
+            <div style={{ overflow: "hidden", marginBottom: "clamp(18px,2.5vw,28px)" }}>
+              <motion.h2
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: 0.07 }}
+                style={{ fontSize: "clamp(2rem,1.4rem + 2.8vw,4rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.035em", lineHeight: 1.08, margin: 0 }}
+              >
+                Tudo o que precisa<br />de saber.
+              </motion.h2>
+            </div>
 
+            <div style={{ overflow: "hidden" }}>
+              <motion.p
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.16 }}
+                style={{ fontSize: "clamp(0.88rem,0.76rem + 0.5vw,1.05rem)", color: "rgba(0,0,0,0.5)", lineHeight: 1.7, margin: "0 auto", maxWidth: "580px" }}
+              >
+                A Gasosa Auto Agro é uma empresa angolana especializada em peças automóveis,
+                lubrificantes e ferramentas agrícolas, com presença em Luanda, Lubango e Huambo.
+              </motion.p>
+            </div>
+          </div>
+
+          {/* ── FAQ items ── */}
+          <div style={{ maxWidth: "800px", margin: "0 auto" }}>
             {FAQ_ITEMS.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.48, ease: "easeOut", delay: i * 0.055 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.52, ease: [0.16, 1, 0.3, 1], delay: i * 0.06 }}
                 style={{
-                  borderTop: i === 0 ? "1px solid rgba(0,0,0,0.09)" : undefined,
-                  borderBottom: "1px solid rgba(0,0,0,0.09)",
-                  padding: "clamp(18px,2.5vw,26px) 0",
+                  borderTop: "1px solid rgba(0,0,0,0.09)",
+                  borderBottom: i === FAQ_ITEMS.length - 1 ? "1px solid rgba(0,0,0,0.09)" : undefined,
+                  padding: "clamp(22px,3vw,32px) 0",
+                  display: "grid",
+                  gridTemplateColumns: "32px 1fr",
+                  gap: "clamp(14px,2vw,24px)",
+                  alignItems: "start",
                 }}
               >
-                <h3 style={{ fontFamily: "'Poppins', sans-serif", fontSize: "clamp(0.88rem,0.3vw + 0.8rem,1.05rem)", fontWeight: 600, color: "#111111", margin: "0 0 9px", letterSpacing: "-0.01em", lineHeight: 1.4 }}>
-                  {item.q}
-                </h3>
-                <p style={{ fontFamily: "'Poppins', sans-serif", fontSize: "clamp(0.8rem,0.25vw + 0.75rem,0.9rem)", color: "rgba(0,0,0,0.55)", lineHeight: 1.75, margin: 0, maxWidth: "820px" }}>
-                  {item.a}
-                </p>
+                {/* Number */}
+                <span style={{ fontSize: "0.72rem", fontWeight: 700, color: "#003591", letterSpacing: "0.08em", paddingTop: "3px", opacity: 0.7 }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                {/* Content */}
+                <div>
+                  <h3 style={{ fontSize: "clamp(0.92rem,0.8rem + 0.4vw,1.08rem)", fontWeight: 600, color: "#111111", margin: "0 0 10px", letterSpacing: "-0.015em", lineHeight: 1.38 }}>
+                    {item.q}
+                  </h3>
+                  <p style={{ fontSize: "clamp(0.82rem,0.76rem + 0.25vw,0.93rem)", color: "rgba(0,0,0,0.52)", lineHeight: 1.78, margin: 0 }}>
+                    {item.a}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
