@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LangProvider } from "./i18n";
+import { ScrollToTop } from "./components/layout/ScrollToTop";
 import { HomePage } from "./pages/HomePage";
 import { InfraestrutrasPage } from "./pages/InfraestrutrasPage";
 import { NoticiasPage } from "./pages/NoticiasPage";
@@ -14,7 +15,9 @@ const queryClient = new QueryClient();
 
 function Router() {
   return (
-    <Switch>
+    <>
+      <ScrollToTop />
+      <Switch>
       <Route path="/" component={HomePage} />
       <Route path="/infraestruturas" component={InfraestrutrasPage} />
       <Route path="/notícias" component={NoticiasPage} />
@@ -23,6 +26,7 @@ function Router() {
       <Route path="/contactos" component={ContactosPage} />
       <Route component={NotFound} />
     </Switch>
+    </>
   );
 }
 
