@@ -15,10 +15,9 @@ const FAINT   = "rgba(0,0,0,0.28)";
 const DIVIDER = "rgba(0,0,0,0.08)";
 
 const BRANDS = [
-  { src: brandGasosa, alt: "Gasosa Auto Agro" },
-  { src: brand55,     alt: "55"               },
-  { src: brandPang,   alt: "Pangulino"         },
-  { src: brandNergy,  alt: "NergyTech"         },
+  { src: brand55,   alt: "55"       },
+  { src: brandPang, alt: "Pangulino" },
+  { src: brandNergy, alt: "NergyTech" },
 ];
 
 const SOCIAL = [
@@ -48,16 +47,16 @@ export function Footer() {
         }}
       >
         {/* Brand column */}
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
           <img
             src={logoSrc}
             alt="Gasosa Auto Agro"
             style={{ height: "40px", marginBottom: "18px", display: "block" }}
           />
-          <p style={{ fontSize: "0.85rem", color: MUTED, lineHeight: 1.65, margin: "0 0 24px", maxWidth: "220px" }}>
+          <p style={{ fontSize: "0.85rem", color: MUTED, lineHeight: 1.65, margin: "0 0 24px", maxWidth: "200px" }}>
             {f.tagline}
           </p>
-          <div style={{ display: "flex", gap: "10px" }}>
+          <div style={{ display: "flex", gap: "10px", justifyContent: "center" }}>
             {SOCIAL.map(({ label, href, path }) => (
               <a
                 key={label}
@@ -78,11 +77,11 @@ export function Footer() {
         </div>
 
         {/* Navigation column */}
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
           <h4 style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.16em", color: FAINT, marginBottom: "18px", textTransform: "uppercase" }}>
             {f.navLabel}
           </h4>
-          <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+          <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
             {f.navLinks.map((link) => (
               <li key={link}>
                 <a
@@ -99,11 +98,11 @@ export function Footer() {
         </div>
 
         {/* Contacts column */}
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
           <h4 style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.16em", color: FAINT, marginBottom: "18px", textTransform: "uppercase" }}>
             {f.contactLabel}
           </h4>
-          <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "14px", alignItems: "center" }}>
             <a
               href={`mailto:${f.email}`}
               style={{ display: "flex", alignItems: "center", gap: "10px", fontSize: "0.85rem", color: MUTED, textDecoration: "none", transition: "color 0.2s" }}
@@ -126,18 +125,18 @@ export function Footer() {
         </div>
 
         {/* Locations column */}
-        <div>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
           <h4 style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.16em", color: FAINT, marginBottom: "18px", textTransform: "uppercase" }}>
             {f.locationsLabel}
           </h4>
-          <div style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "14px", alignItems: "center" }}>
             {f.locations.map(({ city, detail }) => (
-              <div key={city} style={{ display: "flex", alignItems: "flex-start", gap: "10px" }}>
-                <MapPin size={14} style={{ flexShrink: 0, color: NAVY, marginTop: "2px" }} />
-                <div>
-                  <div style={{ fontSize: "0.88rem", fontWeight: 600, color: TEXT, lineHeight: 1.3 }}>{city}</div>
-                  <div style={{ fontSize: "0.75rem", color: FAINT, lineHeight: 1.4 }}>{detail}</div>
+              <div key={city} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <MapPin size={13} style={{ flexShrink: 0, color: NAVY }} />
+                  <span style={{ fontSize: "0.88rem", fontWeight: 600, color: TEXT, lineHeight: 1.3 }}>{city}</span>
                 </div>
+                <div style={{ fontSize: "0.75rem", color: FAINT, lineHeight: 1.4 }}>{detail}</div>
               </div>
             ))}
           </div>
