@@ -40,15 +40,8 @@ export function AngolaMap() {
         style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none" }}
         xmlns="http://www.w3.org/2000/svg"
       >
-        {cities.map(({ id, cx, cy, label, pillW }, i) => (
+        {cities.map(({ id, cx, cy, label, pillW }) => (
           <g key={id}>
-            <motion.g
-              style={{ originX: `${cx}px`, originY: `${cy}px` }}
-              animate={{ scale: [0.5, 2.8, 0.5], opacity: [0.7, 0, 0.7] }}
-              transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut", delay: i * 0.75 }}
-            >
-              <circle cx={cx} cy={cy} r={9} fill="none" stroke={Y} strokeWidth="1.5" />
-            </motion.g>
             <circle cx={cx} cy={cy} r={6} fill={Y} />
             <circle cx={cx} cy={cy} r={2.5} fill="#111111" />
             <rect x={cx - pillW / 2} y={cy + 11} width={pillW} height={21} rx={10.5} fill={Y} />
