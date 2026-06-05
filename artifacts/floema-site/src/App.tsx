@@ -4064,66 +4064,60 @@ function ContactosPage() {
       </div>
 
       {/* ── Locations ── */}
-      {/*
-        TWO INDEPENDENT BLOCKS:
-        1. Title block — full-width, always anchored to the left via paddingLeft.
-           Moving this does NOT affect the map/cities.
-        2. Cities+Map block — has its own maxWidth and margin, move independently.
-           marginLeft:auto + marginRight:0 pushes it to the right.
-      */}
       <section style={{ marginBottom: "clamp(80px, 11vw, 160px)" }}>
-
-        {/* ── BLOCK 1: Label + Title — independent, left-anchored ── */}
-        <div style={{ paddingLeft: "clamp(24px, 5vw, 80px)", marginBottom: "clamp(32px, 5vw, 56px)" }}>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewport}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(24px, 3vw, 40px)" }}
-          >
-            <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>
-              {tc.locationsLabel}
-            </span>
-            <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewport}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              fontSize: "clamp(2rem, 3.5vw, 4rem)",
-              fontWeight: 500,
-              lineHeight: 1.1,
-              color: "#1a1a2e",
-              margin: 0,
-              whiteSpace: "pre-line",
-            }}
-          >
-            {tc.locationsTitle}
-          </motion.h2>
-        </div>
-
-        {/* ── BLOCK 2: Cities + Map — independent, right-aligned ── */}
         <div
           ref={locationsGridRef}
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile || isTablet ? "1fr" : `1fr clamp(300px, 34vw, 480px)`,
-            gap: isMobile || isTablet ? "clamp(36px, 6vw, 56px)" : "clamp(36px, 4vw, 56px)",
+            gridTemplateColumns: isMobile
+              ? "1fr"
+              : isTablet
+              ? "1fr 1fr"
+              : "clamp(180px, 22vw, 320px) clamp(220px, 28vw, 380px) clamp(260px, 32vw, 460px)",
+            gap: isMobile ? "clamp(36px, 6vw, 56px)" : isTablet ? "clamp(28px, 4vw, 48px)" : "clamp(24px, 3vw, 40px)",
             alignItems: "center",
             position: "relative",
-            maxWidth: "1050px",
-            marginLeft: "auto",
-            marginRight: 0,
-            paddingLeft: "clamp(16px, 3vw, 48px)",
-            paddingRight: "clamp(16px, 3vw, 48px)",
+            maxWidth: "1400px",
+            margin: "0 auto",
+            paddingLeft: "clamp(20px, 5vw, 80px)",
+            paddingRight: "clamp(20px, 5vw, 80px)",
           }}
         >
-          {/* City list */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(28px, 4vw, 48px)" }}>
+          {/* ── Column 1: Label + Title ── */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewport}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(20px, 2.5vw, 36px)" }}
+            >
+              <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>
+                {tc.locationsLabel}
+              </span>
+              <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewport}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                fontSize: "clamp(2rem, 2.8vw, 3.5rem)",
+                fontWeight: 700,
+                lineHeight: 1.1,
+                color: "#1a1a2e",
+                margin: 0,
+                whiteSpace: "pre-line",
+              }}
+            >
+              {tc.locationsTitle}
+            </motion.h2>
+          </div>
+
+          {/* ── Column 2: City list ── */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(24px, 3.5vw, 44px)" }}>
             {tc.locations.map((loc, i) => (
               <motion.div
                 key={loc.city}
@@ -4132,21 +4126,31 @@ function ContactosPage() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={viewport}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }}
-                style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}
+                style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}
               >
-                <div style={{ flexShrink: 0, marginTop: "5px" }}>
-                  <MapPin size={26} style={{ color: "#F5A000", display: "block" }} fill="#F5A000" strokeWidth={1} />
-                </div>
-                <div>
-                  <h3 style={{ fontSize: "clamp(1.55rem, 1rem + 2.2vw, 2.4rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.025em", lineHeight: 1.05, margin: "0 0 8px" }}>
+                {/* Luanda (i===0) has no pin icon; others do */}
+                {i > 0 && (
+                  <div style={{ flexShrink: 0, marginTop: "4px" }}>
+                    <MapPin size={22} style={{ color: "#F5A000", display: "block" }} fill="#F5A000" strokeWidth={1} />
+                  </div>
+                )}
+                <div style={i === 0 ? {} : {}}>
+                  <h3 style={{
+                    fontSize: "clamp(1.3rem, 0.9rem + 1.8vw, 2rem)",
+                    fontWeight: 700,
+                    color: "#111111",
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1.05,
+                    margin: "0 0 6px",
+                  }}>
                     {loc.city.toUpperCase()}
                   </h3>
-                  <p style={{ fontSize: "clamp(0.76rem, 0.68rem + 0.3vw, 0.86rem)", color: "rgba(0,0,0,0.42)", margin: "0 0 6px", display: "flex", alignItems: "center", gap: "5px" }}>
+                  <p style={{ fontSize: "clamp(0.74rem, 0.66rem + 0.28vw, 0.84rem)", color: "rgba(0,0,0,0.42)", margin: "0 0 5px", display: "flex", alignItems: "center", gap: "5px" }}>
                     <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
                     {loc.address}
                   </p>
                   {(loc.phones as readonly string[]).map((phone) => (
-                    <p key={phone} style={{ fontSize: "clamp(0.84rem, 0.76rem + 0.3vw, 0.96rem)", color: "#111111", margin: "2px 0", fontWeight: 500 }}>
+                    <p key={phone} style={{ fontSize: "clamp(0.82rem, 0.74rem + 0.28vw, 0.94rem)", color: "#111111", margin: "2px 0", fontWeight: 500 }}>
                       {phone}
                     </p>
                   ))}
@@ -4155,7 +4159,7 @@ function ContactosPage() {
             ))}
           </div>
 
-          {/* Angola Map */}
+          {/* ── Column 3: Angola Map ── */}
           <div ref={mapDivRef}>
             <AngolaMap />
           </div>
