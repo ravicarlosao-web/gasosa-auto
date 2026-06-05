@@ -69,6 +69,8 @@ export function ContactosPage() {
 
   const isMobile = winW < 640;
   const isTablet = winW >= 640 && winW < 1024;
+  const isDesktop = winW >= 1024;
+  const useLines = !isMobile;
 
   const viewport = { once: true, amount: 0.12 } as const;
   const PAD = { paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" };
@@ -219,104 +221,211 @@ export function ContactosPage() {
 
       {/* ── Locations ── */}
       <section style={{ marginBottom: "clamp(80px, 11vw, 160px)" }}>
-        <div
-          ref={locationsGridRef}
-          style={{
-            display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr 1fr" : "clamp(180px, 22vw, 320px) clamp(220px, 28vw, 380px) clamp(260px, 32vw, 460px)",
-            gap: isMobile ? "clamp(36px, 6vw, 56px)" : isTablet ? "clamp(28px, 4vw, 48px)" : "clamp(24px, 3vw, 40px)",
-            alignItems: "start",
-            position: "relative",
-            maxWidth: "1400px",
-            margin: "0 auto",
-            paddingLeft: "clamp(20px, 5vw, 80px)",
-            paddingRight: "clamp(20px, 5vw, 80px)",
-          }}
-        >
-          {/* Column 1: Title */}
-          <div>
+
+        {/* ─ Mobile: map full-width at top, then title + contact list ─ */}
+        {isMobile && (
+          <div style={{ paddingLeft: "clamp(20px, 5vw, 40px)", paddingRight: "clamp(20px, 5vw, 40px)", maxWidth: "1400px", margin: "0 auto" }}>
+            {/* Map */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewport}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              style={{ marginBottom: "clamp(32px, 6vw, 52px)" }}
+            >
+              <AngolaMap />
+            </motion.div>
+
+            {/* Title */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewport}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(16px, 2vw, 28px)" }}
+              style={{ marginBottom: "clamp(24px, 4vw, 36px)" }}
             >
-              <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>{tc.locationsLabel}</span>
-              <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+                <span style={{ fontSize: "0.75rem", fontWeight: 500, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em" }}>{tc.locationsLabel}</span>
+                <span style={{ fontSize: "0.8rem", color: "rgba(0,0,0,0.3)" }}>↓</span>
+              </div>
+              <h2 style={{ fontSize: "clamp(1.7rem, 7vw, 2.6rem)", fontWeight: 500, lineHeight: 1.1, color: "#1a1a2e", margin: 0, whiteSpace: "pre-line" }}>
+                {tc.locationsTitle}
+              </h2>
             </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewport}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              style={{ fontSize: "clamp(2rem, 2.8vw, 3.5rem)", fontWeight: 500, lineHeight: 1.1, color: "#1a1a2e", margin: 0, whiteSpace: "pre-line" }}
-            >
-              {tc.locationsTitle}
-            </motion.h2>
-          </div>
 
-          {/* Column 2: Cities — absolutely positioned to align with map provinces */}
-          <div style={{
-            position: "relative",
-            height: !isMobile && !isTablet && mapHeight > 0 ? `${mapHeight}px` : "auto",
-            display: isMobile || isTablet ? "flex" : "block",
-            flexDirection: "column",
-            gap: isMobile || isTablet ? "clamp(24px, 3.5vw, 44px)" : undefined,
-          }}>
-            {tc.locations.map((loc, i) => {
-              const topPct = MAP_CITIES[i].cy / MAP_SVG_H * 100;
-              return (
+            {/* Contacts list */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "clamp(22px, 5vw, 32px)" }}>
+              {tc.locations.map((loc, i) => (
                 <motion.div
                   key={loc.city}
-                  ref={(el: HTMLDivElement | null) => { entryRefs.current[i] = el; }}
-                  initial={{ opacity: 0, x: -28 }}
+                  initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={viewport}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }}
-                  style={{
-                    position: !isMobile && !isTablet && mapHeight > 0 ? "absolute" : "relative",
-                    top: !isMobile && !isTablet && mapHeight > 0 ? `${topPct}%` : "auto",
-                    transform: !isMobile && !isTablet && mapHeight > 0 ? "translateY(-50%)" : "none",
-                    display: "flex", alignItems: "flex-start", gap: "12px",
-                  }}
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
+                  style={{ display: "flex", alignItems: "flex-start", gap: "10px", paddingBottom: "clamp(20px, 5vw, 28px)", borderBottom: i < tc.locations.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none" }}
                 >
                   <div style={{ flexShrink: 0, marginTop: "3px" }}>
-                    <MapPin size={20} style={{ color: "#F5A000", display: "block" }} fill="#F5A000" strokeWidth={1} />
+                    <MapPin size={18} style={{ color: "#F5A000", display: "block" }} fill="#F5A000" strokeWidth={1} />
                   </div>
                   <div>
-                    <h3 style={{ fontSize: "clamp(1.3rem, 0.9rem + 1.8vw, 2rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.05, margin: "0 0 6px" }}>
+                    <h3 style={{ fontSize: "clamp(1.1rem, 5vw, 1.4rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.1, margin: "0 0 5px" }}>
                       {loc.city.toUpperCase()}
                     </h3>
-                    <p style={{ fontSize: "clamp(0.74rem, 0.66rem + 0.28vw, 0.84rem)", color: "rgba(0,0,0,0.42)", margin: "0 0 5px", display: "flex", alignItems: "center", gap: "5px" }}>
+                    <p style={{ fontSize: "0.8rem", color: "rgba(0,0,0,0.42)", margin: "0 0 4px", display: "flex", alignItems: "center", gap: "5px" }}>
                       <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
                       {loc.address}
                     </p>
                     {(loc.phones as readonly string[]).map((phone) => (
-                      <p key={phone} style={{ fontSize: "clamp(0.82rem, 0.74rem + 0.28vw, 0.94rem)", color: "#111111", margin: "2px 0", fontWeight: 500 }}>
-                        {phone}
-                      </p>
+                      <p key={phone} style={{ fontSize: "0.85rem", color: "#111111", margin: "2px 0", fontWeight: 500 }}>{phone}</p>
                     ))}
                   </div>
                 </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Column 3: Map */}
-          <div ref={mapDivRef}>
-            <AngolaMap />
-          </div>
-
-          {/* Connector lines — horizontal dashed, from card right edge to province dot */}
-          {!isMobile && !isTablet && connectorLines.length > 0 && (
-            <svg style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", overflow: "visible" }} aria-hidden="true">
-              {connectorLines.map((line, i) => (
-                <line key={i} x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} stroke="#F5A000" strokeWidth="1.5" strokeDasharray="5 4" strokeOpacity="0.7" />
               ))}
-            </svg>
-          )}
-        </div>
+            </div>
+          </div>
+        )}
+
+        {/* ─ Tablet & Desktop: contacts + map side-by-side with lines ─ */}
+        {!isMobile && (
+          <div style={{ maxWidth: "1400px", margin: "0 auto", paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" }}>
+
+            {/* Title above grid on tablet; inline on desktop */}
+            {isTablet && (
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={viewport}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                style={{ marginBottom: "clamp(28px, 4vw, 44px)" }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
+                  <span style={{ fontSize: "0.78rem", fontWeight: 500, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em" }}>{tc.locationsLabel}</span>
+                  <span style={{ fontSize: "0.82rem", color: "rgba(0,0,0,0.3)" }}>↓</span>
+                </div>
+                <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 500, lineHeight: 1.1, color: "#1a1a2e", margin: 0, whiteSpace: "pre-line" }}>
+                  {tc.locationsTitle}
+                </h2>
+              </motion.div>
+            )}
+
+            {/* Grid: [title col on desktop] [contacts col] [map col] */}
+            <div
+              ref={locationsGridRef}
+              style={{
+                display: "grid",
+                gridTemplateColumns: isDesktop
+                  ? "clamp(160px, 18vw, 260px) clamp(180px, 22vw, 300px) 1fr"
+                  : "clamp(160px, 30vw, 280px) 1fr",
+                gap: isDesktop ? "clamp(20px, 2.5vw, 36px)" : "clamp(16px, 2.5vw, 32px)",
+                alignItems: "start",
+                position: "relative",
+              }}
+            >
+              {/* Desktop title column */}
+              {isDesktop && (
+                <div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={viewport}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(14px, 1.8vw, 24px)" }}
+                  >
+                    <span style={{ fontSize: "0.78rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>{tc.locationsLabel}</span>
+                    <span style={{ fontSize: "0.82rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
+                  </motion.div>
+                  <motion.h2
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={viewport}
+                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    style={{ fontSize: "clamp(1.8rem, 2.4vw, 3rem)", fontWeight: 500, lineHeight: 1.1, color: "#1a1a2e", margin: 0, whiteSpace: "pre-line" }}
+                  >
+                    {tc.locationsTitle}
+                  </motion.h2>
+                </div>
+              )}
+
+              {/* Contacts column — absolutely positioned to align with map dots */}
+              <div style={{
+                position: "relative",
+                height: mapHeight > 0 ? `${mapHeight}px` : "auto",
+              }}>
+                {tc.locations.map((loc, i) => {
+                  const topPct = MAP_CITIES[i].cy / MAP_SVG_H * 100;
+                  const isAbsolute = mapHeight > 0;
+                  return (
+                    <motion.div
+                      key={loc.city}
+                      ref={(el: HTMLDivElement | null) => { entryRefs.current[i] = el; }}
+                      initial={{ opacity: 0, x: -24 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={viewport}
+                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }}
+                      style={{
+                        position: isAbsolute ? "absolute" : "relative",
+                        top: isAbsolute ? `${topPct}%` : "auto",
+                        transform: isAbsolute ? "translateY(-50%)" : "none",
+                        display: "flex", alignItems: "flex-start", gap: "10px",
+                      }}
+                    >
+                      <div style={{ flexShrink: 0, marginTop: "3px" }}>
+                        <MapPin
+                          size={isTablet ? 16 : 20}
+                          style={{ color: "#F5A000", display: "block" }}
+                          fill="#F5A000"
+                          strokeWidth={1}
+                        />
+                      </div>
+                      <div>
+                        <h3 style={{
+                          fontSize: isTablet ? "clamp(0.95rem, 2vw, 1.3rem)" : "clamp(1.1rem, 1.5vw, 1.7rem)",
+                          fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.1, margin: "0 0 5px",
+                        }}>
+                          {loc.city.toUpperCase()}
+                        </h3>
+                        <p style={{ fontSize: isTablet ? "0.72rem" : "clamp(0.72rem, 0.62rem + 0.28vw, 0.82rem)", color: "rgba(0,0,0,0.42)", margin: "0 0 3px", display: "flex", alignItems: "center", gap: "4px" }}>
+                          <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
+                          {loc.address}
+                        </p>
+                        {(loc.phones as readonly string[]).map((phone) => (
+                          <p key={phone} style={{ fontSize: isTablet ? "0.78rem" : "clamp(0.8rem, 0.72rem + 0.22vw, 0.92rem)", color: "#111111", margin: "1px 0", fontWeight: 500 }}>
+                            {phone}
+                          </p>
+                        ))}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Map column */}
+              <div ref={mapDivRef}>
+                <AngolaMap />
+              </div>
+
+              {/* Connector lines — horizontal dashed */}
+              {connectorLines.length > 0 && (
+                <svg
+                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", overflow: "visible" }}
+                  aria-hidden="true"
+                >
+                  {connectorLines.map((line, i) => (
+                    <line
+                      key={i}
+                      x1={line.x1} y1={line.y1}
+                      x2={line.x2} y2={line.y2}
+                      stroke="#F5A000"
+                      strokeWidth={isTablet ? "1.2" : "1.5"}
+                      strokeDasharray="5 4"
+                      strokeOpacity="0.7"
+                    />
+                  ))}
+                </svg>
+              )}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* ── Contact form ── */}
