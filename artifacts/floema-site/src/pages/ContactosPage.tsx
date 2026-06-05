@@ -24,6 +24,7 @@ export function ContactosPage() {
   const locationsGridRef = useRef<HTMLDivElement | null>(null);
   const [connectorLines, setConnectorLines] = useState<{x1:number;y1:number;x2:number;y2:number}[]>([]);
   const [mapHeight, setMapHeight] = useState(0);
+  const [cardScale, setCardScale] = useState(1);
 
   const MAP_SVG_W = 612.3866;
   const MAP_SVG_H = 684.8916;
@@ -45,6 +46,16 @@ export function ContactosPage() {
       const gridRect = locationsGridRef.current.getBoundingClientRect();
       const mapRect  = mapDivRef.current.getBoundingClientRect();
       setMapHeight(mapRect.height);
+
+      // Dynamic card scale: grow cards when vertical gap between provinces is larger
+      const minGapFrac = Math.min(
+        (MAP_CITIES[1].cy - MAP_CITIES[0].cy) / MAP_SVG_H,
+        (MAP_CITIES[2].cy - MAP_CITIES[1].cy) / MAP_SVG_H,
+      );
+      const minGapPx = minGapFrac * mapRect.height;
+      const scale = Math.max(0.72, Math.min(1.75, minGapPx / 95));
+      setCardScale(scale);
+
       const newLines = MAP_CITIES.map((city, i) => {
         const entry = entryRefs.current[i];
         if (!entry) return null;
@@ -346,7 +357,7 @@ export function ContactosPage() {
                 </div>
               )}
 
-              {/* Contacts column — absolutely positioned to align with map dots */}
+              {/* Contacts column — absolutely positioned, font scales with available gap */}
               <div style={{
                 position: "relative",
                 height: mapHeight > 0 ? `${mapHeight}px` : "auto",
@@ -354,6 +365,17 @@ export function ContactosPage() {
                 {tc.locations.map((loc, i) => {
                   const topPct = MAP_CITIES[i].cy / MAP_SVG_H * 100;
                   const isAbsolute = mapHeight > 0;
+
+                  // Base sizes × cardScale so content grows with available space
+                  const baseCity    = isTablet ? 13   : 16;
+                  const baseAddress = isTablet ? 10.5 : 12;
+                  const basePhone   = isTablet ? 11   : 13;
+                  const baseIcon    = isTablet ? 14   : 18;
+                  const baseGap     = isTablet ? 8    : 10;
+                  const baseDot     = isTablet ? 4    : 5;
+
+                  const sz = (base: number) => `${(base * cardScale).toFixed(1)}px`;
+
                   return (
                     <motion.div
                       key={loc.city}
@@ -366,12 +388,14 @@ export function ContactosPage() {
                         position: isAbsolute ? "absolute" : "relative",
                         top: isAbsolute ? `${topPct}%` : "auto",
                         transform: isAbsolute ? "translateY(-50%)" : "none",
-                        display: "flex", alignItems: "flex-start", gap: "10px",
+                        display: "flex",
+                        alignItems: "flex-start",
+                        gap: sz(baseGap),
                       }}
                     >
                       <div style={{ flexShrink: 0, marginTop: "3px" }}>
                         <MapPin
-                          size={isTablet ? 16 : 20}
+                          size={Math.round(baseIcon * cardScale)}
                           style={{ color: "#F5A000", display: "block" }}
                           fill="#F5A000"
                           strokeWidth={1}
@@ -379,17 +403,40 @@ export function ContactosPage() {
                       </div>
                       <div>
                         <h3 style={{
-                          fontSize: isTablet ? "clamp(0.95rem, 2vw, 1.3rem)" : "clamp(1.1rem, 1.5vw, 1.7rem)",
-                          fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.1, margin: "0 0 5px",
+                          fontSize: sz(baseCity),
+                          fontWeight: 700,
+                          color: "#111111",
+                          letterSpacing: "-0.02em",
+                          lineHeight: 1.1,
+                          margin: `0 0 ${sz(baseGap * 0.5)}`,
                         }}>
                           {loc.city.toUpperCase()}
                         </h3>
-                        <p style={{ fontSize: isTablet ? "0.72rem" : "clamp(0.72rem, 0.62rem + 0.28vw, 0.82rem)", color: "rgba(0,0,0,0.42)", margin: "0 0 3px", display: "flex", alignItems: "center", gap: "4px" }}>
-                          <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
+                        <p style={{
+                          fontSize: sz(baseAddress),
+                          color: "rgba(0,0,0,0.42)",
+                          margin: `0 0 ${sz(baseDot)}`,
+                          display: "flex",
+                          alignItems: "center",
+                          gap: sz(baseDot),
+                        }}>
+                          <span style={{
+                            width: sz(baseDot),
+                            height: sz(baseDot),
+                            borderRadius: "50%",
+                            background: "#F5A000",
+                            display: "inline-block",
+                            flexShrink: 0,
+                          }} />
                           {loc.address}
                         </p>
                         {(loc.phones as readonly string[]).map((phone) => (
-                          <p key={phone} style={{ fontSize: isTablet ? "0.78rem" : "clamp(0.8rem, 0.72rem + 0.22vw, 0.92rem)", color: "#111111", margin: "1px 0", fontWeight: 500 }}>
+                          <p key={phone} style={{
+                            fontSize: sz(basePhone),
+                            color: "#111111",
+                            margin: `${sz(2)} 0`,
+                            fontWeight: 500,
+                          }}>
                             {phone}
                           </p>
                         ))}
