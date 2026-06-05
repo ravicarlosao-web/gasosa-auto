@@ -22,14 +22,14 @@ export function ContactosPage() {
   const entryRefs = useRef<(HTMLDivElement | null)[]>([]);
   const mapDivRef = useRef<HTMLDivElement | null>(null);
   const locationsGridRef = useRef<HTMLDivElement | null>(null);
-  const [connectorLines, setConnectorLines] = useState<{x1:number;y1:number;x2:number;y2:number}[]>([]);
+  const [connectorLines, setConnectorLines] = useState<{x1:number;y1:number;x2:number;y2:number;mx:number}[]>([]);
 
   const MAP_SVG_W = 612.3866;
   const MAP_SVG_H = 684.8916;
   const MAP_CITIES = [
-    { cx: 77,  cy: 230 },
-    { cx: 201, cy: 420 },
-    { cx: 90,  cy: 528 },
+    { cx: 81,  cy: 228 },
+    { cx: 199, cy: 408 },
+    { cx: 163, cy: 522 },
   ];
 
   useEffect(() => {
@@ -49,13 +49,16 @@ export function ContactosPage() {
         const r = entry.getBoundingClientRect();
         const provinceX = mapRect.left - gridRect.left + (city.cx / MAP_SVG_W) * mapRect.width;
         const provinceY = mapRect.top  - gridRect.top  + (city.cy / MAP_SVG_H) * mapRect.height;
+        const cardCenterY = r.top - gridRect.top + r.height / 2;
+        const midX = r.right - gridRect.left + (provinceX - (r.right - gridRect.left)) * 0.45;
         return {
           x1: r.right - gridRect.left,
-          y1: provinceY,
+          y1: cardCenterY,
           x2: provinceX,
           y2: provinceY,
+          mx: midX,
         };
-      }).filter(Boolean) as {x1:number;y1:number;x2:number;y2:number}[];
+      }).filter(Boolean) as {x1:number;y1:number;x2:number;y2:number;mx:number}[];
       setConnectorLines(newLines);
     };
     calculate();
@@ -297,9 +300,16 @@ export function ContactosPage() {
           {/* Connector lines */}
           {!isMobile && !isTablet && connectorLines.length > 0 && (
             <svg style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", overflow: "visible" }} aria-hidden="true">
-              {connectorLines.map((line, i) => (
-                <line key={i} x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} stroke="#F5A000" strokeWidth="1.5" strokeDasharray="5 4" strokeOpacity="0.7" />
-              ))}
+              {connectorLines.map((line, i) => {
+                const cp1x = line.x1 + (line.x2 - line.x1) * 0.5;
+                const cp1y = line.y1;
+                const cp2x = line.x1 + (line.x2 - line.x1) * 0.5;
+                const cp2y = line.y2;
+                const d = `M ${line.x1},${line.y1} C ${cp1x},${cp1y} ${cp2x},${cp2y} ${line.x2},${line.y2}`;
+                return (
+                  <path key={i} d={d} fill="none" stroke="#F5A000" strokeWidth="1.5" strokeDasharray="5 4" strokeOpacity="0.75" />
+                );
+              })}
             </svg>
           )}
         </div>

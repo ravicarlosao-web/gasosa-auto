@@ -20,9 +20,9 @@ export function AngolaMap() {
     );
 
   const cities = [
-    { id: "Luanda",  cx: 77,  cy: 230, label: "LUANDA",  pillW: 74 },
-    { id: "Huambo",  cx: 201, cy: 420, label: "HUAMBO",  pillW: 78 },
-    { id: "Lubango", cx: 90,  cy: 528, label: "HUÍLA",   pillW: 66 },
+    { id: "Luanda",  cx: 81,  cy: 228, label: "LUANDA",  pillW: 74 },
+    { id: "Huambo",  cx: 199, cy: 408, label: "HUAMBO",  pillW: 78 },
+    { id: "Lubango", cx: 163, cy: 522, label: "HUÍLA",   pillW: 66 },
   ] as const;
 
   return (
