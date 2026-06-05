@@ -191,7 +191,7 @@ export function ContactosPage() {
         <div style={{ borderTop: "1.5px solid rgba(0,0,0,0.1)" }}>
           <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: "stretch" }}>
             <motion.a
-              href="mailto:geral@gasosaautoagro.ao"
+              href="mailto:geral@cfagasosa.com"
               initial={{ opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewport}
@@ -206,7 +206,7 @@ export function ContactosPage() {
               }}
               whileHover={{ color: "#003591" }}
             >
-              geral@gasosaautoagro.ao
+              geral@cfagasosa.com
             </motion.a>
 
             <motion.a
@@ -516,13 +516,13 @@ export function ContactosPage() {
               style={{ display: "flex", flexDirection: "column", gap: "16px" }}
             >
               <a
-                href="mailto:geral@gasosaautoagro.ao"
+                href="mailto:geral@cfagasosa.com"
                 style={{ display: "flex", alignItems: "center", gap: "12px", color: "rgba(255,255,255,0.55)", textDecoration: "none", fontSize: "clamp(0.82rem, 0.75rem + 0.3vw, 0.95rem)", transition: "color 0.2s" }}
                 onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#ffffff")}
                 onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)")}
               >
                 <span style={{ width: "36px", height: "36px", borderRadius: "50%", background: "rgba(255,255,255,0.08)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>✉</span>
-                geral@gasosaautoagro.ao
+                geral@cfagasosa.com
               </a>
               <a
                 href="tel:+244951025435"
