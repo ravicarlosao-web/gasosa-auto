@@ -4073,9 +4073,9 @@ function ContactosPage() {
               ? "1fr"
               : isTablet
               ? "1fr 1fr"
-              : "clamp(220px, 28vw, 380px) clamp(260px, 32vw, 460px)",
+              : "clamp(180px, 22vw, 320px) clamp(220px, 28vw, 380px) clamp(260px, 32vw, 460px)",
             gap: isMobile ? "clamp(36px, 6vw, 56px)" : isTablet ? "clamp(28px, 4vw, 48px)" : "clamp(24px, 3vw, 40px)",
-            alignItems: "center",
+            alignItems: "end",
             position: "relative",
             maxWidth: "1400px",
             margin: "0 auto",
@@ -4083,7 +4083,39 @@ function ContactosPage() {
             paddingRight: "clamp(20px, 5vw, 80px)",
           }}
         >
-          {/* ── Column 1: City list ── */}
+          {/* ── Column 1: Label + Title (bottom-aligned) ── */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewport}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(16px, 2vw, 28px)" }}
+            >
+              <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>
+                {tc.locationsLabel}
+              </span>
+              <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={viewport}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                fontSize: "clamp(2rem, 2.8vw, 3.5rem)",
+                fontWeight: 500,
+                lineHeight: 1.1,
+                color: "#1a1a2e",
+                margin: 0,
+                whiteSpace: "pre-line",
+              }}
+            >
+              {tc.locationsTitle}
+            </motion.h2>
+          </div>
+
+          {/* ── Column 2: City list ── */}
           <div style={{ display: "flex", flexDirection: "column", gap: "clamp(24px, 3.5vw, 44px)" }}>
             {tc.locations.map((loc, i) => (
               <motion.div
@@ -4101,7 +4133,7 @@ function ContactosPage() {
                     <MapPin size={22} style={{ color: "#F5A000", display: "block" }} fill="#F5A000" strokeWidth={1} />
                   </div>
                 )}
-                <div style={i === 0 ? {} : {}}>
+                <div>
                   <h3 style={{
                     fontSize: "clamp(1.3rem, 0.9rem + 1.8vw, 2rem)",
                     fontWeight: 700,
@@ -4126,7 +4158,7 @@ function ContactosPage() {
             ))}
           </div>
 
-          {/* ── Column 2: Angola Map ── */}
+          {/* ── Column 3: Angola Map ── */}
           <div ref={mapDivRef}>
             <AngolaMap />
           </div>
@@ -4139,45 +4171,6 @@ function ContactosPage() {
               ))}
             </svg>
           )}
-        </div>
-
-        {/* ── Title below the grid ── */}
-        <div style={{
-          maxWidth: "1400px",
-          margin: "0 auto",
-          paddingLeft: "clamp(20px, 5vw, 80px)",
-          paddingRight: "clamp(20px, 5vw, 80px)",
-          marginTop: "clamp(36px, 5vw, 64px)",
-        }}>
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewport}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(16px, 2vw, 28px)" }}
-          >
-            <span style={{ fontSize: "0.8rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>
-              {tc.locationsLabel}
-            </span>
-            <span style={{ fontSize: "0.85rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewport}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              fontSize: "clamp(2rem, 2.8vw, 3.5rem)",
-              fontWeight: 500,
-              lineHeight: 1.1,
-              color: "#1a1a2e",
-              margin: 0,
-              whiteSpace: "pre-line",
-            }}
-          >
-            {tc.locationsTitle}
-          </motion.h2>
         </div>
       </section>
 
