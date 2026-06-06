@@ -15,6 +15,14 @@ const MUTED   = "rgba(0,0,0,0.45)";
 const FAINT   = "rgba(0,0,0,0.28)";
 const DIVIDER = "rgba(0,0,0,0.08)";
 
+const NAV_ROUTES = [
+  "/#quem-somos",
+  "/pangulino",
+  "/infraestruturas",
+  "/noticias",
+  "/contactos",
+];
+
 const BRANDS = [
   { src: brand55,   alt: "55"       },
   { src: brandPang, alt: "Pangulino" },
@@ -83,16 +91,16 @@ export function Footer() {
             {f.navLabel}
           </h4>
           <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
-            {f.navLinks.map((link) => (
+            {f.navLinks.map((link, i) => (
               <li key={link}>
-                <a
-                  href="#"
+                <Link
+                  href={NAV_ROUTES[i] ?? "/"}
                   style={{ fontSize: "0.88rem", color: MUTED, textDecoration: "none", transition: "color 0.2s" }}
-                  onMouseEnter={e => (e.currentTarget.style.color = TEXT)}
-                  onMouseLeave={e => (e.currentTarget.style.color = MUTED)}
+                  onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = TEXT)}
+                  onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = MUTED)}
                 >
                   {link}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
