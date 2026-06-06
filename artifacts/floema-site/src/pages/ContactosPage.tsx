@@ -37,10 +37,13 @@ export function ContactosPage() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const isMobile = winW < 640;
+  /* ── Breakpoints ── */
+  const isMobile  = winW < 640;
+  const isTablet  = winW >= 640 && winW < 1024;
+  const isDesktop = winW >= 1024;
 
   const viewport = { once: true, amount: 0.12 } as const;
-  const PAD = { paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" };
+  const PAD  = { paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" };
   const WRAP = { maxWidth: "1400px", margin: "0 auto", ...PAD };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -53,12 +56,7 @@ export function ContactosPage() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
-          body: JSON.stringify({
-            name: form.name,
-            email: form.email,
-            subject: form.subject,
-            message: form.message,
-          }),
+          body: JSON.stringify(form),
         }
       );
       if (res.ok) {
@@ -76,15 +74,15 @@ export function ContactosPage() {
 
   const inputStyle: React.CSSProperties = {
     width: "100%",
-    background: "rgba(0,0,0,0.05)",
+    background: "rgba(255,255,255,0.92)",
     border: "1.5px solid transparent",
     borderRadius: "10px",
-    padding: "14px 18px",
-    fontSize: "clamp(0.82rem, 0.75rem + 0.3vw, 0.95rem)",
+    padding: isMobile ? "15px 16px" : "14px 18px",
+    fontSize: "clamp(0.85rem, 0.78rem + 0.3vw, 0.96rem)",
     fontFamily: "'Poppins', sans-serif",
     color: "#111111",
     outline: "none",
-    transition: "border-color 0.2s",
+    transition: "border-color 0.2s, background 0.2s",
     boxSizing: "border-box",
   };
 
@@ -105,7 +103,7 @@ export function ContactosPage() {
           }}
         >
           <Link href="/" className="flex items-center">
-            <NavLogo style={{ height: "clamp(38px, 5.5vw, 58px)" }} />
+            <NavLogo style={{ height: "clamp(34px, 5vw, 54px)" }} />
           </Link>
           <nav className="hidden lg:flex items-center gap-3">
             <div className="flex items-center gap-0.5">
@@ -129,12 +127,19 @@ export function ContactosPage() {
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
       {/* ── Hero ── */}
-      <section style={{ paddingTop: "clamp(140px, 20vh, 220px)", paddingBottom: "clamp(64px, 8vw, 112px)", textAlign: "center", ...PAD }}>
+      <section
+        style={{
+          paddingTop: "clamp(120px, 18vh, 200px)",
+          paddingBottom: "clamp(48px, 7vw, 96px)",
+          textAlign: "center",
+          ...PAD,
+        }}
+      >
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 200, damping: 28 }}
-          style={{ fontSize: "0.78rem", fontWeight: 500, letterSpacing: "0.14em", color: "rgba(0,0,0,0.4)", marginBottom: "28px" }}
+          style={{ fontSize: "0.75rem", fontWeight: 500, letterSpacing: "0.14em", color: "rgba(0,0,0,0.4)", marginBottom: "20px" }}
         >
           {tc.pageLabel}
         </motion.p>
@@ -143,7 +148,15 @@ export function ContactosPage() {
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 90, damping: 22, delay: 0.07 }}
-          style={{ fontSize: "clamp(2.4rem, 1.4rem + 4.2vw, 5.5rem)", fontWeight: 500, color: "#111111", lineHeight: 1.08, letterSpacing: "-0.03em", margin: "0 auto 28px", maxWidth: "900px" }}
+          style={{
+            fontSize: "clamp(2rem, 1.2rem + 4.5vw, 5.5rem)",
+            fontWeight: 500,
+            color: "#111111",
+            lineHeight: 1.08,
+            letterSpacing: "-0.03em",
+            margin: "0 auto 20px",
+            maxWidth: "860px",
+          }}
         >
           {tc.pageTitle}
         </motion.h1>
@@ -152,26 +165,38 @@ export function ContactosPage() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", stiffness: 140, damping: 24, delay: 0.16 }}
-          style={{ fontSize: "clamp(0.88rem, 0.76rem + 0.5vw, 1.08rem)", color: "rgba(0,0,0,0.52)", lineHeight: 1.65, maxWidth: "540px", margin: "0 auto" }}
+          style={{
+            fontSize: "clamp(0.85rem, 0.76rem + 0.5vw, 1.05rem)",
+            color: "rgba(0,0,0,0.52)",
+            lineHeight: 1.65,
+            maxWidth: "500px",
+            margin: "0 auto",
+          }}
         >
           {tc.pageSubtitle}
         </motion.p>
       </section>
 
       {/* ── Direct contact bar ── */}
-      <div style={{ ...WRAP, marginBottom: "clamp(72px, 10vw, 140px)" }}>
+      <div style={{ ...WRAP, marginBottom: "clamp(56px, 9vw, 120px)" }}>
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewport}
           transition={{ duration: 0.45, ease: "easeOut" }}
-          style={{ fontSize: "0.73rem", fontWeight: 500, letterSpacing: "0.13em", color: "rgba(0,0,0,0.36)", textTransform: "uppercase", marginBottom: "20px" }}
+          style={{ fontSize: "0.7rem", fontWeight: 500, letterSpacing: "0.13em", color: "rgba(0,0,0,0.36)", textTransform: "uppercase", marginBottom: "16px" }}
         >
           {tc.directLabel}
         </motion.p>
 
         <div style={{ borderTop: "1.5px solid rgba(0,0,0,0.1)" }}>
-          <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", alignItems: "stretch" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: isMobile ? "column" : "row",
+              alignItems: "stretch",
+            }}
+          >
             <motion.a
               href="mailto:geral@cfagasosa.com"
               initial={{ opacity: 0, y: 14 }}
@@ -179,12 +204,26 @@ export function ContactosPage() {
               viewport={viewport}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.04 }}
               style={{
-                flex: 1, display: "block", padding: "clamp(24px, 3.5vw, 44px) 0",
-                fontSize: "clamp(1.05rem, 0.7rem + 2vw, 2rem)", fontWeight: 500,
-                color: "#111111", textDecoration: "none", letterSpacing: "-0.025em",
+                flex: 1,
+                display: "block",
+                padding: isMobile
+                  ? "clamp(18px, 4vw, 28px) 0"
+                  : "clamp(20px, 3vw, 36px) 0",
+                fontSize: isMobile
+                  ? "clamp(0.95rem, 4.5vw, 1.35rem)"
+                  : isTablet
+                  ? "clamp(1.1rem, 2.5vw, 1.6rem)"
+                  : "clamp(1.2rem, 1.8vw, 2rem)",
+                fontWeight: 500,
+                color: "#111111",
+                textDecoration: "none",
+                letterSpacing: "-0.02em",
                 borderBottom: isMobile ? "1px solid rgba(0,0,0,0.08)" : "none",
                 borderRight: isMobile ? "none" : "1px solid rgba(0,0,0,0.1)",
                 transition: "color 0.2s",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: isMobile ? "normal" : "nowrap",
               }}
               whileHover={{ color: "#003591" }}
             >
@@ -198,10 +237,24 @@ export function ContactosPage() {
               viewport={viewport}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
               style={{
-                flex: isMobile ? "none" : "0 0 auto", display: "block",
-                padding: isMobile ? "clamp(20px, 3vw, 36px) 0" : "clamp(24px, 3.5vw, 44px) 0 clamp(24px, 3.5vw, 44px) clamp(28px, 4vw, 56px)",
-                fontSize: "clamp(1.05rem, 0.7rem + 2vw, 2rem)", fontWeight: 500,
-                color: "#111111", textDecoration: "none", letterSpacing: "-0.025em", transition: "color 0.2s",
+                flexShrink: 0,
+                display: "block",
+                padding: isMobile
+                  ? "clamp(16px, 3.5vw, 24px) 0"
+                  : isTablet
+                  ? "clamp(20px, 3vw, 36px) 0 clamp(20px, 3vw, 36px) clamp(20px, 3vw, 36px)"
+                  : "clamp(20px, 3vw, 36px) 0 clamp(20px, 3vw, 36px) clamp(28px, 4vw, 48px)",
+                fontSize: isMobile
+                  ? "clamp(0.95rem, 4.5vw, 1.35rem)"
+                  : isTablet
+                  ? "clamp(1.1rem, 2.5vw, 1.6rem)"
+                  : "clamp(1.2rem, 1.8vw, 2rem)",
+                fontWeight: 500,
+                color: "#111111",
+                textDecoration: "none",
+                letterSpacing: "-0.02em",
+                transition: "color 0.2s",
+                whiteSpace: "nowrap",
               }}
               whileHover={{ color: "#003591" }}
             >
@@ -213,18 +266,22 @@ export function ContactosPage() {
       </div>
 
       {/* ── Locations ── */}
-      <section style={{ marginBottom: "clamp(80px, 11vw, 160px)" }}>
+      <section style={{ marginBottom: "clamp(64px, 10vw, 140px)" }}>
         <div style={{ maxWidth: "1400px", margin: "0 auto", paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" }}>
 
-          {/* Mobile: map on top, title + cards below */}
-          {isMobile ? (
+          {/* Mobile & Tablet: stacked — map → title → cards */}
+          {!isDesktop ? (
             <>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewport}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                style={{ marginBottom: "clamp(32px, 6vw, 48px)" }}
+                style={{
+                  marginBottom: "clamp(32px, 5vw, 52px)",
+                  maxWidth: isTablet ? "480px" : "100%",
+                  margin: isTablet ? "0 auto clamp(32px,5vw,52px)" : undefined,
+                }}
               >
                 <AngolaMap />
               </motion.div>
@@ -234,15 +291,17 @@ export function ContactosPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewport}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                style={{ marginBottom: "clamp(24px, 4vw, 36px)" }}
+                style={{ marginBottom: "clamp(20px, 3.5vw, 32px)" }}
               >
-                <span style={{ fontSize: "0.75rem", fontWeight: 500, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em", display: "block", marginBottom: "10px" }}>{tc.locationsLabel}</span>
-                <h2 style={{ fontSize: "clamp(1.7rem, 7vw, 2.6rem)", fontWeight: 500, lineHeight: 1.1, color: "#1a1a2e", margin: 0 }}>
+                <span style={{ fontSize: "0.73rem", fontWeight: 500, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em", display: "block", marginBottom: "10px" }}>
+                  {tc.locationsLabel}
+                </span>
+                <h2 style={{ fontSize: isTablet ? "clamp(1.8rem, 3.5vw, 2.6rem)" : "clamp(1.6rem, 7vw, 2.4rem)", fontWeight: 500, lineHeight: 1.1, color: "#1a1a2e", margin: 0 }}>
                   {tc.locationsTitle}
                 </h2>
               </motion.div>
 
-              <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ display: isTablet ? "grid" : "flex", gridTemplateColumns: isTablet ? "repeat(3, 1fr)" : undefined, flexDirection: isMobile ? "column" : undefined, gap: isTablet ? "clamp(16px, 3vw, 28px)" : undefined }}>
                 {tc.locations.map((loc, i) => (
                   <motion.div
                     key={loc.city}
@@ -254,21 +313,23 @@ export function ContactosPage() {
                       display: "flex",
                       alignItems: "flex-start",
                       gap: "12px",
-                      padding: "clamp(18px, 4vw, 24px) 0",
-                      borderBottom: i < tc.locations.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
+                      padding: isMobile ? "clamp(16px, 4vw, 22px) 0" : "clamp(16px, 2.5vw, 22px) 0",
+                      borderBottom: isMobile && i < tc.locations.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
+                      borderRight: isTablet && i < tc.locations.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
+                      paddingRight: isTablet ? "clamp(12px, 2vw, 20px)" : undefined,
                     }}
                   >
-                    <MapPin size={18} style={{ color: "#F5A000", flexShrink: 0, marginTop: "3px" }} fill="#F5A000" strokeWidth={1} />
+                    <MapPin size={isTablet ? 17 : 18} style={{ color: "#F5A000", flexShrink: 0, marginTop: "3px" }} fill="#F5A000" strokeWidth={1} />
                     <div>
-                      <h3 style={{ fontSize: "clamp(1rem, 4.5vw, 1.25rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.1, margin: "0 0 5px" }}>
+                      <h3 style={{ fontSize: isTablet ? "clamp(0.88rem, 1.2vw, 1.05rem)" : "clamp(1rem, 4.5vw, 1.2rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.15, margin: "0 0 5px" }}>
                         {loc.city.toUpperCase()}
                       </h3>
-                      <p style={{ fontSize: "0.78rem", color: "rgba(0,0,0,0.42)", margin: "0 0 5px", display: "flex", alignItems: "center", gap: "5px" }}>
+                      <p style={{ fontSize: isTablet ? "0.72rem" : "0.76rem", color: "rgba(0,0,0,0.42)", margin: "0 0 5px", display: "flex", alignItems: "center", gap: "5px" }}>
                         <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
                         {loc.address}
                       </p>
                       {(loc.phones as readonly string[]).map((phone) => (
-                        <p key={phone} style={{ fontSize: "0.85rem", color: "#111111", margin: "2px 0", fontWeight: 500 }}>{phone}</p>
+                        <p key={phone} style={{ fontSize: isTablet ? "0.78rem" : "0.83rem", color: "#111111", margin: "2px 0", fontWeight: 500 }}>{phone}</p>
                       ))}
                     </div>
                   </motion.div>
@@ -276,23 +337,19 @@ export function ContactosPage() {
               </div>
             </>
           ) : (
-            /* Tablet & Desktop: [title + cards] | [map] */
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "clamp(40px, 6vw, 96px)",
-              alignItems: "start",
-            }}>
-              {/* Left: title + stacked location cards */}
+            /* Desktop: [title + cards] | [map] */
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(48px, 7vw, 112px)", alignItems: "start" }}>
               <div>
                 <motion.div
                   initial={{ opacity: 0, y: 14 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={viewport}
                   transition={{ duration: 0.5, ease: "easeOut" }}
-                  style={{ marginBottom: "clamp(28px, 4vw, 44px)" }}
+                  style={{ marginBottom: "clamp(28px, 4vw, 48px)" }}
                 >
-                  <span style={{ fontSize: "0.78rem", fontWeight: 500, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em", display: "block", marginBottom: "12px" }}>{tc.locationsLabel}</span>
+                  <span style={{ fontSize: "0.76rem", fontWeight: 500, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em", display: "block", marginBottom: "12px" }}>
+                    {tc.locationsLabel}
+                  </span>
                   <h2 style={{ fontSize: "clamp(1.8rem, 2.6vw, 3.2rem)", fontWeight: 500, lineHeight: 1.1, color: "#1a1a2e", margin: 0 }}>
                     {tc.locationsTitle}
                   </h2>
@@ -310,21 +367,21 @@ export function ContactosPage() {
                         display: "flex",
                         alignItems: "flex-start",
                         gap: "14px",
-                        padding: "clamp(20px, 3vw, 28px) 0",
+                        padding: "clamp(20px, 2.8vw, 30px) 0",
                         borderBottom: i < tc.locations.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
                       }}
                     >
                       <MapPin size={20} style={{ color: "#F5A000", flexShrink: 0, marginTop: "3px" }} fill="#F5A000" strokeWidth={1} />
                       <div>
-                        <h3 style={{ fontSize: "clamp(1rem, 1.3vw, 1.3rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.1, margin: "0 0 6px" }}>
+                        <h3 style={{ fontSize: "clamp(1rem, 1.2vw, 1.25rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.1, margin: "0 0 6px" }}>
                           {loc.city.toUpperCase()}
                         </h3>
-                        <p style={{ fontSize: "clamp(0.75rem, 0.85vw, 0.88rem)", color: "rgba(0,0,0,0.42)", margin: "0 0 6px", display: "flex", alignItems: "center", gap: "6px" }}>
+                        <p style={{ fontSize: "clamp(0.75rem, 0.82vw, 0.88rem)", color: "rgba(0,0,0,0.42)", margin: "0 0 6px", display: "flex", alignItems: "center", gap: "6px" }}>
                           <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
                           {loc.address}
                         </p>
                         {(loc.phones as readonly string[]).map((phone) => (
-                          <p key={phone} style={{ fontSize: "clamp(0.82rem, 0.92vw, 0.95rem)", color: "#111111", margin: "3px 0", fontWeight: 500 }}>{phone}</p>
+                          <p key={phone} style={{ fontSize: "clamp(0.82rem, 0.9vw, 0.95rem)", color: "#111111", margin: "3px 0", fontWeight: 500 }}>{phone}</p>
                         ))}
                       </div>
                     </motion.div>
@@ -332,7 +389,6 @@ export function ContactosPage() {
                 </div>
               </div>
 
-              {/* Right: map */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -347,24 +403,30 @@ export function ContactosPage() {
       </section>
 
       {/* ── Contact form ── */}
-      <section style={{ background: "#111111", paddingTop: "clamp(64px, 9vw, 120px)", paddingBottom: "clamp(64px, 9vw, 120px)" }}>
+      <section
+        style={{
+          background: "#111111",
+          paddingTop: "clamp(56px, 9vw, 120px)",
+          paddingBottom: "clamp(56px, 9vw, 120px)",
+        }}
+      >
         <div
           style={{
             ...WRAP,
             display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-            gap: isMobile ? "clamp(40px, 8vw, 64px)" : "clamp(40px, 6vw, 96px)",
+            gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr",
+            gap: isDesktop ? "clamp(40px, 6vw, 96px)" : "clamp(36px, 7vw, 56px)",
             alignItems: "start",
           }}
         >
-          {/* Left */}
+          {/* Left — info */}
           <div>
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewport}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              style={{ fontSize: "0.78rem", fontWeight: 500, letterSpacing: "0.12em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase", marginBottom: "24px" }}
+              style={{ fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.12em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase", marginBottom: "20px" }}
             >
               {tc.formLabel}
             </motion.p>
@@ -374,7 +436,14 @@ export function ContactosPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewport}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.06 }}
-              style={{ fontSize: "clamp(1.6rem, 1rem + 2.8vw, 3.2rem)", fontWeight: 500, color: "#ffffff", lineHeight: 1.12, letterSpacing: "-0.03em", margin: "0 0 clamp(24px, 3vw, 40px)" }}
+              style={{
+                fontSize: "clamp(1.5rem, 1rem + 2.8vw, 3.2rem)",
+                fontWeight: 500,
+                color: "#ffffff",
+                lineHeight: 1.12,
+                letterSpacing: "-0.03em",
+                margin: "0 0 clamp(24px, 3vw, 40px)",
+              }}
             >
               A Gasosa está<br />sempre disponível.
             </motion.h2>
@@ -384,11 +453,11 @@ export function ContactosPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={viewport}
               transition={{ duration: 0.55, ease: "easeOut", delay: 0.14 }}
-              style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+              style={{ display: "flex", flexDirection: "column", gap: "14px" }}
             >
               <a
                 href="mailto:geral@cfagasosa.com"
-                style={{ display: "flex", alignItems: "center", gap: "12px", color: "rgba(255,255,255,0.55)", textDecoration: "none", fontSize: "clamp(0.82rem, 0.75rem + 0.3vw, 0.95rem)", transition: "color 0.2s" }}
+                style={{ display: "flex", alignItems: "center", gap: "12px", color: "rgba(255,255,255,0.55)", textDecoration: "none", fontSize: "clamp(0.82rem, 0.78rem + 0.3vw, 0.95rem)", transition: "color 0.2s" }}
                 onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#ffffff")}
                 onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)")}
               >
@@ -397,7 +466,7 @@ export function ContactosPage() {
               </a>
               <a
                 href="tel:+244951025435"
-                style={{ display: "flex", alignItems: "center", gap: "12px", color: "rgba(255,255,255,0.55)", textDecoration: "none", fontSize: "clamp(0.82rem, 0.75rem + 0.3vw, 0.95rem)", transition: "color 0.2s" }}
+                style={{ display: "flex", alignItems: "center", gap: "12px", color: "rgba(255,255,255,0.55)", textDecoration: "none", fontSize: "clamp(0.82rem, 0.78rem + 0.3vw, 0.95rem)", transition: "color 0.2s" }}
                 onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = "#ffffff")}
                 onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.55)")}
               >
@@ -412,57 +481,91 @@ export function ContactosPage() {
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewport}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: isDesktop ? 0.08 : 0 }}
           >
             {sent ? (
-              <div style={{ background: "rgba(255,255,255,0.06)", borderRadius: "16px", padding: "clamp(32px, 5vw, 64px)", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", gap: "16px", minHeight: "320px", justifyContent: "center" }}>
+              <div
+                style={{
+                  background: "rgba(255,255,255,0.06)",
+                  borderRadius: "16px",
+                  padding: "clamp(32px, 5vw, 64px)",
+                  textAlign: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "16px",
+                  minHeight: "300px",
+                  justifyContent: "center",
+                }}
+              >
                 <span style={{ fontSize: "2.4rem" }}>✓</span>
-                <p style={{ color: "#ffffff", fontWeight: 500, fontSize: "clamp(1rem, 0.85rem + 0.6vw, 1.2rem)", margin: 0, lineHeight: 1.5 }}>
+                <p style={{ color: "#ffffff", fontWeight: 500, fontSize: "clamp(1rem, 0.88rem + 0.5vw, 1.2rem)", margin: 0, lineHeight: 1.5 }}>
                   {tc.formSuccess}
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "14px" }}>
+              <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                {/* Name + email: 2-col on desktop only */}
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: isDesktop ? "1fr 1fr" : "1fr",
+                    gap: "12px",
+                  }}
+                >
                   <input
-                    type="text" required placeholder={tc.namePlaceholder}
-                    value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                    style={{ ...inputStyle, background: "rgba(255,255,255,0.92)", color: "#111111" }}
-                    onFocus={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.background = "rgba(255,255,255,0.98)"; }}
+                    type="text"
+                    required
+                    placeholder={tc.namePlaceholder}
+                    value={form.name}
+                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+                    style={inputStyle}
+                    onFocus={e => { e.currentTarget.style.borderColor = "#003591"; e.currentTarget.style.background = "#ffffff"; }}
                     onBlur={e => { e.currentTarget.style.borderColor = "transparent"; e.currentTarget.style.background = "rgba(255,255,255,0.92)"; }}
                   />
                   <input
-                    type="email" required placeholder={tc.emailPlaceholder}
-                    value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                    style={{ ...inputStyle, background: "rgba(255,255,255,0.92)", color: "#111111" }}
-                    onFocus={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.background = "rgba(255,255,255,0.98)"; }}
+                    type="email"
+                    required
+                    placeholder={tc.emailPlaceholder}
+                    value={form.email}
+                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
+                    style={inputStyle}
+                    onFocus={e => { e.currentTarget.style.borderColor = "#003591"; e.currentTarget.style.background = "#ffffff"; }}
                     onBlur={e => { e.currentTarget.style.borderColor = "transparent"; e.currentTarget.style.background = "rgba(255,255,255,0.92)"; }}
                   />
                 </div>
 
                 <input
-                  type="text" required placeholder={tc.subjectPlaceholder}
-                  value={form.subject} onChange={e => setForm(f => ({ ...f, subject: e.target.value }))}
-                  style={{ ...inputStyle, background: "rgba(255,255,255,0.92)", color: "#111111" }}
-                  onFocus={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.background = "rgba(255,255,255,0.98)"; }}
+                  type="text"
+                  required
+                  placeholder={tc.subjectPlaceholder}
+                  value={form.subject}
+                  onChange={e => setForm(f => ({ ...f, subject: e.target.value }))}
+                  style={inputStyle}
+                  onFocus={e => { e.currentTarget.style.borderColor = "#003591"; e.currentTarget.style.background = "#ffffff"; }}
                   onBlur={e => { e.currentTarget.style.borderColor = "transparent"; e.currentTarget.style.background = "rgba(255,255,255,0.92)"; }}
                 />
 
                 <textarea
-                  required rows={5} placeholder={tc.messagePlaceholder}
-                  value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                  style={{ ...inputStyle, background: "rgba(255,255,255,0.92)", color: "#111111", resize: "vertical", minHeight: "120px" }}
-                  onFocus={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.background = "rgba(255,255,255,0.98)"; }}
+                  required
+                  rows={isMobile ? 4 : 5}
+                  placeholder={tc.messagePlaceholder}
+                  value={form.message}
+                  onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
+                  style={{ ...inputStyle, resize: "vertical", minHeight: isMobile ? "100px" : "120px" }}
+                  onFocus={e => { e.currentTarget.style.borderColor = "#003591"; e.currentTarget.style.background = "#ffffff"; }}
                   onBlur={e => { e.currentTarget.style.borderColor = "transparent"; e.currentTarget.style.background = "rgba(255,255,255,0.92)"; }}
                 />
 
-                <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.35)", margin: "0" }}>
+                <p style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.35)", margin: "2px 0 0" }}>
                   {tc.privacyText}{" "}
-                  <a href="#" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "underline" }}>{tc.privacyLink}</a>.
+                  <Link href="/privacidade" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "underline" }}>
+                    {tc.privacyLink}
+                  </Link>.
                 </p>
 
                 {formError && (
-                  <p style={{ fontSize: "0.82rem", color: "#ff6b6b", margin: "0", textAlign: "center" }}>
+                  <p style={{ fontSize: "0.82rem", color: "#ff8080", margin: "0", textAlign: "center" }}>
                     Ocorreu um erro ao enviar. Tente novamente ou contacte-nos directamente por email.
                   </p>
                 )}
@@ -473,15 +576,23 @@ export function ContactosPage() {
                   whileHover={sending ? {} : { scale: 1.015 }}
                   whileTap={sending ? {} : { scale: 0.985 }}
                   style={{
-                    width: "100%", padding: "clamp(14px, 2vw, 18px) 0",
+                    width: "100%",
+                    padding: "clamp(15px, 2vw, 18px) 0",
                     borderRadius: "10px",
                     background: sending ? "rgba(0,53,145,0.55)" : "#003591",
-                    color: "#ffffff", fontSize: "clamp(0.85rem, 0.78rem + 0.3vw, 0.98rem)",
-                    fontWeight: 600, letterSpacing: "0.04em", border: "none",
+                    color: "#ffffff",
+                    fontSize: "clamp(0.88rem, 0.82rem + 0.3vw, 1rem)",
+                    fontWeight: 600,
+                    letterSpacing: "0.04em",
+                    border: "none",
                     cursor: sending ? "not-allowed" : "pointer",
-                    fontFamily: "'Poppins', sans-serif", marginTop: "4px",
+                    fontFamily: "'Poppins', sans-serif",
+                    marginTop: "4px",
                     transition: "background 0.2s",
-                    display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "8px",
                   }}
                 >
                   {sending ? (
