@@ -80,7 +80,10 @@ export function PangulinoPage() {
       <NavAccentCtx.Provider value="#2D7A22">
       <NavThemeCtx.Provider value={true}>
         <header
-          className="fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between"
+          className="fixed top-0 left-0 right-0 z-50"
+        >
+        <div
+          className="w-full flex items-center justify-between"
           style={{
             maxWidth: "1400px",
             margin: "0 auto",
@@ -106,6 +109,7 @@ export function PangulinoPage() {
           >
             <Menu style={{ width: "clamp(20px, 3vw, 26px)", height: "clamp(20px, 3vw, 26px)" }} />
           </motion.button>
+        </div>
         </header>
       </NavThemeCtx.Provider>
       </NavAccentCtx.Provider>

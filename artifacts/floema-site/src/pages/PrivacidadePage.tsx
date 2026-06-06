@@ -108,14 +108,19 @@ export function PrivacidadePage() {
       {/* ── Header ── */}
       <NavThemeCtx.Provider value={false}>
         <header
-          className="fixed top-0 left-0 right-0 z-50 w-full flex items-center justify-between"
+          className="fixed top-0 left-0 right-0 z-50"
+          style={{
+            background: "rgba(245,239,233,0.92)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+          }}
+        >
+        <div
+          className="w-full flex items-center justify-between"
           style={{
             maxWidth: "1400px",
             margin: "0 auto",
             padding: "clamp(12px, 2vh, 22px) clamp(16px, 4vw, 64px)",
-            background: "rgba(245,239,233,0.92)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
           }}
         >
           <Link href="/" className="flex items-center">
@@ -137,6 +142,7 @@ export function PrivacidadePage() {
           >
             <Menu style={{ width: "clamp(20px, 3vw, 26px)", height: "clamp(20px, 3vw, 26px)" }} />
           </button>
+        </div>
         </header>
       </NavThemeCtx.Provider>
 
