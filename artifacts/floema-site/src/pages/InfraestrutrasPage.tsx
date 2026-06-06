@@ -268,7 +268,7 @@ export function InfraestrutrasPage() {
             whileInView="visible"
             viewport={{ once: false, amount: 0.2 }}
             custom={i * 0.07}
-            style={{ position: "relative", height: isMobile ? "clamp(140px, 44vw, 240px)" : "clamp(180px, 24vh, 320px)", overflow: "hidden", background: "#111" }}
+            style={{ position: "relative", height: isMobile ? "clamp(160px, 50vw, 260px)" : "clamp(180px, 24vh, 320px)", overflow: "hidden", background: "#111" }}
           >
             <LazyImage
               fill

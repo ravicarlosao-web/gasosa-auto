@@ -39,10 +39,11 @@ function MilestoneCard({
 
   return (
     <div
-      className="overflow-hidden"
-      style={{
-        borderRight: index < MILESTONE_STATIC.length - 1 ? "1px solid rgba(255,255,255,0.15)" : "none",
-      }}
+      className={`overflow-hidden ${
+        index < MILESTONE_STATIC.length - 1
+          ? "border-b border-white/15 md:border-b-0 md:border-r md:border-white/15"
+          : ""
+      }`}
     >
       <div
         className="px-0 md:px-8 pt-10 pb-10"
@@ -50,7 +51,7 @@ function MilestoneCard({
       >
         <motion.div style={{ opacity: labelOpacity, x: labelX, marginBottom: "16px" }}>
           <span style={{
-            fontSize: "11px",
+            fontSize: "0.68rem",
             fontWeight: 700,
             letterSpacing: "0.18em",
             color: "rgba(255,255,255,0.45)",
@@ -75,7 +76,7 @@ function MilestoneCard({
           className="w-full rounded-xl overflow-hidden mb-6"
           ref={imgRef}
         >
-          <motion.div style={{ y: imageY, height: "220px", position: "relative" }}>
+          <motion.div style={{ y: imageY, height: "clamp(160px, 28vw, 220px)", position: "relative" }}>
             <LazyImage
               fill
               src={image}
@@ -139,7 +140,7 @@ function CurrentYearHighlight({
         className="sm:max-w-[360px] pb-2"
       >
         <span style={{
-          fontSize: "11px",
+          fontSize: "0.68rem",
           fontWeight: 700,
           letterSpacing: "0.18em",
           color: "rgba(255,255,255,0.45)",

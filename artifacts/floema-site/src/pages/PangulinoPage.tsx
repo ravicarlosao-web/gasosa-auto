@@ -290,7 +290,7 @@ export function PangulinoPage() {
       <div style={{
         background: NAVY,
         display: "grid",
-        gridTemplateColumns: `repeat(${STATS.length}, 1fr)`,
+        gridTemplateColumns: isMobile ? "1fr" : `repeat(${STATS.length}, 1fr)`,
       }}>
         {STATS.map((s, i) => (
           <motion.div
@@ -301,15 +301,25 @@ export function PangulinoPage() {
             viewport={{ once: false, amount: 0.3 }}
             custom={i * 0.1}
             style={{
-              padding: "clamp(28px, 5vh, 52px) clamp(16px, 3vw, 40px)",
-              borderRight: i < STATS.length - 1 ? "1px solid rgba(255,255,255,0.12)" : "none",
+              padding: isMobile
+                ? `clamp(20px, 3.5vh, 32px) clamp(20px, 5vw, 40px)`
+                : `clamp(28px, 5vh, 52px) clamp(16px, 3vw, 40px)`,
+              borderRight: !isMobile && i < STATS.length - 1 ? "1px solid rgba(255,255,255,0.12)" : "none",
+              borderBottom: isMobile && i < STATS.length - 1 ? "1px solid rgba(255,255,255,0.12)" : "none",
               textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+              gap: isMobile ? "16px" : "0",
+              justifyContent: isMobile ? "flex-start" : "center",
+              flexDirection: isMobile ? "row" : "column",
             }}
           >
             <div style={{
-              fontSize: "clamp(2.2rem, 1rem + 4vw, 4.5rem)",
+              fontSize: isMobile ? "clamp(1.8rem, 6vw, 2.6rem)" : "clamp(2.2rem, 1rem + 4vw, 4.5rem)",
               fontWeight: 700, color: AMBER,
-              letterSpacing: "-0.04em", lineHeight: 1, margin: "0 0 8px",
+              letterSpacing: "-0.04em", lineHeight: 1,
+              margin: isMobile ? "0" : "0 0 8px",
+              flexShrink: 0,
             }}>
               {s.value}
             </div>
@@ -317,6 +327,7 @@ export function PangulinoPage() {
               fontSize: "clamp(0.68rem, 0.58rem + 0.38vw, 0.82rem)",
               fontWeight: 500, color: "rgba(255,255,255,0.55)",
               letterSpacing: "0.08em", textTransform: "uppercase",
+              textAlign: isMobile ? "left" : "center",
             }}>
               {s.label}
             </div>
