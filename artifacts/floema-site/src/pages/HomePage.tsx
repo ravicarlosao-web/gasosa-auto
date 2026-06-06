@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { FADE_UP, REVEAL_ROW } from "../lib/motion-variants";
 import { Link } from "wouter";
 import { Menu, Mail } from "lucide-react";
 import { NavLogo } from "../components/layout/NavLogo";
@@ -286,42 +287,39 @@ export function HomePage() {
         >
           {/* ── Heading block — centrado ── */}
           <div style={{ maxWidth: "1100px", margin: "0 auto", textAlign: "center", marginBottom: "clamp(48px,7vw,88px)" }}>
-            <div style={{ overflow: "hidden", marginBottom: "18px" }}>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                style={{ display: "inline-block", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", color: "#003591" }}
-              >
-                PERGUNTAS FREQUENTES
-              </motion.span>
-            </div>
+            <motion.span
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4 }}
+              custom={0}
+              style={{ display: "inline-block", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.18em", color: "#003591", marginBottom: "18px" }}
+            >
+              PERGUNTAS FREQUENTES
+            </motion.span>
 
-            <div style={{ overflow: "hidden", marginBottom: "clamp(18px,2.5vw,28px)" }}>
-              <motion.h2
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: 0.07 }}
-                style={{ fontSize: "clamp(2rem,1.4rem + 2.8vw,4rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.035em", lineHeight: 1.08, margin: 0 }}
-              >
-                Tudo o que precisa<br />de saber.
-              </motion.h2>
-            </div>
+            <motion.h2
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              custom={0.08}
+              style={{ fontSize: "clamp(2rem,1.4rem + 2.8vw,4rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.035em", lineHeight: 1.08, margin: "0 0 clamp(18px,2.5vw,28px)" }}
+            >
+              Tudo o que precisa<br />de saber.
+            </motion.h2>
 
-            <div style={{ overflow: "hidden" }}>
-              <motion.p
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay: 0.16 }}
-                style={{ fontSize: "clamp(0.88rem,0.76rem + 0.5vw,1.05rem)", color: "rgba(0,0,0,0.5)", lineHeight: 1.7, margin: "0 auto", maxWidth: "580px" }}
-              >
-                A Gasosa Auto Agro é uma empresa angolana especializada em peças automóveis,
-                lubrificantes e ferramentas agrícolas, com presença em Luanda, Lubango e Huambo.
-              </motion.p>
-            </div>
+            <motion.p
+              variants={FADE_UP}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              custom={0.18}
+              style={{ fontSize: "clamp(0.88rem,0.76rem + 0.5vw,1.05rem)", color: "rgba(0,0,0,0.5)", lineHeight: 1.7, margin: "0 auto", maxWidth: "580px" }}
+            >
+              A Gasosa Auto Agro é uma empresa angolana especializada em peças automóveis,
+              lubrificantes e ferramentas agrícolas, com presença em Luanda, Lubango e Huambo.
+            </motion.p>
           </div>
 
           {/* ── FAQ items ── */}
@@ -329,10 +327,11 @@ export function HomePage() {
             {FAQ_ITEMS.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.52, ease: [0.16, 1, 0.3, 1], delay: i * 0.06 }}
+                variants={REVEAL_ROW}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                custom={i * 0.09}
                 style={{
                   borderTop: "1px solid rgba(0,0,0,0.09)",
                   borderBottom: i === FAQ_ITEMS.length - 1 ? "1px solid rgba(0,0,0,0.09)" : undefined,
