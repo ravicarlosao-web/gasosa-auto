@@ -28,6 +28,8 @@ export function ContactosPage() {
   const [winW, setWinW] = useState(() => (typeof window !== "undefined" ? window.innerWidth : 1280));
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [formError, setFormError] = useState(false);
 
   const entryRefs = useRef<(HTMLDivElement | null)[]>([]);
   const mapDivRef = useRef<HTMLDivElement | null>(null);
@@ -97,9 +99,35 @@ export function ContactosPage() {
   const PAD = { paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" };
   const WRAP = { maxWidth: "1400px", margin: "0 auto", ...PAD };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    setSending(true);
+    setFormError(false);
+    try {
+      const res = await fetch(
+        `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            name: form.name,
+            email: form.email,
+            subject: form.subject,
+            message: form.message,
+          }),
+        }
+      );
+      if (res.ok) {
+        setSent(true);
+        setForm({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setFormError(true);
+      }
+    } catch {
+      setFormError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   const inputStyle: React.CSSProperties = {
@@ -600,20 +628,40 @@ export function ContactosPage() {
                   <a href="#" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "underline" }}>{tc.privacyLink}</a>.
                 </p>
 
+                {formError && (
+                  <p style={{ fontSize: "0.82rem", color: "#ff6b6b", margin: "0", textAlign: "center" }}>
+                    Ocorreu um erro ao enviar. Tente novamente ou contacte-nos directamente por email.
+                  </p>
+                )}
+
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.015 }}
-                  whileTap={{ scale: 0.985 }}
+                  disabled={sending}
+                  whileHover={sending ? {} : { scale: 1.015 }}
+                  whileTap={sending ? {} : { scale: 0.985 }}
                   style={{
                     width: "100%", padding: "clamp(14px, 2vw, 18px) 0",
-                    borderRadius: "10px", background: "#003591",
+                    borderRadius: "10px",
+                    background: sending ? "rgba(0,53,145,0.55)" : "#003591",
                     color: "#ffffff", fontSize: "clamp(0.85rem, 0.78rem + 0.3vw, 0.98rem)",
-                    fontWeight: 600, letterSpacing: "0.04em", border: "none", cursor: "pointer",
+                    fontWeight: 600, letterSpacing: "0.04em", border: "none",
+                    cursor: sending ? "not-allowed" : "pointer",
                     fontFamily: "'Poppins', sans-serif", marginTop: "4px",
+                    transition: "background 0.2s",
+                    display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
                   }}
                 >
-                  {tc.submitBtn}
+                  {sending ? (
+                    <>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"
+                        style={{ animation: "spin 0.8s linear infinite" }}>
+                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                      </svg>
+                      A enviar…
+                    </>
+                  ) : tc.submitBtn}
                 </motion.button>
+                <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
               </form>
             )}
           </motion.div>
