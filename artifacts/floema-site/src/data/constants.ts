@@ -27,8 +27,8 @@ export const SECTORES_DATA = [
     description:
       "Apoiamos o desenvolvimento do sector rural angolano com máquinas, ferramentas e equipamentos agrícolas de alta durabilidade. Através da nossa marca própria Pangulino, oferecemos produtos desenvolvidos para as condições do campo angolano — robustos, fiáveis e acessíveis.",
     tagline: "Soluções para o campo angolano",
-    thumbnail: "/historia-2016.png",
-    image: "/historia-2016.png",
+    thumbnail: "/agricola-sector.png",
+    image: "/agricola-sector.png",
   },
   {
     key: "industrial",
