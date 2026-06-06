@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Menu, MapPin } from "lucide-react";
@@ -31,69 +31,13 @@ export function ContactosPage() {
   const [sending, setSending] = useState(false);
   const [formError, setFormError] = useState(false);
 
-  const entryRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const mapDivRef = useRef<HTMLDivElement | null>(null);
-  const locationsGridRef = useRef<HTMLDivElement | null>(null);
-  const [connectorLines, setConnectorLines] = useState<{x1:number;y1:number;x2:number;y2:number}[]>([]);
-  const [mapHeight, setMapHeight] = useState(0);
-  const [cardScale, setCardScale] = useState(1);
-
-  const MAP_SVG_W = 612.3866;
-  const MAP_SVG_H = 684.8916;
-  const MAP_CITIES = [
-    { cx: 81,  cy: 228 },
-    { cx: 199, cy: 408 },
-    { cx: 163, cy: 522 },
-  ];
-
   useEffect(() => {
     const onResize = () => setWinW(window.innerWidth);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  useEffect(() => {
-    const calculate = () => {
-      if (!locationsGridRef.current || !mapDivRef.current) return;
-      const gridRect = locationsGridRef.current.getBoundingClientRect();
-      const mapRect  = mapDivRef.current.getBoundingClientRect();
-      setMapHeight(mapRect.height);
-
-      // Dynamic card scale: grow cards when vertical gap between provinces is larger
-      const minGapFrac = Math.min(
-        (MAP_CITIES[1].cy - MAP_CITIES[0].cy) / MAP_SVG_H,
-        (MAP_CITIES[2].cy - MAP_CITIES[1].cy) / MAP_SVG_H,
-      );
-      const minGapPx = minGapFrac * mapRect.height;
-      const scale = Math.max(0.72, Math.min(1.75, minGapPx / 95));
-      setCardScale(scale);
-
-      const newLines = MAP_CITIES.map((city, i) => {
-        const entry = entryRefs.current[i];
-        if (!entry) return null;
-        const r = entry.getBoundingClientRect();
-        const provinceX = mapRect.left - gridRect.left + (city.cx / MAP_SVG_W) * mapRect.width;
-        const provinceY = mapRect.top  - gridRect.top  + (city.cy / MAP_SVG_H) * mapRect.height;
-        return {
-          x1: r.right - gridRect.left,
-          y1: provinceY,
-          x2: provinceX,
-          y2: provinceY,
-        };
-      }).filter(Boolean) as {x1:number;y1:number;x2:number;y2:number}[];
-      setConnectorLines(newLines);
-    };
-    calculate();
-    window.addEventListener("resize", calculate);
-    const ro = new ResizeObserver(calculate);
-    if (locationsGridRef.current) ro.observe(locationsGridRef.current);
-    return () => { window.removeEventListener("resize", calculate); ro.disconnect(); };
-  }, []);
-
   const isMobile = winW < 640;
-  const isTablet = winW >= 640 && winW < 1024;
-  const isDesktop = winW >= 1024;
-  const useLines = !isMobile;
 
   const viewport = { once: true, amount: 0.12 } as const;
   const PAD = { paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" };
@@ -270,247 +214,136 @@ export function ContactosPage() {
 
       {/* ── Locations ── */}
       <section style={{ marginBottom: "clamp(80px, 11vw, 160px)" }}>
+        <div style={{ maxWidth: "1400px", margin: "0 auto", paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" }}>
 
-        {/* ─ Mobile: map full-width at top, then title + contact list ─ */}
-        {isMobile && (
-          <div style={{ paddingLeft: "clamp(20px, 5vw, 40px)", paddingRight: "clamp(20px, 5vw, 40px)", maxWidth: "1400px", margin: "0 auto" }}>
-            {/* Map */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewport}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              style={{ marginBottom: "clamp(32px, 6vw, 52px)" }}
-            >
-              <AngolaMap />
-            </motion.div>
+          {/* Mobile: map on top, title + cards below */}
+          {isMobile ? (
+            <>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={viewport}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                style={{ marginBottom: "clamp(32px, 6vw, 48px)" }}
+              >
+                <AngolaMap />
+              </motion.div>
 
-            {/* Title */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={viewport}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              style={{ marginBottom: "clamp(24px, 4vw, 36px)" }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
-                <span style={{ fontSize: "0.75rem", fontWeight: 500, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em" }}>{tc.locationsLabel}</span>
-                <span style={{ fontSize: "0.8rem", color: "rgba(0,0,0,0.3)" }}>↓</span>
-              </div>
-              <h2 style={{ fontSize: "clamp(1.7rem, 7vw, 2.6rem)", fontWeight: 500, lineHeight: 1.1, color: "#1a1a2e", margin: 0, whiteSpace: "pre-line" }}>
-                {tc.locationsTitle}
-              </h2>
-            </motion.div>
-
-            {/* Contacts list */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "clamp(22px, 5vw, 32px)" }}>
-              {tc.locations.map((loc, i) => (
-                <motion.div
-                  key={loc.city}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={viewport}
-                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
-                  style={{ display: "flex", alignItems: "flex-start", gap: "10px", paddingBottom: "clamp(20px, 5vw, 28px)", borderBottom: i < tc.locations.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none" }}
-                >
-                  <div style={{ flexShrink: 0, marginTop: "3px" }}>
-                    <MapPin size={18} style={{ color: "#F5A000", display: "block" }} fill="#F5A000" strokeWidth={1} />
-                  </div>
-                  <div>
-                    <h3 style={{ fontSize: "clamp(1.1rem, 5vw, 1.4rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.1, margin: "0 0 5px" }}>
-                      {loc.city.toUpperCase()}
-                    </h3>
-                    <p style={{ fontSize: "0.8rem", color: "rgba(0,0,0,0.42)", margin: "0 0 4px", display: "flex", alignItems: "center", gap: "5px" }}>
-                      <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
-                      {loc.address}
-                    </p>
-                    {(loc.phones as readonly string[]).map((phone) => (
-                      <p key={phone} style={{ fontSize: "0.85rem", color: "#111111", margin: "2px 0", fontWeight: 500 }}>{phone}</p>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ─ Tablet & Desktop: contacts + map side-by-side with lines ─ */}
-        {!isMobile && (
-          <div style={{ maxWidth: "1400px", margin: "0 auto", paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" }}>
-
-            {/* Title above grid on tablet; inline on desktop */}
-            {isTablet && (
               <motion.div
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewport}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                style={{ marginBottom: "clamp(28px, 4vw, 44px)" }}
+                style={{ marginBottom: "clamp(24px, 4vw, 36px)" }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
-                  <span style={{ fontSize: "0.78rem", fontWeight: 500, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em" }}>{tc.locationsLabel}</span>
-                  <span style={{ fontSize: "0.82rem", color: "rgba(0,0,0,0.3)" }}>↓</span>
-                </div>
-                <h2 style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 500, lineHeight: 1.1, color: "#1a1a2e", margin: 0, whiteSpace: "pre-line" }}>
+                <span style={{ fontSize: "0.75rem", fontWeight: 500, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em", display: "block", marginBottom: "10px" }}>{tc.locationsLabel}</span>
+                <h2 style={{ fontSize: "clamp(1.7rem, 7vw, 2.6rem)", fontWeight: 500, lineHeight: 1.1, color: "#1a1a2e", margin: 0 }}>
                   {tc.locationsTitle}
                 </h2>
               </motion.div>
-            )}
 
-            {/* Grid: [title col on desktop] [contacts col] [map col] */}
-            <div
-              ref={locationsGridRef}
-              style={{
-                display: "grid",
-                gridTemplateColumns: isDesktop
-                  ? "clamp(160px, 18vw, 260px) clamp(180px, 22vw, 300px) 1fr"
-                  : "clamp(160px, 30vw, 280px) 1fr",
-                gap: isDesktop ? "clamp(20px, 2.5vw, 36px)" : "clamp(16px, 2.5vw, 32px)",
-                alignItems: "start",
-                position: "relative",
-              }}
-            >
-              {/* Desktop title column */}
-              {isDesktop && (
-                <div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                {tc.locations.map((loc, i) => (
                   <motion.div
+                    key={loc.city}
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={viewport}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
-                    style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "clamp(14px, 1.8vw, 24px)" }}
+                    transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "12px",
+                      padding: "clamp(18px, 4vw, 24px) 0",
+                      borderBottom: i < tc.locations.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
+                    }}
                   >
-                    <span style={{ fontSize: "0.78rem", fontWeight: 500, color: "rgba(0,0,0,0.5)", letterSpacing: "0.04em" }}>{tc.locationsLabel}</span>
-                    <span style={{ fontSize: "0.82rem", color: "rgba(0,0,0,0.35)" }}>↓</span>
+                    <MapPin size={18} style={{ color: "#F5A000", flexShrink: 0, marginTop: "3px" }} fill="#F5A000" strokeWidth={1} />
+                    <div>
+                      <h3 style={{ fontSize: "clamp(1rem, 4.5vw, 1.25rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.1, margin: "0 0 5px" }}>
+                        {loc.city.toUpperCase()}
+                      </h3>
+                      <p style={{ fontSize: "0.78rem", color: "rgba(0,0,0,0.42)", margin: "0 0 5px", display: "flex", alignItems: "center", gap: "5px" }}>
+                        <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
+                        {loc.address}
+                      </p>
+                      {(loc.phones as readonly string[]).map((phone) => (
+                        <p key={phone} style={{ fontSize: "0.85rem", color: "#111111", margin: "2px 0", fontWeight: 500 }}>{phone}</p>
+                      ))}
+                    </div>
                   </motion.div>
-                  <motion.h2
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={viewport}
-                    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ fontSize: "clamp(1.8rem, 2.4vw, 3rem)", fontWeight: 500, lineHeight: 1.1, color: "#1a1a2e", margin: 0, whiteSpace: "pre-line" }}
-                  >
+                ))}
+              </div>
+            </>
+          ) : (
+            /* Tablet & Desktop: [title + cards] | [map] */
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "clamp(40px, 6vw, 96px)",
+              alignItems: "start",
+            }}>
+              {/* Left: title + stacked location cards */}
+              <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={viewport}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  style={{ marginBottom: "clamp(28px, 4vw, 44px)" }}
+                >
+                  <span style={{ fontSize: "0.78rem", fontWeight: 500, color: "rgba(0,0,0,0.45)", letterSpacing: "0.04em", display: "block", marginBottom: "12px" }}>{tc.locationsLabel}</span>
+                  <h2 style={{ fontSize: "clamp(1.8rem, 2.6vw, 3.2rem)", fontWeight: 500, lineHeight: 1.1, color: "#1a1a2e", margin: 0 }}>
                     {tc.locationsTitle}
-                  </motion.h2>
-                </div>
-              )}
+                  </h2>
+                </motion.div>
 
-              {/* Contacts column — absolutely positioned, font scales with available gap */}
-              <div style={{
-                position: "relative",
-                height: mapHeight > 0 ? `${mapHeight}px` : "auto",
-              }}>
-                {tc.locations.map((loc, i) => {
-                  const topPct = MAP_CITIES[i].cy / MAP_SVG_H * 100;
-                  const isAbsolute = mapHeight > 0;
-
-                  // Base sizes × cardScale so content grows with available space
-                  const baseCity    = isTablet ? 13   : 16;
-                  const baseAddress = isTablet ? 10.5 : 12;
-                  const basePhone   = isTablet ? 11   : 13;
-                  const baseIcon    = isTablet ? 14   : 18;
-                  const baseGap     = isTablet ? 8    : 10;
-                  const baseDot     = isTablet ? 4    : 5;
-
-                  const sz = (base: number) => `${(base * cardScale).toFixed(1)}px`;
-
-                  return (
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  {tc.locations.map((loc, i) => (
                     <motion.div
                       key={loc.city}
-                      ref={(el: HTMLDivElement | null) => { entryRefs.current[i] = el; }}
-                      initial={{ opacity: 0, x: -24 }}
-                      whileInView={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0, y: 18 }}
+                      whileInView={{ opacity: 1, y: 0 }}
                       viewport={viewport}
-                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }}
+                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.1 }}
                       style={{
-                        position: isAbsolute ? "absolute" : "relative",
-                        top: isAbsolute ? `${topPct}%` : "auto",
-                        transform: isAbsolute ? "translateY(-50%)" : "none",
                         display: "flex",
                         alignItems: "flex-start",
-                        gap: sz(baseGap),
+                        gap: "14px",
+                        padding: "clamp(20px, 3vw, 28px) 0",
+                        borderBottom: i < tc.locations.length - 1 ? "1px solid rgba(0,0,0,0.08)" : "none",
                       }}
                     >
-                      <div style={{ flexShrink: 0, marginTop: "3px" }}>
-                        <MapPin
-                          size={Math.round(baseIcon * cardScale)}
-                          style={{ color: "#F5A000", display: "block" }}
-                          fill="#F5A000"
-                          strokeWidth={1}
-                        />
-                      </div>
+                      <MapPin size={20} style={{ color: "#F5A000", flexShrink: 0, marginTop: "3px" }} fill="#F5A000" strokeWidth={1} />
                       <div>
-                        <h3 style={{
-                          fontSize: sz(baseCity),
-                          fontWeight: 700,
-                          color: "#111111",
-                          letterSpacing: "-0.02em",
-                          lineHeight: 1.1,
-                          margin: `0 0 ${sz(baseGap * 0.5)}`,
-                        }}>
+                        <h3 style={{ fontSize: "clamp(1rem, 1.3vw, 1.3rem)", fontWeight: 700, color: "#111111", letterSpacing: "-0.02em", lineHeight: 1.1, margin: "0 0 6px" }}>
                           {loc.city.toUpperCase()}
                         </h3>
-                        <p style={{
-                          fontSize: sz(baseAddress),
-                          color: "rgba(0,0,0,0.42)",
-                          margin: `0 0 ${sz(baseDot)}`,
-                          display: "flex",
-                          alignItems: "center",
-                          gap: sz(baseDot),
-                        }}>
-                          <span style={{
-                            width: sz(baseDot),
-                            height: sz(baseDot),
-                            borderRadius: "50%",
-                            background: "#F5A000",
-                            display: "inline-block",
-                            flexShrink: 0,
-                          }} />
+                        <p style={{ fontSize: "clamp(0.75rem, 0.85vw, 0.88rem)", color: "rgba(0,0,0,0.42)", margin: "0 0 6px", display: "flex", alignItems: "center", gap: "6px" }}>
+                          <span style={{ width: "5px", height: "5px", borderRadius: "50%", background: "#F5A000", display: "inline-block", flexShrink: 0 }} />
                           {loc.address}
                         </p>
                         {(loc.phones as readonly string[]).map((phone) => (
-                          <p key={phone} style={{
-                            fontSize: sz(basePhone),
-                            color: "#111111",
-                            margin: `${sz(2)} 0`,
-                            fontWeight: 500,
-                          }}>
-                            {phone}
-                          </p>
+                          <p key={phone} style={{ fontSize: "clamp(0.82rem, 0.92vw, 0.95rem)", color: "#111111", margin: "3px 0", fontWeight: 500 }}>{phone}</p>
                         ))}
                       </div>
                     </motion.div>
-                  );
-                })}
-              </div>
-
-              {/* Map column */}
-              <div ref={mapDivRef}>
-                <AngolaMap />
-              </div>
-
-              {/* Connector lines — horizontal dashed */}
-              {connectorLines.length > 0 && (
-                <svg
-                  style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", pointerEvents: "none", overflow: "visible" }}
-                  aria-hidden="true"
-                >
-                  {connectorLines.map((line, i) => (
-                    <line
-                      key={i}
-                      x1={line.x1} y1={line.y1}
-                      x2={line.x2} y2={line.y2}
-                      stroke="#F5A000"
-                      strokeWidth={isTablet ? "1.2" : "1.5"}
-                      strokeDasharray="5 4"
-                      strokeOpacity="0.7"
-                    />
                   ))}
-                </svg>
-              )}
+                </div>
+              </div>
+
+              {/* Right: map */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={viewport}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+              >
+                <AngolaMap />
+              </motion.div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </section>
 
       {/* ── Contact form ── */}
