@@ -465,66 +465,6 @@ export function PangulinoPage() {
         </div>
       </div>
 
-      {/* ── Presença nacional ── */}
-      <div style={{
-        background: DARK,
-        padding: "clamp(56px, 8vh, 90px) clamp(20px, 5vw, 80px)",
-        display: "grid",
-        gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-        gap: isMobile ? "36px" : "clamp(40px, 6vw, 80px)",
-        maxWidth: "1200px",
-        margin: "0 auto",
-        width: "100%",
-        boxSizing: "border-box",
-      }}>
-        <motion.div
-          variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}
-        >
-          <span style={{ display: "block", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: GREEN, marginBottom: "16px" }}>
-            {p.presenca.tag}
-          </span>
-          <h2 style={{
-            fontSize: "clamp(1.6rem, 0.9rem + 2.5vw, 3rem)",
-            fontWeight: 600, color: "#ffffff",
-            letterSpacing: "-0.025em", lineHeight: 1.1, margin: "0 0 20px",
-          }}>
-            {p.presenca.heading}
-          </h2>
-          <p style={{
-            fontSize: "clamp(0.84rem, 0.74rem + 0.36vw, 0.97rem)",
-            color: "rgba(255,255,255,0.58)", lineHeight: 1.78, margin: 0,
-          }}>
-            {p.presenca.desc}
-          </p>
-        </motion.div>
-
-        <motion.div
-          variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.12}
-          style={{ display: "flex", flexDirection: "column", gap: "18px", justifyContent: "center" }}
-        >
-          {p.presenca.pontos.map((pt, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: "14px" }}>
-              <div style={{
-                width: "36px", height: "36px",
-                borderRadius: "50%",
-                background: "rgba(45,122,34,0.18)",
-                border: "1px solid rgba(45,122,34,0.4)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                flexShrink: 0,
-              }}>
-                <MapPin size={16} style={{ color: GREEN }} fill="none" strokeWidth={2} />
-              </div>
-              <span style={{
-                fontSize: "clamp(0.88rem, 0.78rem + 0.36vw, 1rem)",
-                fontWeight: 500, color: "rgba(255,255,255,0.82)",
-              }}>
-                {pt}
-              </span>
-            </div>
-          ))}
-        </motion.div>
-      </div>
-      <div style={{ background: DARK, height: "1px" }} />
 
       {/* ── CTA ── */}
       <div style={{
