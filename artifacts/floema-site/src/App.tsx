@@ -9,6 +9,7 @@ import { InfraestrutrasPage } from "./pages/InfraestrutrasPage";
 import { NoticiasPage } from "./pages/NoticiasPage";
 import { ContactosPage } from "./pages/ContactosPage";
 import { PangulinoPage } from "./pages/PangulinoPage";
+import { PrivacidadePage } from "./pages/PrivacidadePage";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ function Router() {
       <Route path="/noticias" component={NoticiasPage} />
       <Route path="/pangulino" component={PangulinoPage} />
       <Route path="/contactos" component={ContactosPage} />
+      <Route path="/privacidade" component={PrivacidadePage} />
       <Route component={NotFound} />
     </Switch>
     </>

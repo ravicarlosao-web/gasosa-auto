@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin } from "lucide-react";
+import { Link } from "wouter";
 import logoSrc      from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import brandGasosa  from "@assets/Design_sem_nome__4_-removebg-preview_1780702968603.png";
 import brand55      from "@assets/Design_sem_nome__5_-removebg-preview_1780703041624.png";
@@ -193,14 +194,14 @@ export function Footer() {
           {f.copyright.replace("2025", String(year))}
         </span>
         <span style={{ fontSize: "0.75rem", color: "rgba(0,0,0,0.15)" }}>·</span>
-        <a
-          href="#"
+        <Link
+          href="/privacidade"
           style={{ fontSize: "0.75rem", color: FAINT, textDecoration: "none", transition: "color 0.2s" }}
-          onMouseEnter={e => (e.currentTarget.style.color = TEXT)}
-          onMouseLeave={e => (e.currentTarget.style.color = FAINT)}
+          onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = TEXT)}
+          onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = FAINT)}
         >
           {f.legal}
-        </a>
+        </Link>
       </div>
 
     </footer>
