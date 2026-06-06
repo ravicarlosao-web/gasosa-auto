@@ -5,6 +5,7 @@ import { Menu, MapPin } from "lucide-react";
 import { NavLogo } from "../components/layout/NavLogo";
 import heroImg      from "@assets/pangulino-hero-optimized.jpg";
 import pangLogoImg  from "@assets/image_1780664916930.png";
+import wheelbarrowImg from "@assets/ChatGPT_Image_6_de_jun._de_2026,_01_23_38_1780705424458.png";
 import { LazyImage } from "../components/ui/lazy-image";
 import { NavThemeCtx, NavAccentCtx } from "../lib/nav-theme";
 import { NavPill }    from "../components/layout/NavPill";
@@ -275,9 +276,9 @@ export function PangulinoPage() {
         >
           <LazyImage
             fill
-            src={pangLogoImg}
-            alt="Pangulino — marca própria"
-            objectPosition="center"
+            src={wheelbarrowImg}
+            alt="Pangulino — carrinhas de mão agrícolas"
+            objectPosition="center 60%"
           />
           <div style={{
             position: "absolute", inset: 0,
