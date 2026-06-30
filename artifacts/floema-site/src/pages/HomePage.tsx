@@ -29,7 +29,7 @@ const FAQ_ITEMS = [
 
 const HERO_THEMES = [
   { id: "bege",   label: "Bege",       color: "#F2EDE4" },
-  { id: "branco", label: "Branco",     color: "#F5F5F7" },
+  { id: "branco", label: "Branco",     color: "#FFFFFF" },
   { id: "azul",   label: "Azul claro", color: "#E8F0FB" },
 ] as const;
 
