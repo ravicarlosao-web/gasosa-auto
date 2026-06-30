@@ -27,6 +27,14 @@ const FAQ_ITEMS = [
   { q: "A Gasosa trabalha com empresas e fazendas?", a: "Sim. A Gasosa é parceira estratégica de mais de 30 empresas e fazendas em Angola, incluindo Sonangol, Governo de Angola, Fazenda Tchissola, Fazenda Boi Verde, entre muitas outras." },
 ];
 
+const HERO_THEMES = [
+  { id: "bege",   label: "Bege",       color: "#F2EDE4" },
+  { id: "branco", label: "Branco",     color: "#F5F5F7" },
+  { id: "azul",   label: "Azul claro", color: "#E8F0FB" },
+] as const;
+
+type HeroThemeId = (typeof HERO_THEMES)[number]["id"];
+
 export function HomePage() {
   const { t } = useLang();
 
@@ -39,6 +47,8 @@ export function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [navLight, setNavLight] = useState(false);
+  const [heroTheme, setHeroTheme] = useState<HeroThemeId>("bege");
+  const heroBg = HERO_THEMES.find((th) => th.id === heroTheme)?.color ?? "#F2EDE4";
 
   useEffect(() => {
     function onScroll() {
@@ -87,6 +97,10 @@ export function HomePage() {
       <NavThemeCtx.Provider value={navLight}>
         <header
           className="fixed top-0 left-0 right-0 z-50"
+          style={{
+            backgroundColor: heroBg,
+            transition: "background-color 0.5s ease",
+          }}
         >
         <div
           className="w-full flex items-center justify-between"
@@ -106,6 +120,47 @@ export function HomePage() {
                 <NavPill key={item} item={item} />
               ))}
             </div>
+
+            {/* ── Color switcher ── */}
+            <div
+              className="flex items-center gap-1 ml-3"
+              role="group"
+              aria-label="Cor de fundo"
+            >
+              {HERO_THEMES.map((th) => {
+                const isActive = heroTheme === th.id;
+                return (
+                  <button
+                    key={th.id}
+                    onClick={() => setHeroTheme(th.id)}
+                    title={th.label}
+                    aria-pressed={isActive}
+                    style={{
+                      fontSize: "10px",
+                      fontWeight: 600,
+                      letterSpacing: "0.06em",
+                      color: "#0B2D6B",
+                      background: th.color,
+                      border: isActive
+                        ? "2px solid #0B2D6B"
+                        : "2px solid transparent",
+                      borderRadius: "20px",
+                      padding: "3px 9px",
+                      cursor: "pointer",
+                      outline: "none",
+                      transition: "border-color 0.25s ease, box-shadow 0.25s ease",
+                      boxShadow: isActive
+                        ? "0 0 0 1px #0B2D6B"
+                        : "0 0 0 1px rgba(11,45,107,0.18)",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {th.label}
+                  </button>
+                );
+              })}
+            </div>
+
             <LangDropdown />
           </nav>
 
@@ -127,8 +182,10 @@ export function HomePage() {
 
       {/* ── Hero wrapper ── */}
       <div
-        className="sticky top-0 z-0 min-h-[100dvh] w-full bg-background flex flex-col overflow-hidden"
+        className="sticky top-0 z-0 min-h-[100dvh] w-full flex flex-col overflow-hidden"
         style={{
+          backgroundColor: heroBg,
+          transition: "background-color 0.5s ease",
           filter: `blur(${heroBlur}px) brightness(${heroBrightness})`,
           transform: `scale(${heroScale})`,
           transformOrigin: "center center",
