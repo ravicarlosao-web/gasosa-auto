@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Link } from "wouter";
 import { Menu } from "lucide-react";
@@ -566,7 +566,7 @@ function BrandFilterBar({ active, onChange }: { active: BrandId; onChange: (id: 
   return (
     <div style={{
       position: "sticky",
-      top: "clamp(60px,8vh,80px)",
+      top: "clamp(72px,10vh,92px)",
       zIndex: 40,
       background: "#ffffff",
       borderBottom: "1px solid rgba(0,0,0,0.1)",
@@ -639,6 +639,7 @@ export function PangulinoPage() {
   const isMobile = useIsMobile();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeBrand, setActiveBrand] = useState<BrandId>("todas");
+  const [scrolledPast, setScrolledPast] = useState(false);
   const p = t.pangulino;
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -646,17 +647,32 @@ export function PangulinoPage() {
   const heroTitleY         = useTransform(heroScroll, [0, 1], ["0%", "30%"]);
   const heroOverlayOpacity = useTransform(heroScroll, [0, 0.8], [0.62, 0.88]);
 
+  useEffect(() => {
+    function onScroll() {
+      setScrolledPast(window.scrollY > window.innerHeight * 0.75);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div className="w-full flex flex-col" style={{ fontFamily: "'Poppins', sans-serif" }}>
 
       {/* ── Header ── */}
       <NavAccentCtx.Provider value={GREEN}>
-      <NavThemeCtx.Provider value={true}>
-        <header className="fixed top-0 left-0 right-0 z-50">
+      <NavThemeCtx.Provider value={!scrolledPast}>
+        <header
+          className="fixed top-0 left-0 right-0 z-50"
+          style={{
+            background: scrolledPast ? "#ffffff" : "transparent",
+            borderBottom: scrolledPast ? "1px solid rgba(0,0,0,0.1)" : "none",
+            transition: "background 0.35s ease, border-color 0.35s ease",
+          }}
+        >
           <div className="w-full flex items-center justify-between"
             style={{ maxWidth: "1600px", margin: "0 auto", padding: "clamp(12px,2vh,22px) clamp(16px,2vw,32px)" }}>
             <Link href="/" className="flex items-center">
-              <NavLogo style={{ height: "clamp(42px,6vw,66px)" }} />
+              <NavLogo style={{ height: "clamp(32px,4.5vw,48px)" }} />
             </Link>
             <nav className="hidden lg:flex items-center gap-3">
               <div className="flex items-center gap-0.5">
@@ -664,8 +680,14 @@ export function PangulinoPage() {
               </div>
               <LangDropdown />
             </nav>
-            <motion.button className="lg:hidden" style={{ padding: "clamp(6px,1.2vw,10px)", color: "#ffffff" }}
-              onClick={() => setMobileMenuOpen(true)} aria-label={t.mobile.openMenu}>
+            <motion.button
+              className="lg:hidden"
+              style={{ padding: "clamp(6px,1.2vw,10px)" }}
+              animate={{ color: scrolledPast ? "#111111" : "#ffffff" }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label={t.mobile.openMenu}
+            >
               <Menu style={{ width: "clamp(20px,3vw,26px)", height: "clamp(20px,3vw,26px)" }} />
             </motion.button>
           </div>
@@ -681,6 +703,8 @@ export function PangulinoPage() {
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 35%", filter: "saturate(0.7)" }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg,rgba(45,122,34,0.35) 0%,transparent 60%)", zIndex: 1 }} />
         <motion.div style={{ position: "absolute", inset: 0, background: "#000", opacity: heroOverlayOpacity, zIndex: 1 }} />
+        {/* top vignette so header is always legible on the dark hero */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "180px", background: "linear-gradient(to bottom,rgba(0,0,0,0.55) 0%,transparent 100%)", zIndex: 2, pointerEvents: "none" }} />
 
         <motion.div style={{ position: "relative", zIndex: 2, y: heroTitleY, padding: "clamp(32px,5vw,80px) clamp(20px,5vw,80px)", paddingBottom: "clamp(60px,9vh,110px)", maxWidth: "900px" }}>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1], delay: 0.1 }}
