@@ -2,7 +2,7 @@ export type Lang = "PT" | "EN" | "ES";
 
 export const translations = {
   PT: {
-    nav: ["QUEM SOMOS", "PANGULINO", "INFRAESTRUTURAS", "NOTÍCIAS", "CONTACTOS"],
+    nav: ["QUEM SOMOS", "NOSSAS MARCAS", "INFRAESTRUTURAS", "NOTÍCIAS", "CONTACTOS"],
     hero: {
       title1: "Referência angolana no",
       title2: "sector automóvel e agrícola.",
@@ -115,7 +115,7 @@ export const translations = {
     footer: {
       tagline: "Qualidade e confiança para quem impulsiona Angola.",
       navLabel: "Navegação",
-      navLinks: ["Quem Somos", "PANGULINO", "Infraestruturas", "Notícias", "Contactos"],
+      navLinks: ["Quem Somos", "Nossas Marcas", "Infraestruturas", "Notícias", "Contactos"],
       contactLabel: "Contactos",
       email: "geral@cfagasosa.com",
       phone: "+244 951 025 435",
@@ -173,10 +173,10 @@ export const translations = {
     },
     pangulino: {
       hero: {
-        supra: "— FORÇA. PRECISÃO. CAMPO.",
-        heading: "PANGULINO",
-        sub1: "A marca angolana que trabalha tanto quanto o agricultor.",
-        sub2: "Ferramentas para quem vive da terra.",
+        supra: "— QUALIDADE. CONFIANÇA. ANGOLA.",
+        heading: "NOSSAS MARCAS",
+        sub1: "Pangulino, Nergytech e muito mais — marcas que trabalham para Angola.",
+        sub2: "Da terra à estrada, da oficina à indústria.",
       },
       manifesto: {
         tag: "A NOSSA MARCA",
@@ -267,7 +267,7 @@ export const translations = {
   },
 
   EN: {
-    nav: ["ABOUT US", "PANGULINO", "INFRASTRUCTURE", "NEWS", "CONTACTS"],
+    nav: ["ABOUT US", "OUR BRANDS", "INFRASTRUCTURE", "NEWS", "CONTACTS"],
     hero: {
       title1: "Angola's reference in the",
       title2: "automotive and agricultural sector.",
@@ -381,7 +381,7 @@ export const translations = {
     footer: {
       tagline: "Quality and trust for those who drive Angola forward.",
       navLabel: "Navigation",
-      navLinks: ["About Us", "PANGULINO", "Infrastructure", "News", "Contacts"],
+      navLinks: ["About Us", "Our Brands", "Infrastructure", "News", "Contacts"],
       contactLabel: "Contacts",
       email: "geral@cfagasosa.com",
       phone: "+244 951 025 435",
@@ -439,10 +439,10 @@ export const translations = {
     },
     pangulino: {
       hero: {
-        supra: "— STRENGTH. PRECISION. FIELD.",
-        heading: "PANGULINO",
-        sub1: "The Angolan brand that works as hard as the farmer.",
-        sub2: "Tools for those who live off the land.",
+        supra: "— QUALITY. TRUST. ANGOLA.",
+        heading: "OUR BRANDS",
+        sub1: "Pangulino, Nergytech and more — brands built for Angola.",
+        sub2: "From the field to the road, from the workshop to industry.",
       },
       manifesto: {
         tag: "OUR BRAND",
@@ -533,7 +533,7 @@ export const translations = {
   },
 
   ES: {
-    nav: ["QUIÉNES SOMOS", "PANGULINO", "INFRAESTRUCTURAS", "NOTICIAS", "CONTACTOS"],
+    nav: ["QUIÉNES SOMOS", "NUESTRAS MARCAS", "INFRAESTRUCTURAS", "NOTICIAS", "CONTACTOS"],
     hero: {
       title1: "Referencia angoleña en el",
       title2: "sector automovilístico y agrícola.",
@@ -647,7 +647,7 @@ export const translations = {
     footer: {
       tagline: "Calidad y confianza para quienes impulsan Angola.",
       navLabel: "Navegación",
-      navLinks: ["Quiénes Somos", "PANGULINO", "Infraestructuras", "Noticias", "Contactos"],
+      navLinks: ["Quiénes Somos", "Nuestras Marcas", "Infraestructuras", "Noticias", "Contactos"],
       contactLabel: "Contactos",
       email: "geral@cfagasosa.com",
       phone: "+244 951 025 435",
@@ -705,10 +705,10 @@ export const translations = {
     },
     pangulino: {
       hero: {
-        supra: "— FUERZA. PRECISIÓN. CAMPO.",
-        heading: "PANGULINO",
-        sub1: "La marca angoleña que trabaja tanto como el agricultor.",
-        sub2: "Herramientas para quienes viven de la tierra.",
+        supra: "— CALIDAD. CONFIANZA. ANGOLA.",
+        heading: "NUESTRAS MARCAS",
+        sub1: "Pangulino, Nergytech y más — marcas creadas para Angola.",
+        sub2: "Del campo a la carretera, del taller a la industria.",
       },
       manifesto: {
         tag: "NUESTRA MARCA",

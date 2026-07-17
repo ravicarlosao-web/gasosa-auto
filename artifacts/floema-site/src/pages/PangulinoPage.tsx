@@ -49,10 +49,10 @@ export function PangulinoPage() {
   const { t } = useLang();
 
   useSEO({
-    title: "Ferramentas Agrícolas Pangulino — Força e Precisão no Campo Angolano",
-    description: "Pangulino — a principal marca angolana de ferramentas agrícolas. Enxadas, pás, ancas, carrinhos de mão e mais. Disponível nas lojas Gasosa em Luanda, Lubango e Huambo.",
-    path: "/pangulino",
-    breadcrumb: { name: "Pangulino", path: "/pangulino" },
+    title: "Nossas Marcas — Pangulino & Nergytech | Gasosa Auto Agro",
+    description: "Conheça as marcas da Gasosa Auto Agro: Pangulino, a marca angolana de ferramentas agrícolas, e Nergytech, representação exclusiva de lubrificantes premium em Angola.",
+    path: "/nossas-marcas",
+    breadcrumb: { name: "Nossas Marcas", path: "/nossas-marcas" },
     schema: [PANGULINO_PRODUCT_SCHEMA],
   });
   const isMobile = useIsMobile();
