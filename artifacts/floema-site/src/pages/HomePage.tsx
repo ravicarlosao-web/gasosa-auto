@@ -100,6 +100,7 @@ export function HomePage() {
           style={{
             backgroundColor: heroBg,
             transition: "background-color 0.5s ease",
+            borderBottom: "1px solid rgba(11, 45, 107, 0.15)",
           }}
         >
         <div
