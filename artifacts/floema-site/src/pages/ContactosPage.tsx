@@ -132,59 +132,8 @@ export function ContactosPage() {
 
       <MobileMenu open={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
 
-      {/* ── Hero ── */}
-      <section
-        style={{
-          paddingTop: "clamp(120px, 18vh, 200px)",
-          paddingBottom: "clamp(48px, 7vw, 96px)",
-          textAlign: "center",
-          ...PAD,
-        }}
-      >
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 200, damping: 28 }}
-          style={{ fontSize: "0.75rem", fontWeight: 500, letterSpacing: "0.14em", color: "rgba(0,0,0,0.4)", marginBottom: "20px" }}
-        >
-          {tc.pageLabel}
-        </motion.p>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 32 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 90, damping: 22, delay: 0.07 }}
-          style={{
-            fontSize: "clamp(2rem, 1.2rem + 4.5vw, 5.5rem)",
-            fontWeight: 500,
-            color: "#111111",
-            lineHeight: 1.08,
-            letterSpacing: "-0.03em",
-            margin: "0 auto 20px",
-            maxWidth: "860px",
-          }}
-        >
-          {tc.pageTitle}
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: "spring", stiffness: 140, damping: 24, delay: 0.16 }}
-          style={{
-            fontSize: "clamp(0.85rem, 0.76rem + 0.5vw, 1.05rem)",
-            color: "rgba(0,0,0,0.52)",
-            lineHeight: 1.65,
-            maxWidth: "500px",
-            margin: "0 auto",
-          }}
-        >
-          {tc.pageSubtitle}
-        </motion.p>
-      </section>
-
       {/* ── Locations ── */}
-      <section style={{ marginBottom: "clamp(64px, 10vw, 140px)" }}>
+      <section style={{ paddingTop: "clamp(120px, 18vh, 200px)", marginBottom: "clamp(64px, 10vw, 140px)" }}>
         <div style={{ maxWidth: "1400px", margin: "0 auto", paddingLeft: "clamp(20px, 5vw, 80px)", paddingRight: "clamp(20px, 5vw, 80px)" }}>
 
           {/* Mobile & Tablet: stacked — map → title → cards */}
@@ -318,6 +267,60 @@ export function ContactosPage() {
             </div>
           )}
         </div>
+      </section>
+
+      {/* ── Hero ── */}
+      <section
+        style={{
+          paddingTop: "clamp(48px, 7vw, 96px)",
+          paddingBottom: "clamp(48px, 7vw, 96px)",
+          textAlign: "center",
+          ...PAD,
+        }}
+      >
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewport}
+          transition={{ type: "spring", stiffness: 200, damping: 28 }}
+          style={{ fontSize: "0.75rem", fontWeight: 500, letterSpacing: "0.14em", color: "rgba(0,0,0,0.4)", marginBottom: "20px" }}
+        >
+          {tc.pageLabel}
+        </motion.p>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewport}
+          transition={{ type: "spring", stiffness: 90, damping: 22, delay: 0.07 }}
+          style={{
+            fontSize: "clamp(2rem, 1.2rem + 4.5vw, 5.5rem)",
+            fontWeight: 500,
+            color: "#111111",
+            lineHeight: 1.08,
+            letterSpacing: "-0.03em",
+            margin: "0 auto 20px",
+            maxWidth: "860px",
+          }}
+        >
+          {tc.pageTitle}
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewport}
+          transition={{ type: "spring", stiffness: 140, damping: 24, delay: 0.16 }}
+          style={{
+            fontSize: "clamp(0.85rem, 0.76rem + 0.5vw, 1.05rem)",
+            color: "rgba(0,0,0,0.52)",
+            lineHeight: 1.65,
+            maxWidth: "500px",
+            margin: "0 auto",
+          }}
+        >
+          {tc.pageSubtitle}
+        </motion.p>
       </section>
 
       {/* ── Contact form ── */}
