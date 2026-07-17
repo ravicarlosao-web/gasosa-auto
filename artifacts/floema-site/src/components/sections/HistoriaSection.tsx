@@ -41,7 +41,7 @@ function MilestoneCard({
     <div
       className={`overflow-hidden ${
         index < MILESTONE_STATIC.length - 1
-          ? "border-b border-white/15 md:border-b-0 md:border-r md:border-white/15"
+          ? "border-b border-black/10 md:border-b-0 md:border-r md:border-black/10"
           : ""
       }`}
     >
@@ -54,7 +54,7 @@ function MilestoneCard({
             fontSize: "0.68rem",
             fontWeight: 700,
             letterSpacing: "0.18em",
-            color: "rgba(255,255,255,0.45)",
+            color: "rgba(0,0,0,0.4)",
             display: "block",
             marginBottom: "4px",
           }}>
@@ -63,7 +63,7 @@ function MilestoneCard({
           <span style={{
             fontSize: "clamp(0.95rem, 0.7rem + 1vw, 1.15rem)",
             fontWeight: 700,
-            color: "#ffffff",
+            color: "#111111",
             display: "block",
             lineHeight: 1.2,
           }}>
@@ -91,7 +91,7 @@ function MilestoneCard({
           style={{
             opacity: descOpacity,
             y: descY,
-            color: "rgba(255,255,255,0.78)",
+            color: "rgba(0,0,0,0.55)",
             fontSize: "clamp(0.78rem, 0.6rem + 0.6vw, 0.92rem)",
             lineHeight: 1.7,
             fontWeight: 400,
@@ -117,7 +117,7 @@ function CurrentYearHighlight({
   const textOpacity = useTransform(sectionProgress, [0.44, 0.62], [0, 1]);
 
   return (
-    <div className="mt-0 pt-10 border-t border-white/20 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8">
+    <div className="mt-0 pt-10 border-t border-black/10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8">
       <div className="overflow-hidden">
         <motion.span
           style={{
@@ -127,7 +127,7 @@ function CurrentYearHighlight({
             fontWeight: 800,
             lineHeight: 0.85,
             letterSpacing: "-0.04em",
-            color: "#ffffff",
+            color: "#111111",
             fontSize: "clamp(5rem, 4rem + 10vw, 14rem)",
           }}
         >
@@ -143,14 +143,14 @@ function CurrentYearHighlight({
           fontSize: "0.68rem",
           fontWeight: 700,
           letterSpacing: "0.18em",
-          color: "rgba(255,255,255,0.45)",
+          color: "rgba(0,0,0,0.4)",
           display: "block",
           marginBottom: "8px",
         }}>
           {t.historia.currentLabel}
         </span>
         <p style={{
-          color: "rgba(255,255,255,0.85)",
+          color: "rgba(0,0,0,0.65)",
           fontSize: "clamp(0.85rem, 0.6rem + 0.8vw, 1.05rem)",
           lineHeight: 1.65,
           fontWeight: 500,
@@ -182,9 +182,8 @@ export function HistoriaSection() {
   return (
     <section
       ref={sectionRef}
-      data-nav-light
       className="w-full"
-      style={{ background: "#003591", fontFamily: "'Poppins', sans-serif", position: "relative" }}
+      style={{ background: "#ffffff", fontFamily: "'Poppins', sans-serif", position: "relative" }}
     >
       <div className="max-w-[1400px] mx-auto px-5 sm:px-10 pt-10 pb-16 sm:pt-14 sm:pb-24">
         <div className="overflow-hidden mb-16 sm:mb-20">
@@ -192,7 +191,7 @@ export function HistoriaSection() {
             style={{
               y: headingY,
               opacity: headingOpacity,
-              color: "#ffffff",
+              color: "#111111",
               fontWeight: 700,
               lineHeight: 1.1,
               letterSpacing: "0.01em",
@@ -204,7 +203,7 @@ export function HistoriaSection() {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-white/20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-black/10">
           {MILESTONE_STATIC.map((m, i) => {
             const tr = t.historia.milestones[i];
             return (
