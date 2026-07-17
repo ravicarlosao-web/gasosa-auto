@@ -121,46 +121,6 @@ export function HomePage() {
               ))}
             </div>
 
-            {/* ── Color switcher ── */}
-            <div
-              className="flex items-center gap-1 ml-3"
-              role="group"
-              aria-label="Cor de fundo"
-            >
-              {HERO_THEMES.map((th) => {
-                const isActive = heroTheme === th.id;
-                return (
-                  <button
-                    key={th.id}
-                    onClick={() => setHeroTheme(th.id)}
-                    title={th.label}
-                    aria-pressed={isActive}
-                    style={{
-                      fontSize: "10px",
-                      fontWeight: 600,
-                      letterSpacing: "0.06em",
-                      color: "#0B2D6B",
-                      background: th.color,
-                      border: isActive
-                        ? "2px solid #0B2D6B"
-                        : "2px solid transparent",
-                      borderRadius: "20px",
-                      padding: "3px 9px",
-                      cursor: "pointer",
-                      outline: "none",
-                      transition: "border-color 0.25s ease, box-shadow 0.25s ease",
-                      boxShadow: isActive
-                        ? "0 0 0 1px #0B2D6B"
-                        : "0 0 0 1px rgba(11,45,107,0.18)",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {th.label}
-                  </button>
-                );
-              })}
-            </div>
-
             <LangDropdown />
           </nav>
 
