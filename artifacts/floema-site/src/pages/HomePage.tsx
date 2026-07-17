@@ -28,7 +28,6 @@ const FAQ_ITEMS = [
 ];
 
 const HERO_THEMES = [
-  { id: "bege",   label: "Bege",       color: "#F2EDE4" },
   { id: "branco", label: "Branco",     color: "#FFFFFF" },
   { id: "azul",   label: "Azul claro", color: "#E8F0FB" },
 ] as const;
@@ -47,7 +46,7 @@ export function HomePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [navLight, setNavLight] = useState(false);
-  const [heroTheme, setHeroTheme] = useState<HeroThemeId>("bege");
+  const [heroTheme, setHeroTheme] = useState<HeroThemeId>("branco");
   const heroBg = HERO_THEMES.find((th) => th.id === heroTheme)?.color ?? "#F2EDE4";
 
   useEffect(() => {
