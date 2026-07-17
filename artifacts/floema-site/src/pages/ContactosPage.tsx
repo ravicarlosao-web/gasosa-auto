@@ -102,9 +102,9 @@ export function ContactosPage() {
         <div
           className="w-full flex items-center justify-between"
           style={{
-            maxWidth: "1400px",
+            maxWidth: "1600px",
             margin: "0 auto",
-            padding: "clamp(12px, 2vh, 22px) clamp(16px, 4vw, 64px)",
+            padding: "clamp(12px, 2vh, 22px) clamp(16px, 2vw, 32px)",
           }}
         >
           <Link href="/" className="flex items-center">

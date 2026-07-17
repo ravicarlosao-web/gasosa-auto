@@ -418,7 +418,7 @@ function NoticiasCategorySection({
             viewport={viewport}
             transition={{ type: "spring", stiffness: 80, damping: 20, delay: i * 0.07 }}
             style={{
-              borderRadius: "14px", overflow: "hidden", background: "#EDE6DF",
+              borderRadius: "14px", overflow: "hidden", background: "#f5f5f5",
               cursor: "pointer", display: "flex", flexDirection: "column",
               gridRow: i === 0 && winW >= 900 ? "span 2" : undefined,
             }}
@@ -515,9 +515,9 @@ export function NoticiasPage() {
         <div
           className="w-full flex items-center justify-between"
           style={{
-            maxWidth: "1400px",
+            maxWidth: "1600px",
             margin: "0 auto",
-            padding: "clamp(12px, 2vh, 22px) clamp(16px, 4vw, 64px)",
+            padding: "clamp(12px, 2vh, 22px) clamp(16px, 2vw, 32px)",
           }}
         >
           <Link href="/" className="flex items-center">
@@ -638,7 +638,7 @@ export function NoticiasPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewport}
                 transition={{ type: "spring", stiffness: 85, damping: 22 }}
-                style={{ gridColumn: isMobile ? "1" : "span 2", borderRadius: "16px", overflow: "hidden", background: "#EDE6DF", cursor: "pointer", display: "flex", flexDirection: "column" }}
+                style={{ gridColumn: isMobile ? "1" : "span 2", borderRadius: "16px", overflow: "hidden", background: "#f5f5f5", cursor: "pointer", display: "flex", flexDirection: "column" }}
                 whileHover={{ y: -6 }}
                 whileTap={{ scale: 0.99 }}
               >
@@ -673,7 +673,7 @@ export function NoticiasPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewport}
                 transition={{ type: "spring", stiffness: 85, damping: 22, delay: (i + 1) * 0.07 }}
-                style={{ borderRadius: "16px", overflow: "hidden", background: "#EDE6DF", cursor: "pointer", display: "flex", flexDirection: "column" }}
+                style={{ borderRadius: "16px", overflow: "hidden", background: "#f5f5f5", cursor: "pointer", display: "flex", flexDirection: "column" }}
                 whileHover={{ y: -6 }}
                 whileTap={{ scale: 0.99 }}
               >
