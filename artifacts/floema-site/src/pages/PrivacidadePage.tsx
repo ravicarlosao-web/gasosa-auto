@@ -12,7 +12,7 @@ import { FADE_UP } from "../lib/motion-variants";
 import { useLang } from "../i18n";
 import { useSEO } from "../lib/use-seo";
 
-const BG   = "#F5EFE9";
+const BG   = "#ffffff";
 const NAVY = "#003591";
 const TEXT = "#111111";
 const MUTED = "rgba(0,0,0,0.52)";

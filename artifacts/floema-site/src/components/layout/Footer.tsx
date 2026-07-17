@@ -8,7 +8,7 @@ import brandNergy   from "@assets/Design_sem_nome__7_-removebg-preview_178070317
 import { useLang } from "../../i18n";
 
 /* ── Paleta do site ── */
-const BG      = "#F5EFE9";
+const BG      = "#ffffff";
 const NAVY    = "#003591";
 const TEXT    = "#111111";
 const MUTED   = "rgba(0,0,0,0.45)";

@@ -20,7 +20,7 @@ import { useSEO, PANGULINO_PRODUCT_SCHEMA } from "../lib/use-seo";
 const GREEN  = "#2D7A22";
 const AMBER  = "#F5A000";
 const NAVY   = "#003591";
-const CREAM  = "#F5EFE9";
+const CREAM  = "#ffffff";
 const DARK   = "#0a1628";
 
 const viewport = { once: false, amount: 0.18 } as const;

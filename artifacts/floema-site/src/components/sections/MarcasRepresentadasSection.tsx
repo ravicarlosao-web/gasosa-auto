@@ -103,7 +103,7 @@ export function MarcasRepresentadasSection() {
   return (
     <div
       ref={containerRef}
-      style={{ height: "520vh", background: "#F5EFE9", position: "relative" }}
+      style={{ height: "520vh", background: "#ffffff", position: "relative" }}
     >
       <div
         style={{

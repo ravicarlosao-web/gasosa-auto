@@ -47,7 +47,7 @@ export function HomePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [navLight, setNavLight] = useState(false);
   const [heroTheme, setHeroTheme] = useState<HeroThemeId>("branco");
-  const heroBg = HERO_THEMES.find((th) => th.id === heroTheme)?.color ?? "#F2EDE4";
+  const heroBg = HERO_THEMES.find((th) => th.id === heroTheme)?.color ?? "#ffffff";
 
   useEffect(() => {
     function onScroll() {
@@ -338,7 +338,7 @@ export function HomePage() {
         <section
           aria-label="Perguntas Frequentes sobre a Gasosa Auto Agro"
           style={{
-            background: "#F5EFE9",
+            background: "#ffffff",
             fontFamily: "'Poppins', sans-serif",
             paddingTop: "clamp(80px,12vw,144px)",
             paddingBottom: "clamp(80px,12vw,144px)",

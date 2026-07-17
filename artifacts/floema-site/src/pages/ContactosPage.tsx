@@ -87,7 +87,7 @@ export function ContactosPage() {
   };
 
   return (
-    <div className="w-full flex flex-col" style={{ fontFamily: "'Poppins', sans-serif", background: "#F5EFE9" }}>
+    <div className="w-full flex flex-col" style={{ fontFamily: "'Poppins', sans-serif", background: "#ffffff" }}>
 
       {/* ── Header ── */}
       <NavThemeCtx.Provider value={false}>

@@ -52,7 +52,7 @@ export function SectoresSection() {
 
   if (isMobile) {
     return (
-      <div style={{ background: "#F5EFE9", fontFamily: "'Poppins', sans-serif", padding: "clamp(48px, 8vw, 80px) 0" }}>
+      <div style={{ background: "#ffffff", fontFamily: "'Poppins', sans-serif", padding: "clamp(48px, 8vw, 80px) 0" }}>
         <div style={{ maxWidth: "600px", margin: "0 auto", padding: "0 clamp(20px, 5vw, 40px)" }}>
           <div style={{ display: "flex", gap: "8px", marginBottom: "clamp(28px, 6vw, 44px)", flexWrap: "wrap" }}>
             {sectorsT.map((s, i) => (
@@ -144,7 +144,7 @@ export function SectoresSection() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
-            background: "#F5EFE9",
+            background: "#ffffff",
           }}
         >
           <div style={{ marginBottom: "clamp(28px, 5vh, 56px)" }}>
@@ -225,7 +225,7 @@ export function SectoresSection() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
-            background: "#F5EFE9",
+            background: "#ffffff",
           }}
         >
           <div style={{ overflow: "hidden" }}>
@@ -267,7 +267,7 @@ export function SectoresSection() {
         <div
           style={{
             flex: 1,
-            background: "#F5EFE9",
+            background: "#ffffff",
             paddingTop: "clamp(88px, 12vh, 130px)",
             paddingBottom: "clamp(36px, 6vh, 80px)",
             paddingLeft: 0,

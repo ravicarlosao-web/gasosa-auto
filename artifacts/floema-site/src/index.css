@@ -94,7 +94,7 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  --background: 29 38% 94%; /* #F5EFE9 — matched from hero image */
+  --background: 0 0% 100%; /* #ffffff */
 
   --foreground: 220 14% 10%; /* near-black */
 

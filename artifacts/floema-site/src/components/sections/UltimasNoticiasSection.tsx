@@ -11,7 +11,7 @@ export function UltimasNoticiasSection() {
   return (
     <section
       style={{
-        background: "#F5EFE9",
+        background: "#ffffff",
         fontFamily: "'Poppins', sans-serif",
         paddingTop: "clamp(64px, 9vw, 120px)",
         paddingBottom: "clamp(72px, 10vw, 140px)",
@@ -86,7 +86,7 @@ export function UltimasNoticiasSection() {
                 flexDirection: "column",
                 borderRadius: "16px",
                 overflow: "hidden",
-                background: "#F5EFE9",
+                background: "#ffffff",
                 boxShadow: "0 2px 16px rgba(0,0,0,0.07)",
                 transition: "box-shadow 0.25s",
                 cursor: "pointer",

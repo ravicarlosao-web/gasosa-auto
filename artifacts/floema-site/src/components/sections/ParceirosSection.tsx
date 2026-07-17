@@ -135,7 +135,7 @@ export function ParceirosSection() {
   return (
     <section
       style={{
-        background: "#F5EFE9",
+        background: "#ffffff",
         fontFamily: "'Poppins', sans-serif",
         paddingTop: "clamp(64px, 9vw, 120px)",
         paddingBottom: "clamp(72px, 10vw, 140px)",

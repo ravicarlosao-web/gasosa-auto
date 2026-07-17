@@ -263,11 +263,11 @@ function NoticiaDrawer({
             }
             style={isMobile ? {
               position: "fixed", bottom: 0, left: 0, width: "100%", height: "92vh",
-              borderRadius: "20px 20px 0 0", background: "#F5EFE9", zIndex: 301,
+              borderRadius: "20px 20px 0 0", background: "#ffffff", zIndex: 301,
               overflowY: "auto", fontFamily: "'Poppins', sans-serif",
             } : {
               position: "fixed", top: 0, right: 0, width: "clamp(320px, 55vw, 860px)",
-              height: "100vh", background: "#F5EFE9", zIndex: 301,
+              height: "100vh", background: "#ffffff", zIndex: 301,
               overflowY: "auto", fontFamily: "'Poppins', sans-serif",
             }}
           >
@@ -500,7 +500,7 @@ export function NoticiasPage() {
   const WRAP = { maxWidth: "1400px", margin: "0 auto", ...PAD };
 
   return (
-    <div className="w-full flex flex-col" style={{ fontFamily: "'Poppins', sans-serif", background: "#F5EFE9" }}>
+    <div className="w-full flex flex-col" style={{ fontFamily: "'Poppins', sans-serif", background: "#ffffff" }}>
 
       {/* ── Header ── */}
       <NavThemeCtx.Provider value={false}>
