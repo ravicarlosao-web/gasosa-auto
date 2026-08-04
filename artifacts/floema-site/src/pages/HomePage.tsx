@@ -4,6 +4,7 @@ import { FADE_UP, REVEAL_ROW } from "../lib/motion-variants";
 import { Link } from "wouter";
 import { Menu, Mail } from "lucide-react";
 import { NavLogo } from "../components/layout/NavLogo";
+import { AngolaMap } from "../components/AngolaMap";
 import _pangHero       from "@assets/pangulino-hero-optimized.jpg";
 import _infraHero      from "@assets/20250903_123036_1780417176290.jpg";
 import { NavThemeCtx } from "../lib/nav-theme";
@@ -142,10 +143,8 @@ export function HomePage() {
 
       {/* ── Hero wrapper ── */}
       <div
-        className="sticky top-0 z-0 min-h-[100dvh] w-full flex flex-col overflow-hidden"
+        className="sticky top-0 z-0 min-h-[100dvh] w-full overflow-hidden"
         style={{
-          backgroundColor: heroBg,
-          transition: "background-color 0.5s ease",
           filter: `blur(${heroBlur}px) brightness(${heroBrightness})`,
           transform: `scale(${heroScale})`,
           transformOrigin: "center center",
@@ -153,59 +152,165 @@ export function HomePage() {
           borderRadius: scrollProgress > 0 ? `${scrollProgress * 20}px` : "0px",
         }}
       >
-        <main className="relative flex-1 w-full overflow-hidden">
+        {/* Background image */}
+        <img
+          src="/hero-bg.png"
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+        />
 
-          {/* Title */}
+        {/* Gradient overlay — opaque on left, fades right */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(105deg, rgba(232,240,251,0.97) 0%, rgba(232,240,251,0.92) 30%, rgba(232,240,251,0.55) 58%, rgba(232,240,251,0.08) 82%, transparent 100%)",
+          }}
+        />
+
+        <main
+          className="relative z-10 w-full flex flex-col"
+          style={{ minHeight: "100dvh", paddingTop: "clamp(80px, 12vh, 110px)" }}
+        >
+          {/* ── Two-column content ── */}
           <div
-            className="absolute inset-0 z-10 flex items-center justify-center text-center"
+            className="flex-1 flex items-center"
             style={{
-              padding: `0 clamp(16px, 6vw, 80px)`,
-              paddingBottom: "clamp(12vh, 20vh, 26vh)",
+              maxWidth: "1600px",
+              margin: "0 auto",
+              width: "100%",
+              padding: "clamp(24px, 4vh, 48px) clamp(16px, 4vw, 64px)",
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: "clamp(16px, 3vw, 48px)",
+              alignItems: "center",
             }}
           >
-            <motion.h1
-              style={{
-                color: "#003591",
-                fontFamily: "'Poppins', sans-serif",
-                fontWeight: 700,
-                lineHeight: 1.08,
-                letterSpacing: "0.01em",
-                fontSize: "clamp(2rem, 4vw + 1rem, 5.5rem)",
-              }}
-              initial={{ opacity: 0, y: 50, filter: "blur(12px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ delay: 0.2, duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+            {/* Left: title + separator + subtitle */}
+            <div>
+              <motion.h1
+                style={{
+                  color: "#003591",
+                  fontFamily: "'Poppins', sans-serif",
+                  fontWeight: 700,
+                  lineHeight: 1.1,
+                  letterSpacing: "-0.01em",
+                  fontSize: "clamp(1.7rem, 2.2vw + 0.8rem, 3.8rem)",
+                  margin: 0,
+                  marginBottom: "clamp(16px, 2.5vw, 28px)",
+                }}
+                initial={{ opacity: 0, y: 50, filter: "blur(12px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ delay: 0.2, duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {t.hero.title1}
+              </motion.h1>
+
+              {/* Yellow separator */}
+              <motion.div
+                style={{
+                  width: "clamp(40px, 4vw, 64px)",
+                  height: "3px",
+                  background: "#F5A000",
+                  borderRadius: "2px",
+                  marginBottom: "clamp(14px, 2vw, 22px)",
+                  transformOrigin: "left center",
+                }}
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ delay: 0.9, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+              />
+
+              <motion.p
+                style={{
+                  fontSize: "clamp(0.82rem, 0.6vw + 0.6rem, 1.05rem)",
+                  color: "#003591",
+                  lineHeight: 1.65,
+                  fontWeight: 500,
+                  margin: 0,
+                  opacity: 0.78,
+                  maxWidth: "480px",
+                }}
+                initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
+                animate={{ opacity: 0.78, y: 0, filter: "blur(0px)" }}
+                transition={{ delay: 1.1, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {t.hero.subtitle}
+              </motion.p>
+            </div>
+
+            {/* Right: Angola map */}
+            <motion.div
+              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+              initial={{ opacity: 0, x: 40, filter: "blur(8px)" }}
+              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              transition={{ delay: 0.4, duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              {t.hero.title1}<br />
-              {t.hero.title2}
-            </motion.h1>
+              <AngolaMap />
+            </motion.div>
           </div>
 
-          {/* Bottom bar */}
+          {/* ── Bottom bar ── */}
           <div
-            className="absolute z-30 flex items-end justify-between"
+            className="flex items-end justify-between"
             style={{
-              bottom: "clamp(16px, 4vh, 48px)",
-              left: "clamp(16px, 4vw, 64px)",
-              right: "clamp(16px, 4vw, 64px)",
+              padding: `0 clamp(16px, 4vw, 64px) clamp(16px, 4vh, 48px)`,
               gap: "clamp(10px, 2vw, 24px)",
+              maxWidth: "1600px",
+              width: "100%",
+              margin: "0 auto",
+              alignSelf: "flex-end",
             }}
           >
-            <motion.p
-              style={{
-                fontSize: "clamp(0.72rem, 0.5vw + 0.6rem, 0.95rem)",
-                color: "#003591",
-                lineHeight: 1.65,
-                fontWeight: 500,
-                maxWidth: "clamp(200px, 40vw, 300px)",
-              }}
-              initial={{ opacity: 0, y: 40, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ delay: 1.4, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            {/* 4 text feature items */}
+            <motion.div
+              className="hidden sm:flex items-center"
+              style={{ gap: 0 }}
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             >
-              {t.hero.subtitle}
-            </motion.p>
+              {t.hero.features.map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "center" }}>
+                  {i > 0 && (
+                    <div
+                      style={{
+                        width: "1px",
+                        height: "36px",
+                        background: "rgba(0,53,145,0.22)",
+                        margin: "0 clamp(14px, 2vw, 28px)",
+                        flexShrink: 0,
+                      }}
+                    />
+                  )}
+                  <p
+                    style={{
+                      fontSize: "clamp(0.52rem, 0.4vw + 0.38rem, 0.64rem)",
+                      fontWeight: 700,
+                      letterSpacing: "0.1em",
+                      color: "#003591",
+                      margin: 0,
+                      textAlign: "center",
+                      lineHeight: 1.45,
+                      whiteSpace: "pre-line",
+                    }}
+                  >
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
 
+            {/* Contact card (unchanged) */}
             <motion.div
               className="relative overflow-hidden rounded-2xl flex-shrink-0 hidden sm:block"
               style={{

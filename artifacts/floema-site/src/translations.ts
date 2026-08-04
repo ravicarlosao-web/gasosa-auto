@@ -4,9 +4,15 @@ export const translations = {
   PT: {
     nav: ["QUEM SOMOS", "NOSSAS MARCAS", "INFRAESTRUTURAS", "NOTÍCIAS", "CONTACTOS"],
     hero: {
-      title1: "Referência angolana no",
-      title2: "sector automóvel e agrícola.",
-      subtitle: "Qualidade e confiança para quem impulsiona Angola — nos campos, nas estradas e nas indústrias.",
+      title1: "Referência em soluções automóveis, agrícolas e industriais em Angola",
+      title2: "",
+      subtitle: "Qualidade e confiança que impulsionam Angola",
+      features: [
+        "QUALIDADE\nCOMPROVADA",
+        "CONFIANÇA\nE SEGURANÇA",
+        "TECNOLOGIA\nE INOVAÇÃO",
+        "PARCERIAS\nQUE GERAM VALOR",
+      ],
       cardText1: "Uma empresa construída",
       cardText2: "para durar.",
       contactBtn: "CONTACTE-NOS",
@@ -269,8 +275,14 @@ export const translations = {
   EN: {
     nav: ["ABOUT US", "OUR BRANDS", "INFRASTRUCTURE", "NEWS", "CONTACTS"],
     hero: {
-      title1: "Angola's reference in the",
-      title2: "automotive and agricultural sector.",
+      title1: "Angola's reference in automotive, agricultural and industrial solutions",
+      title2: "",
+      features: [
+        "PROVEN\nQUALITY",
+        "TRUST\n& SAFETY",
+        "TECHNOLOGY\n& INNOVATION",
+        "PARTNERSHIPS\nTHAT CREATE VALUE",
+      ],
       subtitle:
         "Quality and trust for those who drive Angola forward — in the fields, on the roads and in industry.",
       cardText1: "A company built",
@@ -535,8 +547,14 @@ export const translations = {
   ES: {
     nav: ["QUIÉNES SOMOS", "NUESTRAS MARCAS", "INFRAESTRUCTURAS", "NOTICIAS", "CONTACTOS"],
     hero: {
-      title1: "Referencia angoleña en el",
-      title2: "sector automovilístico y agrícola.",
+      title1: "Referencia en soluciones automotrices, agrícolas e industriales en Angola",
+      title2: "",
+      features: [
+        "CALIDAD\nCOMPROBADA",
+        "CONFIANZA\nY SEGURIDAD",
+        "TECNOLOGÍA\nE INNOVACIÓN",
+        "ALIANZAS\nQUE GENERAN VALOR",
+      ],
       subtitle:
         "Calidad y confianza para quienes impulsan Angola — en los campos, en las carreteras y en las industrias.",
       cardText1: "Una empresa construida",
