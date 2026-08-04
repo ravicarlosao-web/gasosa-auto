@@ -181,32 +181,28 @@ export function HomePage() {
           className="relative z-10 w-full flex flex-col"
           style={{ minHeight: "100dvh", paddingTop: "clamp(80px, 12vh, 110px)" }}
         >
-          {/* ── Two-column content ── */}
+          {/* ── Text content ── */}
           <div
             className="flex-1 flex items-center"
             style={{
               maxWidth: "1600px",
               margin: "0 auto",
               width: "100%",
-              padding: "clamp(24px, 4vh, 48px) clamp(16px, 4vw, 64px)",
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "clamp(16px, 3vw, 48px)",
-              alignItems: "center",
+              padding: "clamp(24px, 4vh, 48px) clamp(20px, 6vw, 96px)",
             }}
           >
-            {/* Left: title + separator + subtitle */}
-            <div>
+            {/* Title block — max ~55% width so the bg photo breathes on the right */}
+            <div style={{ maxWidth: "clamp(320px, 52vw, 680px)" }}>
               <motion.h1
                 style={{
                   color: "#003591",
                   fontFamily: "'Poppins', sans-serif",
                   fontWeight: 700,
-                  lineHeight: 1.1,
-                  letterSpacing: "-0.01em",
-                  fontSize: "clamp(1.7rem, 2.2vw + 0.8rem, 3.8rem)",
+                  lineHeight: 1.08,
+                  letterSpacing: "-0.015em",
+                  fontSize: "clamp(2rem, 2.8vw + 0.8rem, 4.4rem)",
                   margin: 0,
-                  marginBottom: "clamp(16px, 2.5vw, 28px)",
+                  marginBottom: "clamp(20px, 3vw, 36px)",
                 }}
                 initial={{ opacity: 0, y: 50, filter: "blur(12px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -218,11 +214,11 @@ export function HomePage() {
               {/* Yellow separator */}
               <motion.div
                 style={{
-                  width: "clamp(40px, 4vw, 64px)",
+                  width: "clamp(48px, 5vw, 72px)",
                   height: "3px",
                   background: "#F5A000",
                   borderRadius: "2px",
-                  marginBottom: "clamp(14px, 2vw, 22px)",
+                  marginBottom: "clamp(18px, 2.5vw, 28px)",
                   transformOrigin: "left center",
                 }}
                 initial={{ opacity: 0, scaleX: 0 }}
@@ -232,31 +228,21 @@ export function HomePage() {
 
               <motion.p
                 style={{
-                  fontSize: "clamp(0.82rem, 0.6vw + 0.6rem, 1.05rem)",
+                  fontSize: "clamp(0.9rem, 0.7vw + 0.65rem, 1.2rem)",
                   color: "#003591",
-                  lineHeight: 1.65,
+                  lineHeight: 1.6,
                   fontWeight: 500,
                   margin: 0,
-                  opacity: 0.78,
-                  maxWidth: "480px",
+                  opacity: 0.82,
+                  maxWidth: "440px",
                 }}
                 initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
-                animate={{ opacity: 0.78, y: 0, filter: "blur(0px)" }}
+                animate={{ opacity: 0.82, y: 0, filter: "blur(0px)" }}
                 transition={{ delay: 1.1, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               >
                 {t.hero.subtitle}
               </motion.p>
             </div>
-
-            {/* Right: Angola map */}
-            <motion.div
-              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-              initial={{ opacity: 0, x: 40, filter: "blur(8px)" }}
-              animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              transition={{ delay: 0.4, duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <AngolaMap />
-            </motion.div>
           </div>
 
           {/* ── Bottom bar ── */}
