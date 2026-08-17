@@ -431,9 +431,10 @@ function NergySection() {
   const isMobile = useIsMobile();
 
   const PRODUCTS = [
-    { name: "Lubrificantes Automóvel", desc: "Óleos de motor, lubrificantes de transmissão e fluidos de travão para veículos ligeiros e pesados. Formulações de alto desempenho que protegem o motor em climas exigentes.", detalhe: "Motor • Transmissão • Direcção • Travões" },
-    { name: "Lubrificantes Industriais", desc: "Óleos hidráulicos, lubrificantes de engrenagem e fluidos de corte para maquinaria industrial e equipamento de construção. Redução de desgaste e maior tempo entre manutenções.", detalhe: "Hidráulico • Engrenagem • Compressor • Corte" },
-    { name: "Lubrificantes Agrícolas", desc: "Linha específica para tratores, colhedoras e equipamento agrícola. Desenvolvidos para operar em condições de campo — poeira, calor e cargas intermitentes.", detalhe: "Tractor • Agrícola • Caixa • Hidráulico" },
+    { name: "Filtros de Óleo", desc: "Protegem o sistema de lubrificação através da remoção de partículas metálicas e resíduos de combustão, prolongando a vida útil do motor e reduzindo o desgaste prematuro.", detalhe: "Lubrificação • Motor • Desgaste" },
+    { name: "Filtros de Ar", desc: "Garantem ar limpo para uma combustão eficiente, protegendo os componentes internos contra poeiras e partículas abrasivas.", detalhe: "Combustão • Poeiras • Protecção" },
+    { name: "Filtros de Combustível", desc: "Removem partículas e água antes que atinjam bombas e injetores, assegurando maior eficiência, menor consumo e proteção do sistema de injeção.", detalhe: "Água • Injecção • Eficiência" },
+    { name: "Filtros Hidráulicos", desc: "Contribuem para a limpeza dos circuitos hidráulicos, protegendo bombas, válvulas e cilindros, reduzindo paragens e aumentando a produtividade.", detalhe: "Bombas • Válvulas • Cilindros" },
   ];
 
   const ICONS = [
@@ -447,6 +448,41 @@ function NergySection() {
       <path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/>
       <path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/>
     </svg>,
+    <svg key="d" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3 4 6v5c0 5.25 3.4 8.45 8 10 4.6-1.55 8-4.75 8-10V6l-8-3Z"/>
+      <path d="m9 12 2 2 4-4"/>
+    </svg>,
+  ];
+
+  const QUALITY_POINTS = [
+    {
+      label: "TECNOLOGIA",
+      title: "Filtragem pensada para ambientes exigentes.",
+      desc: "Os nossos meios filtrantes são concebidos para maximizar a retenção de contaminantes. A estrutura reforçada, os vedantes de elevada resistência e os materiais cuidadosamente selecionados garantem desempenho estável durante todo o intervalo de serviço.",
+    },
+    {
+      label: "CONTROLO DE QUALIDADE",
+      title: "Consistência em cada componente.",
+      desc: "Cada componente é sujeito a processos rigorosos de inspeção para assegurar consistência dimensional, resistência estrutural e eficiência de filtragem. O compromisso com a qualidade traduz-se em produtos preparados para operar sob condições severas.",
+    },
+  ];
+
+  const SECTORS = [
+    "Veículos ligeiros",
+    "Transporte pesado",
+    "Agricultura",
+    "Construção",
+    "Mineração",
+    "Equipamentos industriais",
+    "Grupos geradores",
+  ];
+
+  const REASONS = [
+    "Engenharia orientada para o desempenho",
+    "Materiais filtrantes de elevada eficiência",
+    "Compatibilidade com milhares de aplicações",
+    "Elevada durabilidade e fiabilidade comprovada",
+    "Suporte técnico especializado",
   ];
 
   return (
@@ -459,20 +495,20 @@ function NergySection() {
             padding: isMobile ? "clamp(48px,10vw,72px) clamp(24px,6vw,48px)" : "clamp(64px,8vw,100px) clamp(40px,5.5vw,80px) clamp(64px,8vw,100px) clamp(28px,5vw,72px)" }}
         >
           <span style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: NAVY, display: "block", marginBottom: "16px" }}>
-            REPRESENTAÇÃO EXCLUSIVA
+            NERGYTECH · NOSSA MARCA
           </span>
           <h2 style={{ fontSize: "clamp(1.8rem,1rem+3vw,3.5rem)", fontWeight: 600, color: "#111111", letterSpacing: "-0.03em", lineHeight: 1.08, margin: "0 0 28px" }}>
-            Excelência internacional.<br />Presença angolana.
+            Engenharia de filtragem.<br />Máximo desempenho.
           </h2>
           <p style={{ fontSize: "clamp(0.88rem,0.78rem+0.38vw,1rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.78, margin: "0 0 18px" }}>
-            A Nergytech é uma marca internacional de lubrificantes de alto desempenho. A Gasosa Auto Agro detém a representação exclusiva em Angola — garantindo ao mercado angolano acesso às formulações mais avançadas para cada aplicação.
+            Protegemos motores, sistemas hidráulicos e equipamentos industriais com soluções de filtragem desenvolvidas para ambientes exigentes. Cada filtro é concebido para proporcionar máxima eficiência, elevada durabilidade e desempenho consistente, reduzindo custos de manutenção e aumentando a disponibilidade operacional.
           </p>
           <p style={{ fontSize: "clamp(0.88rem,0.78rem+0.38vw,1rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.78, margin: "0 0 32px" }}>
-            Presente nas três unidades em Luanda, Lubango e Huambo, com stock permanente e assistência técnica especializada para selecção do produto certo para cada equipamento.
+            Somos especializados em soluções de filtragem para os setores automotivo, agrícola, industrial, construção, mineração e geração de energia. A nossa missão é proteger os equipamentos que movimentam negócios, garantindo fiabilidade e produtividade em cada aplicação.
           </p>
           <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.06em", color: NAVY }}>
             <span style={{ width: "28px", height: "2px", background: NAVY, display: "inline-block" }} />
-            Representante exclusivo Nergytech em Angola
+            Proteção para equipamentos que não podem parar
           </span>
         </motion.div>
 
@@ -487,9 +523,9 @@ function NergySection() {
       {/* Stats */}
       <div style={{ background: NAVY, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)" }}>
         {[
-          { value: "3",    label: isMobile ? "Sectores" : "Sectores cobertos" },
-          { value: "100%", label: isMobile ? "Exclusivo" : "Representação exclusiva" },
-          { value: "3",    label: isMobile ? "Unidades" : "Unidades com stock" },
+          { value: "7",    label: isMobile ? "Setores" : "Setores de aplicação" },
+          { value: "4",    label: isMobile ? "Soluções" : "Tipos de filtros" },
+          { value: "100%", label: isMobile ? "Foco" : "Foco no desempenho" },
         ].map((s, i) => (
           <motion.div key={i} variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.3 }} custom={i * 0.1}
             style={{ padding: isMobile ? "clamp(20px,3.5vh,32px) clamp(20px,5vw,40px)" : "clamp(28px,5vh,52px) clamp(16px,3vw,40px)",
@@ -523,10 +559,10 @@ function NergySection() {
           </motion.span>
           <motion.h2 variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.06}
             style={{ fontSize: "clamp(1.8rem,1rem+2.8vw,3.2rem)", fontWeight: 600, color: "#ffffff", letterSpacing: "-0.03em", lineHeight: 1.1, margin: "0 0 48px" }}>
-            Lubrificação para cada aplicação.
+            Filtragem para cada aplicação.
           </motion.h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "2px", paddingBottom: "2px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit,minmax(240px,1fr))", gap: "2px", paddingBottom: "2px" }}>
           {PRODUCTS.map((item, i) => (
             <motion.div key={i} variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.15 }} custom={i * 0.1}
               style={{ background: i === 1 ? "#1a1a1a" : "#141414", padding: "clamp(36px,5vw,56px) clamp(24px,4vw,48px)", display: "flex", flexDirection: "column", gap: "20px", borderTop: `3px solid ${NAVY}` }}>
@@ -539,15 +575,118 @@ function NergySection() {
         </div>
       </div>
 
+      {/* Technology and quality */}
+      <div style={{ background: "#f6f8fb", padding: "clamp(64px,10vh,112px) clamp(20px,5vw,80px)" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <motion.span
+            variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}
+            style={{ display: "block", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: NAVY, marginBottom: "14px" }}
+          >
+            ENGENHARIA NERGYTECH
+          </motion.span>
+          <motion.h2
+            variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.06}
+            style={{ fontSize: "clamp(1.8rem,1rem+2.8vw,3.2rem)", fontWeight: 600, color: "#111111", letterSpacing: "-0.03em", lineHeight: 1.1, margin: "0 0 clamp(36px,6vh,64px)", maxWidth: "720px" }}
+          >
+            Proteção inteligente para aumentar a vida útil dos equipamentos.
+          </motion.h2>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: "clamp(20px,3vw,36px)" }}>
+            {QUALITY_POINTS.map((point, i) => (
+              <motion.article
+                key={point.label}
+                variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} custom={i * 0.12}
+                style={{
+                  background: "#ffffff",
+                  padding: "clamp(28px,4vw,48px)",
+                  border: "1px solid rgba(0,53,145,0.1)",
+                  borderTop: `3px solid ${NAVY}`,
+                  boxShadow: "0 12px 36px rgba(0,31,92,0.05)",
+                }}
+              >
+                <span style={{ display: "block", fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.18em", color: NAVY, marginBottom: "18px" }}>
+                  {point.label}
+                </span>
+                <h3 style={{ fontSize: "clamp(1.15rem,0.95rem+0.9vw,1.55rem)", fontWeight: 600, color: "#111111", lineHeight: 1.2, letterSpacing: "-0.02em", margin: "0 0 16px" }}>
+                  {point.title}
+                </h3>
+                <p style={{ fontSize: "clamp(0.84rem,0.75rem+0.3vw,0.96rem)", color: "rgba(0,0,0,0.58)", lineHeight: 1.8, margin: 0 }}>
+                  {point.desc}
+                </p>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Application sectors and reasons */}
+      <div style={{ background: NAVY, padding: "clamp(64px,10vh,112px) clamp(20px,5vw,80px)" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1.05fr 0.95fr", gap: "clamp(48px,8vw,112px)", alignItems: "start" }}>
+          <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}>
+            <span style={{ display: "block", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: "#8eb7f4", marginBottom: "14px" }}>
+              SETORES DE APLICAÇÃO
+            </span>
+            <h2 style={{ fontSize: "clamp(1.8rem,1rem+2.8vw,3.2rem)", fontWeight: 600, color: "#ffffff", letterSpacing: "-0.03em", lineHeight: 1.1, margin: "0 0 22px" }}>
+              Uma solução para cada ambiente de trabalho.
+            </h2>
+            <p style={{ fontSize: "clamp(0.86rem,0.76rem+0.35vw,1rem)", color: "rgba(255,255,255,0.64)", lineHeight: 1.8, margin: "0 0 32px", maxWidth: "540px" }}>
+              Da estrada ao campo e da obra à indústria, a Nergytech ajuda a manter os equipamentos protegidos, produtivos e prontos para trabalhar.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+              {SECTORS.map((sector) => (
+                <span
+                  key={sector}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    minHeight: "38px",
+                    padding: "8px 14px",
+                    border: "1px solid rgba(255,255,255,0.2)",
+                    color: "rgba(255,255,255,0.82)",
+                    fontSize: "clamp(0.72rem,0.66rem+0.18vw,0.8rem)",
+                    fontWeight: 500,
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  {sector}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.12}
+            style={{ background: "#ffffff", padding: "clamp(28px,4vw,48px)", color: "#111111" }}
+          >
+            <span style={{ display: "block", fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.18em", color: NAVY, marginBottom: "18px" }}>
+              PORQUE ESCOLHER A NOSSA MARCA
+            </span>
+            <h3 style={{ fontSize: "clamp(1.35rem,1rem+1vw,1.8rem)", fontWeight: 600, lineHeight: 1.2, letterSpacing: "-0.02em", margin: "0 0 26px" }}>
+              Desempenho que se traduz em confiança.
+            </h3>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: "16px" }}>
+              {REASONS.map((reason) => (
+                <li key={reason} style={{ display: "flex", alignItems: "flex-start", gap: "12px", color: "rgba(0,0,0,0.64)", fontSize: "clamp(0.82rem,0.74rem+0.28vw,0.92rem)", lineHeight: 1.5 }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0, width: "20px", height: "20px", borderRadius: "50%", background: NAVY, color: "#ffffff", fontSize: "0.7rem", marginTop: "1px" }}>
+                    ✓
+                  </span>
+                  {reason}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </div>
+
       {/* CTA */}
       <div style={{ background: `linear-gradient(135deg,${NAVY} 0%,#001f5c 100%)`, padding: "clamp(64px,10vh,100px) clamp(20px,5vw,80px)", display: "flex", flexDirection: "column", alignItems: isMobile ? "flex-start" : "center", textAlign: isMobile ? "left" : "center" }}>
         <motion.h2 variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}
           style={{ fontSize: "clamp(2rem,1rem+4vw,5rem)", fontWeight: 700, color: "#ffffff", letterSpacing: "-0.04em", lineHeight: 1.05, margin: "0 0 20px", maxWidth: "800px" }}>
-          O lubrificante certo.<br />Para cada motor.
+          Encontre a solução<br />ideal para a sua aplicação.
         </motion.h2>
         <motion.p variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.1}
           style={{ fontSize: "clamp(0.88rem,0.78rem+0.38vw,1.05rem)", color: "rgba(255,255,255,0.72)", lineHeight: 1.75, margin: "0 0 36px", maxWidth: "520px" }}>
-          Fale com a nossa equipa para selecionar o produto Nergytech adequado ao seu veículo ou equipamento.
+          A nossa equipa está preparada para ajudar a selecionar o filtro mais adequado e garantir proteção, desempenho e máxima eficiência operacional.
         </motion.p>
         <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.18}>
           <Link href="/contactos" style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "clamp(13px,2vh,18px) clamp(28px,4vw,44px)", background: "#ffffff", color: NAVY, fontWeight: 700, fontSize: "clamp(0.82rem,0.72rem+0.35vw,0.95rem)", letterSpacing: "0.06em", textDecoration: "none", borderRadius: "4px" }}>
