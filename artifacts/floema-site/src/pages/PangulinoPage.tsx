@@ -157,9 +157,9 @@ function Ag55Section() {
   const isMobile = useIsMobile();
 
   const PRODUCTS = [
-    { name: "Peças Automóveis", desc: "Gama completa de peças de substituição para veículos ligeiros, pesados e industriais. Compatibilidade garantida com as principais marcas presentes no mercado angolano.", detalhe: "Motor • Travões • Suspensão • Transmissão" },
-    { name: "Acessórios & Equipamento", desc: "Acessórios de interior e exterior, ferramentas de bordo e equipamento de manutenção rápida. Qualidade que se vê e se sente em cada detalhe.", detalhe: "Interior • Exterior • Ferramentas • Diagnóstico" },
-    { name: "Consumíveis & Filtros", desc: "Filtros de óleo, ar e combustível, velas de ignição, correias e fluidos. Stock permanente nas três unidades para uma substituição sempre atempada.", detalhe: "Filtros • Velas • Correias • Fluidos" },
+    { name: "Baterias automotivas", desc: "Concebidas para proporcionar potência de arranque, estabilidade e desempenho consistente, destinam-se a uma ampla variedade de veículos.", detalhe: "Automóveis • Comerciais • Pesados" },
+    { name: "Baterias industriais e agrícolas", desc: "Desenvolvidas para aplicações profissionais que exigem robustez, resistência e fiabilidade. Proporcionam a potência necessária para acompanhar diferentes condições de trabalho e operação.", detalhe: "Indústria • Tratores • Equipamentos" },
+    { name: "Baterias para motociclos", desc: "Desenvolvidas para responder às necessidades específicas dos veículos de duas rodas, combinam dimensões compactas, eficiência e potência de arranque.", detalhe: "Motociclos • Duas rodas • Compactas" },
   ];
 
   const ICONS = [
@@ -172,6 +172,25 @@ function Ag55Section() {
     <svg key="c" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>
     </svg>,
+  ];
+
+  const APPLICATIONS = [
+    { label: "AUTOMOTIVO", title: "Energia para a mobilidade diária.", desc: "Soluções para automóveis, veículos comerciais e veículos pesados, adaptadas às diferentes necessidades do mercado." },
+    { label: "INDUSTRIAL & AGRÍCOLA", title: "Potência para o trabalho profissional.", desc: "Baterias para máquinas industriais, tratores, equipamentos agrícolas e outras aplicações que exigem robustez e continuidade." },
+    { label: "MOTOCICLOS", title: "Desempenho em duas rodas.", desc: "Uma gama compacta e eficiente, com potência de arranque adequada a motociclos e outros veículos de duas rodas." },
+  ];
+
+  const QUALITY_POINTS = [
+    {
+      label: "QUALIDADE ORIENTADA PARA O DESEMPENHO",
+      title: "Tecnologia e rigor em cada produto.",
+      desc: "Na AG55, cada produto é desenvolvido com foco na qualidade, consistência e fiabilidade. A seleção de materiais, os processos de fabricação e os critérios de controlo de qualidade são orientados para responder às exigências de diferentes aplicações e mercados.",
+    },
+    {
+      label: "A ASSINATURA AG55",
+      title: "Soluções de energia confiáveis.",
+      desc: "A combinação entre tecnologia, engenharia e rigor no processo de fabricação permite oferecer produtos orientados para um desempenho consistente, acompanhando as necessidades dos clientes e parceiros nos segmentos automotivo, industrial, agrícola e de motociclos.",
+    },
   ];
 
   return (
@@ -191,20 +210,20 @@ function Ag55Section() {
           }}
         >
           <span style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: GOLD, display: "block", marginBottom: "16px" }}>
-            A NOSSA MARCA
+            AG55 · NOSSA MARCA
           </span>
           <h2 style={{ fontSize: "clamp(1.8rem,1rem+3vw,3.5rem)", fontWeight: 600, color: "#111111", letterSpacing: "-0.03em", lineHeight: 1.08, margin: "0 0 28px" }}>
-            Performance.<br />Confiança.<br />Angola.
+            Energia confiável.<br />Desempenho consistente.
           </h2>
           <p style={{ fontSize: "clamp(0.88rem,0.78rem+0.38vw,1rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.78, margin: "0 0 18px" }}>
-            A ag55 é a marca de peças e acessórios automóveis da Gasosa Auto Agro — criada para garantir ao mercado angolano acesso a componentes de qualidade, com disponibilidade permanente e preços competitivos.
+            A AG55 apresenta uma gama abrangente de baterias desenvolvidas para responder às exigências dos mercados automotivo, industrial, agrícola e de motociclos.
           </p>
           <p style={{ fontSize: "clamp(0.88rem,0.78rem+0.38vw,1rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.78, margin: "0 0 32px" }}>
-            Da manutenção preventiva à reparação de emergência, a ag55 cobre toda a cadeia de necessidades automóveis — com uma gama pensada para o parque automóvel presente em Angola.
+            Com foco em qualidade, desempenho e fiabilidade, a AG55 disponibiliza soluções concebidas para diferentes tipos de veículos, máquinas e equipamentos, proporcionando uma resposta adequada às mais diversas aplicações.
           </p>
           <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.06em", color: GOLD }}>
             <span style={{ width: "28px", height: "2px", background: GOLD, display: "inline-block" }} />
-            Marca 100% focada no automobilismo angolano
+            Qualidade, tecnologia e engenharia
           </span>
         </motion.div>
 
@@ -212,16 +231,16 @@ function Ag55Section() {
           variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.12}
           style={{ position: "relative", overflow: "hidden", minHeight: isMobile ? "260px" : "auto", background: "#e8e4dc" }}
         >
-          <LazyImage fill src={ag55Hero} alt="ag55 — peças automóveis" objectPosition="center 40%" />
+          <LazyImage fill src={ag55Hero} alt="AG55 — baterias automotivas e industriais" objectPosition="center 40%" />
         </motion.div>
       </div>
 
       {/* Stats strip */}
       <div style={{ background: DARK, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)" }}>
         {[
-          { value: "500+", label: "Referências em stock" },
-          { value: "3",    label: "Províncias cobertas" },
-          { value: "100%", label: "Focada em Angola" },
+          { value: "3",    label: isMobile ? "Segmentos" : "Segmentos de aplicação" },
+          { value: "100%", label: isMobile ? "Fiabilidade" : "Foco na fiabilidade" },
+          { value: "AG55", label: isMobile ? "Energia" : "Energia para cada aplicação" },
         ].map((s, i) => (
           <motion.div
             key={i}
@@ -256,10 +275,10 @@ function Ag55Section() {
           </motion.span>
           <motion.h2 variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.06}
             style={{ fontSize: "clamp(1.8rem,1rem+2.8vw,3.2rem)", fontWeight: 600, color: "#ffffff", letterSpacing: "-0.03em", lineHeight: 1.1, margin: "0 0 48px" }}>
-            Tudo o que o seu veículo precisa.
+            Uma gama completa de soluções.
           </motion.h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "2px", paddingBottom: "2px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fit,minmax(240px,1fr))", gap: "2px", paddingBottom: "2px" }}>
           {PRODUCTS.map((item, i) => (
             <motion.div key={i} variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.15 }} custom={i * 0.1}
               style={{
@@ -284,6 +303,89 @@ function Ag55Section() {
         </div>
       </div>
 
+      {/* Quality and applications */}
+      <div style={{ background: "#f7f5ef", padding: "clamp(64px,10vh,112px) clamp(20px,5vw,80px)" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <motion.span
+            variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}
+            style={{ display: "block", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: GOLD, marginBottom: "14px" }}
+          >
+            QUALIDADE AG55
+          </motion.span>
+          <motion.h2
+            variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.06}
+            style={{ fontSize: "clamp(1.8rem,1rem+2.8vw,3.2rem)", fontWeight: 600, color: "#111111", letterSpacing: "-0.03em", lineHeight: 1.1, margin: "0 0 clamp(36px,6vh,64px)", maxWidth: "760px" }}
+          >
+            Energia preparada para acompanhar cada desafio.
+          </motion.h2>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: "clamp(20px,3vw,36px)" }}>
+            {QUALITY_POINTS.map((point, i) => (
+              <motion.article
+                key={point.label}
+                variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.2 }} custom={i * 0.12}
+                style={{
+                  background: "#ffffff",
+                  padding: "clamp(28px,4vw,48px)",
+                  border: "1px solid rgba(196,154,16,0.16)",
+                  borderTop: `3px solid ${GOLD}`,
+                  boxShadow: "0 12px 36px rgba(65,49,0,0.05)",
+                }}
+              >
+                <span style={{ display: "block", fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.16em", color: GOLD, marginBottom: "18px" }}>
+                  {point.label}
+                </span>
+                <h3 style={{ fontSize: "clamp(1.15rem,0.95rem+0.9vw,1.55rem)", fontWeight: 600, color: "#111111", lineHeight: 1.2, letterSpacing: "-0.02em", margin: "0 0 16px" }}>
+                  {point.title}
+                </h3>
+                <p style={{ fontSize: "clamp(0.84rem,0.75rem+0.3vw,0.96rem)", color: "rgba(0,0,0,0.58)", lineHeight: 1.8, margin: 0 }}>
+                  {point.desc}
+                </p>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ background: "#111111", padding: "clamp(64px,10vh,112px) clamp(20px,5vw,80px)" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <motion.span
+            variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}
+            style={{ display: "block", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: GOLD, marginBottom: "14px" }}
+          >
+            DESENVOLVIDA PARA DIFERENTES APLICAÇÕES
+          </motion.span>
+          <motion.h2
+            variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.06}
+            style={{ fontSize: "clamp(1.8rem,1rem+2.8vw,3.2rem)", fontWeight: 600, color: "#ffffff", letterSpacing: "-0.03em", lineHeight: 1.1, margin: "0 0 clamp(36px,6vh,64px)", maxWidth: "720px" }}
+          >
+            Uma gama que acompanha a mobilidade, o trabalho e a energia.
+          </motion.h2>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: "2px" }}>
+            {APPLICATIONS.map((item, i) => (
+              <motion.article
+                key={item.label}
+                variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.18 }} custom={i * 0.1}
+                style={{ background: i === 1 ? "#1a1a1a" : "#141414", padding: "clamp(28px,4vw,48px)", borderTop: `3px solid ${GOLD}`, display: "flex", flexDirection: "column", minHeight: isMobile ? "auto" : "260px" }}
+              >
+                <span style={{ display: "block", fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.16em", color: GOLD, marginBottom: "22px" }}>
+                  {item.label}
+                </span>
+                <h3 style={{ fontSize: "clamp(1.15rem,0.9rem+0.9vw,1.55rem)", fontWeight: 600, color: "#ffffff", lineHeight: 1.2, letterSpacing: "-0.02em", margin: "0 0 16px" }}>
+                  {item.title}
+                </h3>
+                <p style={{ fontSize: "clamp(0.82rem,0.72rem+0.3vw,0.94rem)", color: "rgba(255,255,255,0.6)", lineHeight: 1.78, margin: 0 }}>
+                  {item.desc}
+                </p>
+              </motion.article>
+            ))}
+          </div>
+          <p style={{ color: "rgba(255,255,255,0.42)", fontSize: "clamp(0.72rem,0.66rem+0.18vw,0.8rem)", letterSpacing: "0.08em", margin: "28px 0 0", textTransform: "uppercase" }}>
+            Automotivo&nbsp; | &nbsp;Industrial &amp; Agrícola&nbsp; | &nbsp;Motociclos
+          </p>
+        </div>
+      </div>
+
       {/* CTA */}
       <div style={{
         background: `linear-gradient(135deg, ${GOLD} 0%, #8B6800 100%)`,
@@ -294,11 +396,11 @@ function Ag55Section() {
       }}>
         <motion.h2 variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}
           style={{ fontSize: "clamp(2rem,1rem+4vw,5rem)", fontWeight: 700, color: "#ffffff", letterSpacing: "-0.04em", lineHeight: 1.05, margin: "0 0 20px", maxWidth: "800px" }}>
-          A peça certa.<br />Sempre disponível.
+          Energia confiável.<br />Desempenho consistente.
         </motion.h2>
         <motion.p variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.1}
           style={{ fontSize: "clamp(0.88rem,0.78rem+0.38vw,1.05rem)", color: "rgba(255,255,255,0.72)", lineHeight: 1.75, margin: "0 0 36px", maxWidth: "520px" }}>
-          Fale com a nossa equipa para saber mais sobre a gama ag55, disponibilidade de peças e condições comerciais.
+          A AG55 acompanha as necessidades dos seus clientes e parceiros com soluções de energia confiáveis para diferentes aplicações.
         </motion.p>
         <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.18}>
           <Link href="/contactos" style={{
