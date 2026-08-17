@@ -33,7 +33,7 @@ type BrandId = "todas" | "ag55" | "pangulino" | "nergytech";
 
 const BRAND_TABS: { id: BrandId; label: string; accent: string }[] = [
   { id: "todas",     label: "Todas as Marcas", accent: NAVY   },
-  { id: "ag55",      label: "ag55",            accent: GOLD   },
+  { id: "ag55",      label: "AG55",            accent: GOLD   },
   { id: "pangulino", label: "Pangulino",        accent: GREEN  },
   { id: "nergytech", label: "Nergytech",        accent: NAVY   },
 ];
