@@ -131,7 +131,7 @@ function CurrentYearHighlight({
             fontSize: "clamp(5rem, 4rem + 10vw, 14rem)",
           }}
         >
-          2025
+          {t.historia.currentYear}
         </motion.span>
       </div>
 

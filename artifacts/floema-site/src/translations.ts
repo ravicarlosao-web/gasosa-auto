@@ -23,27 +23,28 @@ export const translations = {
       heading: "Uma trajetória marcada pela dedicação, excelência e crescimento.",
       milestones: [
         {
-          label: "Fundação",
-          subtitle: "O início em Luanda",
+          label: "O início no Huambo",
+          subtitle: "Nasce a Auto Gasosa",
           description:
-            "Fundação da Gasosa Auto Agro em Luanda, com capital próprio e foco no fornecimento de peças, acessórios e lubrificantes para o sector automóvel e agrícola angolano.",
+            "A nossa história começa em 2004, na província do Huambo. Foi aqui que nasceu a Auto Gasosa, iniciando a sua actividade com uma visão clara: construir uma empresa sólida, próxima dos seus clientes e capaz de fornecer produtos e soluções de qualidade para diferentes sectores.",
         },
         {
-          label: "Marca própria",
-          subtitle: "Nasce a Pangulino",
+          label: "Expansão para o Lubango",
+          subtitle: "Crescemos para a região sul",
           description:
-            "Criação da marca própria Pangulino, inspirada no pangolim — símbolo de resistência e protecção. Uma linha de ferramentas e equipamentos agrícolas de alta durabilidade, desenvolvida para o mercado angolano.",
+            "Em 2016, demos um passo importante no nosso processo de crescimento quando chegámos ao Lubango, província da Huíla. Esta expansão permitiu-nos aproximar ainda mais dos nossos clientes e parceiros na região sul de Angola, fortalecendo a nossa capacidade de distribuição.",
         },
         {
-          label: "Expansão nacional",
-          subtitle: "De Luanda ao interior do país",
+          label: "Presença em Luanda",
+          subtitle: "Um novo marco na nossa história",
           description:
-            "Consolidação da presença nacional com a abertura de instalações no Lubango e no Huambo — mais de 10.000 m² de infraestrutura no Lubango, com lojas, armazéns e oficinas ao serviço das províncias do sul e centro do país.",
+            "Em 2026, a Auto Gasosa alcança um novo marco com a chegada a Luanda, o principal centro económico e empresarial de Angola. Esta presença representa o resultado de mais de 20 anos de experiência, aprendizagem e crescimento.",
         },
       ],
-      currentLabel: "HOJE — 2025",
+      currentYear: "HOJE",
+      currentLabel: "UMA EMPRESA COM VISÃO DE FUTURO",
       currentText:
-        "Consolidados como referência nacional no sector automóvel, agrícola e industrial, com representação exclusiva da marca Nergytech em Angola, parceria com mais de 30 clientes e empresas de referência — e uma visão clara para o futuro.",
+        "De Huambo a Lubango e, agora, Luanda, a nossa trajetória é feita de crescimento sustentado, relações duradouras e uma procura constante por melhores soluções. Continuamos a investir no desenvolvimento do nosso portefólio, na parceria com marcas de referência e na capacidade de responder às exigências dos mercados automóvel, agrícola e industrial. Mais de 20 anos de história. Uma presença cada vez maior. O mesmo compromisso de sempre. O nosso próximo capítulo começa agora.",
     },
     sectores: {
       tag: "O QUE FAZEMOS",
@@ -295,27 +296,28 @@ export const translations = {
       heading: "A journey marked by dedication, excellence and growth.",
       milestones: [
         {
-          label: "Foundation",
-          subtitle: "The beginning in Luanda",
+          label: "The beginning in Huambo",
+          subtitle: "Auto Gasosa is born",
           description:
-            "Foundation of Gasosa Auto Agro in Luanda, with own capital and focus on supplying parts, accessories and lubricants for the Angolan automotive and agricultural sector.",
+            "Our story begins in 2004, in Huambo province. This is where Auto Gasosa was born, starting its activity with a clear vision: to build a solid company, close to its customers and able to supply quality products and solutions to different sectors.",
         },
         {
-          label: "Own brand",
-          subtitle: "Pangulino is born",
+          label: "Expansion to Lubango",
+          subtitle: "Growing into the southern region",
           description:
-            "Creation of the Pangulino own brand, inspired by the pangolin — a symbol of resilience and protection. A line of highly durable agricultural tools and equipment, developed for the Angolan market.",
+            "In 2016, we took an important step in our growth by arriving in Lubango, Huíla province. This expansion brought us closer to customers and partners in southern Angola and strengthened our distribution capacity.",
         },
         {
-          label: "National expansion",
-          subtitle: "From Luanda to the interior",
+          label: "Presence in Luanda",
+          subtitle: "A new milestone in our story",
           description:
-            "Consolidation of national presence with the opening of facilities in Lubango and Huambo — more than 10,000 m² of infrastructure in Lubango, with shops, warehouses and workshops serving the southern and central provinces.",
+            "In 2026, Auto Gasosa reaches a new milestone with its arrival in Luanda, Angola's main economic and business centre. This presence is the result of more than 20 years of experience, learning and growth.",
         },
       ],
-      currentLabel: "TODAY — 2025",
+      currentYear: "TODAY",
+      currentLabel: "A COMPANY WITH A VISION FOR THE FUTURE",
       currentText:
-        "Established as a national reference in the automotive, agricultural and industrial sector, with exclusive representation of the Nergytech brand in Angola, partnerships with more than 30 leading clients and companies — and a clear vision for the future.",
+        "From Huambo to Lubango and now Luanda, our journey is built on sustained growth, lasting relationships and a constant search for better solutions. We continue to invest in our portfolio, partnerships with leading brands and our ability to respond to the needs of the automotive, agricultural and industrial markets. More than 20 years of history. An ever-growing presence. The same commitment as always. Our next chapter starts now.",
     },
     sectores: {
       tag: "WHAT WE DO",
@@ -567,27 +569,28 @@ export const translations = {
       heading: "Una trayectoria marcada por la dedicación, la excelencia y el crecimiento.",
       milestones: [
         {
-          label: "Fundación",
-          subtitle: "El inicio en Luanda",
+          label: "El inicio en Huambo",
+          subtitle: "Nace Auto Gasosa",
           description:
-            "Fundación de Gasosa Auto Agro en Luanda, con capital propio y enfoque en el suministro de piezas, accesorios y lubricantes para el sector automovilístico y agrícola angoleño.",
+            "Nuestra historia comienza en 2004, en la provincia de Huambo. Aquí nació Auto Gasosa, iniciando su actividad con una visión clara: construir una empresa sólida, cercana a sus clientes y capaz de suministrar productos y soluciones de calidad para diferentes sectores.",
         },
         {
-          label: "Marca propia",
-          subtitle: "Nace Pangulino",
+          label: "Expansión a Lubango",
+          subtitle: "Crecemos hacia la región sur",
           description:
-            "Creación de la marca propia Pangulino, inspirada en el pangolín — símbolo de resistencia y protección. Una línea de herramientas y equipos agrícolas de alta durabilidad, desarrollada para el mercado angoleño.",
+            "En 2016, dimos un paso importante en nuestro crecimiento al llegar a Lubango, provincia de Huíla. Esta expansión nos permitió acercarnos aún más a nuestros clientes y socios en el sur de Angola y fortalecer nuestra capacidad de distribución.",
         },
         {
-          label: "Expansión nacional",
-          subtitle: "De Luanda al interior del país",
+          label: "Presencia en Luanda",
+          subtitle: "Un nuevo hito en nuestra historia",
           description:
-            "Consolidación de la presencia nacional con la apertura de instalaciones en Lubango y Huambo — más de 10.000 m² de infraestructura en Lubango, con tiendas, almacenes y talleres al servicio de las provincias del sur y centro del país.",
+            "En 2026, Auto Gasosa alcanza un nuevo hito con su llegada a Luanda, el principal centro económico y empresarial de Angola. Esta presencia es el resultado de más de 20 años de experiencia, aprendizaje y crecimiento.",
         },
       ],
-      currentLabel: "HOY — 2025",
+      currentYear: "HOY",
+      currentLabel: "UNA EMPRESA CON VISIÓN DE FUTURO",
       currentText:
-        "Consolidados como referencia nacional en el sector automovilístico, agrícola e industrial, con representación exclusiva de la marca Nergytech en Angola, asociación con más de 30 clientes y empresas de referencia — y una visión clara para el futuro.",
+        "De Huambo a Lubango y, ahora, Luanda, nuestra trayectoria está hecha de crecimiento sostenido, relaciones duraderas y una búsqueda constante de mejores soluciones. Seguimos invirtiendo en nuestro portafolio, en alianzas con marcas de referencia y en la capacidad de responder a las exigencias de los mercados automovilístico, agrícola e industrial. Más de 20 años de historia. Una presencia cada vez mayor. El mismo compromiso de siempre. Nuestro próximo capítulo comienza ahora.",
     },
     sectores: {
       tag: "LO QUE HACEMOS",
