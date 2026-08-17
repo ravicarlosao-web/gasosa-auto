@@ -210,7 +210,7 @@ function Ag55Section() {
           }}
         >
           <span style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: GOLD, display: "block", marginBottom: "16px" }}>
-            AG55 · NOSSA MARCA
+            AG55
           </span>
           <h2 style={{ fontSize: "clamp(1.8rem,1rem+3vw,3.5rem)", fontWeight: 600, color: "#111111", letterSpacing: "-0.03em", lineHeight: 1.08, margin: "0 0 28px" }}>
             Energia confiável.<br />Desempenho consistente.
@@ -597,7 +597,7 @@ function NergySection() {
             padding: isMobile ? "clamp(48px,10vw,72px) clamp(24px,6vw,48px)" : "clamp(64px,8vw,100px) clamp(40px,5.5vw,80px) clamp(64px,8vw,100px) clamp(28px,5vw,72px)" }}
         >
           <span style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: NAVY, display: "block", marginBottom: "16px" }}>
-            NERGYTECH · NOSSA MARCA
+            NERGYTECH
           </span>
           <h2 style={{ fontSize: "clamp(1.8rem,1rem+3vw,3.5rem)", fontWeight: 600, color: "#111111", letterSpacing: "-0.03em", lineHeight: 1.08, margin: "0 0 28px" }}>
             Engenharia de filtragem.<br />Máximo desempenho.

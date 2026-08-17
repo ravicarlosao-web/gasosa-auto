@@ -186,7 +186,7 @@ export const translations = {
         sub2: "Da terra à estrada, da oficina à indústria.",
       },
       manifesto: {
-        tag: "A NOSSA MARCA",
+        tag: "PANGULINO",
         heading: "Inspirada no pangolim.\nForjada para Angola.",
         body1: "A Pangulino nasce da convicção de que o agricultor angolano merece ferramentas à altura do seu trabalho. Inspirada no pangolim — símbolo africano de resistência, protecção e persistência — a marca foi criada para responder às exigências reais do campo angolano.",
         body2: "Cada produto da gama Pangulino é desenvolvido com materiais de alta durabilidade, pensado para os solos, o clima e as práticas agrícolas de Angola. Do Planalto Central às planícies costeiras, a Pangulino está onde o trabalho acontece.",
@@ -459,7 +459,7 @@ export const translations = {
         sub2: "From the field to the road, from the workshop to industry.",
       },
       manifesto: {
-        tag: "OUR BRAND",
+        tag: "PANGULINO",
         heading: "Inspired by the pangolin.\nForged for Angola.",
         body1: "Pangulino was born from the conviction that the Angolan farmer deserves tools that match their work. Inspired by the pangolin — an African symbol of resilience, protection and persistence — the brand was created to meet the real demands of Angola's fields.",
         body2: "Every Pangulino product is developed with high-durability materials, designed for Angola's soils, climate and agricultural practices. From the Central Plateau to the coastal plains, Pangulino is where work happens.",
@@ -732,7 +732,7 @@ export const translations = {
         sub2: "Del campo a la carretera, del taller a la industria.",
       },
       manifesto: {
-        tag: "NUESTRA MARCA",
+        tag: "PANGULINO",
         heading: "Inspirada en el pangolín.\nForjada para Angola.",
         body1: "Pangulino nace de la convicción de que el agricultor angoleño merece herramientas a la altura de su trabajo. Inspirada en el pangolín — símbolo africano de resistencia, protección y persistencia — la marca fue creada para responder a las exigencias reales del campo angoleño.",
         body2: "Cada producto de la gama Pangulino está desarrollado con materiales de alta durabilidad, pensado para los suelos, el clima y las prácticas agrícolas de Angola. Desde la Meseta Central hasta las llanuras costeras, Pangulino está donde ocurre el trabajo.",
