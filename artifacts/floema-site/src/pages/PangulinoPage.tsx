@@ -70,8 +70,8 @@ function TodasSection({ onSelect }: { onSelect: (id: BrandId) => void }) {
       id: "ag55" as BrandId,
       accent: GOLD,
       label: "AG55",
-      tagline: "Peças e acessórios de alta performance",
-      desc: "A ag55 é a marca de referência da Gasosa Auto Agro para peças, acessórios e consumíveis automóveis. Desenvolvida para responder às exigências do mercado angolano com qualidade consistente e disponibilidade garantida.",
+      tagline: "Baterias para cada aplicação",
+      desc: "A AG55 disponibiliza baterias para veículos, máquinas agrícolas, equipamentos industriais e motociclos. Soluções desenvolvidas para garantir potência de arranque, estabilidade e desempenho consistente.",
       img: ag55Hero,
     },
     {
@@ -86,8 +86,8 @@ function TodasSection({ onSelect }: { onSelect: (id: BrandId) => void }) {
       id: "nergytech" as BrandId,
       accent: NAVY,
       label: "Nergytech",
-      tagline: "Lubrificantes premium — representação exclusiva",
-      desc: "A Gasosa Auto Agro detém a representação exclusiva da Nergytech em Angola. Lubrificantes de alto desempenho para veículos, máquinas agrícolas e equipamentos industriais.",
+      tagline: "Filtragem para um desempenho consistente",
+      desc: "A Nergytech oferece filtros de óleo, ar, combustível e hidráulicos para veículos, máquinas agrícolas e equipamentos industriais. Soluções desenvolvidas para proteger os sistemas e prolongar a vida útil dos equipamentos.",
       img: nergyImg1,
     },
   ];
