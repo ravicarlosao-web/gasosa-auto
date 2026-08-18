@@ -196,8 +196,8 @@ export function HistoriaSection() {
               fontWeight: 700,
               lineHeight: 1.1,
               letterSpacing: "0.01em",
-              fontSize: "clamp(1.25rem, 0.8rem + 2.8vw, 4rem)",
-              maxWidth: "700px",
+              fontSize: "clamp(1.2rem, 0.85rem + 2.2vw, 3rem)",
+              maxWidth: "600px",
             }}
           >
             {t.historia.heading}
