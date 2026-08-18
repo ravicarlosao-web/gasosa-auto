@@ -870,10 +870,10 @@ export function PangulinoPage() {
   const { t } = useLang();
 
   useSEO({
-    title: "Nossas Marcas — Pangulino, Nergytech & ag55 | Gasosa Auto Agro",
+    title: "Marcas que Representamos — Pangulino, Nergytech & ag55 | Gasosa Auto Agro",
     description: "Conheça as marcas da Gasosa Auto Agro: ag55 (peças automóveis), Pangulino (ferramentas agrícolas) e Nergytech (representação exclusiva de lubrificantes premium em Angola).",
     path: "/nossas-marcas",
-    breadcrumb: { name: "Nossas Marcas", path: "/nossas-marcas" },
+    breadcrumb: { name: "Marcas que Representamos", path: "/nossas-marcas" },
     schema: [PANGULINO_PRODUCT_SCHEMA],
   });
 
@@ -940,20 +940,20 @@ export function PangulinoPage() {
 
       {/* ── Hero ── */}
       <div ref={heroRef} style={{ position: "relative", width: "100%", height: "100dvh", minHeight: "560px", overflow: "hidden", background: DARK, display: "flex", alignItems: "flex-end", justifyContent: "flex-start" }}>
-        <img src={heroImg} alt="Nossas Marcas — Gasosa Auto Agro" loading="eager" fetchPriority="high" decoding="async"
+        <img src={heroImg} alt="Marcas que Representamos — Gasosa Auto Agro" loading="eager" fetchPriority="high" decoding="async"
           style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 35%", filter: "saturate(0.7)" }} />
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg,rgba(45,122,34,0.35) 0%,transparent 60%)", zIndex: 1 }} />
         <motion.div style={{ position: "absolute", inset: 0, background: "#000", opacity: heroOverlayOpacity, zIndex: 1 }} />
         {/* top vignette so header is always legible on the dark hero */}
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: "180px", background: "linear-gradient(to bottom,rgba(0,0,0,0.55) 0%,transparent 100%)", zIndex: 2, pointerEvents: "none" }} />
 
-        <motion.div style={{ position: "relative", zIndex: 2, y: heroTitleY, padding: "clamp(32px,5vw,80px) clamp(20px,5vw,80px)", paddingBottom: "clamp(60px,9vh,110px)", maxWidth: "900px" }}>
+        <motion.div style={{ position: "relative", zIndex: 2, y: heroTitleY, width: "100%", maxWidth: "1280px", boxSizing: "border-box", padding: "clamp(32px,5vw,80px) clamp(20px,5vw,80px)", paddingBottom: "clamp(60px,9vh,110px)" }}>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1], delay: 0.1 }}
             style={{ fontSize: "clamp(0.65rem,0.55rem+0.4vw,0.8rem)", fontWeight: 600, color: GREEN, letterSpacing: "0.18em", textTransform: "uppercase", margin: "0 0 14px" }}>
             {p.hero.supra}
           </motion.p>
           <motion.h1 initial={{ opacity: 0, y: 44 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 80, damping: 22, delay: 0.15 }}
-            style={{ fontSize: "clamp(4.5rem, 2rem + 12vw, 14rem)", fontWeight: 700, color: "#ffffff", letterSpacing: "-0.04em", lineHeight: 0.88, margin: "0 0 32px" }}>
+            style={{ fontSize: "clamp(4rem, 1.5rem + 8vw, 9rem)", fontWeight: 700, color: "#ffffff", letterSpacing: "-0.04em", lineHeight: 0.88, margin: "0 0 32px", maxWidth: "1200px" }}>
             {p.hero.heading}
           </motion.h1>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1], delay: 0.38 }}>

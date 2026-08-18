@@ -2,7 +2,7 @@ export type Lang = "PT" | "EN" | "ES";
 
 export const translations = {
   PT: {
-    nav: ["QUEM SOMOS", "NOSSAS MARCAS", "INFRAESTRUTURAS", "NOTÍCIAS", "CONTACTOS"],
+    nav: ["QUEM SOMOS", "MARCAS QUE REPRESENTAMOS", "INFRAESTRUTURAS", "NOTÍCIAS", "CONTACTOS"],
     hero: {
       title1: "Referência em soluções automóveis, agrícolas e industriais em Angola",
       title2: "",
@@ -122,7 +122,7 @@ export const translations = {
     footer: {
       tagline: "Qualidade e confiança para quem impulsiona Angola.",
       navLabel: "Navegação",
-      navLinks: ["Quem Somos", "Nossas Marcas", "Infraestruturas", "Notícias", "Contactos"],
+      navLinks: ["Quem Somos", "Marcas que Representamos", "Infraestruturas", "Notícias", "Contactos"],
       contactLabel: "Contactos",
       email: "geral@cfagasosa.com",
       phone: "+244 951 025 435",
@@ -181,7 +181,7 @@ export const translations = {
     pangulino: {
       hero: {
         supra: "— QUALIDADE. CONFIANÇA. ANGOLA.",
-        heading: "NOSSAS MARCAS",
+        heading: "MARCAS QUE REPRESENTAMOS",
         sub1: "Pangulino, Nergytech e muito mais — marcas que trabalham para Angola.",
         sub2: "Da terra à estrada, da oficina à indústria.",
       },
@@ -274,7 +274,7 @@ export const translations = {
   },
 
   EN: {
-    nav: ["ABOUT US", "OUR BRANDS", "INFRASTRUCTURE", "NEWS", "CONTACTS"],
+    nav: ["ABOUT US", "BRANDS WE REPRESENT", "INFRASTRUCTURE", "NEWS", "CONTACTS"],
     hero: {
       title1: "Angola's reference in automotive, agricultural and industrial solutions",
       title2: "",
@@ -395,7 +395,7 @@ export const translations = {
     footer: {
       tagline: "Quality and trust for those who drive Angola forward.",
       navLabel: "Navigation",
-      navLinks: ["About Us", "Our Brands", "Infrastructure", "News", "Contacts"],
+      navLinks: ["About Us", "Brands We Represent", "Infrastructure", "News", "Contacts"],
       contactLabel: "Contacts",
       email: "geral@cfagasosa.com",
       phone: "+244 951 025 435",
@@ -454,7 +454,7 @@ export const translations = {
     pangulino: {
       hero: {
         supra: "— QUALITY. TRUST. ANGOLA.",
-        heading: "OUR BRANDS",
+        heading: "BRANDS WE REPRESENT",
         sub1: "Pangulino, Nergytech and more — brands built for Angola.",
         sub2: "From the field to the road, from the workshop to industry.",
       },
@@ -547,7 +547,7 @@ export const translations = {
   },
 
   ES: {
-    nav: ["QUIÉNES SOMOS", "NUESTRAS MARCAS", "INFRAESTRUCTURAS", "NOTICIAS", "CONTACTOS"],
+    nav: ["QUIÉNES SOMOS", "MARCAS QUE REPRESENTAMOS", "INFRAESTRUCTURAS", "NOTICIAS", "CONTACTOS"],
     hero: {
       title1: "Referencia en soluciones automotrices, agrícolas e industriales en Angola",
       title2: "",
@@ -668,7 +668,7 @@ export const translations = {
     footer: {
       tagline: "Calidad y confianza para quienes impulsan Angola.",
       navLabel: "Navegación",
-      navLinks: ["Quiénes Somos", "Nuestras Marcas", "Infraestructuras", "Noticias", "Contactos"],
+      navLinks: ["Quiénes Somos", "Marcas que Representamos", "Infraestructuras", "Noticias", "Contactos"],
       contactLabel: "Contactos",
       email: "geral@cfagasosa.com",
       phone: "+244 951 025 435",
@@ -727,7 +727,7 @@ export const translations = {
     pangulino: {
       hero: {
         supra: "— CALIDAD. CONFIANZA. ANGOLA.",
-        heading: "NUESTRAS MARCAS",
+        heading: "MARCAS QUE REPRESENTAMOS",
         sub1: "Pangulino, Nergytech y más — marcas creadas para Angola.",
         sub2: "Del campo a la carretera, del taller a la industria.",
       },

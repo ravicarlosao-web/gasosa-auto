@@ -166,7 +166,7 @@ export function Footer() {
           }}
         >
           <p style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: FAINT, textTransform: "uppercase", margin: 0 }}>
-            As Nossas Marcas
+            Marcas que Representamos
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "clamp(28px, 5vw, 60px)" }}>
             {BRANDS.map(({ src, alt }) => (
