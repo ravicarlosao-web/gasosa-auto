@@ -117,8 +117,8 @@ function CurrentYearHighlight({
   const textOpacity = useTransform(sectionProgress, [0.44, 0.62], [0, 1]);
 
   return (
-    <div className="mt-0 pt-10 border-t border-black/10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-8">
-      <div className="overflow-hidden">
+    <div className="mt-0 pt-10 border-t border-black/10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-10 lg:gap-16">
+      <div className="overflow-hidden sm:flex-1 sm:min-w-0">
         <motion.span
           style={{
             x: yearX,
@@ -128,7 +128,7 @@ function CurrentYearHighlight({
             lineHeight: 0.85,
             letterSpacing: "-0.04em",
             color: "#111111",
-            fontSize: "clamp(5rem, 4rem + 10vw, 14rem)",
+            fontSize: "clamp(4.5rem, 2rem + 8vw, 10rem)",
           }}
         >
           {t.historia.currentYear}
@@ -137,23 +137,24 @@ function CurrentYearHighlight({
 
       <motion.div
         style={{ opacity: textOpacity, y: textY }}
-        className="sm:max-w-[360px] pb-2"
+        className="w-full sm:flex-[0_1_520px] sm:max-w-[520px] pb-2"
       >
         <span style={{
-          fontSize: "0.68rem",
+          fontSize: "0.72rem",
           fontWeight: 700,
           letterSpacing: "0.18em",
           color: "rgba(0,0,0,0.4)",
           display: "block",
-          marginBottom: "8px",
+          marginBottom: "12px",
         }}>
           {t.historia.currentLabel}
         </span>
         <p style={{
-          color: "rgba(0,0,0,0.65)",
-          fontSize: "clamp(0.85rem, 0.6rem + 0.8vw, 1.05rem)",
-          lineHeight: 1.65,
+          color: "rgba(0,0,0,0.76)",
+          fontSize: "clamp(0.95rem, 0.7rem + 0.75vw, 1.2rem)",
+          lineHeight: 1.7,
           fontWeight: 500,
+          margin: 0,
         }}>
           {t.historia.currentText}
         </p>
