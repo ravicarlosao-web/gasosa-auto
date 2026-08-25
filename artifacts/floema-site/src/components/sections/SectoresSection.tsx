@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useLang } from "../../i18n";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { SECTORES_DATA } from "../../data/constants";
@@ -8,27 +8,9 @@ import { textVariants } from "../../lib/motion-variants";
 export function SectoresSection() {
   const { t } = useLang();
   const isMobile = useIsMobile();
-  const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const directionRef = useRef<number>(1);
   const activeIndexRef = useRef<number>(0);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  useEffect(() => {
-    if (isMobile) return;
-    return scrollYProgress.on("change", (v) => {
-      const next = v < 1 / 3 ? 0 : v < 2 / 3 ? 1 : 2;
-      if (next !== activeIndexRef.current) {
-        directionRef.current = next > activeIndexRef.current ? 1 : -1;
-        activeIndexRef.current = next;
-        setActiveIndex(next);
-      }
-    });
-  }, [scrollYProgress, isMobile]);
 
   const sectorsT = SECTORES_DATA.map((s, i) => ({
     ...s,
@@ -40,6 +22,13 @@ export function SectoresSection() {
 
   const active = sectorsT[activeIndex];
   const dir = directionRef.current;
+
+  const selectSector = (index: number) => {
+    if (index === activeIndexRef.current) return;
+    directionRef.current = index > activeIndexRef.current ? 1 : -1;
+    activeIndexRef.current = index;
+    setActiveIndex(index);
+  };
 
   useEffect(() => {
     SECTORES_DATA.forEach((s) => {
@@ -58,11 +47,7 @@ export function SectoresSection() {
             {sectorsT.map((s, i) => (
               <motion.button
                 key={s.key}
-                onClick={() => {
-                  directionRef.current = i > activeIndex ? 1 : -1;
-                  activeIndexRef.current = i;
-                  setActiveIndex(i);
-                }}
+                onClick={() => selectSector(i)}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 24 }}
                 style={{
@@ -121,7 +106,7 @@ export function SectoresSection() {
   }
 
   return (
-    <div ref={containerRef} style={{ height: "200vh", position: "relative" }}>
+    <div style={{ minHeight: "100dvh", position: "relative" }}>
       <div
         style={{
           position: "sticky",
@@ -151,9 +136,35 @@ export function SectoresSection() {
             {sectorsT.map((s, i) => {
               const isActive = i === activeIndex;
               return (
-                <div
+                <button
                   key={s.key}
-                  style={{ display: "flex", alignItems: "baseline", lineHeight: 1.25, marginBottom: "0.04em" }}
+                  type="button"
+                  onClick={() => selectSector(i)}
+                  onKeyDown={(event) => {
+                    if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+                      event.preventDefault();
+                      selectSector((i + 1) % sectorsT.length);
+                    }
+                    if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+                      event.preventDefault();
+                      selectSector((i - 1 + sectorsT.length) % sectorsT.length);
+                    }
+                  }}
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-label={`Ver sector ${s.name}`}
+                  style={{
+                    display: "flex",
+                    alignItems: "baseline",
+                    lineHeight: 1.25,
+                    marginBottom: "0.04em",
+                    padding: 0,
+                    border: 0,
+                    background: "transparent",
+                    cursor: "pointer",
+                    textAlign: "left",
+                    fontFamily: "inherit",
+                  }}
                 >
                   <span style={{ display: "inline-block", width: "1.1em", fontSize: "clamp(1.4rem, 2.8vw, 2.8rem)", flexShrink: 0, lineHeight: 1.06 }}>
                     <motion.span
@@ -174,7 +185,7 @@ export function SectoresSection() {
                   >
                     {s.name}
                   </motion.span>
-                </div>
+                </button>
               );
             })}
           </div>
