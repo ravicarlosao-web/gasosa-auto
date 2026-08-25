@@ -3,6 +3,7 @@ import nergyImg4 from "@assets/IMG_20250903_111532_1780387597136.jpg";
 import nergyImg5 from "@assets/1000015282_1780387656692.jpg";
 import nergyImg6 from "@assets/WhatsApp_Image_2025-09-03_at_11.33.28_(2)_1780387695350.jpeg";
 import historiaHuamboImg from "@assets/WhatsApp_Image_2026-08-17_at_19.35.54_1786993459379.jpeg";
+import automovelSectorImg from "@assets/WhatsApp_Image_2026-08-25_at_12.16.49_1787656706644.jpeg";
 
 export const MILESTONE_STATIC = [
   { year: "2004", image: historiaHuamboImg },
@@ -18,8 +19,8 @@ export const SECTORES_DATA = [
     description:
       "Fornecemos peças, acessórios e lubrificantes de alta performance para veículos ligeiros, pesados e industriais. Com marcas de referência internacional como Nergytech, Petronas, Castrol e Galp, garantimos qualidade e durabilidade em cada produto — para frotas empresariais e particulares.",
     tagline: "Alta performance para cada veículo",
-    thumbnail: "/automovel-sector.jpeg",
-    image: "/automovel-sector.jpeg",
+    thumbnail: automovelSectorImg,
+    image: automovelSectorImg,
   },
   {
     key: "agricola",
