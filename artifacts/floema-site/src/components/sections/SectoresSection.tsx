@@ -194,33 +194,20 @@ export function SectoresSection() {
 
           <div style={{ width: "clamp(48px, 30%, 100px)", height: 1, background: "rgba(0,0,0,0.18)", marginBottom: "clamp(14px, 2.5vh, 28px)" }} />
 
-          <div style={{ overflow: "hidden", marginBottom: "clamp(14px, 2.5vh, 28px)" }}>
+          <div style={{ overflow: "hidden", maxWidth: "clamp(180px, 90%, 300px)" }}>
             <AnimatePresence mode="wait" custom={dir}>
               <motion.p
-                key={`tag-${activeIndex}`}
+                key={`left-desc-${activeIndex}`}
                 custom={dir}
                 variants={textVariants}
                 initial="enter"
                 animate="center"
                 exit="exit"
-                style={{ fontSize: "clamp(0.72rem, 0.6rem + 0.4vw, 0.88rem)", fontWeight: 400, color: "rgba(0,0,0,0.55)", lineHeight: 1.45, margin: 0 }}
+                style={{ fontSize: "clamp(0.75rem, 0.6rem + 0.5vw, 0.93rem)", lineHeight: 1.82, color: "#111111", fontWeight: 400, margin: 0 }}
               >
-                {active.tagline} ↓
+                {active.description}
               </motion.p>
             </AnimatePresence>
-          </div>
-
-          <div style={{ width: "clamp(130px, 74%, 230px)", aspectRatio: "3 / 4", overflow: "hidden", position: "relative", flexShrink: 0 }}>
-            {sectorsT.map((s, i) => (
-              <motion.div
-                key={s.key}
-                animate={{ y: `${(i - activeIndex) * 100}%` }}
-                transition={{ type: "spring", stiffness: 340, damping: 34, mass: 0.7 }}
-                style={{ position: "absolute", inset: 0, willChange: "transform" }}
-              >
-                <img src={s.thumbnail} alt={s.name} loading="eager" decoding="sync" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-              </motion.div>
-            ))}
           </div>
         </div>
 
@@ -257,21 +244,6 @@ export function SectoresSection() {
 
           <div style={{ flex: 1 }} />
 
-          <div style={{ overflow: "hidden" }}>
-            <AnimatePresence mode="wait" custom={dir}>
-              <motion.p
-                key={`desc-${activeIndex}`}
-                custom={dir}
-                variants={textVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                style={{ fontSize: "clamp(0.75rem, 0.6rem + 0.5vw, 0.93rem)", lineHeight: 1.82, color: "#111111", fontWeight: 400, margin: 0 }}
-              >
-                {active.description}
-              </motion.p>
-            </AnimatePresence>
-          </div>
         </div>
 
         {/* ── Right panel ── */}
