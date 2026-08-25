@@ -221,8 +221,8 @@ export function SectoresSection() {
               alt="Lubrificantes, filtros para todas aplicações, baterias e acessórios diversos"
               style={{
                 display: "block",
-                width: "clamp(280px, 28vw, 400px)",
-                maxWidth: "none",
+                width: "100%",
+                maxWidth: "100%",
                 height: "auto",
                 marginTop: "clamp(14px, 2vh, 24px)",
                 alignSelf: "flex-start",
