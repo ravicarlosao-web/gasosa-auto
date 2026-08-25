@@ -4,6 +4,7 @@ import { useLang } from "../../i18n";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { SECTORES_DATA } from "../../data/constants";
 import { textVariants } from "../../lib/motion-variants";
+import automovelFeaturesImg from "@assets/WhatsApp_Image_2026-08-25_at_11.53.29_2_1787656788036.png";
 
 export function SectoresSection() {
   const { t } = useLang();
@@ -98,6 +99,13 @@ export function SectoresSection() {
               <p style={{ fontSize: "0.92rem", color: "rgba(0,0,0,0.55)", lineHeight: 1.78, fontWeight: 400, margin: 0 }}>
                 {active.description}
               </p>
+              {active.key === "automovel" && (
+                <img
+                  src={automovelFeaturesImg}
+                  alt="Lubrificantes, filtros para todas aplicações, baterias e acessórios diversos"
+                  style={{ display: "block", width: "100%", height: "auto", marginTop: "clamp(28px, 5vw, 44px)" }}
+                />
+              )}
             </motion.div>
           </AnimatePresence>
         </div>
@@ -209,6 +217,13 @@ export function SectoresSection() {
               </motion.p>
             </AnimatePresence>
           </div>
+          {active.key === "automovel" && (
+            <img
+              src={automovelFeaturesImg}
+              alt="Lubrificantes, filtros para todas aplicações, baterias e acessórios diversos"
+              style={{ display: "block", width: "100%", height: "auto", marginTop: "clamp(22px, 3vh, 36px)" }}
+            />
+          )}
         </div>
 
         {/* ── Middle panel ── */}
