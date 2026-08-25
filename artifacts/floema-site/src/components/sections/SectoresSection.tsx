@@ -198,8 +198,6 @@ export function SectoresSection() {
             })}
           </div>
 
-          <div style={{ flex: 1 }} />
-
           <div style={{ width: "clamp(48px, 30%, 100px)", height: 1, background: "rgba(0,0,0,0.18)", marginBottom: "clamp(14px, 2.5vh, 28px)" }} />
 
           <div style={{ overflow: "hidden", maxWidth: "clamp(180px, 90%, 300px)" }}>
@@ -221,7 +219,7 @@ export function SectoresSection() {
             <img
               src={automovelFeaturesImg}
               alt="Lubrificantes, filtros para todas aplicações, baterias e acessórios diversos"
-              style={{ display: "block", width: "145%", height: "auto", marginTop: "clamp(22px, 3vh, 36px)" }}
+              style={{ display: "block", width: "120%", height: "auto", marginTop: "clamp(22px, 3vh, 36px)" }}
             />
           )}
         </div>
