@@ -103,7 +103,7 @@ export function SectoresSection() {
                 <img
                   src={automovelFeaturesImg}
                   alt="Lubrificantes, filtros para todas aplicações, baterias e acessórios diversos"
-                  style={{ display: "block", width: "118%", height: "auto", marginTop: "clamp(28px, 5vw, 44px)" }}
+                  style={{ display: "block", width: "125%", height: "auto", marginTop: "clamp(28px, 5vw, 44px)" }}
                 />
               )}
             </motion.div>
@@ -219,7 +219,7 @@ export function SectoresSection() {
             <img
               src={automovelFeaturesImg}
               alt="Lubrificantes, filtros para todas aplicações, baterias e acessórios diversos"
-              style={{ display: "block", width: "120%", height: "auto", marginTop: "clamp(22px, 3vh, 36px)" }}
+              style={{ display: "block", width: "155%", height: "auto", marginTop: "clamp(22px, 3vh, 36px)" }}
             />
           )}
         </div>
