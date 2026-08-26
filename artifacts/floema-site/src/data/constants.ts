@@ -36,7 +36,7 @@ export const SECTORES_DATA = [
   {
     key: "industrial",
     name: "Industrial",
-    subtitle: "Soluções para operações industriais",
+    subtitle: "",
     description:
       "Lubrificantes, materiais de manutenção e ferramentas para diferentes aplicações industriais. Soluções fiáveis, com disponibilidade e suporte especializado.",
     tagline: "Stock permanente, atendimento especializado",
