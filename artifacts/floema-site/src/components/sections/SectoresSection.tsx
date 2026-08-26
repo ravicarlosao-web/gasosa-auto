@@ -202,7 +202,13 @@ export function SectoresSection() {
 
           <div style={{ width: "clamp(48px, 30%, 100px)", height: 1, background: "rgba(0,0,0,0.18)", marginBottom: "clamp(14px, 2.5vh, 28px)" }} />
 
-          <div style={{ overflow: "hidden", maxWidth: "clamp(180px, 90%, 300px)" }}>
+          <div
+            style={{
+              overflow: "hidden",
+              maxWidth: "clamp(180px, 90%, 300px)",
+              marginTop: active.key === "agricola" ? "clamp(14px, 2vh, 24px)" : 0,
+            }}
+          >
             <AnimatePresence mode="wait" custom={dir}>
               <motion.p
                 key={`left-desc-${activeIndex}`}
