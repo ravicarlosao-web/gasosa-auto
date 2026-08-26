@@ -57,7 +57,7 @@ export const translations = {
           num: "01",
           tag: "AUTOMÓVEL",
           name: "Automóvel",
-          title: "Soluções completas para o sector automóvel",
+          title: "",
           tagline: "Alta performance para cada veículo",
           description:
             "Acessórios e lubrificantes para veículos ligeiros, pesados e equipamentos industriais.\n\nTrabalhamos com marcas de referência internacional para garantir qualidade, desempenho e durabilidade.",
