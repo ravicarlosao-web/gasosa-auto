@@ -4,6 +4,7 @@ import nergyImg5 from "@assets/1000015282_1780387656692.jpg";
 import nergyImg6 from "@assets/WhatsApp_Image_2025-09-03_at_11.33.28_(2)_1780387695350.jpeg";
 import historiaHuamboImg from "@assets/WhatsApp_Image_2026-08-17_at_19.35.54_1786993459379.jpeg";
 import automovelSectorImg from "@assets/WhatsApp_Image_2026-08-25_at_12.16.49_1787656706644.jpeg";
+import industrialSectorImg from "@assets/WhatsApp_Image_2026-08-26_at_14.11.13_1787750854865.jpeg";
 
 export const MILESTONE_STATIC = [
   { year: "2004", image: historiaHuamboImg },
@@ -39,8 +40,8 @@ export const SECTORES_DATA = [
     description:
       "Lubrificantes, materiais de manutenção e ferramentas para diferentes aplicações industriais. Soluções fiáveis, com disponibilidade e suporte especializado.",
     tagline: "Stock permanente, atendimento especializado",
-    thumbnail: "/industrial-sector.jpeg",
-    image: "/industrial-sector.jpeg",
+    thumbnail: industrialSectorImg,
+    image: industrialSectorImg,
   },
 ] as const;
 
