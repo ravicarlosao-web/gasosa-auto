@@ -76,7 +76,7 @@ export const translations = {
           tag: "INDUSTRIAL",
           name: "Industrial",
           title: "Soluções para operações industriais",
-          tagline: "Stock permanente, atendimento especializado",
+          tagline: "",
           description:
             "Lubrificantes, materiais de manutenção e ferramentas para diferentes aplicações industriais. Soluções fiáveis, com disponibilidade e suporte especializado.",
         },

@@ -90,9 +90,11 @@ export function SectoresSection() {
                   style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                 />
               </div>
-              <p style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.15em", color: "#F5A000", marginBottom: "10px", textTransform: "uppercase" }}>
-                {active.tagline}
-              </p>
+              {active.tagline && (
+                <p style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.15em", color: "#F5A000", marginBottom: "10px", textTransform: "uppercase" }}>
+                  {active.tagline}
+                </p>
+              )}
               {active.subtitle && (
                 <h2 style={{ fontSize: "clamp(1.6rem, 5vw, 2.2rem)", fontWeight: 400, color: "#111111", lineHeight: 1.18, letterSpacing: "-0.03em", margin: "0 0 16px" }}>
                   {active.subtitle}
