@@ -35,9 +35,9 @@ export const SECTORES_DATA = [
   {
     key: "industrial",
     name: "Industrial",
-    subtitle: "Fornecimento industrial de confiança",
+    subtitle: "Soluções para operações industriais",
     description:
-      "Servimos indústrias, unidades fabris e empresas de logística com lubrificantes, materiais de manutenção e ferramentas diversas. A nossa equipa experiente garante o produto certo para cada aplicação — com stock permanente e atendimento especializado nas três províncias onde operamos.",
+      "Lubrificantes, materiais de manutenção e ferramentas para diferentes aplicações industriais. Soluções fiáveis, com disponibilidade e suporte especializado.",
     tagline: "Stock permanente, atendimento especializado",
     thumbnail: "/industrial-sector.jpeg",
     image: "/industrial-sector.jpeg",

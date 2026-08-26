@@ -75,10 +75,10 @@ export const translations = {
           num: "03",
           tag: "INDUSTRIAL",
           name: "Industrial",
-          title: "Fornecimento industrial de confiança",
+          title: "Soluções para operações industriais",
           tagline: "Stock permanente, atendimento especializado",
           description:
-            "Servimos indústrias, unidades fabris e empresas de logística com lubrificantes, materiais de manutenção e ferramentas diversas. A nossa equipa experiente garante o produto certo para cada aplicação — com stock permanente e atendimento especializado nas três províncias onde operamos.",
+            "Lubrificantes, materiais de manutenção e ferramentas para diferentes aplicações industriais. Soluções fiáveis, com disponibilidade e suporte especializado.",
         },
       ],
     },
