@@ -16,7 +16,7 @@ export const SECTORES_DATA = [
   {
     key: "automovel",
     name: "Automóvel",
-    subtitle: "Soluções completas para o sector automóvel",
+    subtitle: "",
     description:
       "Fornecemos peças, acessórios e lubrificantes de alta performance para veículos ligeiros, pesados e industriais. Com marcas de referência internacional como Nergytech, Petronas, Castrol e Galp, garantimos qualidade e durabilidade em cada produto — para frotas empresariais e particulares.",
     tagline: "Alta performance para cada veículo",

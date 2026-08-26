@@ -57,7 +57,7 @@ export const translations = {
           num: "01",
           tag: "AUTOMÓVEL",
           name: "Automóvel",
-          title: "Soluções para operações industriais",
+          title: "",
           tagline: "Alta performance para cada veículo",
           description:
             "Acessórios e lubrificantes para veículos ligeiros, pesados e equipamentos industriais.\n\nTrabalhamos com marcas de referência internacional para garantir qualidade, desempenho e durabilidade.",
@@ -75,7 +75,7 @@ export const translations = {
           num: "03",
           tag: "INDUSTRIAL",
           name: "Industrial",
-          title: "",
+          title: "Soluções para operações industriais",
           tagline: "Stock permanente, atendimento especializado",
           description:
             "Lubrificantes, materiais de manutenção e ferramentas para diferentes aplicações industriais. Soluções fiáveis, com disponibilidade e suporte especializado.",
