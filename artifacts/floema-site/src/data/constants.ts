@@ -38,7 +38,7 @@ export const SECTORES_DATA = [
     name: "Industrial",
     subtitle: "",
     description:
-      "Soluções para operações industriais. Lubrificantes, materiais de manutenção e ferramentas para diferentes aplicações industriais. Soluções fiáveis, com disponibilidade e suporte especializado.",
+      "Soluções para operações industriais.\n\nLubrificantes, materiais de manutenção e ferramentas para diferentes aplicações industriais. Soluções fiáveis, com disponibilidade e suporte especializado.",
     tagline: "",
     thumbnail: industrialSectorImg,
     image: industrialSectorImg,

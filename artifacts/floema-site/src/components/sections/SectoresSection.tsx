@@ -100,7 +100,7 @@ export function SectoresSection() {
                   {active.subtitle}
                 </h2>
               )}
-              <p style={{ fontSize: "0.92rem", color: "rgba(0,0,0,0.55)", lineHeight: 1.78, fontWeight: 400, margin: 0 }}>
+              <p style={{ fontSize: "0.92rem", color: "rgba(0,0,0,0.55)", lineHeight: 1.78, fontWeight: 400, margin: 0, whiteSpace: active.key === "industrial" ? "pre-line" : "normal" }}>
                 {active.description}
               </p>
               {active.key === "automovel" && (
@@ -219,7 +219,7 @@ export function SectoresSection() {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                style={{ fontSize: "clamp(0.75rem, 0.6rem + 0.5vw, 0.93rem)", lineHeight: 1.82, color: "#111111", fontWeight: 400, margin: 0 }}
+                style={{ fontSize: "clamp(0.75rem, 0.6rem + 0.5vw, 0.93rem)", lineHeight: 1.82, color: "#111111", fontWeight: 400, margin: 0, whiteSpace: active.key === "industrial" ? "pre-line" : "normal" }}
               >
                 {active.description}
               </motion.p>
