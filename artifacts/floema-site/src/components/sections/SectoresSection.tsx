@@ -206,7 +206,7 @@ export function SectoresSection() {
             style={{
               overflow: "hidden",
               maxWidth: "clamp(180px, 90%, 300px)",
-              marginTop: active.key === "agricola" ? "clamp(14px, 2vh, 24px)" : 0,
+              marginTop: active.key === "agricola" ? "clamp(28px, 4vh, 44px)" : 0,
             }}
           >
             <AnimatePresence mode="wait" custom={dir}>
