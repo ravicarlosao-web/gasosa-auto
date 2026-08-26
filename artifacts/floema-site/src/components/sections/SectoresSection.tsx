@@ -6,6 +6,22 @@ import { SECTORES_DATA } from "../../data/constants";
 import { textVariants } from "../../lib/motion-variants";
 import automovelFeaturesImg from "@assets/WhatsApp_Image_2026-08-25_at_11.53.29_2_1787656788036.png";
 
+function FormattedSectorDescription({ description }: { description: string }) {
+  const [firstParagraph, ...remainingParagraphs] = description.split("\n\n");
+  const isPortugueseIndustrialIntro = firstParagraph === "Soluções para operações industriais.";
+
+  if (!isPortugueseIndustrialIntro) {
+    return <>{description}</>;
+  }
+
+  return (
+    <>
+      <span style={{ fontSize: "1.1em", fontWeight: 700 }}>{firstParagraph}</span>
+      {remainingParagraphs.length > 0 && `\n\n${remainingParagraphs.join("\n\n")}`}
+    </>
+  );
+}
+
 export function SectoresSection() {
   const { t } = useLang();
   const isMobile = useIsMobile();
@@ -101,7 +117,7 @@ export function SectoresSection() {
                 </h2>
               )}
               <p style={{ fontSize: "0.92rem", color: "rgba(0,0,0,0.55)", lineHeight: 1.78, fontWeight: 400, margin: 0, whiteSpace: active.key === "industrial" ? "pre-line" : "normal" }}>
-                {active.description}
+                <FormattedSectorDescription description={active.description} />
               </p>
               {active.key === "automovel" && (
                 <img
@@ -221,7 +237,7 @@ export function SectoresSection() {
                 exit="exit"
                 style={{ fontSize: "clamp(0.75rem, 0.6rem + 0.5vw, 0.93rem)", lineHeight: 1.82, color: "#111111", fontWeight: 400, margin: 0, whiteSpace: active.key === "industrial" ? "pre-line" : "normal" }}
               >
-                {active.description}
+                <FormattedSectorDescription description={active.description} />
               </motion.p>
             </AnimatePresence>
           </div>
