@@ -93,9 +93,11 @@ export function SectoresSection() {
               <p style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.15em", color: "#F5A000", marginBottom: "10px", textTransform: "uppercase" }}>
                 {active.tagline}
               </p>
-              <h2 style={{ fontSize: "clamp(1.6rem, 5vw, 2.2rem)", fontWeight: 400, color: "#111111", lineHeight: 1.18, letterSpacing: "-0.03em", margin: "0 0 16px" }}>
-                {active.subtitle}
-              </h2>
+              {active.key !== "agricola" && (
+                <h2 style={{ fontSize: "clamp(1.6rem, 5vw, 2.2rem)", fontWeight: 400, color: "#111111", lineHeight: 1.18, letterSpacing: "-0.03em", margin: "0 0 16px" }}>
+                  {active.subtitle}
+                </h2>
+              )}
               <p style={{ fontSize: "0.92rem", color: "rgba(0,0,0,0.55)", lineHeight: 1.78, fontWeight: 400, margin: 0 }}>
                 {active.description}
               </p>
@@ -248,21 +250,23 @@ export function SectoresSection() {
             background: "#ffffff",
           }}
         >
-          <div style={{ overflow: "hidden" }}>
-            <AnimatePresence mode="wait" custom={dir}>
-              <motion.h3
-                key={`sub-${activeIndex}`}
-                custom={dir}
-                variants={textVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                style={{ fontSize: "clamp(1.05rem, 0.85rem + 1vw, 1.5rem)", fontWeight: 400, lineHeight: 1.28, letterSpacing: "-0.01em", color: "#111111", margin: 0 }}
-              >
-                {active.subtitle}
-              </motion.h3>
-            </AnimatePresence>
-          </div>
+          {active.key !== "agricola" && (
+            <div style={{ overflow: "hidden" }}>
+              <AnimatePresence mode="wait" custom={dir}>
+                <motion.h3
+                  key={`sub-${activeIndex}`}
+                  custom={dir}
+                  variants={textVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  style={{ fontSize: "clamp(1.05rem, 0.85rem + 1vw, 1.5rem)", fontWeight: 400, lineHeight: 1.28, letterSpacing: "-0.01em", color: "#111111", margin: 0 }}
+                >
+                  {active.subtitle}
+                </motion.h3>
+              </AnimatePresence>
+            </div>
+          )}
 
           <div style={{ flex: 1 }} />
 

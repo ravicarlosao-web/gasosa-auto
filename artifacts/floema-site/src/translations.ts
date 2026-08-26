@@ -66,10 +66,10 @@ export const translations = {
           num: "02",
           tag: "AGRÍCOLA",
           name: "Agrícola",
-          title: "Equipamentos que trabalham tanto quanto o agricultor",
+          title: "",
           tagline: "Soluções para o campo angolano",
           description:
-            "Apoiamos o desenvolvimento do sector rural angolano com máquinas, ferramentas e equipamentos agrícolas de alta durabilidade. Através da nossa marca própria Pangulino, oferecemos produtos desenvolvidos para as condições do campo angolano — robustos, fiáveis e acessíveis.",
+            "Equipamentos e soluções para o sector agrícola.\n\nTecnologia, robustez e fiabilidade para maximizar o desempenho no campo.",
         },
         {
           num: "03",
