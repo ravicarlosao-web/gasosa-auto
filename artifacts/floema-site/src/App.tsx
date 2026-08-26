@@ -25,7 +25,9 @@ function Router() {
       <Route path="/noticias" component={NoticiasPage} />
       <Route path="/pangulino" component={PangulinoPage} />
       <Route path="/nossas-marcas" component={PangulinoPage} />
+      <Route path="/marcas-que-representamos" component={PangulinoPage} />
       <Route path="/our-brands" component={PangulinoPage} />
+      <Route path="/brands-we-represent" component={PangulinoPage} />
       <Route path="/nuestras-marcas" component={PangulinoPage} />
       <Route path="/contactos" component={ContactosPage} />
       <Route path="/privacidade" component={PrivacidadePage} />
