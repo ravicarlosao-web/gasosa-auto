@@ -14,7 +14,6 @@ import { MobileMenu } from "../components/layout/MobileMenu";
 import { Footer } from "../components/layout/Footer";
 import { HistoriaSection } from "../components/sections/HistoriaSection";
 import { SectoresSection } from "../components/sections/SectoresSection";
-import { MarcasRepresentadasSection } from "../components/sections/MarcasRepresentadasSection";
 import { ParceirosSection } from "../components/sections/ParceirosSection";
 import { UltimasNoticiasSection } from "../components/sections/UltimasNoticiasSection";
 import { useLang } from "../i18n";
@@ -371,10 +370,6 @@ export function HomePage() {
 
       <div className="relative z-10">
         <SectoresSection />
-      </div>
-
-      <div className="relative z-10">
-        <MarcasRepresentadasSection />
       </div>
 
       <div className="relative z-10">
