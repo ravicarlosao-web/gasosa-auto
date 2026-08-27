@@ -20,7 +20,11 @@ export const translations = {
       contactAlt: "Contacte-nos",
     },
     historia: {
-      heading: "Uma trajetória marcada pela dedicação, excelência e crescimento.",
+      heading: "Uma trajetória de crescimento e solidez.",
+      intro: [
+        "Fundada em 2004, a CFA GASOSA SU, LDA. é uma empresa angolana especializada no fornecimento de peças, acessórios, lubrificantes e serviços para os setores automóvel, industrial e agrícola.",
+        "Ao longo da sua trajetória, a empresa construiu um percurso sólido, assente em capital próprio, proximidade com os clientes e compromisso com a qualidade, consolidando a sua presença no mercado angolano.",
+      ],
       milestones: [
         {
           label: "O início no Huambo",
@@ -293,7 +297,11 @@ export const translations = {
       contactAlt: "Contact us",
     },
     historia: {
-      heading: "A journey marked by dedication, excellence and growth.",
+      heading: "A journey of growth and solidity.",
+      intro: [
+        "Founded in 2004, CFA GASOSA SU, LDA. is an Angolan company specialising in the supply of parts, accessories, lubricants and services for the automotive, industrial and agricultural sectors.",
+        "Throughout its journey, the company has built a solid path grounded in its own capital, closeness to customers and commitment to quality, consolidating its presence in the Angolan market.",
+      ],
       milestones: [
         {
           label: "The beginning in Huambo",
@@ -566,7 +574,11 @@ export const translations = {
       contactAlt: "Contáctenos",
     },
     historia: {
-      heading: "Una trayectoria marcada por la dedicación, la excelencia y el crecimiento.",
+      heading: "Una trayectoria de crecimiento y solidez.",
+      intro: [
+        "Fundada en 2004, CFA GASOSA SU, LDA. es una empresa angoleña especializada en el suministro de piezas, accesorios, lubricantes y servicios para los sectores automovilístico, industrial y agrícola.",
+        "A lo largo de su trayectoria, la empresa ha construido un recorrido sólido, basado en capital propio, cercanía con los clientes y compromiso con la calidad, consolidando su presencia en el mercado angoleño.",
+      ],
       milestones: [
         {
           label: "El inicio en Huambo",

@@ -187,21 +187,42 @@ export function HistoriaSection() {
       style={{ background: "#ffffff", fontFamily: "'Poppins', sans-serif", position: "relative" }}
     >
       <div className="max-w-[1400px] mx-auto px-5 sm:px-10 pt-10 pb-16 sm:pt-14 sm:pb-24">
-        <div className="overflow-hidden mb-16 sm:mb-20">
+        <div className="overflow-hidden mb-8 sm:mb-10">
           <motion.h2
             style={{
               y: headingY,
               opacity: headingOpacity,
               color: "#111111",
-              fontWeight: 700,
+              fontWeight: 600,
               lineHeight: 1.1,
               letterSpacing: "0.01em",
-              fontSize: "clamp(1.2rem, 0.85rem + 2.2vw, 3rem)",
-              maxWidth: "600px",
+              fontSize: "clamp(1.05rem, 0.75rem + 1.7vw, 2.25rem)",
+              maxWidth: "680px",
             }}
           >
             {t.historia.heading}
           </motion.h2>
+        </div>
+
+        <div
+          style={{
+            maxWidth: "780px",
+            marginBottom: "clamp(42px, 6vw, 72px)",
+          }}
+        >
+          {t.historia.intro.map((paragraph, index) => (
+            <p
+              key={index}
+              style={{
+                color: "rgba(0,0,0,0.62)",
+                fontSize: "clamp(0.9rem, 0.76rem + 0.45vw, 1.08rem)",
+                lineHeight: 1.75,
+                margin: index === t.historia.intro.length - 1 ? 0 : "0 0 16px",
+              }}
+            >
+              {paragraph}
+            </p>
+          ))}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-t border-black/10">
