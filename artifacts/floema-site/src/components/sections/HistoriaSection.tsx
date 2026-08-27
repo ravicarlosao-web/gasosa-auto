@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useLang } from "../../i18n";
 import { MILESTONE_STATIC } from "../../data/constants";
 import { LazyImage } from "../ui/lazy-image";
+import teamPhoto from "@assets/WhatsApp_Image_2026-08-27_at_14.50.51_1787840686863.jpeg";
 
 function MilestoneCard({
   year,
@@ -117,7 +118,7 @@ function CurrentYearHighlight({
   const textOpacity = useTransform(sectionProgress, [0.44, 0.62], [0, 1]);
 
   return (
-    <div className="mt-0 pt-10 border-t border-black/10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-10 lg:gap-16">
+    <div className="mt-0 pt-10 border-t border-black/10 flex flex-col sm:flex-row items-start justify-between gap-10 lg:gap-16">
       <div className="overflow-hidden sm:flex-1 sm:min-w-0">
         <motion.span
           style={{
@@ -125,10 +126,10 @@ function CurrentYearHighlight({
             opacity: yearOpacity,
             display: "block",
             fontWeight: 800,
-            lineHeight: 0.85,
+            lineHeight: 0.9,
             letterSpacing: "-0.04em",
             color: "#111111",
-            fontSize: "clamp(4.5rem, 2rem + 8vw, 10rem)",
+            fontSize: "clamp(3.8rem, 1.8rem + 6.2vw, 7.5rem)",
           }}
         >
           {t.historia.currentYear}
@@ -158,6 +159,29 @@ function CurrentYearHighlight({
         }}>
           {t.historia.currentText}
         </p>
+        <div
+          style={{
+            width: "100%",
+            aspectRatio: "4 / 3",
+            marginTop: "clamp(24px, 3vw, 36px)",
+            borderRadius: "14px",
+            overflow: "hidden",
+          }}
+        >
+          <img
+            src={teamPhoto}
+            alt="Equipa actual da Gasosa Auto Agro"
+            loading="lazy"
+            decoding="async"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center 38%",
+              display: "block",
+            }}
+          />
+        </div>
       </motion.div>
     </div>
   );
