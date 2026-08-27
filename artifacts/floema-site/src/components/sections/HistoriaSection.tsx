@@ -118,8 +118,8 @@ function CurrentYearHighlight({
   const textOpacity = useTransform(sectionProgress, [0.44, 0.62], [0, 1]);
 
   return (
-    <div className="mt-0 pt-10 border-t border-black/10 flex flex-col sm:flex-row items-start justify-between gap-10 lg:gap-16">
-      <div className="overflow-hidden sm:flex-1 sm:min-w-0">
+    <div className="mt-0 pt-10 border-t border-black/10 grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] items-start gap-8 md:gap-10 lg:gap-16">
+      <div className="overflow-hidden w-full">
         <motion.span
           style={{
             x: yearX,
@@ -134,11 +134,35 @@ function CurrentYearHighlight({
         >
           {t.historia.currentYear}
         </motion.span>
+
+        <div
+          style={{
+            width: "100%",
+            aspectRatio: "3 / 2",
+            marginTop: "clamp(24px, 3vw, 34px)",
+            borderRadius: "14px",
+            overflow: "hidden",
+          }}
+        >
+          <img
+            src={teamPhoto}
+            alt="Equipa actual da Gasosa Auto Agro"
+            loading="lazy"
+            decoding="async"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center 38%",
+              display: "block",
+            }}
+          />
+        </div>
       </div>
 
       <motion.div
         style={{ opacity: textOpacity, y: textY }}
-        className="w-full sm:flex-[0_1_520px] sm:max-w-[520px] pb-2"
+        className="w-full pb-2"
       >
         <span style={{
           fontSize: "0.72rem",
@@ -159,29 +183,6 @@ function CurrentYearHighlight({
         }}>
           {t.historia.currentText}
         </p>
-        <div
-          style={{
-            width: "100%",
-            aspectRatio: "4 / 3",
-            marginTop: "clamp(24px, 3vw, 36px)",
-            borderRadius: "14px",
-            overflow: "hidden",
-          }}
-        >
-          <img
-            src={teamPhoto}
-            alt="Equipa actual da Gasosa Auto Agro"
-            loading="lazy"
-            decoding="async"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center 38%",
-              display: "block",
-            }}
-          />
-        </div>
       </motion.div>
     </div>
   );
