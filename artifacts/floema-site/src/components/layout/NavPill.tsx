@@ -17,7 +17,9 @@ export function NavPill({ item }: { item: string }) {
   const isHome = item === "INÍCIO" || item === "HOME" || item === "INICIO";
   const href = isHome ? "/" : `/${item.toLowerCase().replace(/\s+/g, "-")}`;
   const anchorId = SCROLL_MAP[href];
-  const isActive = isHome || anchorId ? location === "/" : location === href;
+  // "Quem Somos" is an in-page anchor on the home page, not a separate
+  // route. Keep only "Início" highlighted while the home page is open.
+  const isActive = isHome ? location === "/" : anchorId ? false : location === href;
 
   function handleScrollClick(e: React.MouseEvent) {
     e.preventDefault();
