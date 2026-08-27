@@ -14,9 +14,10 @@ export function NavPill({ item }: { item: string }) {
   const light = useContext(NavThemeCtx);
   const accent = useContext(NavAccentCtx);
   const [location, navigate] = useLocation();
-  const href = `/${item.toLowerCase().replace(/\s+/g, "-")}`;
+  const isHome = item === "INÍCIO" || item === "HOME" || item === "INICIO";
+  const href = isHome ? "/" : `/${item.toLowerCase().replace(/\s+/g, "-")}`;
   const anchorId = SCROLL_MAP[href];
-  const isActive = anchorId ? location === "/" : location === href;
+  const isActive = isHome || anchorId ? location === "/" : location === href;
 
   function handleScrollClick(e: React.MouseEvent) {
     e.preventDefault();

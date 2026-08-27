@@ -33,7 +33,11 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
             </motion.button>
           </div>
           <nav className="flex flex-col gap-0">
-            {t.nav.map((item, i) => (
+            {t.nav.map((item, i) => {
+              const isHome = item === "INÍCIO" || item === "HOME" || item === "INICIO";
+              const href = isHome ? "/" : `/${item.toLowerCase().replace(/\s+/g, "-")}`;
+
+              return (
               <motion.div
                 key={item}
                 initial={{ opacity: 0, y: 16 }}
@@ -41,8 +45,14 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
                 transition={{ delay: i * 0.055, type: "spring", stiffness: 280, damping: 28 }}
               >
                 <Link
-                  href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                  onClick={onClose}
+                  href={href}
+                  onClick={(event) => {
+                    onClose();
+                    if (isHome && window.location.pathname === "/") {
+                      event.preventDefault();
+                      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                    }
+                  }}
                   className="text-2xl font-medium tracking-tight text-foreground py-4 border-b border-foreground/8 flex items-center justify-between"
                   style={{ letterSpacing: "-0.02em" }}
                 >
@@ -57,7 +67,8 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
                   </motion.span>
                 </Link>
               </motion.div>
-            ))}
+              );
+            })}
           </nav>
           <motion.div
             className="mt-10 flex gap-2"
