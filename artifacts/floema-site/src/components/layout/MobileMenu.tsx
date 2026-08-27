@@ -1,12 +1,14 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { X } from "lucide-react";
 import logoSrc from "@assets/ChatGPT_Image_21_de_mai._de_2026,_12_09_16_1_1779362713859.png";
 import { LANGUAGES } from "../../lib/nav-theme";
 import { useLang } from "../../i18n";
+import { setPendingAnchor } from "../../lib/scroll-anchor";
 
 export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { t, lang, setLang } = useLang();
+  const [location, navigate] = useLocation();
 
   return (
     <AnimatePresence>
@@ -35,7 +37,8 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
           <nav className="flex flex-col gap-0">
             {t.nav.map((item, i) => {
               const isHome = item === "INÍCIO" || item === "HOME" || item === "INICIO";
-              const href = isHome ? "/" : `/${item.toLowerCase().replace(/\s+/g, "-")}`;
+              const isAbout = item === "QUEM SOMOS" || item === "ABOUT US" || item === "QUIÉNES SOMOS";
+              const href = isHome ? "/" : isAbout ? "/#quem-somos" : `/${item.toLowerCase().replace(/\s+/g, "-")}`;
 
               return (
               <motion.div
@@ -51,6 +54,16 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
                     if (isHome && window.location.pathname === "/") {
                       event.preventDefault();
                       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+                    }
+                    if (isAbout) {
+                      event.preventDefault();
+                      const section = document.getElementById("quem-somos");
+                      if (section) {
+                        section.scrollIntoView({ behavior: "smooth", block: "start" });
+                      } else {
+                        setPendingAnchor("quem-somos");
+                        navigate("/");
+                      }
                     }
                   }}
                   className="text-2xl font-medium tracking-tight text-foreground py-4 border-b border-foreground/8 flex items-center justify-between"

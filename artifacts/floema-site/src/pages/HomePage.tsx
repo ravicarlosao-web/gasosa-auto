@@ -50,13 +50,6 @@ export function HomePage() {
   const [heroTheme, setHeroTheme] = useState<HeroThemeId>("branco");
   const heroBg = HERO_THEMES.find((th) => th.id === heroTheme)?.color ?? "#ffffff";
 
-  const scrollToAbout = () => {
-    document.getElementById("quem-somos")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
-
   useEffect(() => {
     function onScroll() {
       const progress = Math.min(1, Math.max(0, window.scrollY / window.innerHeight));
@@ -250,29 +243,6 @@ export function HomePage() {
                 {t.hero.subtitle}
               </motion.p>
 
-              <motion.button
-                type="button"
-                onClick={scrollToAbout}
-                whileHover={{ y: -2, backgroundColor: "#003591", color: "#ffffff" }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 260, damping: 24 }}
-                style={{
-                  marginTop: "clamp(24px, 3vw, 34px)",
-                  padding: "12px 20px",
-                  border: "1px solid #003591",
-                  borderRadius: "999px",
-                  background: "transparent",
-                  color: "#003591",
-                  fontFamily: "'Poppins', sans-serif",
-                  fontSize: "0.78rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  cursor: "pointer",
-                }}
-              >
-                {t.hero.aboutBtn}
-              </motion.button>
             </div>
           </div>
 

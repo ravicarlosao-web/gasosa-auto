@@ -2,7 +2,7 @@ export type Lang = "PT" | "EN" | "ES";
 
 export const translations = {
   PT: {
-    nav: ["INÍCIO", "MARCAS QUE REPRESENTAMOS", "INFRAESTRUTURAS", "NOTÍCIAS", "CONTACTOS"],
+    nav: ["INÍCIO", "QUEM SOMOS", "MARCAS QUE REPRESENTAMOS", "INFRAESTRUTURAS", "NOTÍCIAS", "CONTACTOS"],
     hero: {
       title1: "Referência em soluções automóveis, agrícolas e industriais em Angola",
       title2: "",
@@ -16,7 +16,6 @@ export const translations = {
       cardText1: "Uma empresa construída",
       cardText2: "para durar.",
       contactBtn: "CONTACTE-NOS",
-      aboutBtn: "Quem somos",
       technicianAlt: "Técnico Gasosa Auto Agro",
       contactAlt: "Contacte-nos",
     },
@@ -275,7 +274,7 @@ export const translations = {
   },
 
   EN: {
-    nav: ["HOME", "BRANDS WE REPRESENT", "INFRASTRUCTURE", "NEWS", "CONTACTS"],
+    nav: ["HOME", "ABOUT US", "BRANDS WE REPRESENT", "INFRASTRUCTURE", "NEWS", "CONTACTS"],
     hero: {
       title1: "Angola's reference in automotive, agricultural and industrial solutions",
       title2: "",
@@ -290,7 +289,6 @@ export const translations = {
       cardText1: "A company built",
       cardText2: "to last.",
       contactBtn: "CONTACT US",
-      aboutBtn: "About us",
       technicianAlt: "Gasosa Auto Agro technician",
       contactAlt: "Contact us",
     },
@@ -549,7 +547,7 @@ export const translations = {
   },
 
   ES: {
-    nav: ["INICIO", "MARCAS QUE REPRESENTAMOS", "INFRAESTRUCTURAS", "NOTICIAS", "CONTACTOS"],
+    nav: ["INICIO", "QUIÉNES SOMOS", "MARCAS QUE REPRESENTAMOS", "INFRAESTRUCTURAS", "NOTICIAS", "CONTACTOS"],
     hero: {
       title1: "Referencia en soluciones automotrices, agrícolas e industriales en Angola",
       title2: "",
@@ -564,7 +562,6 @@ export const translations = {
       cardText1: "Una empresa construida",
       cardText2: "para durar.",
       contactBtn: "CONTÁCTENOS",
-      aboutBtn: "Quiénes somos",
       technicianAlt: "Técnico de Gasosa Auto Agro",
       contactAlt: "Contáctenos",
     },
