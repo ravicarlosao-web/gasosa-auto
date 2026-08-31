@@ -3,12 +3,13 @@ import nergyImg4 from "@assets/IMG_20250903_111532_1780387597136.jpg";
 import nergyImg5 from "@assets/1000015282_1780387656692.jpg";
 import nergyImg6 from "@assets/WhatsApp_Image_2025-09-03_at_11.33.28_(2)_1780387695350.jpeg";
 import historiaHuamboImg from "@assets/WhatsApp_Image_2026-08-17_at_19.35.54_1786993459379.jpeg";
+import lubangoExpansionImg from "@assets/WhatsApp_Image_2026-08-31_at_13.01.40_1788178460544.jpeg";
 import automovelSectorImg from "@assets/WhatsApp_Image_2026-08-25_at_12.16.49_1787656706644.jpeg";
 import industrialSectorImg from "@assets/WhatsApp_Image_2026-08-26_at_14.11.13_1787750854865.jpeg";
 
 export const MILESTONE_STATIC = [
   { year: "2004", image: historiaHuamboImg },
-  { year: "2016", image: "/historia-2016.png" },
+  { year: "2016", image: lubangoExpansionImg },
   { year: "2026", image: "/historia-2020.png" },
 ];
 
