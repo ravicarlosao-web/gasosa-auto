@@ -539,6 +539,8 @@ function NergySection() {
     { name: "Filtros de Ar", desc: "Garantem ar limpo para uma combustão eficiente, protegendo os componentes internos contra poeiras e partículas abrasivas.", detalhe: "Combustão • Poeiras • Protecção" },
     { name: "Filtros de Combustível", desc: "Removem partículas e água antes que atinjam bombas e injetores, assegurando maior eficiência, menor consumo e proteção do sistema de injeção.", detalhe: "Água • Injecção • Eficiência" },
     { name: "Filtros Hidráulicos", desc: "Contribuem para a limpeza dos circuitos hidráulicos, protegendo bombas, válvulas e cilindros, reduzindo paragens e aumentando a produtividade.", detalhe: "Bombas • Válvulas • Cilindros" },
+    { name: "Filtros de Ar Condicionado", desc: "Retêm poeiras e partículas, contribuindo para um ar mais limpo no habitáculo e para o bom funcionamento do sistema de climatização.", detalhe: "Climatização • Conforto • Protecção" },
+    { name: "Separadores de Água", desc: "Separam a água e as impurezas do combustível, protegendo o sistema de alimentação e aumentando a fiabilidade dos equipamentos.", detalhe: "Água • Combustível • Protecção" },
   ];
 
   const ICONS = [
@@ -555,6 +557,16 @@ function NergySection() {
     <svg key="d" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 3 4 6v5c0 5.25 3.4 8.45 8 10 4.6-1.55 8-4.75 8-10V6l-8-3Z"/>
       <path d="m9 12 2 2 4-4"/>
+    </svg>,
+    <svg key="e" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3v18M3 12h18"/>
+      <path d="M5.5 5.5 18.5 18.5M18.5 5.5 5.5 18.5"/>
+      <circle cx="12" cy="12" r="8.5"/>
+    </svg>,
+    <svg key="f" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 5h16M6 5v5l6 4v5M18 5v5l-6 4"/>
+      <path d="M4 19h16"/>
+      <path d="M8 8h8"/>
     </svg>,
   ];
 
@@ -642,7 +654,7 @@ function NergySection() {
       <div style={{ background: NAVY, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)" }}>
         {[
           { value: "7",    label: isMobile ? "Setores" : "Setores de aplicação" },
-          { value: "4",    label: isMobile ? "Soluções" : "Tipos de filtros" },
+           { value: "6",    label: isMobile ? "Soluções" : "Tipos de filtros" },
           { value: "100%", label: isMobile ? "Foco" : "Foco no desempenho" },
         ].map((s, i) => (
           <motion.div key={i} variants={FADE_UP} initial="hidden" whileInView="visible" viewport={{ once: false, amount: 0.3 }} custom={i * 0.1}
