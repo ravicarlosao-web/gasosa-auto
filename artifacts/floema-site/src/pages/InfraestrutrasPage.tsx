@@ -5,9 +5,9 @@ import { Menu } from "lucide-react";
 import { NavLogo } from "../components/layout/NavLogo";
 import infraHeroImg        from "@assets/20250903_123036_1780417176290.jpg";
 import infraLubangoExt    from "@assets/20250903_123815_1780417632798.jpg";
-import infraLubangoAerial from "@assets/20250903_124326_1780417637563.jpg";
-import infraLubangoInside from "@assets/20250903_125127_1780417648038.jpg";
-import infraLubangoWide   from "@assets/20250903_124357_1780417657961.jpg";
+import infraLubangoNew1   from "@assets/WhatsApp_Image_2026-09-28_at_19.24.58_1790620163509.jpeg";
+import infraLubangoNew2   from "@assets/WhatsApp_Image_2026-09-28_at_19.30.44_1790620268238.jpeg";
+import infraLubangoNew3   from "@assets/WhatsApp_Image_2026-09-28_at_19.33.27_1790620445134.jpeg";
 import infraHuamboExt     from "@assets/20250903_124447_1780417641736.jpg";
 import infraLuandaFachada from "@assets/WhatsApp_Image_2025-09-05_at_17.29.30_(2)_1780420633119.jpeg";
 import infraLuandaLoja1   from "@assets/WhatsApp_Image_2025-09-05_at_17.29.31_1780420592748.jpeg";
@@ -406,7 +406,7 @@ export function InfraestrutrasPage() {
 
       {/* 3-photo strip */}
       <PhotoStrip
-        srcs={[infraLubangoAerial, infraLubangoInside, infraLubangoWide]}
+        srcs={[infraLubangoNew1, infraLubangoNew2, infraLubangoNew3]}
         cols={3}
         height={isMobile ? "clamp(160px,45vw,260px)" : "clamp(220px,26vh,360px)"}
       />
