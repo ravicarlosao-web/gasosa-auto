@@ -11,6 +11,7 @@ import nergyImg3         from "@assets/IMG_20250903_113401_1780387574299.jpg";
 import nergyImg4         from "@assets/IMG_20250903_111532_1780387597136.jpg";
 import nergyImg5         from "@assets/1000015282_1780387656692.jpg";
 import ag55Hero          from "@assets/20250903_124224_1780417672672.jpg";
+import ag55WorkshopImg   from "@assets/ChatGPT_Image_28_de_set._de_2026,_21_55_44_1790636440030.png";
 import ag55Img2          from "@assets/20250903_124326_1780417637563.jpg";
 import { LazyImage }     from "../components/ui/lazy-image";
 import { NavThemeCtx, NavAccentCtx } from "../lib/nav-theme";
@@ -231,7 +232,7 @@ function Ag55Section() {
           variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.12}
           style={{ position: "relative", overflow: "hidden", minHeight: isMobile ? "260px" : "auto", background: "#e8e4dc" }}
         >
-          <LazyImage fill src={ag55Hero} alt="AG55 — baterias automotivas e industriais" objectPosition="center 40%" />
+          <LazyImage fill src={ag55WorkshopImg} alt="AG55 — baterias automotivas e industriais" objectPosition="center 40%" />
         </motion.div>
       </div>
 
