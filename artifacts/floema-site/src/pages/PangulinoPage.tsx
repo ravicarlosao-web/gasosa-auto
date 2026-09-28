@@ -158,7 +158,7 @@ function Ag55Section() {
 
   const PRODUCTS = [
     { name: "Baterias automotivas", desc: "Concebidas para proporcionar potência de arranque, estabilidade e desempenho consistente, destinam-se a uma ampla variedade de veículos.", detalhe: "Automóveis • Comerciais • Pesados" },
-    { name: "Baterias industriais e agrícolas", desc: "Desenvolvidas para aplicações profissionais que exigem robustez, resistência e fiabilidade. Proporcionam a potência necessária para acompanhar diferentes condições de trabalho e operação.", detalhe: "Indústria • Tratores • Equipamentos" },
+    { name: "Baterias para máquinas e equipamentos", desc: "Desenvolvidas para aplicações profissionais que exigem robustez, resistência e fiabilidade. Proporcionam a potência necessária para acompanhar diferentes condições de trabalho e operação.", detalhe: "Indústria • Tratores • Equipamentos" },
     { name: "Baterias para motociclos", desc: "Desenvolvidas para responder às necessidades específicas dos veículos de duas rodas, combinam dimensões compactas, eficiência e potência de arranque.", detalhe: "Motociclos • Duas rodas • Compactas" },
   ];
 
