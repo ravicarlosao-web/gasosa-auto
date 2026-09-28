@@ -87,7 +87,7 @@ function TodasSection({ onSelect }: { onSelect: (id: BrandId) => void }) {
       accent: NAVY,
       label: "Nergytech",
       tagline: "Filtragem para um desempenho consistente",
-      desc: "A Nergytech oferece filtros de óleo, ar, combustível e hidráulicos para veículos, máquinas agrícolas e equipamentos industriais. Soluções desenvolvidas para proteger os sistemas e prolongar a vida útil dos equipamentos.",
+      desc: "Mais soluções para a sua viatura dos filtros aos componentes de travagem, das escovas limpa-para-brisas a uma vasta gama de acessórios automóveis, a Nergytech oferece soluções para as necessidades de manutenção de cada viatura.",
       img: nergyImg1,
     },
   ];
