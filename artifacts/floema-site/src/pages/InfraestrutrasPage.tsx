@@ -8,7 +8,6 @@ import infraLubangoExt    from "@assets/20250903_123815_1780417632798.jpg";
 import infraLubangoNew1   from "@assets/WhatsApp_Image_2026-09-28_at_19.24.58_1790620163509.jpeg";
 import infraLubangoNew2   from "@assets/WhatsApp_Image_2026-09-28_at_19.30.44_1790620268238.jpeg";
 import infraLubangoNew3   from "@assets/WhatsApp_Image_2026-09-28_at_19.33.27_1790620445134.jpeg";
-import infraHuamboExt     from "@assets/20250903_124447_1780417641736.jpg";
 import infraLuandaNewFacade from "@assets/b0e6ee0b-07ae-4560-9b5a-7e902c726b03_1790627782433.jpg";
 import infraLuandaNewSide   from "@assets/WhatsApp_Image_2026-09-28_at_20.46.10_(1)_1790627778584.jpeg";
 import infraLuandaNewWorkshop from "@assets/WhatsApp_Image_2026-09-28_at_20.46.55_1790627778585.jpeg";
@@ -449,34 +448,28 @@ export function InfraestrutrasPage() {
       <LocationDivider />
 
       {/* ══════════════════════════════════════
-          03 — HUAMBO
+          03 — HUAMBO · EM BREVE
       ══════════════════════════════════════ */}
-      <LocationBlock
-        index="03"
-        tag={inf.paineis[1].tag}
-        title={inf.paineis[1].titulo}
-        description={inf.paineis[1].descricao}
-        stats={[
-          { value: "1 200 m²", label: "Área construída" },
-          { value: "Loja + Armazém", label: "Espaços" },
-          { value: "Planalto Central", label: "Região" },
-        ]}
-        delay={0}
-      />
-
-      {/* Huambo single photo */}
       <motion.div
         variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}
-        style={{ position: "relative", width: "100%", height: isMobile ? "clamp(260px,60vw,420px)" : "clamp(440px,52vh,640px)", overflow: "hidden", background: "#111" }}
+        style={{
+          background: "#f7f7f7",
+          minHeight: isMobile ? "clamp(220px,45vw,300px)" : "clamp(280px,34vh,420px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          padding: "clamp(48px,8vw,88px) clamp(24px,6vw,96px)",
+        }}
       >
-        <LazyImage
-          fill
-          src={infraHuamboExt}
-          alt="Instalações Huambo"
-          objectPosition="center"
-          whileHover={{ scale: 1.04 }}
-          motionTransition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-        />
+        <div>
+          <span style={{ display: "inline-block", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.2em", color: AMBER, textTransform: "uppercase" as const, borderBottom: `2px solid ${AMBER}`, paddingBottom: "4px", marginBottom: "20px" }}>
+            HUAMBO
+          </span>
+          <h2 style={{ fontFamily: "'Poppins', sans-serif", fontSize: "clamp(2rem,1rem+3.5vw,4.5rem)", fontWeight: 700, color: "#0a1628", letterSpacing: "-0.035em", lineHeight: 1.05, margin: 0 }}>
+            Em breve
+          </h2>
+        </div>
       </motion.div>
 
       <LocationDivider />
