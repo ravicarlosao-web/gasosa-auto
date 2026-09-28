@@ -386,7 +386,7 @@ export function InfraestrutrasPage() {
       {/* main photo — wide */}
       <motion.div
         variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}
-        style={{ position: "relative", width: "100%", height: isMobile ? "clamp(260px,60vw,420px)" : "clamp(480px,58vh,720px)", overflow: "hidden", background: "#111" }}
+        style={{ position: "relative", width: "100%", height: isMobile ? "clamp(340px,85vw,560px)" : "clamp(560px,68vh,820px)", overflow: "hidden", background: "#111" }}
       >
         <LazyImage
           fill
@@ -402,7 +402,7 @@ export function InfraestrutrasPage() {
       <PhotoStrip
         srcs={[infraLubangoNew1, infraLubangoNew2, infraLubangoNew3]}
         cols={3}
-        height={isMobile ? "clamp(160px,45vw,260px)" : "clamp(220px,26vh,360px)"}
+        height={isMobile ? "clamp(220px,60vw,360px)" : "clamp(300px,36vh,460px)"}
       />
 
       <LocationDivider />
@@ -426,7 +426,7 @@ export function InfraestrutrasPage() {
       {/* fachada principal — nova imagem */}
       <motion.div
         variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}
-        style={{ position: "relative", width: "100%", height: isMobile ? "clamp(260px,60vw,420px)" : "clamp(480px,58vh,720px)", overflow: "hidden", background: "#111" }}
+        style={{ position: "relative", width: "100%", height: isMobile ? "clamp(340px,85vw,560px)" : "clamp(560px,68vh,820px)", overflow: "hidden", background: "#111" }}
       >
         <LazyImage
           fill
@@ -442,7 +442,7 @@ export function InfraestrutrasPage() {
       <PhotoStrip
         srcs={[infraLuandaNewSide, infraLuandaNewWorkshop]}
         cols={2}
-        height={isMobile ? "clamp(200px,55vw,320px)" : "clamp(260px,30vh,400px)"}
+        height={isMobile ? "clamp(240px,65vw,400px)" : "clamp(340px,42vh,520px)"}
       />
 
       <LocationDivider />
@@ -507,7 +507,7 @@ export function InfraestrutrasPage() {
       {/* future photo */}
       <motion.div
         variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}
-        style={{ position: "relative", width: "100%", height: isMobile ? "clamp(240px,55vw,380px)" : "clamp(380px,46vh,560px)", overflow: "hidden", background: "#0a1628" }}
+        style={{ position: "relative", width: "100%", height: isMobile ? "clamp(300px,70vw,460px)" : "clamp(460px,56vh,680px)", overflow: "hidden", background: "#0a1628" }}
       >
         <LazyImage
           fill
