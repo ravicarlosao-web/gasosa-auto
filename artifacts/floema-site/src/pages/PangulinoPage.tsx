@@ -539,6 +539,20 @@ function NergySection() {
     { name: "Filtros Hidráulicos", desc: "Contribuem para a limpeza dos circuitos hidráulicos, protegendo bombas, válvulas e cilindros, reduzindo paragens e aumentando a produtividade.", detalhe: "Bombas • Válvulas • Cilindros" },
   ];
 
+  const BRAKE_PRODUCTS = [
+    "Pastilhas de travão",
+    "Cintas de travão",
+    "Discos de travão",
+    "Tambores de travão",
+    "Acessórios de travagem",
+  ];
+
+  const AUTOMOTIVE_ACCESSORIES = [
+    "Lâmpadas automotivas 12V e 24V para viaturas ligeiras e aplicações industriais",
+    "Velas de ignição e de aquecimento",
+    "Escovas limpa para-brisas para todas as aplicações",
+  ];
+
   const ICONS = [
     <svg key="a" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>
@@ -675,6 +689,69 @@ function NergySection() {
             </motion.div>
           ))}
         </div>
+      </div>
+
+      {/* Braking components and automotive accessories */}
+      <div style={{ background: "#ffffff" }}>
+        <section style={{ padding: "clamp(64px,9vh,112px) clamp(20px,5vw,80px)", borderBottom: "1px solid rgba(0,53,145,0.1)" }}>
+          <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "0.85fr 1.15fr", gap: "clamp(36px,7vw,108px)", alignItems: "start" }}>
+            <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}>
+              <span style={{ display: "block", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: NAVY, marginBottom: "16px" }}>
+                COMPONENTES DE TRAVAGEM
+              </span>
+              <h2 style={{ fontSize: "clamp(1.8rem,1rem+2.8vw,3.2rem)", fontWeight: 600, color: "#111111", letterSpacing: "-0.03em", lineHeight: 1.08, margin: 0 }}>
+                TRAVAGEM NERGYTECH
+              </h2>
+            </motion.div>
+
+            <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.1}>
+              <p style={{ fontSize: "clamp(0.9rem,0.8rem+0.35vw,1.04rem)", color: "rgba(0,0,0,0.65)", lineHeight: 1.82, margin: "0 0 20px" }}>
+                NergyTech reúne uma gama de componentes para a manutenção de sistemas de travagem. Pastilhas, cintas, discos, tambores e acessórios que respondem às necessidades de diferentes viaturas, desde ligeiras e comerciais até pesadas. Uma oferta abrangente para quem procura manter a segurança e a capacidade de resposta da sua frota em cada percurso.
+              </p>
+              <p style={{ fontSize: "clamp(0.9rem,0.8rem+0.35vw,1.04rem)", color: "rgba(0,0,0,0.65)", lineHeight: 1.82, margin: "0 0 28px" }}>
+                Acessórios de travagem com elevada resistência ao desgaste e desempenho consistente em diferentes condições de utilização.
+              </p>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: "10px 24px", borderTop: "2px solid rgba(0,53,145,0.14)", paddingTop: "20px" }}>
+                {BRAKE_PRODUCTS.map((product) => (
+                  <div key={product} style={{ display: "flex", alignItems: "center", gap: "10px", color: "#111111", fontSize: "clamp(0.8rem,0.72rem+0.25vw,0.92rem)", fontWeight: 600 }}>
+                    <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: NAVY, flexShrink: 0 }} />
+                    {product}
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section style={{ background: "#f6f8fb", padding: "clamp(64px,9vh,112px) clamp(20px,5vw,80px)" }}>
+          <div style={{ maxWidth: "1200px", margin: "0 auto", display: "grid", gridTemplateColumns: isMobile ? "1fr" : "0.85fr 1.15fr", gap: "clamp(36px,7vw,108px)", alignItems: "start" }}>
+            <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}>
+              <span style={{ display: "block", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.18em", color: NAVY, marginBottom: "16px" }}>
+                ACESSÓRIOS AUTOMOTIVOS
+              </span>
+              <h2 style={{ fontSize: "clamp(1.8rem,1rem+2.8vw,3.2rem)", fontWeight: 600, color: "#111111", letterSpacing: "-0.03em", lineHeight: 1.08, margin: "0 0 18px" }}>
+                Soluções para cuidar de cada detalhe da sua viatura.
+              </h2>
+            </motion.div>
+
+            <motion.div variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0.1}>
+              <p style={{ fontSize: "clamp(0.9rem,0.8rem+0.35vw,1.04rem)", color: "rgba(0,0,0,0.65)", lineHeight: 1.82, margin: "0 0 28px" }}>
+                NergyTech dispõe de produtos para os sistemas: elétrico, de iluminação, ignição, pré-aquecimento e visibilidade, contribuindo para o funcionamento seguro e eficiente do veículo.
+              </p>
+              <span style={{ display: "block", fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.15em", color: NAVY, marginBottom: "14px" }}>
+                PRODUTOS DISPONÍVEIS
+              </span>
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                {AUTOMOTIVE_ACCESSORIES.map((product) => (
+                  <div key={product} style={{ display: "flex", alignItems: "flex-start", gap: "12px", color: "#111111", fontSize: "clamp(0.84rem,0.75rem+0.3vw,0.98rem)", lineHeight: 1.55 }}>
+                    <span style={{ color: NAVY, fontWeight: 700, fontSize: "1.1rem", lineHeight: 1.3 }}>•</span>
+                    <span>{product}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
       </div>
 
       {/* Technology and quality */}
