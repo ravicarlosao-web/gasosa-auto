@@ -383,7 +383,7 @@ export function InfraestrutrasPage() {
         description={inf.featured.descricao}
         stats={[
           { value: "10 000 m²", label: "Área construída" },
-          { value: "3", label: "Espaços operacionais" },
+          { value: "2", label: "Espaços operacionais" },
           { value: "Huíla", label: "Província" },
         ]}
         delay={0}
