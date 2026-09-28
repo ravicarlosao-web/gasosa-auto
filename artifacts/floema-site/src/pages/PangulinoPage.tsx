@@ -216,10 +216,10 @@ function Ag55Section() {
             Energia confiável.<br />Desempenho consistente.
           </h2>
           <p style={{ fontSize: "clamp(0.88rem,0.78rem+0.38vw,1rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.78, margin: "0 0 18px" }}>
-            A AG55 apresenta uma gama abrangente de baterias desenvolvidas para responder às exigências dos mercados automotivo, industrial, agrícola e de motociclos.
+            Disponibilizámos uma linha completa de baterias. Com capacidades de 6 Ah a 200 Ah, oferecemos soluções para uma ampla variedade de aplicações desde motociclos e veículos ligeiros até viaturas pesadas, máquinas e equipamentos.
           </p>
           <p style={{ fontSize: "clamp(0.88rem,0.78rem+0.38vw,1rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.78, margin: "0 0 32px" }}>
-            Com foco em qualidade, desempenho e fiabilidade, a AG55 disponibiliza soluções concebidas para diferentes tipos de veículos, máquinas e equipamentos, proporcionando uma resposta adequada às mais diversas aplicações.
+            A diversidade da gama AG55 permite encontrar a bateria certa para cada necessidade, combinando energia, resistência e desempenho para manter o seu veículo ou equipamento sempre pronto para trabalhar.
           </p>
           <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.06em", color: GOLD }}>
             <span style={{ width: "28px", height: "2px", background: GOLD, display: "inline-block" }} />
