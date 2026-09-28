@@ -602,18 +602,32 @@ function NergySection() {
             NERGYTECH
           </span>
           <h2 style={{ fontSize: "clamp(1.8rem,1rem+3vw,3.5rem)", fontWeight: 600, color: "#111111", letterSpacing: "-0.03em", lineHeight: 1.08, margin: "0 0 28px" }}>
-            Engenharia de filtragem.<br />Máximo desempenho.
+            Soluções para cada sistema
           </h2>
-          <p style={{ fontSize: "clamp(0.88rem,0.78rem+0.38vw,1rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.78, margin: "0 0 18px" }}>
-            Protegemos motores, sistemas hidráulicos e equipamentos industriais com soluções de filtragem desenvolvidas para ambientes exigentes. Cada filtro é concebido para proporcionar máxima eficiência, elevada durabilidade e desempenho consistente, reduzindo custos de manutenção e aumentando a disponibilidade operacional.
+          <p style={{ fontSize: "clamp(0.88rem,0.78rem+0.38vw,1rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.78, margin: "0 0 20px" }}>
+            A Nergytech apresenta uma gama de produtos para a manutenção de viaturas e equipamentos, com soluções para diferentes sistemas e aplicações:
           </p>
-          <p style={{ fontSize: "clamp(0.88rem,0.78rem+0.38vw,1rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.78, margin: "0 0 32px" }}>
-            Somos especializados em soluções de filtragem para os setores automotivo, agrícola, industrial, construção, mineração e geração de energia. A nossa missão é proteger os equipamentos que movimentam negócios, garantindo fiabilidade e produtividade em cada aplicação.
+          <div style={{ display: "flex", flexDirection: "column", gap: "14px", marginBottom: "24px" }}>
+            <p style={{ fontSize: "clamp(0.86rem,0.76rem+0.34vw,0.98rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.72, margin: 0 }}>
+              <strong style={{ color: "#111111", fontWeight: 700 }}>Filtros</strong> — filtros de óleo, ar, combustível, ar condicionado, hidráulicos e separadores de água, destinados à proteção de motores, sistemas hidráulicos e outros componentes.
+            </p>
+            <p style={{ fontSize: "clamp(0.86rem,0.76rem+0.34vw,0.98rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.72, margin: 0 }}>
+              <strong style={{ color: "#111111", fontWeight: 700 }}>Componentes de travagem</strong> — pastilhas, calços, discos, tambores e outros acessórios para a manutenção do sistema de travagem.
+            </p>
+            <p style={{ fontSize: "clamp(0.86rem,0.76rem+0.34vw,0.98rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.72, margin: 0 }}>
+              <strong style={{ color: "#111111", fontWeight: 700 }}>Escovas limpa-para-brisas</strong> — soluções para diferentes modelos de viaturas, que ajudam a manter a visibilidade em condições de chuva e poeira.
+            </p>
+            <p style={{ fontSize: "clamp(0.86rem,0.76rem+0.34vw,0.98rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.72, margin: 0 }}>
+              <strong style={{ color: "#111111", fontWeight: 700 }}>Acessórios automóveis</strong> — uma vasta gama de artigos para manutenção, substituição e conservação de viaturas.
+            </p>
+          </div>
+          <p style={{ fontSize: "clamp(0.86rem,0.76rem+0.34vw,0.98rem)", color: "rgba(0,0,0,0.62)", lineHeight: 1.72, margin: "0 0 20px" }}>
+            Com aplicações nos setores automóvel, agrícola, industrial, da construção e da mineração, a Nergytech oferece opções para as necessidades de cada operação.
           </p>
-          <span style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.06em", color: NAVY }}>
+          <p style={{ display: "inline-flex", alignItems: "center", gap: "8px", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.02em", color: NAVY, margin: 0 }}>
             <span style={{ width: "28px", height: "2px", background: NAVY, display: "inline-block" }} />
-            Proteção para equipamentos que não podem parar
-          </span>
+            Uma gama completa para acompanhar cada desafio.
+          </p>
         </motion.div>
 
         <motion.div
