@@ -9,14 +9,9 @@ import infraLubangoNew1   from "@assets/WhatsApp_Image_2026-09-28_at_19.24.58_17
 import infraLubangoNew2   from "@assets/WhatsApp_Image_2026-09-28_at_19.30.44_1790620268238.jpeg";
 import infraLubangoNew3   from "@assets/WhatsApp_Image_2026-09-28_at_19.33.27_1790620445134.jpeg";
 import infraHuamboExt     from "@assets/20250903_124447_1780417641736.jpg";
-import infraLuandaFachada from "@assets/WhatsApp_Image_2025-09-05_at_17.29.30_(2)_1780420633119.jpeg";
-import infraLuandaLoja1   from "@assets/WhatsApp_Image_2025-09-05_at_17.29.31_1780420592748.jpeg";
-import infraLuandaLoja2   from "@assets/WhatsApp_Image_2025-09-05_at_17.29.32_(5)_1780420596544.jpeg";
-import infraLuandaLoja3   from "@assets/WhatsApp_Image_2025-09-05_at_17.29.32_(6)_1780420599872.jpeg";
-import infraLuandaLoja4   from "@assets/WhatsApp_Image_2025-09-05_at_17.29.32_(8)_1780420570261.jpeg";
-import infraLuandaOfic1   from "@assets/WhatsApp_Image_2025-09-05_at_17.29.31_(6)_1780420686105.jpeg";
-import infraLuandaOfic2   from "@assets/WhatsApp_Image_2025-09-05_at_17.29.31_(7)_1780420689121.jpeg";
-import infraLuandaOfic3   from "@assets/WhatsApp_Image_2025-09-05_at_17.29.31_(8)_1780420692112.jpeg";
+import infraLuandaNewFacade from "@assets/b0e6ee0b-07ae-4560-9b5a-7e902c726b03_1790627782433.jpg";
+import infraLuandaNewSide   from "@assets/WhatsApp_Image_2026-09-28_at_20.46.10_(1)_1790627778584.jpeg";
+import infraLuandaNewWorkshop from "@assets/WhatsApp_Image_2026-09-28_at_20.46.55_1790627778585.jpeg";
 import infraFuturas       from "@assets/20250903_123030_1780417662829.jpg";
 import { LazyImage } from "../components/ui/lazy-image";
 import { NavThemeCtx } from "../lib/nav-theme";
@@ -429,14 +424,14 @@ export function InfraestrutrasPage() {
         delay={0}
       />
 
-      {/* fachada principal — large */}
+      {/* fachada principal — nova imagem */}
       <motion.div
         variants={FADE_UP} initial="hidden" whileInView="visible" viewport={viewport} custom={0}
         style={{ position: "relative", width: "100%", height: isMobile ? "clamp(260px,60vw,420px)" : "clamp(480px,58vh,720px)", overflow: "hidden", background: "#111" }}
       >
         <LazyImage
           fill
-          src={infraLuandaFachada}
+          src={infraLuandaNewFacade}
           alt="Loja Luanda — fachada"
           objectPosition="center 60%"
           whileHover={{ scale: 1.04 }}
@@ -444,28 +439,11 @@ export function InfraestrutrasPage() {
         />
       </motion.div>
 
-      {/* 4-photo loja strip */}
+      {/* Galeria atualizada de Luanda */}
       <PhotoStrip
-        srcs={[infraLuandaLoja1, infraLuandaLoja2, infraLuandaLoja3, infraLuandaLoja4]}
-        cols={4}
-        height={isMobile ? "clamp(150px,42vw,240px)" : "clamp(200px,22vh,300px)"}
-      />
-
-      {/* oficina sub-label */}
-      <div style={{ background: "#f7f7f7", padding: "clamp(32px,5vw,56px) clamp(24px,6vw,96px)" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "flex", alignItems: "center", gap: "20px" }}>
-          <span style={{ width: "36px", height: "2px", background: AMBER, display: "inline-block", flexShrink: 0 }} />
-          <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.16em", color: "rgba(0,0,0,0.4)", textTransform: "uppercase" as const }}>
-            LUANDA · OFICINA DE SERVIÇOS RÁPIDOS
-          </span>
-        </div>
-      </div>
-
-      {/* 3-photo oficina strip */}
-      <PhotoStrip
-        srcs={[infraLuandaOfic1, infraLuandaOfic2, infraLuandaOfic3]}
-        cols={3}
-        height={isMobile ? "clamp(180px,50vw,300px)" : "clamp(220px,28vh,380px)"}
+        srcs={[infraLuandaNewSide, infraLuandaNewWorkshop]}
+        cols={2}
+        height={isMobile ? "clamp(200px,55vw,320px)" : "clamp(260px,30vh,400px)"}
       />
 
       <LocationDivider />
