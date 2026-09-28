@@ -12,6 +12,8 @@ import nergyImg4         from "@assets/IMG_20250903_111532_1780387597136.jpg";
 import nergyImg5         from "@assets/1000015282_1780387656692.jpg";
 import ag55Hero          from "@assets/20250903_124224_1780417672672.jpg";
 import ag55Img2          from "@assets/20250903_124326_1780417637563.jpg";
+import ag55CardImg       from "@assets/ChatGPT_Image_28_de_set._de_2026,_19_22_14_1790619757586.png";
+import nergyCardImg      from "@assets/ChatGPT_Image_28_de_set._de_2026,_19_07_02_1790619568278.png";
 import { LazyImage }     from "../components/ui/lazy-image";
 import { NavThemeCtx, NavAccentCtx } from "../lib/nav-theme";
 import { NavPill }       from "../components/layout/NavPill";
@@ -72,7 +74,7 @@ function TodasSection({ onSelect }: { onSelect: (id: BrandId) => void }) {
       label: "AG55",
       tagline: "Baterias para cada aplicação",
       desc: "A AG55 disponibiliza baterias para veículos, máquinas agrícolas, equipamentos industriais e motociclos. Soluções desenvolvidas para garantir potência de arranque, estabilidade e desempenho consistente.",
-      img: ag55Hero,
+      img: ag55CardImg,
     },
     {
       id: "pangulino" as BrandId,
@@ -87,8 +89,8 @@ function TodasSection({ onSelect }: { onSelect: (id: BrandId) => void }) {
       accent: NAVY,
       label: "Nergytech",
       tagline: "Filtragem para um desempenho consistente",
-      desc: "Mais soluções para a sua viatura dos filtros aos componentes de travagem, das escovas limpa-para-brisas a uma vasta gama de acessórios automóveis, a Nergytech oferece soluções para as necessidades de manutenção de cada viatura.",
-      img: nergyImg1,
+      desc: "A Nergytech oferece filtros de óleo, ar, combustível e hidráulicos para veículos, máquinas agrícolas e equipamentos industriais. Soluções desenvolvidas para proteger os sistemas e prolongar a vida útil dos equipamentos.",
+      img: nergyCardImg,
     },
   ];
 
